@@ -2035,8 +2035,8 @@
                     </div>
                     <div class="guide-step">
                         <div class="guide-step-number">2</div>
-                        <h3>Вставьте в YouTube чат</h3>
-                        <p>Откройте YouTube стрим Цинтрийки и вставьте команду в чат трансляции</p>
+                        <h3>Вставьте в чат YouTube или Twitch</h3>
+                        <p>Откройте стрим Цинтрийки на YouTube или Twitch и вставьте команду в чат трансляции</p>
                     </div>
                     <div class="guide-step">
                         <div class="guide-step-number">3</div>
@@ -2491,7 +2491,7 @@
             
             // Show all commands when searching
             if (activeCategory !== "Все") {
-                // Update tabs to show "Все" as active
+                // Update tabs to show "Все" как active
                 document.querySelectorAll('.category-tab').forEach(t => {
                     t.classList.remove('active');
                     if (t.getAttribute('data-category') === "Все") {
