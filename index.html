@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Akony&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Roboto Bold -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -70,6 +72,8 @@
             /* Typography - AKONY теперь основной шрифт для заголовков */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-heading: 'Akony', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            /* Roboto для кнопок, команд и названий песен */
+            --font-roboto-bold: 'Roboto', sans-serif;
             
             /* Transitions */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -258,7 +262,7 @@
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
             border-radius: var(--radius-lg);
             color: white;
             font-size: 20px;
@@ -349,7 +353,7 @@
             align-items: center;
             gap: 8px;
             padding: 10px 16px;
-            background: var(--accent); /* Изменено с градиента на сплошной цвет */
+            background: var(--accent);
             border: none;
             border-radius: var(--radius-md);
             color: var(--text-primary);
@@ -378,7 +382,7 @@
         }
 
         .balance-btn:hover {
-            background: var(--gold); /* Изменено при наведении */
+            background: var(--gold);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -527,7 +531,7 @@
             left: 8px;
             height: calc(100% - 16px);
             border-radius: var(--radius-md);
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
             box-shadow: var(--shadow-md);
             transition: transform var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1), 
                         width var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -536,7 +540,7 @@
         }
 
         .tab-btn.songs-tab.active ~ .tab-indicator {
-            background: var(--purple); /* Изменено с градиента на сплошной цвет */
+            background: var(--purple);
         }
 
         /* АКТИВНАЯ ВКЛАДКА - ТЕКСТ ВСЕГДА БЕЛЫЙ */
@@ -616,7 +620,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
             color: white;
             font-weight: 700;
             font-size: 14px;
@@ -627,7 +631,7 @@
         }
 
         .hero-title {
-            font-family: var(--font-heading); /* Теперь использует Akony */
+            font-family: var(--font-heading);
             font-size: 48px;
             font-weight: 700;
             line-height: 1.1;
@@ -672,7 +676,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
         }
 
         .info-card:hover {
@@ -693,14 +697,14 @@
             justify-content: center;
             width: 48px;
             height: 48px;
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
             border-radius: var(--radius-md);
             color: white;
             font-size: 20px;
         }
 
         .info-card-title {
-            font-family: var(--font-heading); /* Теперь использует Akony */
+            font-family: var(--font-heading);
             font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
@@ -798,7 +802,7 @@
         }
 
         .category-tag.active {
-            background: var(--primary); /* Изменено с градиента на сплошной цвет */
+            background: var(--primary);
             color: white;
             border-color: transparent;
             box-shadow: var(--shadow-primary);
@@ -854,9 +858,9 @@
         }
 
         .command-name {
-            font-family: var(--font-heading); /* Теперь использует Akony */
+            font-family: var(--font-roboto-bold); /* Roboto Bold для команд */
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
             word-break: break-word;
         }
@@ -866,9 +870,10 @@
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            background: var(--accent); /* Изменено с градиента на сплошной цвет */
+            background: var(--accent);
             border-radius: var(--radius-full);
             color: var(--text-primary);
+            font-family: var(--font-roboto-bold);
             font-weight: 700;
             font-size: 14px;
             min-width: 80px;
@@ -944,7 +949,7 @@
             justify-content: center;
             width: 56px;
             height: 56px;
-            background: var(--purple); /* Изменено с градиента на сплошной цвет */
+            background: var(--purple);
             border-radius: var(--radius-lg);
             color: white;
             font-size: 24px;
@@ -966,7 +971,7 @@
         }
 
         .song-title {
-            font-family: var(--font-heading); /* Теперь использует Akony */
+            font-family: var(--font-roboto-bold); /* Roboto Bold для названий песен */
             font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
@@ -982,9 +987,10 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: var(--purple); /* Изменено с градиента на сплошной цвет */
+            background: var(--purple);
             border-radius: var(--radius-md);
             color: white;
+            font-family: var(--font-roboto-bold);
             font-weight: 700;
             font-size: 16px;
             min-width: 140px;
@@ -1008,7 +1014,7 @@
         }
 
         .no-results h3 {
-            font-family: var(--font-heading); /* Теперь использует Akony */
+            font-family: var(--font-heading);
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 12px;
