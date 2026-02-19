@@ -1651,7 +1651,10 @@
                 {name: "!round one", description: "", cost: 300},
                 {name: "!28 ударов ножом", description: "", cost: 300},
                 {name: "!получить пи", description: "", cost: 300},
-                {name: "!пришел увидел", description: "", cost: 300}
+                {name: "!пришел увидел", description: "", cost: 300},
+                // Добавленные команды из Ведьмака 3
+                {name: "!ебанько", description: "Ведьмак 3", cost: 300},
+                {name: "!не научитесь", description: "Ведьмак 3", cost: 300}
             ],
             "🙈 Фиаско": [
                 {name: "!все спиздили", description: "Леон Кеннеди", cost: 300},
@@ -2176,7 +2179,6 @@
             themeToggle.addEventListener('click', toggleTheme);
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
-            searchBox.addEventListener('input', handleSearch);
             
             // Debounce search for performance
             let searchTimeout;
