@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Цинтрибот | Звуковые команды и песни</title>
-    <meta name="description" content="Панель звуковых команд Цинтрибота и заказ песен за БУСЬКИ">
+    <meta name="description" content="Панель звуковых команд Цинтрибота, заказ песен и розыгрыши за БУСЬКИ">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#06D6A0">
+    <meta name="theme-color" content="#E11D48">
     
     <!-- Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -23,35 +23,35 @@
     
     <style>
         :root {
-            /* Dark Theme (Default) */
-            --primary: #6366F1;
-            --primary-light: #818CF8;
-            --primary-dark: #4F46E5;
-            --secondary: #EC4899;
-            --accent: #F59E0B;
+            /* 🌸 Holiday Dark Theme (Default) 🌸 */
+            --primary: #E11D48;      /* Rose */
+            --primary-light: #FB7185;
+            --primary-dark: #BE123C;
+            --secondary: #D946EF;    /* Fuchsia */
+            --accent: #F59E0B;       /* Mimosa Gold */
             --success: #10B981;
             --danger: #EF4444;
             --gold: #FBBF24;
-            --purple: #8B5CF6;
-            --purple-light: #A78BFA;
-            --purple-dark: #6D28D9;
+            --purple: #C026D3;       /* Vibrant Spring Purple */
+            --purple-light: #E879F9;
+            --purple-dark: #86198F;
             
-            /* Background Colors - Dark */
-            --bg-primary: #0F172A;
-            --bg-secondary: #1E293B;
-            --bg-tertiary: #334155;
-            --bg-card: rgba(30, 41, 59, 0.8);
-            --bg-glass: rgba(15, 23, 42, 0.8);
-            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+            /* Background Colors - Dark Holiday */
+            --bg-primary: #1A0B14;   /* Deep Maroon/Wine */
+            --bg-secondary: #2D1222;
+            --bg-tertiary: #431A33;
+            --bg-card: rgba(45, 18, 34, 0.8);
+            --bg-glass: rgba(26, 11, 20, 0.85);
+            --bg-gradient: linear-gradient(135deg, #1A0B14 0%, #2A081D 100%);
             
-            /* Text Colors - Dark */
-            --text-primary: #F8FAFC;
-            --text-secondary: #CBD5E1;
-            --text-tertiary: #94A3B8;
-            --text-accent: #C7D2FE;
+            /* Text Colors - Dark Holiday */
+            --text-primary: #FDF2F8; /* Light Pinkish White */
+            --text-secondary: #FBCFE8;
+            --text-tertiary: #F472B6;
+            --text-accent: #FDA4AF;
             
-            /* UI Colors - Dark */
-            --border-color: rgba(148, 163, 184, 0.1);
+            /* UI Colors */
+            --border-color: rgba(244, 114, 182, 0.2);
             --shadow-color: rgba(0, 0, 0, 0.3);
             
             /* Spacing */
@@ -66,13 +66,13 @@
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
             --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4);
-            --shadow-primary: 0 4px 20px rgba(99, 102, 241, 0.2);
-            --shadow-purple: 0 4px 20px rgba(139, 92, 246, 0.2);
+            --shadow-primary: 0 4px 20px rgba(225, 29, 72, 0.3);
+            --shadow-purple: 0 4px 20px rgba(192, 38, 211, 0.3);
+            --shadow-gold: 0 4px 20px rgba(245, 158, 11, 0.3);
             
-            /* Typography - AKONY теперь основной шрифт для заголовков */
+            /* Typography */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-heading: 'Akony', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-            /* Roboto для кнопок, команд и названий песен */
             --font-roboto-bold: 'Roboto', sans-serif;
             
             /* Transitions */
@@ -84,40 +84,39 @@
             --header-height: 72px;
             --sidebar-width: 280px;
             
-            /* Logo colors - Dark theme (white) */
             --logo-color: #FFFFFF;
         }
 
-        /* Light Theme Variables */
+        /* 🌸 Holiday Light Theme Variables 🌸 */
         [data-theme="light"] {
-            /* Background Colors - Light */
-            --bg-primary: #FFFFFF;
-            --bg-secondary: #F8FAFC;
-            --bg-tertiary: #F1F5F9;
-            --bg-card: rgba(248, 250, 252, 0.8);
-            --bg-glass: rgba(255, 255, 255, 0.8);
-            --bg-gradient: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+            /* Background Colors - Light Holiday */
+            --bg-primary: #FFF0F5;   /* Lavender Blush */
+            --bg-secondary: #FFE4E6; /* Rose Light */
+            --bg-tertiary: #FECDD3;
+            --bg-card: rgba(255, 240, 245, 0.85);
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --bg-gradient: linear-gradient(135deg, #FFF1F2 0%, #FCE7F3 100%);
             
-            /* Text Colors - Light */
-            --text-primary: #0F172A;
-            --text-secondary: #334155;
-            --text-tertiary: #64748B;
-            --text-accent: #3730A3;
+            /* Text Colors - Light Holiday */
+            --text-primary: #4C0519; /* Deep Rose Dark */
+            --text-secondary: #831843;
+            --text-tertiary: #BE185D;
+            --text-accent: #E11D48;
             
-            /* UI Colors - Light */
-            --border-color: rgba(203, 213, 225, 0.5);
-            --shadow-color: rgba(148, 163, 184, 0.1);
+            /* UI Colors */
+            --border-color: rgba(244, 114, 182, 0.4);
+            --shadow-color: rgba(190, 24, 93, 0.1);
             
             /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(148, 163, 184, 0.1);
-            --shadow-md: 0 4px 16px rgba(148, 163, 184, 0.15);
-            --shadow-lg: 0 8px 32px rgba(148, 163, 184, 0.2);
-            --shadow-xl: 0 16px 48px rgba(148, 163, 184, 0.25);
-            --shadow-primary: 0 4px 20px rgba(99, 102, 241, 0.15);
-            --shadow-purple: 0 4px 20px rgba(139, 92, 246, 0.15);
+            --shadow-sm: 0 2px 8px rgba(190, 24, 93, 0.05);
+            --shadow-md: 0 4px 16px rgba(190, 24, 93, 0.1);
+            --shadow-lg: 0 8px 32px rgba(190, 24, 93, 0.15);
+            --shadow-xl: 0 16px 48px rgba(190, 24, 93, 0.2);
+            --shadow-primary: 0 4px 20px rgba(225, 29, 72, 0.25);
+            --shadow-purple: 0 4px 20px rgba(192, 38, 211, 0.25);
+            --shadow-gold: 0 4px 20px rgba(245, 158, 11, 0.25);
             
-            /* Logo colors - Light theme (black) */
-            --logo-color: #000000;
+            --logo-color: #831843;
         }
 
         * {
@@ -151,7 +150,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -3;
             background: var(--bg-gradient);
         }
 
@@ -161,7 +160,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             opacity: 0.6;
             filter: blur(80px);
         }
@@ -205,6 +204,33 @@
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
 
+        /* 🌸 Falling Petals 🌸 */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 15px 0 15px 0;
+            opacity: 0.4;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+
         /* Grid Pattern */
         .grid-pattern {
             position: fixed;
@@ -212,12 +238,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             background-image: 
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 60px 60px;
-            opacity: 0.1;
+            opacity: 0.15;
             mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
         }
@@ -246,37 +272,56 @@
         .splash-content {
             text-align: center;
             animation: splashAnimation 2s ease-in-out;
+            position: relative;
         }
 
         .splash-icon {
             width: 120px;
             height: 120px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 32px;
-            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(225, 29, 72, 0.2);
             animation: pulse 2s infinite;
+            position: relative;
         }
 
-        .splash-icon i {
-            font-size: 64px;
+        .splash-icon i.fa-robot {
+            font-size: 54px;
             color: white;
-            animation: spin 4s linear infinite;
+            animation: bounceSoft 3s ease-in-out infinite;
+        }
+        
+        .splash-icon i.fa-heart {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 28px;
+            color: var(--accent);
+            animation: pulseHeart 1.5s infinite;
         }
 
         .splash-content h1 {
             font-family: var(--font-heading);
             font-size: 48px;
             font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: fadeInUp 1s ease-out;
+        }
+
+        .splash-subtitle {
+            font-size: 22px;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 16px;
+            animation: fadeInUp 1s ease-out 0.1s both;
         }
 
         .splash-content p {
@@ -309,24 +354,23 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: var(--shadow-xl), 0 0 0 8px rgba(99, 102, 241, 0.2); }
-            50% { transform: scale(1.05); box-shadow: var(--shadow-xl), 0 0 0 12px rgba(99, 102, 241, 0.4); }
+            0%, 100% { transform: scale(1); box-shadow: var(--shadow-xl), 0 0 0 8px rgba(225, 29, 72, 0.2); }
+            50% { transform: scale(1.05); box-shadow: var(--shadow-xl), 0 0 0 12px rgba(225, 29, 72, 0.4); }
+        }
+        
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes progress {
@@ -337,9 +381,9 @@
         /* Layout Container */
         .container {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
         /* Header */
@@ -380,10 +424,9 @@
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-lg);
-            color: var(--logo-color);
+            color: #FFF;
             font-size: 20px;
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-base);
@@ -401,6 +444,9 @@
             color: var(--logo-color);
             line-height: 1.2;
             transition: color var(--transition-base);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .logo-text span {
@@ -439,6 +485,7 @@
             background: var(--bg-tertiary);
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
+            color: var(--primary);
         }
 
         .theme-toggle:active {
@@ -450,21 +497,10 @@
             transition: transform var(--transition-base);
         }
 
-        [data-theme="light"] .theme-toggle .fa-moon {
-            display: none;
-        }
-
-        [data-theme="light"] .theme-toggle .fa-sun {
-            display: block;
-        }
-
-        [data-theme="dark"] .theme-toggle .fa-sun {
-            display: none;
-        }
-
-        [data-theme="dark"] .theme-toggle .fa-moon {
-            display: block;
-        }
+        [data-theme="light"] .theme-toggle .fa-moon { display: none; }
+        [data-theme="light"] .theme-toggle .fa-sun { display: block; }
+        [data-theme="dark"] .theme-toggle .fa-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .fa-moon { display: block; }
 
         /* Balance Button */
         .balance-btn {
@@ -475,8 +511,8 @@
             background: var(--accent);
             border: none;
             border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-weight: 600;
+            color: #1A0B14;
+            font-weight: 700;
             font-size: 14px;
             cursor: pointer;
             transition: all var(--transition-fast);
@@ -492,7 +528,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.6s;
         }
 
@@ -543,7 +579,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s;
         }
 
@@ -559,19 +595,19 @@
         .social-link.telegram:hover {
             color: #0088CC;
             background: rgba(0, 136, 204, 0.1);
-            border-color: rgba(0, 136, 204, 0.2);
+            border-color: rgba(0, 136, 204, 0.3);
         }
 
         .social-link.youtube:hover {
             color: #FF0000;
             background: rgba(255, 0, 0, 0.1);
-            border-color: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.3);
         }
 
         .social-link.twitch:hover {
             color: #9146FF;
             background: rgba(145, 70, 255, 0.1);
-            border-color: rgba(145, 70, 255, 0.2);
+            border-color: rgba(145, 70, 255, 0.3);
         }
 
         .social-tooltip {
@@ -605,33 +641,35 @@
         .main-content {
             margin-top: var(--header-height);
             min-height: calc(100vh - var(--header-height));
-            padding: 32px 0;
+            padding: 24px 0;
         }
 
-        /* Tabs Navigation - ИСПРАВЛЕНА */
+        /* Tabs Navigation - компактный для 4 вкладок */
         .tabs-nav {
             display: flex;
-            gap: 8px;
-            margin-bottom: 32px;
+            gap: 6px;
+            margin-bottom: 24px;
             background: var(--bg-secondary);
             border-radius: var(--radius-lg);
-            padding: 8px;
+            padding: 6px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
-            max-width: fit-content;
+            width: 100%;
+            max-width: 100%;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .tab-btn {
-            padding: 14px 28px;
+            flex: 1;
+            padding: 10px 8px;
             background: transparent;
             border: none;
             border-radius: var(--radius-md);
             color: var(--text-secondary);
             font-family: var(--font-heading);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all var(--transition-fast);
@@ -640,17 +678,17 @@
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
+            justify-content: center;
+            gap: 6px;
         }
 
         .tab-indicator {
             position: absolute;
-            top: 8px;
-            left: 8px;
-            height: calc(100% - 16px);
+            top: 6px;
+            left: 6px;
+            height: calc(100% - 12px);
             border-radius: var(--radius-md);
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             box-shadow: var(--shadow-md);
             transition: transform var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1), 
                         width var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -659,21 +697,28 @@
         }
 
         .tab-btn.songs-tab.active ~ .tab-indicator {
-            background: var(--purple);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
         }
 
-        /* АКТИВНАЯ ВКЛАДКА - ТЕКСТ ВСЕГДА БЕЛЫЙ */
-        .tab-btn.active {
-            color: white !important;
+        .tab-btn.raffle-tab.active ~ .tab-indicator {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
         }
 
-        .tab-btn.active i,
-        .tab-btn.active span,
-        .tab-btn.active .price-badge {
-            color: white !important;
+        .tab-btn.suffering-tab.active ~ .tab-indicator {
+            background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
         }
 
-        /* Усиливаем для светлой темы */
+        .tab-btn.active { color: white !important; }
+        .tab-btn.active i, .tab-btn.active span, .tab-btn.active .price-badge { color: white !important; }
+        
+        /* Dark text for Raffle tab active */
+        .tab-btn.raffle-tab.active,
+        .tab-btn.raffle-tab.active i,
+        .tab-btn.raffle-tab.active span,
+        .tab-btn.raffle-tab.active .price-badge {
+            color: #1A0B14 !important;
+        }
+
         [data-theme="light"] .tab-btn.active,
         [data-theme="light"] .tab-btn.active i,
         [data-theme="light"] .tab-btn.active span,
@@ -681,19 +726,29 @@
             color: white !important;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
-
-        [data-theme="light"] .tab-indicator {
-            box-shadow: var(--shadow-lg);
+        
+        [data-theme="light"] .tab-btn.raffle-tab.active,
+        [data-theme="light"] .tab-btn.raffle-tab.active i,
+        [data-theme="light"] .tab-btn.raffle-tab.active span,
+        [data-theme="light"] .tab-btn.raffle-tab.active .price-badge {
+            color: #1A0B14 !important;
+            text-shadow: none;
         }
 
+        [data-theme="light"] .tab-indicator { box-shadow: var(--shadow-lg); }
+
         .price-badge {
-            padding: 4px 10px;
+            padding: 2px 6px;
             border-radius: var(--radius-sm);
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             transition: all var(--transition-fast);
+        }
+        
+        .tab-btn.raffle-tab.active .price-badge {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .tab-btn:not(.active) .price-badge {
@@ -701,35 +756,19 @@
             color: var(--text-secondary);
         }
 
-        .tab-btn.songs-tab .price-badge {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--purple);
-        }
-
-        .tab-btn.songs-tab.active .price-badge {
-            background: rgba(255, 255, 255, 0.2);
-            color: white !important;
-        }
-
         /* Tab Content */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
+        .tab-content.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Section */
+        /* Hero Section - компактный */
         .hero-section {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 24px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -738,23 +777,23 @@
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: var(--primary);
+            gap: 6px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             font-weight: 700;
-            font-size: 14px;
-            padding: 8px 20px;
+            font-size: 12px;
+            padding: 4px 16px;
             border-radius: var(--radius-full);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow-primary);
         }
 
         .hero-title {
             font-family: var(--font-heading);
-            font-size: 48px;
+            font-size: 32px;
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 16px;
+            line-height: 1.2;
+            margin-bottom: 8px;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -762,25 +801,25 @@
         }
 
         .hero-description {
-            font-size: 18px;
+            font-size: 14px;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 32px;
+            line-height: 1.5;
+            margin-bottom: 16px;
         }
 
-        /* Info Cards */
+        /* Info Cards - компактные */
         .info-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .info-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: 16px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: all var(--transition-base);
@@ -795,64 +834,184 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .info-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .info-card-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .info-card-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: var(--primary);
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-md);
             color: white;
-            font-size: 20px;
+            font-size: 16px;
+            box-shadow: var(--shadow-primary);
         }
 
         .info-card-title {
             font-family: var(--font-heading);
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .info-card-content {
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.4;
+            font-size: 13px;
         }
 
-        /* Search Section */
-        .search-section {
-            margin-bottom: 32px;
+        /* Raffle Banner - в стиле основного сайта */
+        .raffle-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-base);
         }
+
+        .raffle-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .raffle-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .raffle-banner-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .raffle-banner-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: var(--shadow-primary);
+        }
+
+        .raffle-banner-content h3 {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .raffle-banner-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .raffle-banner-content p i {
+            color: var(--primary);
+            margin-right: 4px;
+        }
+
+        .raffle-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .raffle-badge i {
+            color: var(--primary);
+        }
+
+        .raffle-banner-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: var(--shadow-primary);
+            text-decoration: none;
+        }
+
+        .raffle-banner-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .raffle-banner-button:active {
+            transform: translateY(0);
+        }
+
+        /* Search Section - компактный */
+        .search-section { margin-bottom: 20px; }
 
         .search-container {
             position: relative;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         .search-input {
             width: 100%;
-            padding: 18px 24px 18px 52px;
+            padding: 12px 16px 12px 40px;
             background: var(--bg-card);
             border: 2px solid var(--border-color);
             border-radius: var(--radius-lg);
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 14px;
             font-family: inherit;
             transition: all var(--transition-base);
             backdrop-filter: blur(10px);
@@ -865,34 +1024,32 @@
             box-shadow: var(--shadow-primary);
         }
 
-        .search-input::placeholder {
-            color: var(--text-tertiary);
-        }
+        .search-input::placeholder { color: var(--text-tertiary); }
 
         .search-icon {
             position: absolute;
-            left: 20px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-tertiary);
-            font-size: 18px;
+            font-size: 14px;
         }
 
-        /* Categories */
+        /* Categories - компактные */
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 32px;
+            gap: 6px;
+            margin-bottom: 20px;
         }
 
         .category-tag {
-            padding: 10px 20px;
+            padding: 6px 14px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-full);
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all var(--transition-fast);
@@ -907,13 +1064,11 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
             transition: left 0.6s;
         }
 
-        .category-tag:hover::before {
-            left: 100%;
-        }
+        .category-tag:hover::before { left: 100%; }
 
         .category-tag:hover {
             background: var(--bg-tertiary);
@@ -921,25 +1076,25 @@
         }
 
         .category-tag.active {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border-color: transparent;
             box-shadow: var(--shadow-primary);
         }
 
-        /* Commands Grid */
+        /* Commands Grid - компактный */
         .commands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .command-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 20px;
+            padding: 16px;
             transition: all var(--transition-base);
             cursor: pointer;
             position: relative;
@@ -955,30 +1110,28 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
             transition: left 0.6s;
         }
 
-        .command-card:hover::before {
-            left: 100%;
-        }
+        .command-card:hover::before { left: 100%; }
 
         .command-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
+            border-color: var(--primary-light);
         }
 
         .command-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .command-name {
             font-family: var(--font-roboto-bold);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
             word-break: break-word;
@@ -987,56 +1140,57 @@
         .command-cost {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
+            gap: 4px;
+            padding: 4px 8px;
             background: var(--accent);
             border-radius: var(--radius-full);
-            color: var(--text-primary);
+            color: #1A0B14;
             font-family: var(--font-roboto-bold);
             font-weight: 700;
-            font-size: 14px;
-            min-width: 80px;
+            font-size: 12px;
+            min-width: 60px;
             justify-content: center;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
         }
 
         .command-description {
             color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 16px;
-            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            font-size: 13px;
         }
 
         .command-category {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 2px 8px;
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-full);
-            font-size: 12px;
+            font-size: 10px;
             color: var(--text-tertiary);
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* Songs Grid */
+        /* Songs Grid - компактный */
         .songs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .song-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: 16px;
             transition: all var(--transition-base);
             cursor: pointer;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -1048,30 +1202,28 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(192, 38, 211, 0.15), transparent);
             transition: left 0.6s;
         }
 
-        .song-card:hover::before {
-            left: 100%;
-        }
+        .song-card:hover::before { left: 100%; }
 
         .song-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-purple);
-            border-color: var(--purple);
+            border-color: var(--purple-light);
         }
 
         .song-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 56px;
-            height: 56px;
-            background: var(--purple);
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
             border-radius: var(--radius-lg);
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             flex-shrink: 0;
             box-shadow: var(--shadow-purple);
         }
@@ -1082,20 +1234,20 @@
         }
 
         .song-artist {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text-tertiary);
-            margin-bottom: 4px;
-            font-weight: 500;
+            margin-bottom: 2px;
+            font-weight: 600;
             letter-spacing: 0.5px;
         }
 
         .song-title {
             font-family: var(--font-roboto-bold);
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.3;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -1104,63 +1256,248 @@
         .song-price {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: var(--purple);
+            gap: 4px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
             border-radius: var(--radius-md);
             color: white;
             font-family: var(--font-roboto-bold);
             font-weight: 700;
-            font-size: 16px;
-            min-width: 140px;
+            font-size: 14px;
+            min-width: 90px;
             justify-content: center;
             box-shadow: var(--shadow-purple);
+        }
+
+        /* Raffle Card (Gold/Yellow Theme) - компактный */
+        .raffle-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .raffle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.15), transparent);
+            transition: left 0.6s;
+        }
+
+        .raffle-card:hover::before { left: 100%; }
+
+        .raffle-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent);
+        }
+
+        .raffle-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            border-radius: var(--radius-lg);
+            color: #1A0B14;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .raffle-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .raffle-title {
+            font-family: var(--font-roboto-bold);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 2px;
+            word-break: break-word;
+        }
+
+        .raffle-subtitle {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .raffle-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            border-radius: var(--radius-md);
+            color: #1A0B14;
+            font-family: var(--font-roboto-bold);
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 90px;
+            justify-content: center;
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* Suffering Card (Red/Danger Theme) - компактный */
+        .suffering-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-left: 4px solid var(--danger);
+        }
+
+        .suffering-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.15), transparent);
+            transition: left 0.6s;
+        }
+
+        .suffering-card:hover::before { left: 100%; }
+
+        .suffering-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            border-color: var(--danger);
+        }
+
+        .suffering-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
+            border-radius: var(--radius-lg);
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .suffering-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .suffering-title {
+            font-family: var(--font-roboto-bold);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 2px;
+            word-break: break-word;
+        }
+
+        .suffering-subtitle {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .suffering-description {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            padding-top: 4px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .suffering-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: var(--font-roboto-bold);
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 90px;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
         }
 
         /* No Results */
         .no-results {
             text-align: center;
-            padding: 64px 32px;
+            padding: 32px 16px;
             color: var(--text-tertiary);
             grid-column: 1 / -1;
         }
 
         .no-results i {
-            font-size: 48px;
-            margin-bottom: 16px;
+            font-size: 36px;
+            margin-bottom: 12px;
             color: var(--text-tertiary);
             opacity: 0.5;
         }
 
         .no-results h3 {
             font-family: var(--font-heading);
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: var(--text-secondary);
         }
 
         .no-results p {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--text-tertiary);
-            max-width: 400px;
+            max-width: 300px;
             margin: 0 auto;
         }
 
         /* Notification */
         .notification {
             position: fixed;
-            bottom: 24px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: var(--bg-glass);
             color: var(--text-primary);
-            padding: 16px 28px;
+            padding: 12px 24px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-xl);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 2000;
             opacity: 0;
             transition: all var(--transition-base);
@@ -1176,201 +1513,72 @@
         }
 
         .notification i {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--success);
         }
 
         .notification.songs-notification i {
-            color: var(--purple);
+            color: var(--purple-light);
+        }
+        
+        .notification.raffle-notification i {
+            color: var(--gold);
         }
 
-        /* Footer */
+        .notification.suffering-notification i {
+            color: var(--danger);
+        }
+
+        /* Footer - компактный */
         .footer {
-            margin-top: 64px;
-            padding: 32px 0;
+            margin-top: 32px;
+            padding: 20px 0;
             border-top: 1px solid var(--border-color);
             text-align: center;
         }
 
         .footer-content p {
             color: var(--text-tertiary);
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            margin-bottom: 4px;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .commands-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .songs-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .info-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-container {
-                gap: 12px;
-            }
-            
-            .social-link {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .balance-btn {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-            
-            .tab-btn {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .hero-description {
-                font-size: 16px;
-            }
-            
-            .tabs-nav {
-                width: 100%;
-                max-width: 100%;
-                justify-content: stretch;
-            }
-            
-            .tab-btn {
-                flex: 1;
-                justify-content: center;
-                padding: 12px 16px;
-            }
-            
-            .splash-icon {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .splash-icon i {
-                font-size: 48px;
-            }
-            
-            .splash-content h1 {
-                font-size: 36px;
-            }
-            
-            .splash-content p {
-                font-size: 16px;
-            }
+            .hero-title { font-size: 28px; }
+            .commands-grid { grid-template-columns: 1fr; gap: 12px; }
+            .songs-grid { grid-template-columns: 1fr; gap: 12px; }
+            .info-cards { grid-template-columns: 1fr; }
+            .header-container { gap: 10px; }
+            .social-link { width: 36px; height: 36px; }
+            .balance-btn { padding: 6px 10px; font-size: 12px; }
+            .tab-btn { font-size: 12px; padding: 8px 4px; }
+            .hero-description { font-size: 13px; }
+            .raffle-banner { flex-direction: column; text-align: center; }
+            .raffle-banner-left { flex-direction: column; }
+            .splash-icon { width: 80px; height: 80px; }
+            .splash-icon i.fa-robot { font-size: 36px; }
+            .splash-icon i.fa-heart { font-size: 20px; }
+            .splash-content h1 { font-size: 28px; }
+            .splash-content p { font-size: 14px; }
         }
 
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 28px;
-            }
-            
-            .hero-description {
-                font-size: 15px;
-            }
-            
-            .container {
-                padding: 0 16px;
-            }
-            
-            .command-card,
-            .song-card {
-                padding: 16px;
-            }
-            
-            .song-card {
-                flex-direction: column;
-                text-align: center;
-                gap: 16px;
-            }
-            
-            .song-price {
-                width: 100%;
-            }
-            
-            .social-links {
-                gap: 8px;
-            }
-            
-            .social-link {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-            
-            .theme-toggle,
-            .balance-btn {
-                width: 36px;
-                height: 36px;
-                padding: 0;
-                justify-content: center;
-            }
-            
-            .balance-btn span {
-                display: none;
-            }
-            
-            .info-card {
-                padding: 20px;
-            }
-            
-            .info-card-title {
-                font-size: 18px;
-            }
-            
-            .tab-btn {
-                flex-direction: column;
-                gap: 4px;
-                padding: 10px 12px;
-            }
-            
-            .price-badge {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-            
-            .tabs-nav {
-                padding: 6px;
-            }
-            
-            .splash-icon {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 24px;
-            }
-            
-            .splash-icon i {
-                font-size: 40px;
-            }
-            
-            .splash-content h1 {
-                font-size: 28px;
-            }
-            
-            .splash-content p {
-                font-size: 14px;
-                padding: 0 20px;
-            }
-            
-            .splash-progress {
-                width: 160px;
-            }
-        }
-
-        /* Dark/Light Theme Toggle Animation */
-        body {
-            transition: background-color var(--transition-base), color var(--transition-base);
+            .hero-title { font-size: 24px; }
+            .hero-description { font-size: 12px; }
+            .container { padding: 0 12px; }
+            .command-card, .song-card, .raffle-card, .suffering-card { padding: 12px; }
+            .song-card, .raffle-card, .suffering-card { flex-direction: column; text-align: center; gap: 8px; }
+            .song-price, .raffle-price, .suffering-price { width: 100%; }
+            .social-links { gap: 6px; }
+            .social-link { width: 32px; height: 32px; font-size: 12px; }
+            .theme-toggle, .balance-btn { width: 32px; height: 32px; padding: 0; justify-content: center; }
+            .balance-btn span { display: none; }
+            .info-card { padding: 12px; }
+            .info-card-title { font-size: 14px; }
+            .tab-btn { flex-direction: column; gap: 2px; padding: 6px 2px; }
+            .price-badge { font-size: 8px; padding: 1px 3px; }
+            .raffle-banner-content p { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -1380,8 +1588,10 @@
         <div class="splash-content">
             <div class="splash-icon">
                 <i class="fas fa-robot"></i>
+                <i class="fas fa-heart"></i>
             </div>
             <h1>Цинтрибот</h1>
+            <div class="splash-subtitle">🌸 С 8 Марта! 🌸</div>
             <p>Загружаем звуковые команды и песни...</p>
             <div class="splash-progress">
                 <div class="splash-progress-bar"></div>
@@ -1397,6 +1607,8 @@
         <div class="orb-3"></div>
     </div>
     <div class="grid-pattern"></div>
+    <!-- 🌸 Контейнер для лепестков 🌸 -->
+    <div class="petals-container" id="petals"></div>
 
     <!-- Header -->
     <header class="header">
@@ -1406,7 +1618,7 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>Цинтрибот</h1>
+                    <h1>Цинтрибот 🌸</h1>
                     <span>Звуковые команды и песни</span>
                 </div>
             </a>
@@ -1443,22 +1655,32 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Tabs Navigation -->
+            <!-- Tabs Navigation - 4 вкладки без скролла -->
             <div class="tabs-nav" id="tabs-nav">
                 <div class="tab-indicator" id="tab-indicator"></div>
                 <button class="tab-btn active" data-tab="commands">
                     <i class="fas fa-microphone-alt"></i>
-                    <span>Звуковые команды</span>
-                    <span class="price-badge">300 БУСЕК</span>
+                    <span>Команды</span>
+                    <span class="price-badge">300</span>
                 </button>
                 <button class="tab-btn songs-tab" data-tab="songs">
                     <i class="fas fa-music"></i>
-                    <span>Заказ песен</span>
-                    <span class="price-badge">40,000 БУСЕК</span>
+                    <span>Песни</span>
+                    <span class="price-badge">40k</span>
+                </button>
+                <button class="tab-btn raffle-tab" data-tab="raffle">
+                    <i class="fas fa-gift"></i>
+                    <span>Розыгрыш</span>
+                    <span class="price-badge">5k+</span>
+                </button>
+                <button class="tab-btn suffering-tab" data-tab="suffering">
+                    <i class="fas fa-skull"></i>
+                    <span>Страдание</span>
+                    <span class="price-badge">1k</span>
                 </button>
             </div>
 
-            <!-- Commands Tab -->
+            <!-- Commands Tab (Главный экран) -->
             <div class="tab-content active" id="commands-tab">
                 <!-- Hero Section -->
                 <section class="hero-section">
@@ -1468,10 +1690,29 @@
                     </div>
                     <h1 class="hero-title">Библиотека звуковых команд</h1>
                     <p class="hero-description">
-                        Выбирайте команды из библиотеки, копируйте их и отправляйте в чат стрима.
-                        Каждая команда стоит всего 300 БУСЕК и моментально воспроизводится ботом.
+                        Выбирайте команды, копируйте и отправляйте в чат стрима.
                     </p>
                 </section>
+
+                <!-- Баннер о розыгрыше игр в стиле сайта -->
+                <div class="raffle-banner">
+                    <div class="raffle-banner-left">
+                        <div class="raffle-banner-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="raffle-banner-content">
+                            <h3>🎮 Розыгрыш игр за БУСЬКИ!</h3>
+                            <p>
+                                <span><i class="fas fa-ticket-alt"></i> Билеты от 5,000 БУСЕК</span>
+                                <span class="raffle-badge"><i class="fas fa-star"></i> Devil May Cry, Wolfenstein</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="raffle-banner-button" onclick="switchToRaffleTab()">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Участвовать</span>
+                    </button>
+                </div>
 
                 <!-- Info Cards -->
                 <div class="info-cards">
@@ -1483,8 +1724,7 @@
                             <h3 class="info-card-title">Как получить БУСЬКИ</h3>
                         </div>
                         <div class="info-card-content">
-                            <p>БУСЬКИ начисляются за активность в чате: 20 БУСЕК за каждое сообщение, 
-                            1000 БУСЕК за 100 лайков, +500 БУСЕК за каждые следующие 50 лайков.</p>
+                            <p>20 БУСЕК за сообщение, 1000 за 100 лайков.</p>
                         </div>
                     </div>
                     
@@ -1496,9 +1736,7 @@
                             <h3 class="info-card-title">Как использовать</h3>
                         </div>
                         <div class="info-card-content">
-                            <p>1. Нажмите на команду для копирования<br>
-                            2. Вставьте в чат YouTube/Twitch<br>
-                            3. Бот воспроизведет звук списав 300 БУСЕК</p>
+                            <p>Нажмите → вставьте в чат → бот воспроизведет.</p>
                         </div>
                     </div>
                 </div>
@@ -1523,7 +1761,7 @@
                 <div class="no-results" id="no-results" style="display: none;">
                     <i class="fas fa-search"></i>
                     <h3>Команды не найдены</h3>
-                    <p>Попробуйте изменить запрос или выберите другую категорию</p>
+                    <p>Попробуйте изменить запрос</p>
                 </div>
             </div>
 
@@ -1531,50 +1769,15 @@
             <div class="tab-content" id="songs-tab">
                 <!-- Hero Section -->
                 <section class="hero-section">
-                    <div class="hero-badge">
+                    <div class="hero-badge" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);">
                         <i class="fas fa-crown"></i>
                         <span>40,000 БУСЕК за песню</span>
                     </div>
-                    <h1 class="hero-title">Закажите песню на стриме</h1>
+                    <h1 class="hero-title">Закажите песню</h1>
                     <p class="hero-description">
-                        Выберите любимую песню из списка, закажите её за 40,000 БУСЕК, 
-                        и Цинтрийка исполнит её во время стрима. Команда автоматически 
-                        копируется для вставки в чат.
+                        Выберите песню и отправьте команду в чат.
                     </p>
                 </section>
-
-                <!-- Info Cards -->
-                <div class="info-cards">
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <div class="info-card-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <h3 class="info-card-title">Как заказать песню</h3>
-                        </div>
-                        <div class="info-card-content">
-                            <p>1. Выберите песню из списка<br>
-                            2. Команда скопируется автоматически<br>
-                            3. Вставьте команду в чат стрима<br>
-                            4. Цинтрийка исполнит песню позже</p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-card-header">
-                            <div class="info-card-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h3 class="info-card-title">Особенности заказа</h3>
-                        </div>
-                        <div class="info-card-content">
-                            <p>• Одна песни = 40,000 БУСЕК<br>
-                            • Исполнение во время стрима<br>
-                            • Бот списывает БУСЬКИ автоматически<br>
-                            • Команда: !песня [исполнитель] - [название]</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Songs Grid -->
                 <div class="songs-grid" id="songs-container">
@@ -1585,9 +1788,50 @@
                 <div class="no-results" id="no-songs-results" style="display: none;">
                     <i class="fas fa-music"></i>
                     <h3>Песни не найдены</h3>
-                    <p>Попробуйте обновить страницу или проверьте подключение к интернету</p>
+                    <p>Обновите страницу</p>
                 </div>
             </div>
+
+            <!-- Raffle Tab -->
+            <div class="tab-content" id="raffle-tab">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-badge" style="background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%); color: #1A0B14;">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Испытай удачу!</span>
+                    </div>
+                    <h1 class="hero-title">Розыгрыш игр</h1>
+                    <p class="hero-description">
+                        Покупай билеты за БУСЬКИ.
+                    </p>
+                </section>
+
+                <!-- Raffle Grid -->
+                <div class="songs-grid" id="raffle-container">
+                    <!-- Raffle items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Suffering Tab (Страдание стримера) -->
+            <div class="tab-content" id="suffering-tab">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-badge" style="background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);">
+                        <i class="fas fa-skull"></i>
+                        <span>Страдание стримера - радость зрителя!</span>
+                    </div>
+                    <h1 class="hero-title">Мучительные испытания</h1>
+                    <p class="hero-description">
+                        5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК
+                    </p>
+                </section>
+
+                <!-- Suffering Grid -->
+                <div class="songs-grid" id="suffering-container">
+                    <!-- Suffering items will be loaded here -->
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -1595,7 +1839,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>🎵 Заказывайте любимые песни и наслаждайтесь музыкой на стримах Цинтрийки!</p>
+                <p>🎵 Заказывайте песни на стримах Цинтрийки!</p>
                 <p>© 2024 Цинтрийское государство</p>
             </div>
         </div>
@@ -1608,7 +1852,7 @@
     </div>
 
     <script>
-        // Data with all commands
+        // Data with all commands - обновлено с новыми командами
         const commandsByCategory = {
             "💜 Приветствие": [
                 {name: "!здравствуйте", description: "Голодные игры", cost: 300},
@@ -1632,7 +1876,11 @@
                 {name: "!я же королева", description: "", cost: 300},
                 {name: "!бриллианты", description: "", cost: 300},
                 {name: "!бомжа пробовала", description: "", cost: 300},
-                {name: "!танцуют все", description: "", cost: 300}
+                {name: "!танцуют все", description: "", cost: 300},
+                // Новые команды в раздел "Мои голосовые"
+                {name: "!слоумо", description: "Замедление", cost: 300},
+                {name: "!деньжата посыпались", description: "Звук денег", cost: 300},
+                {name: "!стелс", description: "Скрытность", cost: 300}
             ],
             "💪 Боевой настрой": [
                 {name: "!чики брики", description: "", cost: 300},
@@ -1652,10 +1900,12 @@
                 {name: "!28 ударов ножом", description: "", cost: 300},
                 {name: "!получить пи", description: "", cost: 300},
                 {name: "!пришел увидел", description: "", cost: 300},
-                // Добавленные команды из Ведьмака 3
                 {name: "!ебанько", description: "Ведьмак 3", cost: 300},
                 {name: "!не научитесь", description: "Ведьмак 3", cost: 300},
-                {name: "!дрын", description: "Оружие", cost: 300}
+                {name: "!дрын", description: "Оружие", cost: 300},
+                // Новые команды в раздел "Боевые"
+                {name: "!поле чудес", description: "При победе", cost: 300},
+                {name: "!Корбен, детка", description: "", cost: 300}
             ],
             "🙈 Фиаско": [
                 {name: "!все спиздили", description: "Леон Кеннеди", cost: 300},
@@ -1750,6 +2000,22 @@
             {artist: "No Doubt", name: "Don't Speak"}
         ];
 
+        // Raffle Items
+        const raffleItems = [
+            {command: "!The Evil Within", cost: "5,000", title: "The Evil Within", type: "game"},
+            {command: "!Devil My Cry 5 + Vergil", cost: "5,000", title: "Devil My Cry 5 + Vergil", type: "game"},
+            {command: "!Wolfenstein: The new order", cost: "5,000", title: "Wolfenstein: The new order", type: "game"},
+            {command: "!REANIMAL", cost: "20,000", title: "REANIMAL", type: "game"},
+            {command: "!Clair Obscur: Expedition 33", cost: "20,000", title: "Clair Obscur: Expedition 33", type: "game"}
+        ];
+
+        // Suffering Items (Страдание стримера)
+        const sufferingItems = [
+            {command: "!лечилка", description: "Не использует лечилки (5 мин, не на боссов)", cost: "1,000", title: "Лечилка", icon: "fa-ban"},
+            {command: "!одно оружие", description: "Только одно оружие (5 мин, не на боссов)", cost: "1,000", title: "Одно оружие", icon: "fa-gun"},
+            {command: "!стелс миссия", description: "Пройти миссию по стелсу (5 мин, не на боссов)", cost: "1,000", title: "Стелс миссия", icon: "fa-eye-slash"}
+        ];
+
         // DOM Elements
         const splashScreen = document.getElementById('splash-screen');
         const themeToggle = document.getElementById('theme-toggle');
@@ -1760,17 +2026,30 @@
         const categoriesTabs = document.getElementById('categories-tabs');
         const commandsContainer = document.getElementById('commands-container');
         const songsContainer = document.getElementById('songs-container');
+        const raffleContainer = document.getElementById('raffle-container');
+        const sufferingContainer = document.getElementById('suffering-container');
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notification-text');
         const searchBox = document.getElementById('search-box');
         const noResults = document.getElementById('no-results');
         const noSongsResults = document.getElementById('no-songs-results');
         const balanceBtn = document.getElementById('balance-value');
+        const petalsContainer = document.getElementById('petals');
         
         let activeCategoryFilter = "Все";
         let searchQuery = "";
         let allCommands = [];
         let currentTab = 'commands';
+
+        // Функция для переключения на вкладку розыгрыша
+        window.switchToRaffleTab = function() {
+            // Найти кнопку вкладки розыгрыша и активировать её
+            const raffleTabBtn = document.querySelector('.tab-btn[data-tab="raffle"]');
+            if (raffleTabBtn) {
+                // Имитировать клик по вкладке
+                raffleTabBtn.click();
+            }
+        };
 
         // Initialize theme from localStorage or system preference
         function initTheme() {
@@ -1794,18 +2073,32 @@
             document.body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // Add animation to toggle button
             themeToggle.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                themeToggle.style.transform = '';
-            }, 150);
+            setTimeout(() => { themeToggle.style.transform = ''; }, 150);
         }
 
         // Hide splash screen
         function hideSplashScreen() {
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
-            }, 2000); // Показываем 2 секунды
+            }, 2000);
+        }
+
+        // 🌸 Генерация падающих лепестков 🌸
+        function createPetals() {
+            const petalCount = 15;
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                petal.style.animationDelay = (Math.random() * 5) + 's';
+                petal.style.width = (Math.random() * 8 + 8) + 'px';
+                petal.style.height = (Math.random() * 8 + 8) + 'px';
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                petalsContainer.appendChild(petal);
+            }
         }
 
         // Prepare all commands array
@@ -1813,13 +2106,9 @@
             allCommands = [];
             Object.entries(commandsByCategory).forEach(([category, commands]) => {
                 commands.forEach(command => {
-                    allCommands.push({
-                        ...command,
-                        category: category
-                    });
+                    allCommands.push({ ...command, category: category });
                 });
             });
-            
             allCommands.sort((a, b) => a.name.localeCompare(b.name));
         }
 
@@ -1831,54 +2120,33 @@
         // Initialize everything
         function initialize() {
             initTheme();
+            createPetals();
             prepareAllCommands();
             prepareSongs();
             initCategories();
             renderCommands();
             renderSongs();
+            renderRaffle();
+            renderSuffering();
             
-            // Небольшая задержка для гарантии рендеринга DOM
             setTimeout(updateTabIndicator, 100);
-            
-            // Прячем экран приветствия
             hideSplashScreen();
         }
 
-        // Update tab indicator position - ИСПРАВЛЕННАЯ ФУНКЦИЯ
+        // Update tab indicator position
         function updateTabIndicator() {
             const activeTab = document.querySelector('.tab-btn.active');
             if (!activeTab || !tabIndicator || !tabsNav) return;
             
             try {
-                // Получаем позицию относительно контейнера вкладок
                 const navRect = tabsNav.getBoundingClientRect();
                 const tabRect = activeTab.getBoundingClientRect();
                 
-                // Рассчитываем позицию с учетом padding контейнера
                 const position = tabRect.left - navRect.left;
                 const width = tabRect.width;
                 
-                // Устанавливаем индикатор
                 tabIndicator.style.transform = `translateX(${position}px)`;
                 tabIndicator.style.width = `${width}px`;
-                
-                // Убедимся, что индикатор не выходит за границы
-                // Вычитаем 16px для учета padding контейнера (8px слева + 8px справа)
-                const maxPosition = navRect.width - width - 16;
-                
-                // Если индикатор выходит за границы, корректируем его положение
-                if (position < 8) {
-                    tabIndicator.style.transform = 'translateX(8px)';
-                } else if (position > maxPosition) {
-                    tabIndicator.style.transform = `translateX(${maxPosition}px)`;
-                }
-                
-                // Set indicator color based on active tab
-                if (activeTab.classList.contains('songs-tab')) {
-                    tabIndicator.style.background = 'var(--purple)';
-                } else {
-                    tabIndicator.style.background = 'var(--primary)';
-                }
             } catch (error) {
                 console.error('Error updating tab indicator:', error);
             }
@@ -1887,27 +2155,21 @@
         // Handle tab switching
         function handleTabSwitch(e) {
             const tabId = e.currentTarget.getAttribute('data-tab');
-            
             if (currentTab === tabId) return;
             
-            // Update tabs
             tabBtns.forEach(btn => btn.classList.remove('active'));
             e.currentTarget.classList.add('active');
             
-            // Update contents
             tabContents.forEach(content => content.classList.remove('active'));
             document.getElementById(`${tabId}-tab`).classList.add('active');
             
             currentTab = tabId;
             
-            // Update tab indicator с небольшими задержками для гарантии рендеринга
             setTimeout(() => {
                 updateTabIndicator();
-                // Двойная проверка через небольшой интервал
                 setTimeout(updateTabIndicator, 50);
             }, 20);
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1915,11 +2177,9 @@
         function initCategories() {
             categoriesTabs.innerHTML = '';
             
-            // Add "Все" category first
             const allTab = createCategoryTag("Все", "active");
             categoriesTabs.appendChild(allTab);
             
-            // Add other categories
             Object.entries(commandsByCategory).forEach(([category]) => {
                 const tab = createCategoryTag(category, "");
                 categoriesTabs.appendChild(tab);
@@ -1932,31 +2192,23 @@
             tag.className = `category-tag ${extraClass}`;
             tag.textContent = name;
             tag.setAttribute('data-category', name);
-            
             tag.addEventListener('click', handleCategoryClick);
-            
             return tag;
         }
 
         // Handle category click
         function handleCategoryClick(e) {
             const category = e.currentTarget.getAttribute('data-category');
-            
             if (category === activeCategoryFilter) return;
             
-            // Update tags
-            document.querySelectorAll('.category-tag').forEach(t => {
-                t.classList.remove('active');
-            });
+            document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
             e.currentTarget.classList.add('active');
             
-            // Clear search if changing category
             if (searchQuery) {
                 searchBox.value = "";
                 searchQuery = "";
             }
             
-            // Update category
             activeCategoryFilter = category;
             renderCommands();
         }
@@ -1964,35 +2216,28 @@
         // Render Commands based on current category/search
         function renderCommands() {
             commandsContainer.innerHTML = '';
-            
             let commandsToDisplay = [];
             
             if (searchQuery) {
-                // Search mode
                 commandsToDisplay = allCommands.filter(command => 
                     command.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     (command.description && command.description.toLowerCase().includes(searchQuery.toLowerCase()))
                 );
-                
-                // Show/hide no results
-                if (commandsToDisplay.length === 0) {
-                    noResults.style.display = 'block';
-                } else {
-                    noResults.style.display = 'none';
-                }
+                noResults.style.display = commandsToDisplay.length === 0 ? 'block' : 'none';
             } else if (activeCategoryFilter === "Все") {
-                // All commands mode
                 commandsToDisplay = allCommands;
                 noResults.style.display = 'none';
             } else {
-                // Specific category mode
                 commandsToDisplay = commandsByCategory[activeCategoryFilter];
-                commandsToDisplay = [...commandsToDisplay].sort((a, b) => a.name.localeCompare(b.name));
+                if (commandsToDisplay) {
+                    commandsToDisplay = [...commandsToDisplay].sort((a, b) => a.name.localeCompare(b.name));
+                } else {
+                    commandsToDisplay = [];
+                }
                 noResults.style.display = 'none';
             }
             
-            // Display commands
-            commandsToDisplay.forEach((command, index) => {
+            commandsToDisplay.forEach((command) => {
                 const commandCard = document.createElement('div');
                 commandCard.className = 'command-card';
                 commandCard.setAttribute('data-command', command.name);
@@ -2017,13 +2262,9 @@
                     </div>
                 `;
                 
-                // Add click/touch event
                 commandCard.addEventListener('click', handleCommandClick);
                 commandCard.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleCommandClick(e);
-                    }
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCommandClick(e); }
                 });
                 
                 commandsContainer.appendChild(commandCard);
@@ -2034,7 +2275,7 @@
         function renderSongs() {
             songsContainer.innerHTML = '';
             
-            songs.forEach((song, index) => {
+            songs.forEach((song) => {
                 const command = `!песня ${song.artist} - ${song.name}`;
                 const songCard = document.createElement('div');
                 songCard.className = 'song-card';
@@ -2057,72 +2298,123 @@
                     </div>
                 `;
                 
-                // Add click/touch event
-                songCard.addEventListener('click', handleSongClick);
+                songCard.addEventListener('click', handleCopyAction);
                 songCard.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleSongClick(e);
-                    }
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopyAction(e); }
                 });
                 
                 songsContainer.appendChild(songCard);
             });
         }
 
-        // Handle command click
-        function handleCommandClick(e) {
-            const commandCard = e.currentTarget;
-            const command = commandCard.getAttribute('data-command');
+        // Render Raffle Items
+        function renderRaffle() {
+            raffleContainer.innerHTML = '';
             
-            copyToClipboard(command);
-            showNotification(`"${command}" скопировано!`, 'commands');
-            
-            // Add visual feedback
-            commandCard.style.transform = 'scale(0.98)';
-            
-            setTimeout(() => {
-                commandCard.style.transform = '';
-            }, 200);
+            raffleItems.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'raffle-card';
+                card.setAttribute('data-command', item.command);
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Купить билет: ${item.title}`);
+                card.setAttribute('tabindex', '0');
+                
+                card.innerHTML = `
+                    <div class="raffle-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="raffle-info">
+                        <div class="raffle-title">${item.title}</div>
+                        <div class="raffle-subtitle">Розыгрыш ключа</div>
+                    </div>
+                    <div class="raffle-price" aria-label="Стоимость: ${item.cost} БУСЕК">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>${item.cost}</span>
+                    </div>
+                `;
+                
+                card.addEventListener('click', handleCopyAction);
+                card.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopyAction(e); }
+                });
+                
+                raffleContainer.appendChild(card);
+            });
         }
 
-        // Handle song click
-        function handleSongClick(e) {
-            const songCard = e.currentTarget;
-            const command = songCard.getAttribute('data-command');
+        // Render Suffering Items
+        function renderSuffering() {
+            sufferingContainer.innerHTML = '';
+            
+            sufferingItems.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'suffering-card';
+                card.setAttribute('data-command', item.command);
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Испытание: ${item.title}`);
+                card.setAttribute('tabindex', '0');
+                
+                card.innerHTML = `
+                    <div class="suffering-icon">
+                        <i class="fas ${item.icon}"></i>
+                    </div>
+                    <div class="suffering-info">
+                        <div class="suffering-title">${item.title}</div>
+                        <div class="suffering-subtitle">⏱️ 5 мин • 🚫 Не на боссов</div>
+                        <div class="suffering-description">${item.description}</div>
+                    </div>
+                    <div class="suffering-price" aria-label="Стоимость: ${item.cost} БУСЕК">
+                        <i class="fas fa-skull"></i>
+                        <span>${item.cost}</span>
+                    </div>
+                `;
+                
+                card.addEventListener('click', handleCopyAction);
+                card.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopyAction(e); }
+                });
+                
+                sufferingContainer.appendChild(card);
+            });
+        }
+
+        // Generic copy handler for commands, songs, raffle
+        function handleCommandClick(e) {
+            handleCopyAction(e, 'commands');
+        }
+        
+        function handleCopyAction(e, forcedType = null) {
+            const card = e.currentTarget;
+            const command = card.getAttribute('data-command');
+            
+            let notificationType = forcedType;
+            if (!notificationType) {
+                if (currentTab === 'raffle') notificationType = 'raffle';
+                else if (currentTab === 'songs') notificationType = 'songs';
+                else if (currentTab === 'suffering') notificationType = 'suffering';
+                else notificationType = 'commands';
+            }
             
             copyToClipboard(command);
-            showNotification(`"${command}" скопировано!`, 'songs');
+            showNotification(`"${command}" скопировано!`, notificationType);
             
-            // Add visual feedback
-            songCard.style.transform = 'scale(0.98)';
-            
-            setTimeout(() => {
-                songCard.style.transform = '';
-            }, 200);
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => { card.style.transform = ''; }, 200);
         }
 
         // Handle search
         function handleSearch() {
             searchQuery = searchBox.value.trim();
             
-            // If search is empty, show current category
             if (!searchQuery) {
-                if (activeCategoryFilter !== "Все") {
-                    renderCommands();
-                } else {
-                    renderCommands();
-                }
+                renderCommands();
                 return;
             }
             
-            // Show all commands when searching
             if (activeCategoryFilter !== "Все") {
                 document.querySelectorAll('.category-tag').forEach(t => {
                     t.classList.remove('active');
-                    if (t.getAttribute('data-category') === "Все") {
-                        t.classList.add('active');
-                    }
+                    if (t.getAttribute('data-category') === "Все") t.classList.add('active');
                 });
                 activeCategoryFilter = "Все";
             }
@@ -2147,55 +2439,51 @@
         // Show notification
         function showNotification(message, type = 'commands') {
             notificationText.textContent = message;
-            notification.classList.remove('songs-notification');
             
-            if (type === 'songs') {
-                notification.classList.add('songs-notification');
-            }
+            notification.classList.remove('songs-notification', 'raffle-notification', 'suffering-notification');
+            
+            if (type === 'songs') notification.classList.add('songs-notification');
+            if (type === 'raffle') notification.classList.add('raffle-notification');
+            if (type === 'suffering') notification.classList.add('suffering-notification');
             
             notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            setTimeout(() => { notification.classList.remove('show'); }, 3000);
         }
 
         // Handle balance button click
         function handleBalanceClick() {
             copyToClipboard('!буськи');
-            showNotification('Команда "!буськи" скопирована для проверки баланса', currentTab);
+            let notifType = 'commands';
+            if (currentTab === 'songs') notifType = 'songs';
+            if (currentTab === 'raffle') notifType = 'raffle';
+            if (currentTab === 'suffering') notifType = 'suffering';
             
-            // Add visual feedback
+            showNotification('Команда "!буськи" скопирована!', notifType);
+            
             balanceBtn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                balanceBtn.style.transform = '';
-            }, 150);
+            setTimeout(() => { balanceBtn.style.transform = ''; }, 150);
         }
 
         // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', () => {
             initialize();
             
-            // Event listeners
             themeToggle.addEventListener('click', toggleTheme);
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
             
-            // Debounce search for performance
+            // Update indicator on window resize
+            window.addEventListener('resize', updateTabIndicator);
+            
             let searchTimeout;
             searchBox.addEventListener('input', () => {
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(handleSearch, 300);
             });
             
-            // Handle window resize
-            window.addEventListener('resize', updateTabIndicator);
-            
-            // Force update tab indicator after a short delay to ensure everything is rendered
             setTimeout(updateTabIndicator, 300);
         });
 
-        // Handle page load event
         window.addEventListener('load', () => {
             setTimeout(updateTabIndicator, 300);
         });
