@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Цинтрибот | Звуковые команды и песни</title>
-    <meta name="description" content="Панель звуковых команд Цинтрибота, заказ песен и розыгрыши за БУСЬКИ">
+    <meta name="description" content="Панель звуковых команд Цинтрибота, заказ песен">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#E11D48">
+    <meta name="theme-color" content="#2A1A2A">
     
     <!-- Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -23,36 +23,37 @@
     
     <style>
         :root {
-            /* 🌸 Holiday Dark Theme (Default) 🌸 */
-            --primary: #E11D48;      /* Rose */
-            --primary-light: #FB7185;
-            --primary-dark: #BE123C;
-            --secondary: #D946EF;    /* Fuchsia */
-            --accent: #F59E0B;       /* Mimosa Gold */
-            --success: #10B981;
-            --danger: #EF4444;
-            --gold: #FBBF24;
-            --purple: #C026D3;       /* Vibrant Spring Purple */
-            --purple-light: #E879F9;
-            --purple-dark: #86198F;
+            /* 🌸 Насыщенная тёмная тема с приятными цветами 🌸 */
+            --primary: #FF6B9D;       /* Насыщенный розовый */
+            --primary-light: #FF8FB1;
+            --primary-dark: #E64D7E;
+            --secondary: #9D7BFF;      /* Насыщенный фиолетовый */
+            --accent: #6BFF9D;         /* Насыщенный мятный */
+            --success: #4CAF50;
+            --danger: #FF6B6B;         /* Коралловый */
+            --gold: #FFD93D;           /* Золотой */
+            --purple: #BF7BFF;          /* Фиолетовый */
+            --purple-light: #D79BFF;
+            --purple-dark: #A55BFF;
             
-            /* Background Colors - Dark Holiday */
-            --bg-primary: #1A0B14;   /* Deep Maroon/Wine */
-            --bg-secondary: #2D1222;
-            --bg-tertiary: #431A33;
-            --bg-card: rgba(45, 18, 34, 0.8);
-            --bg-glass: rgba(26, 11, 20, 0.85);
-            --bg-gradient: linear-gradient(135deg, #1A0B14 0%, #2A081D 100%);
+            /* Background Colors - Глубокий тёмный */
+            --bg-primary: #0A0A0F;      /* Почти чёрный с фиолетовым отливом */
+            --bg-secondary: #1A1A24;     /* Тёмно-серый с синим отливом */
+            --bg-tertiary: #2A2A35;      /* Чуть светлее */
+            --bg-card: rgba(26, 26, 36, 0.9);
+            --bg-glass: rgba(10, 10, 15, 0.85);
+            --bg-gradient: linear-gradient(135deg, #0A0A0F 0%, #1A0A1F 100%);
             
-            /* Text Colors - Dark Holiday */
-            --text-primary: #FDF2F8; /* Light Pinkish White */
-            --text-secondary: #FBCFE8;
-            --text-tertiary: #F472B6;
-            --text-accent: #FDA4AF;
+            /* Text Colors - Яркий белый */
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0FF;
+            --text-tertiary: #C0C0FF;
+            --text-accent: #FFB3C6;
             
-            /* UI Colors */
-            --border-color: rgba(244, 114, 182, 0.2);
-            --shadow-color: rgba(0, 0, 0, 0.3);
+            /* UI Colors - Более тонкие рамки */
+            --border-color: rgba(255, 107, 157, 0.2);
+            --border-hover: rgba(255, 107, 157, 0.4);
+            --shadow-color: rgba(0, 0, 0, 0.5);
             
             /* Spacing */
             --radius-sm: 8px;
@@ -61,14 +62,14 @@
             --radius-xl: 24px;
             --radius-full: 9999px;
             
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4);
-            --shadow-primary: 0 4px 20px rgba(225, 29, 72, 0.3);
-            --shadow-purple: 0 4px 20px rgba(192, 38, 211, 0.3);
-            --shadow-gold: 0 4px 20px rgba(245, 158, 11, 0.3);
+            /* Shadows - Глубокие */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+            --shadow-primary: 0 4px 20px rgba(255, 107, 157, 0.2);
+            --shadow-purple: 0 4px 20px rgba(157, 123, 255, 0.2);
+            --shadow-gold: 0 4px 20px rgba(255, 217, 61, 0.2);
             
             /* Typography */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -84,39 +85,39 @@
             --header-height: 72px;
             --sidebar-width: 280px;
             
-            --logo-color: #FFFFFF;
+            --logo-color: #FF8FB1;
         }
 
-        /* 🌸 Holiday Light Theme Variables 🌸 */
+        /* Светлая тема (опционально) */
         [data-theme="light"] {
-            /* Background Colors - Light Holiday */
-            --bg-primary: #FFF0F5;   /* Lavender Blush */
-            --bg-secondary: #FFE4E6; /* Rose Light */
-            --bg-tertiary: #FECDD3;
-            --bg-card: rgba(255, 240, 245, 0.85);
+            --primary: #FF6B9D;
+            --primary-light: #FF8FB1;
+            --primary-dark: #E64D7E;
+            --secondary: #9D7BFF;
+            --accent: #6BFF9D;
+            
+            --bg-primary: #F5F0FF;
+            --bg-secondary: #FFE6F0;
+            --bg-tertiary: #F0FFE6;
+            --bg-card: rgba(255, 255, 255, 0.9);
             --bg-glass: rgba(255, 255, 255, 0.85);
-            --bg-gradient: linear-gradient(135deg, #FFF1F2 0%, #FCE7F3 100%);
+            --bg-gradient: linear-gradient(135deg, #F5F0FF 0%, #FFE6F0 100%);
             
-            /* Text Colors - Light Holiday */
-            --text-primary: #4C0519; /* Deep Rose Dark */
-            --text-secondary: #831843;
-            --text-tertiary: #BE185D;
-            --text-accent: #E11D48;
+            --text-primary: #1A0A1F;
+            --text-secondary: #2A1A2F;
+            --text-tertiary: #3A2A3F;
+            --text-accent: #4A3A4F;
             
-            /* UI Colors */
-            --border-color: rgba(244, 114, 182, 0.4);
-            --shadow-color: rgba(190, 24, 93, 0.1);
+            --border-color: rgba(255, 107, 157, 0.2);
+            --border-hover: rgba(255, 107, 157, 0.4);
+            --shadow-color: rgba(26, 10, 31, 0.1);
             
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(190, 24, 93, 0.05);
-            --shadow-md: 0 4px 16px rgba(190, 24, 93, 0.1);
-            --shadow-lg: 0 8px 32px rgba(190, 24, 93, 0.15);
-            --shadow-xl: 0 16px 48px rgba(190, 24, 93, 0.2);
-            --shadow-primary: 0 4px 20px rgba(225, 29, 72, 0.25);
-            --shadow-purple: 0 4px 20px rgba(192, 38, 211, 0.25);
-            --shadow-gold: 0 4px 20px rgba(245, 158, 11, 0.25);
+            --shadow-sm: 0 2px 8px rgba(26, 10, 31, 0.1);
+            --shadow-md: 0 4px 16px rgba(26, 10, 31, 0.15);
+            --shadow-lg: 0 8px 32px rgba(26, 10, 31, 0.2);
+            --shadow-xl: 0 16px 48px rgba(26, 10, 31, 0.25);
             
-            --logo-color: #831843;
+            --logo-color: #2A1A2F;
         }
 
         * {
@@ -161,50 +162,50 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            opacity: 0.6;
-            filter: blur(80px);
+            opacity: 0.7;
+            filter: blur(100px);
         }
 
         .orb-1 {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            top: -200px;
-            right: -100px;
+            top: -250px;
+            right: -150px;
             animation: float 20s ease-in-out infinite;
         }
 
         .orb-2 {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
-            bottom: -150px;
-            left: -100px;
+            bottom: -200px;
+            left: -150px;
             animation: float 25s ease-in-out infinite reverse;
         }
 
         .orb-3 {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            top: 50%;
+            top: 40%;
             right: 20%;
             animation: float 30s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            33% { transform: translate(40px, -40px) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) rotate(240deg); }
         }
 
-        /* 🌸 Falling Petals 🌸 */
+        /* 🌸 Falling Petals */
         .petals-container {
             position: fixed;
             top: 0;
@@ -220,14 +221,14 @@
             position: absolute;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: 15px 0 15px 0;
-            opacity: 0.4;
+            opacity: 0.3;
             animation: fall linear infinite;
         }
         
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
             100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
         }
 
@@ -243,7 +244,7 @@
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 60px 60px;
-            opacity: 0.15;
+            opacity: 0.1;
             mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
         }
@@ -284,14 +285,14 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 32px;
-            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(225, 29, 72, 0.2);
+            box-shadow: var(--shadow-xl), 0 0 0 8px rgba(255, 107, 157, 0.2);
             animation: pulse 2s infinite;
             position: relative;
         }
 
         .splash-icon i.fa-robot {
             font-size: 54px;
-            color: white;
+            color: var(--text-primary);
             animation: bounceSoft 3s ease-in-out infinite;
         }
         
@@ -309,19 +310,11 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: fadeInUp 1s ease-out;
-        }
-
-        .splash-subtitle {
-            font-size: 22px;
-            color: var(--secondary);
-            font-weight: 600;
-            margin-bottom: 16px;
-            animation: fadeInUp 1s ease-out 0.1s both;
         }
 
         .splash-content p {
@@ -354,8 +347,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: var(--shadow-xl), 0 0 0 8px rgba(225, 29, 72, 0.2); }
-            50% { transform: scale(1.05); box-shadow: var(--shadow-xl), 0 0 0 12px rgba(225, 29, 72, 0.4); }
+            0%, 100% { transform: scale(1); box-shadow: var(--shadow-xl), 0 0 0 8px rgba(255, 107, 157, 0.2); }
+            50% { transform: scale(1.05); box-shadow: var(--shadow-xl), 0 0 0 12px rgba(255, 107, 157, 0.3); }
         }
         
         @keyframes pulseHeart {
@@ -426,9 +419,9 @@
             height: 44px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-lg);
-            color: #FFF;
+            color: var(--text-primary);
             font-size: 20px;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-primary);
             transition: all var(--transition-base);
         }
 
@@ -483,8 +476,9 @@
 
         .theme-toggle:hover {
             background: var(--bg-tertiary);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--border-hover);
             color: var(--primary);
         }
 
@@ -508,15 +502,15 @@
             align-items: center;
             gap: 8px;
             padding: 10px 16px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border: none;
             border-radius: var(--radius-md);
-            color: #1A0B14;
+            color: var(--text-primary);
             font-weight: 700;
             font-size: 14px;
             cursor: pointer;
             transition: all var(--transition-fast);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-primary);
             position: relative;
             overflow: hidden;
         }
@@ -528,7 +522,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s;
         }
 
@@ -537,7 +531,6 @@
         }
 
         .balance-btn:hover {
-            background: var(--gold);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -579,7 +572,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: left 0.6s;
         }
 
@@ -589,25 +582,20 @@
 
         .social-link:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--border-hover);
         }
 
         .social-link.telegram:hover {
-            color: #0088CC;
-            background: rgba(0, 136, 204, 0.1);
-            border-color: rgba(0, 136, 204, 0.3);
+            color: var(--secondary);
         }
 
         .social-link.youtube:hover {
-            color: #FF0000;
-            background: rgba(255, 0, 0, 0.1);
-            border-color: rgba(255, 0, 0, 0.3);
+            color: var(--danger);
         }
 
         .social-link.twitch:hover {
-            color: #9146FF;
-            background: rgba(145, 70, 255, 0.1);
-            border-color: rgba(145, 70, 255, 0.3);
+            color: var(--purple);
         }
 
         .social-tooltip {
@@ -644,7 +632,7 @@
             padding: 24px 0;
         }
 
-        /* Tabs Navigation - компактный для 4 вкладок */
+        /* Tabs Navigation */
         .tabs-nav {
             display: flex;
             gap: 6px;
@@ -689,7 +677,7 @@
             height: calc(100% - 12px);
             border-radius: var(--radius-md);
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-primary);
             transition: transform var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1), 
                         width var(--transition-base) cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 1;
@@ -700,55 +688,28 @@
             background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
         }
 
-        .tab-btn.raffle-tab.active ~ .tab-indicator {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
-        }
-
         .tab-btn.suffering-tab.active ~ .tab-indicator {
             background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
         }
 
-        .tab-btn.active { color: white !important; }
-        .tab-btn.active i, .tab-btn.active span, .tab-btn.active .price-badge { color: white !important; }
-        
-        /* Dark text for Raffle tab active */
-        .tab-btn.raffle-tab.active,
-        .tab-btn.raffle-tab.active i,
-        .tab-btn.raffle-tab.active span,
-        .tab-btn.raffle-tab.active .price-badge {
-            color: #1A0B14 !important;
-        }
+        .tab-btn.active { color: var(--text-primary) !important; }
+        .tab-btn.active i, .tab-btn.active span, .tab-btn.active .price-badge { color: var(--text-primary) !important; }
 
         [data-theme="light"] .tab-btn.active,
         [data-theme="light"] .tab-btn.active i,
         [data-theme="light"] .tab-btn.active span,
         [data-theme="light"] .tab-btn.active .price-badge {
-            color: white !important;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            color: var(--text-primary) !important;
         }
-        
-        [data-theme="light"] .tab-btn.raffle-tab.active,
-        [data-theme="light"] .tab-btn.raffle-tab.active i,
-        [data-theme="light"] .tab-btn.raffle-tab.active span,
-        [data-theme="light"] .tab-btn.raffle-tab.active .price-badge {
-            color: #1A0B14 !important;
-            text-shadow: none;
-        }
-
-        [data-theme="light"] .tab-indicator { box-shadow: var(--shadow-lg); }
 
         .price-badge {
             padding: 2px 6px;
             border-radius: var(--radius-sm);
             font-size: 10px;
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
             transition: all var(--transition-fast);
-        }
-        
-        .tab-btn.raffle-tab.active .price-badge {
-            background: rgba(0, 0, 0, 0.1);
         }
 
         .tab-btn:not(.active) .price-badge {
@@ -765,7 +726,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Section - компактный */
+        /* Hero Section */
         .hero-section {
             text-align: center;
             margin-bottom: 24px;
@@ -779,7 +740,7 @@
             align-items: center;
             gap: 6px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            color: var(--text-primary);
             font-weight: 700;
             font-size: 12px;
             padding: 4px 16px;
@@ -794,7 +755,7 @@
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -807,7 +768,7 @@
             margin-bottom: 16px;
         }
 
-        /* Info Cards - компактные */
+        /* Info Cards */
         .info-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -835,12 +796,13 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.7;
         }
 
         .info-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--border-hover);
         }
 
         .info-card-header {
@@ -858,13 +820,13 @@
             height: 36px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-md);
-            color: white;
+            color: var(--text-primary);
             font-size: 16px;
             box-shadow: var(--shadow-primary);
         }
 
         .info-card-title {
-            font-family: var(--font-heading);
+            font-family: var(--font-roboto-bold);
             font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
@@ -876,126 +838,7 @@
             font-size: 13px;
         }
 
-        /* Raffle Banner - в стиле основного сайта */
-        .raffle-banner {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 16px 24px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 16px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-            transition: all var(--transition-base);
-        }
-
-        .raffle-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .raffle-banner:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
-        }
-
-        .raffle-banner-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .raffle-banner-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: var(--shadow-primary);
-        }
-
-        .raffle-banner-content h3 {
-            font-family: var(--font-heading);
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .raffle-banner-content p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .raffle-banner-content p i {
-            color: var(--primary);
-            margin-right: 4px;
-        }
-
-        .raffle-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 12px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-full);
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .raffle-badge i {
-            color: var(--primary);
-        }
-
-        .raffle-banner-button {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border: none;
-            border-radius: var(--radius-md);
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            box-shadow: var(--shadow-primary);
-            text-decoration: none;
-        }
-
-        .raffle-banner-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .raffle-banner-button:active {
-            transform: translateY(0);
-        }
-
-        /* Search Section - компактный */
+        /* Search Section */
         .search-section { margin-bottom: 20px; }
 
         .search-container {
@@ -1008,7 +851,7 @@
             width: 100%;
             padding: 12px 16px 12px 40px;
             background: var(--bg-card);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
             color: var(--text-primary);
             font-size: 14px;
@@ -1020,7 +863,7 @@
 
         .search-input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--border-hover);
             box-shadow: var(--shadow-primary);
         }
 
@@ -1035,7 +878,7 @@
             font-size: 14px;
         }
 
-        /* Categories - компактные */
+        /* Categories */
         .categories {
             display: flex;
             flex-wrap: wrap;
@@ -1064,7 +907,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             transition: left 0.6s;
         }
 
@@ -1072,17 +915,19 @@
 
         .category-tag:hover {
             background: var(--bg-tertiary);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-primary);
         }
 
         .category-tag.active {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
+            color: var(--text-primary);
             border-color: transparent;
             box-shadow: var(--shadow-primary);
         }
 
-        /* Commands Grid - компактный */
+        /* Commands Grid */
         .commands-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1110,16 +955,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.05), transparent);
             transition: left 0.6s;
         }
 
         .command-card:hover::before { left: 100%; }
 
         .command-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--border-hover);
         }
 
         .command-header {
@@ -1142,15 +987,15 @@
             align-items: center;
             gap: 4px;
             padding: 4px 8px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-radius: var(--radius-full);
-            color: #1A0B14;
+            color: var(--text-primary);
             font-family: var(--font-roboto-bold);
             font-weight: 700;
             font-size: 12px;
             min-width: 60px;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            box-shadow: var(--shadow-primary);
         }
 
         .command-description {
@@ -1171,7 +1016,7 @@
             font-weight: 600;
         }
 
-        /* Songs Grid - компактный */
+        /* Songs Grid */
         .songs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1202,16 +1047,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(192, 38, 211, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(157, 123, 255, 0.05), transparent);
             transition: left 0.6s;
         }
 
         .song-card:hover::before { left: 100%; }
 
         .song-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-purple);
-            border-color: var(--purple-light);
+            border-color: var(--border-hover);
         }
 
         .song-icon {
@@ -1222,7 +1067,7 @@
             height: 44px;
             background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
             border-radius: var(--radius-lg);
-            color: white;
+            color: var(--text-primary);
             font-size: 20px;
             flex-shrink: 0;
             box-shadow: var(--shadow-purple);
@@ -1260,7 +1105,7 @@
             padding: 6px 12px;
             background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
             border-radius: var(--radius-md);
-            color: white;
+            color: var(--text-primary);
             font-family: var(--font-roboto-bold);
             font-weight: 700;
             font-size: 14px;
@@ -1269,95 +1114,7 @@
             box-shadow: var(--shadow-purple);
         }
 
-        /* Raffle Card (Gold/Yellow Theme) - компактный */
-        .raffle-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 16px;
-            transition: all var(--transition-base);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .raffle-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.15), transparent);
-            transition: left 0.6s;
-        }
-
-        .raffle-card:hover::before { left: 100%; }
-
-        .raffle-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
-            border-color: var(--accent);
-        }
-
-        .raffle-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
-            border-radius: var(--radius-lg);
-            color: #1A0B14;
-            font-size: 20px;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-gold);
-        }
-
-        .raffle-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .raffle-title {
-            font-family: var(--font-roboto-bold);
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
-            margin-bottom: 2px;
-            word-break: break-word;
-        }
-
-        .raffle-subtitle {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .raffle-price {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 12px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
-            border-radius: var(--radius-md);
-            color: #1A0B14;
-            font-family: var(--font-roboto-bold);
-            font-weight: 700;
-            font-size: 14px;
-            min-width: 90px;
-            justify-content: center;
-            box-shadow: var(--shadow-gold);
-        }
-
-        /* Suffering Card (Red/Danger Theme) - компактный */
+        /* Suffering Card */
         .suffering-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -1372,7 +1129,7 @@
             gap: 12px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-left: 4px solid var(--danger);
+            border-left: 3px solid rgba(255, 107, 107, 0.5);
         }
 
         .suffering-card::before {
@@ -1382,16 +1139,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.05), transparent);
             transition: left 0.6s;
         }
 
         .suffering-card:hover::before { left: 100%; }
 
         .suffering-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
-            border-color: var(--danger);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.15);
+            border-color: var(--border-hover);
         }
 
         .suffering-icon {
@@ -1402,10 +1159,10 @@
             height: 44px;
             background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
             border-radius: var(--radius-lg);
-            color: white;
+            color: var(--text-primary);
             font-size: 20px;
             flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.15);
         }
 
         .suffering-info {
@@ -1435,7 +1192,7 @@
             color: var(--text-secondary);
             margin-top: 4px;
             padding-top: 4px;
-            border-top: 1px dashed var(--border-color);
+            border-top: 1px dashed rgba(255, 107, 107, 0.3);
         }
 
         .suffering-price {
@@ -1445,13 +1202,13 @@
             padding: 6px 12px;
             background: linear-gradient(135deg, var(--danger) 0%, var(--primary) 100%);
             border-radius: var(--radius-md);
-            color: white;
+            color: var(--text-primary);
             font-family: var(--font-roboto-bold);
             font-weight: 700;
             font-size: 14px;
             min-width: 90px;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.15);
         }
 
         /* No Results */
@@ -1517,19 +1274,23 @@
             color: var(--success);
         }
 
+        .notification.songs-notification {
+            border-color: rgba(157, 123, 255, 0.3);
+        }
+        
         .notification.songs-notification i {
             color: var(--purple-light);
         }
-        
-        .notification.raffle-notification i {
-            color: var(--gold);
-        }
 
+        .notification.suffering-notification {
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+        
         .notification.suffering-notification i {
             color: var(--danger);
         }
 
-        /* Footer - компактный */
+        /* Footer */
         .footer {
             margin-top: 32px;
             padding: 20px 0;
@@ -1554,8 +1315,6 @@
             .balance-btn { padding: 6px 10px; font-size: 12px; }
             .tab-btn { font-size: 12px; padding: 8px 4px; }
             .hero-description { font-size: 13px; }
-            .raffle-banner { flex-direction: column; text-align: center; }
-            .raffle-banner-left { flex-direction: column; }
             .splash-icon { width: 80px; height: 80px; }
             .splash-icon i.fa-robot { font-size: 36px; }
             .splash-icon i.fa-heart { font-size: 20px; }
@@ -1567,9 +1326,9 @@
             .hero-title { font-size: 24px; }
             .hero-description { font-size: 12px; }
             .container { padding: 0 12px; }
-            .command-card, .song-card, .raffle-card, .suffering-card { padding: 12px; }
-            .song-card, .raffle-card, .suffering-card { flex-direction: column; text-align: center; gap: 8px; }
-            .song-price, .raffle-price, .suffering-price { width: 100%; }
+            .command-card, .song-card, .suffering-card { padding: 12px; }
+            .song-card, .suffering-card { flex-direction: column; text-align: center; gap: 8px; }
+            .song-price, .suffering-price { width: 100%; }
             .social-links { gap: 6px; }
             .social-link { width: 32px; height: 32px; font-size: 12px; }
             .theme-toggle, .balance-btn { width: 32px; height: 32px; padding: 0; justify-content: center; }
@@ -1578,7 +1337,6 @@
             .info-card-title { font-size: 14px; }
             .tab-btn { flex-direction: column; gap: 2px; padding: 6px 2px; }
             .price-badge { font-size: 8px; padding: 1px 3px; }
-            .raffle-banner-content p { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -1591,7 +1349,6 @@
                 <i class="fas fa-heart"></i>
             </div>
             <h1>Цинтрибот</h1>
-            <div class="splash-subtitle">🌸 С 8 Марта! 🌸</div>
             <p>Загружаем звуковые команды и песни...</p>
             <div class="splash-progress">
                 <div class="splash-progress-bar"></div>
@@ -1607,7 +1364,7 @@
         <div class="orb-3"></div>
     </div>
     <div class="grid-pattern"></div>
-    <!-- 🌸 Контейнер для лепестков 🌸 -->
+    <!-- Контейнер для лепестков -->
     <div class="petals-container" id="petals"></div>
 
     <!-- Header -->
@@ -1618,7 +1375,7 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>Цинтрибот 🌸</h1>
+                    <h1>Цинтрибот</h1>
                     <span>Звуковые команды и песни</span>
                 </div>
             </a>
@@ -1655,7 +1412,7 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Tabs Navigation - 4 вкладки без скролла -->
+            <!-- Tabs Navigation - 3 вкладки -->
             <div class="tabs-nav" id="tabs-nav">
                 <div class="tab-indicator" id="tab-indicator"></div>
                 <button class="tab-btn active" data-tab="commands">
@@ -1668,11 +1425,6 @@
                     <span>Песни</span>
                     <span class="price-badge">40k</span>
                 </button>
-                <button class="tab-btn raffle-tab" data-tab="raffle">
-                    <i class="fas fa-gift"></i>
-                    <span>Розыгрыш</span>
-                    <span class="price-badge">5k+</span>
-                </button>
                 <button class="tab-btn suffering-tab" data-tab="suffering">
                     <i class="fas fa-skull"></i>
                     <span>Страдание</span>
@@ -1680,7 +1432,7 @@
                 </button>
             </div>
 
-            <!-- Commands Tab (Главный экран) -->
+            <!-- Commands Tab -->
             <div class="tab-content active" id="commands-tab">
                 <!-- Hero Section -->
                 <section class="hero-section">
@@ -1693,26 +1445,6 @@
                         Выбирайте команды, копируйте и отправляйте в чат стрима.
                     </p>
                 </section>
-
-                <!-- Баннер о розыгрыше игр в стиле сайта -->
-                <div class="raffle-banner">
-                    <div class="raffle-banner-left">
-                        <div class="raffle-banner-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <div class="raffle-banner-content">
-                            <h3>🎮 Розыгрыш игр за БУСЬКИ!</h3>
-                            <p>
-                                <span><i class="fas fa-ticket-alt"></i> Билеты от 5,000 БУСЕК</span>
-                                <span class="raffle-badge"><i class="fas fa-star"></i> Devil May Cry, Wolfenstein</span>
-                            </p>
-                        </div>
-                    </div>
-                    <button class="raffle-banner-button" onclick="switchToRaffleTab()">
-                        <i class="fas fa-arrow-right"></i>
-                        <span>Участвовать</span>
-                    </button>
-                </div>
 
                 <!-- Info Cards -->
                 <div class="info-cards">
@@ -1792,27 +1524,7 @@
                 </div>
             </div>
 
-            <!-- Raffle Tab -->
-            <div class="tab-content" id="raffle-tab">
-                <!-- Hero Section -->
-                <section class="hero-section">
-                    <div class="hero-badge" style="background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%); color: #1A0B14;">
-                        <i class="fas fa-ticket-alt"></i>
-                        <span>Испытай удачу!</span>
-                    </div>
-                    <h1 class="hero-title">Розыгрыш игр</h1>
-                    <p class="hero-description">
-                        Покупай билеты за БУСЬКИ.
-                    </p>
-                </section>
-
-                <!-- Raffle Grid -->
-                <div class="songs-grid" id="raffle-container">
-                    <!-- Raffle items will be loaded here -->
-                </div>
-            </div>
-
-            <!-- Suffering Tab (Страдание стримера) -->
+            <!-- Suffering Tab -->
             <div class="tab-content" id="suffering-tab">
                 <!-- Hero Section -->
                 <section class="hero-section">
@@ -1831,7 +1543,6 @@
                     <!-- Suffering items will be loaded here -->
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -1852,7 +1563,7 @@
     </div>
 
     <script>
-        // Data with all commands - обновлено с новыми командами
+        // Data with all commands
         const commandsByCategory = {
             "💜 Приветствие": [
                 {name: "!здравствуйте", description: "Голодные игры", cost: 300},
@@ -1877,7 +1588,6 @@
                 {name: "!бриллианты", description: "", cost: 300},
                 {name: "!бомжа пробовала", description: "", cost: 300},
                 {name: "!танцуют все", description: "", cost: 300},
-                // Новые команды в раздел "Мои голосовые"
                 {name: "!слоумо", description: "Замедление", cost: 300},
                 {name: "!деньжата посыпались", description: "Звук денег", cost: 300},
                 {name: "!стелс", description: "Скрытность", cost: 300}
@@ -1903,9 +1613,8 @@
                 {name: "!ебанько", description: "Ведьмак 3", cost: 300},
                 {name: "!не научитесь", description: "Ведьмак 3", cost: 300},
                 {name: "!дрын", description: "Оружие", cost: 300},
-                // Новые команды в раздел "Боевые"
                 {name: "!поле чудес", description: "При победе", cost: 300},
-                {name: "!Корбен, детка", description: "", cost: 300}
+                {name: "!Корбен детка", description: "", cost: 300}
             ],
             "🙈 Фиаско": [
                 {name: "!все спиздили", description: "Леон Кеннеди", cost: 300},
@@ -2000,16 +1709,7 @@
             {artist: "No Doubt", name: "Don't Speak"}
         ];
 
-        // Raffle Items
-        const raffleItems = [
-            {command: "!The Evil Within", cost: "5,000", title: "The Evil Within", type: "game"},
-            {command: "!Devil My Cry 5 + Vergil", cost: "5,000", title: "Devil My Cry 5 + Vergil", type: "game"},
-            {command: "!Wolfenstein: The new order", cost: "5,000", title: "Wolfenstein: The new order", type: "game"},
-            {command: "!REANIMAL", cost: "20,000", title: "REANIMAL", type: "game"},
-            {command: "!Clair Obscur: Expedition 33", cost: "20,000", title: "Clair Obscur: Expedition 33", type: "game"}
-        ];
-
-        // Suffering Items (Страдание стримера)
+        // Suffering Items
         const sufferingItems = [
             {command: "!лечилка", description: "Не использует лечилки (5 мин, не на боссов)", cost: "1,000", title: "Лечилка", icon: "fa-ban"},
             {command: "!одно оружие", description: "Только одно оружие (5 мин, не на боссов)", cost: "1,000", title: "Одно оружие", icon: "fa-gun"},
@@ -2026,7 +1726,6 @@
         const categoriesTabs = document.getElementById('categories-tabs');
         const commandsContainer = document.getElementById('commands-container');
         const songsContainer = document.getElementById('songs-container');
-        const raffleContainer = document.getElementById('raffle-container');
         const sufferingContainer = document.getElementById('suffering-container');
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notification-text');
@@ -2040,16 +1739,6 @@
         let searchQuery = "";
         let allCommands = [];
         let currentTab = 'commands';
-
-        // Функция для переключения на вкладку розыгрыша
-        window.switchToRaffleTab = function() {
-            // Найти кнопку вкладки розыгрыша и активировать её
-            const raffleTabBtn = document.querySelector('.tab-btn[data-tab="raffle"]');
-            if (raffleTabBtn) {
-                // Имитировать клик по вкладке
-                raffleTabBtn.click();
-            }
-        };
 
         // Initialize theme from localStorage or system preference
         function initTheme() {
@@ -2084,7 +1773,7 @@
             }, 2000);
         }
 
-        // 🌸 Генерация падающих лепестков 🌸
+        // Generate petals
         function createPetals() {
             const petalCount = 15;
             for (let i = 0; i < petalCount; i++) {
@@ -2126,7 +1815,6 @@
             initCategories();
             renderCommands();
             renderSongs();
-            renderRaffle();
             renderSuffering();
             
             setTimeout(updateTabIndicator, 100);
@@ -2213,7 +1901,7 @@
             renderCommands();
         }
 
-        // Render Commands based on current category/search
+        // Render Commands
         function renderCommands() {
             commandsContainer.innerHTML = '';
             let commandsToDisplay = [];
@@ -2307,41 +1995,6 @@
             });
         }
 
-        // Render Raffle Items
-        function renderRaffle() {
-            raffleContainer.innerHTML = '';
-            
-            raffleItems.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = 'raffle-card';
-                card.setAttribute('data-command', item.command);
-                card.setAttribute('role', 'button');
-                card.setAttribute('aria-label', `Купить билет: ${item.title}`);
-                card.setAttribute('tabindex', '0');
-                
-                card.innerHTML = `
-                    <div class="raffle-icon">
-                        <i class="fas fa-gift"></i>
-                    </div>
-                    <div class="raffle-info">
-                        <div class="raffle-title">${item.title}</div>
-                        <div class="raffle-subtitle">Розыгрыш ключа</div>
-                    </div>
-                    <div class="raffle-price" aria-label="Стоимость: ${item.cost} БУСЕК">
-                        <i class="fas fa-ticket-alt"></i>
-                        <span>${item.cost}</span>
-                    </div>
-                `;
-                
-                card.addEventListener('click', handleCopyAction);
-                card.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopyAction(e); }
-                });
-                
-                raffleContainer.appendChild(card);
-            });
-        }
-
         // Render Suffering Items
         function renderSuffering() {
             sufferingContainer.innerHTML = '';
@@ -2378,7 +2031,7 @@
             });
         }
 
-        // Generic copy handler for commands, songs, raffle
+        // Generic copy handler
         function handleCommandClick(e) {
             handleCopyAction(e, 'commands');
         }
@@ -2389,8 +2042,7 @@
             
             let notificationType = forcedType;
             if (!notificationType) {
-                if (currentTab === 'raffle') notificationType = 'raffle';
-                else if (currentTab === 'songs') notificationType = 'songs';
+                if (currentTab === 'songs') notificationType = 'songs';
                 else if (currentTab === 'suffering') notificationType = 'suffering';
                 else notificationType = 'commands';
             }
@@ -2440,10 +2092,9 @@
         function showNotification(message, type = 'commands') {
             notificationText.textContent = message;
             
-            notification.classList.remove('songs-notification', 'raffle-notification', 'suffering-notification');
+            notification.classList.remove('songs-notification', 'suffering-notification');
             
             if (type === 'songs') notification.classList.add('songs-notification');
-            if (type === 'raffle') notification.classList.add('raffle-notification');
             if (type === 'suffering') notification.classList.add('suffering-notification');
             
             notification.classList.add('show');
@@ -2455,7 +2106,6 @@
             copyToClipboard('!буськи');
             let notifType = 'commands';
             if (currentTab === 'songs') notifType = 'songs';
-            if (currentTab === 'raffle') notifType = 'raffle';
             if (currentTab === 'suffering') notifType = 'suffering';
             
             showNotification('Команда "!буськи" скопирована!', notifType);
@@ -2472,7 +2122,6 @@
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
             
-            // Update indicator on window resize
             window.addEventListener('resize', updateTabIndicator);
             
             let searchTimeout;
