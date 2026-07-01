@@ -15,29 +15,25 @@
     <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <!-- Display: Unbounded (full cyrillic) -->
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <!-- UI: Inter (full cyrillic) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* ===== Soft Modern · Plum / Sand / Cream ===== */
-            --primary: #6E5498;          /* слива — Команды */
+            --primary: #6E5498;
             --primary-light: #8A6FB6;
             --primary-dark: #584176;
-            --secondary: #4B3B6E;        /* баклажан — Песни */
+            --secondary: #4B3B6E;
             --secondary-light: #6A558F;
-            --accent: #9FB59E;           /* мягкий шалфей */
+            --accent: #9FB59E;
             --success: #6F9E6B;
-            --danger: #C76B5C;           /* приглушённая терракота — Страдание */
+            --danger: #C76B5C;
             --danger-light: #D98A7C;
-            --gold: #C6A866;             /* песок-золото */
+            --gold: #C6A866;
             --purple: #7A5FA8;
             --purple-light: #9A82C4;
             --purple-dark: #5C4682;
 
-            /* Backgrounds — тёплый крем */
             --bg-primary: #F3EEE4;
             --bg-secondary: #FBF8F2;
             --bg-tertiary: #F6F1E7;
@@ -45,25 +41,21 @@
             --bg-glass: #FBF8F2;
             --bg-gradient: linear-gradient(155deg, #F3EEE4 0%, #EDE6D8 100%);
 
-            /* Text — глубокий сливово-чёрный */
             --text-primary: #2B2531;
             --text-secondary: #6A6276;
             --text-tertiary: #968FA0;
             --text-accent: #584176;
 
-            /* UI — hairline borders + soft shadows */
             --border-color: rgba(43, 37, 49, 0.10);
             --border-hover: rgba(110, 84, 152, 0.35);
             --shadow-color: rgba(43, 37, 49, 0.08);
 
-            /* Spacing / radius */
             --radius-sm: 10px;
             --radius-md: 14px;
             --radius-lg: 20px;
             --radius-xl: 28px;
             --radius-full: 9999px;
 
-            /* Shadows — мягкие, диффузные, тёплые */
             --shadow-sm: 0 2px 8px rgba(43, 37, 49, 0.05);
             --shadow-md: 0 8px 24px rgba(43, 37, 49, 0.07);
             --shadow-lg: 0 16px 40px rgba(43, 37, 49, 0.10);
@@ -72,42 +64,33 @@
             --shadow-purple: 0 8px 24px rgba(75, 59, 110, 0.18);
             --shadow-gold: 0 8px 24px rgba(198, 168, 102, 0.20);
 
-            /* Typography */
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-heading: 'Unbounded', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-roboto-bold: 'Unbounded', 'Inter', sans-serif;
 
-            /* Transitions */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-            /* Layout */
             --header-height: 76px;
-            --sidebar-width: 280px;
-
-            --bg-header: rgba(251, 248, 242, 0.72);
-
             --logo-color: #584176;
         }
 
-        /* ===== Soft Modern · DARK theme ===== */
+        /* ===== Dark theme ===== */
         [data-theme="dark"] {
-            --primary: #9D7BFF;          /* мягкий фиолетовый */
+            --primary: #9D7BFF;
             --primary-light: #B79BFF;
             --primary-dark: #7E5FE0;
-            --secondary: #6B5BA8;        /* баклажан светлее */
+            --secondary: #6B5BA8;
             --secondary-light: #8A78C4;
             --accent: #8FC7A8;
             --success: #6FB98B;
-            --danger: #E08579;           /* светлая терракота для тёмного */
+            --danger: #E08579;
             --danger-light: #ECA59C;
             --gold: #E0C078;
             --purple: #9D7BFF;
             --purple-light: #B79BFF;
             --purple-dark: #7E5FE0;
 
-            /* Backgrounds — глубокий сливово-угольный */
             --bg-primary: #161320;
             --bg-secondary: #1E1A2C;
             --bg-tertiary: #27223A;
@@ -115,18 +98,15 @@
             --bg-glass: #1E1A2C;
             --bg-gradient: linear-gradient(155deg, #161320 0%, #1B1428 100%);
 
-            /* Text */
             --text-primary: #F2EEF8;
             --text-secondary: #B8B0CC;
             --text-tertiary: #857D9C;
             --text-accent: #B79BFF;
 
-            /* UI */
             --border-color: rgba(242, 238, 248, 0.10);
             --border-hover: rgba(157, 123, 255, 0.45);
             --shadow-color: rgba(0, 0, 0, 0.4);
 
-            /* Shadows — более глубокие */
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.30);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.38);
             --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.48);
@@ -136,7 +116,6 @@
             --shadow-gold: 0 8px 24px rgba(224, 192, 120, 0.24);
 
             --bg-header: rgba(30, 26, 44, 0.72);
-
             --logo-color: #B79BFF;
         }
 
@@ -169,7 +148,6 @@
             font-feature-settings: "ss01", "cv11";
         }
 
-        /* ===== Soft background gradient ===== */
         .gradient-bg {
             position: fixed;
             top: 0;
@@ -229,7 +207,6 @@
             50% { transform: scale(1.06); opacity: 0.7; }
         }
 
-        /* ===== Falling Petals (very delicate) ===== */
         .petals-container {
             position: fixed;
             top: 0;
@@ -256,16 +233,8 @@
             100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
         }
 
-        /* Grid pattern removed in new design — element kept for compat */
         .grid-pattern { display: none; }
-
-        /* Witcher runes removed — element kept for compat */
         .witcher-runes { display: none; }
-
-        @keyframes runesFloat {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(2%, -2%, 0) scale(1.02); }
-        }
 
         /* ===== Splash Screen ===== */
         .splash-screen {
@@ -278,20 +247,17 @@
             justify-content: center;
             transition: opacity var(--transition-slow), visibility var(--transition-slow);
         }
-
         .splash-screen.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-
         .splash-content {
             text-align: center;
             animation: splashAnimation 2s ease-in-out;
             position: relative;
             z-index: 2;
         }
-
         .splash-icon {
             width: 112px;
             height: 112px;
@@ -305,13 +271,11 @@
             animation: pulse 2.4s infinite;
             position: relative;
         }
-
         .splash-icon i.fa-robot {
             font-size: 50px;
             color: #FBF8F2;
             animation: bounceSoft 3s ease-in-out infinite;
         }
-
         .splash-icon i.fa-heart {
             position: absolute;
             bottom: 18px;
@@ -320,7 +284,6 @@
             color: var(--danger-light);
             animation: pulseHeart 1.5s infinite;
         }
-
         .splash-content h1 {
             font-family: var(--font-heading);
             font-size: 44px;
@@ -330,14 +293,12 @@
             color: var(--text-primary);
             animation: fadeInUp 1s ease-out;
         }
-
         .splash-content p {
             font-size: 16px;
             color: var(--text-secondary);
             margin-bottom: 28px;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
-
         .splash-progress {
             width: 220px;
             height: 4px;
@@ -348,45 +309,38 @@
             animation: fadeInUp 1s ease-out 0.4s both;
             position: relative;
         }
-
         .splash-progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--gold));
             border-radius: var(--radius-full);
             animation: progress 2s ease-in-out forwards;
         }
-
         @keyframes splashAnimation {
             0% { transform: scale(0.92); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); }
             50% { transform: scale(1.04); box-shadow: var(--shadow-xl); }
         }
-
         @keyframes pulseHeart {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
-
         @keyframes bounceSoft {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes progress {
             from { width: 0%; }
             to { width: 100%; }
         }
 
-        /* ========= Welcome Screen ========= */
+        /* ===== Welcome Screen ===== */
         .welcome-screen {
             position: fixed;
             inset: 0;
@@ -395,20 +349,16 @@
             align-items: center;
             justify-content: center;
             padding: 18px;
-
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-
             transition: opacity var(--transition-slow), visibility var(--transition-slow);
         }
-
         .welcome-screen.show {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
         }
-
         .welcome-backdrop {
             position: absolute;
             inset: 0;
@@ -417,7 +367,6 @@
             -webkit-backdrop-filter: blur(14px) saturate(130%);
             z-index: 0;
         }
-
         .welcome-modal {
             position: relative;
             width: 100%;
@@ -431,17 +380,14 @@
             transform: translateY(10px) scale(0.98);
             opacity: 0;
         }
-
         .welcome-screen.show .welcome-modal {
             animation: welcomeIn 560ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
         }
-
         @keyframes welcomeIn {
             0% { transform: translateY(14px) scale(0.985); opacity: 0; }
             45% { transform: translateY(-3px) scale(1.01); opacity: 1; }
             100% { transform: translateY(0) scale(1); opacity: 1; }
         }
-
         .welcome-inner {
             position: relative;
             padding: 28px;
@@ -450,11 +396,9 @@
             gap: 24px;
             align-items: center;
         }
-
         @media (max-width: 700px) {
             .welcome-inner { grid-template-columns: 1fr; text-align: center; }
         }
-
         .welcome-close {
             position: absolute;
             top: 14px;
@@ -470,13 +414,11 @@
             font-weight: 700;
             transition: all var(--transition-fast);
         }
-
         .welcome-close:hover {
             transform: translateY(-1px);
             border-color: var(--border-hover);
             color: var(--text-primary);
         }
-
         .welcome-emblem {
             width: 120px;
             height: 120px;
@@ -491,19 +433,15 @@
             position: relative;
             overflow: hidden;
         }
-
         .welcome-emblem svg { width: 60px; height: 60px; display: block; }
-
         .welcome-screen.show .welcome-emblem {
             animation: emblemFloat 1.1s ease-in-out both;
         }
-
         @keyframes emblemFloat {
             0% { transform: translateY(8px) rotate(-3deg); opacity: 0; }
             60% { transform: translateY(-3px) rotate(2deg); opacity: 1; }
             100% { transform: translateY(0) rotate(0deg); opacity: 1; }
         }
-
         .welcome-text .eyebrow {
             font-family: var(--font-sans);
             letter-spacing: 1.4px;
@@ -513,7 +451,6 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
-
         .welcome-text h2 {
             font-family: var(--font-heading);
             font-size: 30px;
@@ -522,7 +459,6 @@
             margin-bottom: 10px;
             color: var(--text-primary);
         }
-
         .welcome-text p {
             color: var(--text-secondary);
             font-size: 15px;
@@ -530,14 +466,12 @@
             margin-bottom: 18px;
             max-width: 620px;
         }
-
         .welcome-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 18px;
         }
-
         .welcome-badge {
             padding: 7px 13px;
             border-radius: var(--radius-full);
@@ -550,20 +484,16 @@
             align-items: center;
             gap: 7px;
         }
-
         .welcome-badge i { color: var(--primary); }
-
         .welcome-actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
             justify-content: flex-start;
         }
-
         @media (max-width: 700px) {
             .welcome-actions { justify-content: center; }
         }
-
         .welcome-btn {
             border: none;
             cursor: pointer;
@@ -576,19 +506,16 @@
             box-shadow: var(--shadow-primary);
             transition: all var(--transition-fast);
         }
-
         .welcome-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-
         .welcome-btn.secondary {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
             box-shadow: none;
             color: var(--text-secondary);
         }
-
         @media (prefers-reduced-motion: reduce) {
             .welcome-screen.show .welcome-modal,
             .welcome-screen.show .welcome-emblem {
@@ -596,7 +523,7 @@
             }
         }
 
-        /* ===== Layout Container ===== */
+        /* ===== Layout ===== */
         .container {
             width: 100%;
             max-width: 1240px;
@@ -619,7 +546,6 @@
             display: flex;
             align-items: center;
         }
-
         .header-container {
             display: flex;
             align-items: center;
@@ -627,15 +553,12 @@
             width: 100%;
             height: 100%;
         }
-
-        /* Logo */
         .logo {
             display: flex;
             align-items: center;
             gap: 14px;
             text-decoration: none;
         }
-
         .logo-icon {
             display: flex;
             align-items: center;
@@ -652,22 +575,14 @@
             overflow: hidden;
             transform: translateZ(0);
         }
-
-        .logo-icon svg {
-            width: 28px;
-            height: 28px;
-            display: block;
-        }
-
+        .logo-icon svg { width: 28px; height: 28px; display: block; }
         .logo:hover .logo-icon {
             transform: translateY(-2px) scale(1.02);
         }
-
         .logo-text {
             display: flex;
             flex-direction: column;
         }
-
         .logo-text h1 {
             font-family: var(--font-heading);
             font-size: 20px;
@@ -679,7 +594,6 @@
             align-items: center;
             gap: 6px;
         }
-
         .logo-text span {
             font-size: 12px;
             color: var(--text-tertiary);
@@ -687,14 +601,12 @@
             letter-spacing: 0.1px;
         }
 
-        /* Header Actions */
         .header-actions {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             width: 44px;
             height: 44px;
@@ -710,7 +622,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .theme-toggle:hover {
             background: var(--bg-tertiary);
             transform: translateY(-2px);
@@ -718,24 +629,14 @@
             border-color: var(--border-hover);
             color: var(--primary);
         }
-
-        .theme-toggle:active {
-            transform: scale(0.95);
-        }
-
-        .theme-toggle i {
-            font-size: 17px;
-            transition: transform var(--transition-base);
-        }
-
-        /* Theme toggle: light=moon, dark=sun (witcher3 hidden) */
+        .theme-toggle:active { transform: scale(0.95); }
+        .theme-toggle i { font-size: 17px; transition: transform var(--transition-base); }
         .theme-toggle .fa-sun { display: none; }
         .theme-toggle .fa-moon { display: block; }
         .theme-toggle .fa-wand-magic-sparkles { display: none; }
         [data-theme="dark"] .theme-toggle .fa-sun { display: block; }
         [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
 
-        /* Balance Button */
         .balance-btn {
             display: flex;
             align-items: center;
@@ -751,26 +652,17 @@
             transition: all var(--transition-fast);
             box-shadow: var(--shadow-primary);
         }
-
         .balance-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
+        .balance-btn:active { transform: translateY(0); }
+        .balance-btn i { font-size: 15px; }
 
-        .balance-btn:active {
-            transform: translateY(0);
-        }
-
-        .balance-btn i {
-            font-size: 15px;
-        }
-
-        /* Social Links */
         .social-links {
             display: flex;
             gap: 10px;
         }
-
         .social-link {
             display: flex;
             align-items: center;
@@ -786,18 +678,15 @@
             position: relative;
             overflow: hidden;
         }
-
         .social-link:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
             border-color: var(--border-hover);
             background: var(--bg-tertiary);
         }
-
         .social-link.telegram:hover { color: var(--primary); }
         .social-link.youtube:hover { color: var(--danger); }
         .social-link.twitch:hover { color: var(--purple); }
-
         .social-tooltip {
             position: absolute;
             bottom: -30px;
@@ -815,21 +704,20 @@
             pointer-events: none;
             z-index: 1001;
         }
-
         .social-link:hover .social-tooltip {
             opacity: 1;
             visibility: visible;
             bottom: -26px;
         }
 
-        /* ===== Main Content ===== */
+        /* ===== Main ===== */
         .main-content {
             margin-top: var(--header-height);
             min-height: calc(100vh - var(--header-height));
             padding: 36px 0;
         }
 
-        /* ===== Tabs Navigation ===== */
+        /* ===== Tabs ===== */
         .tabs-nav {
             display: flex;
             gap: 6px;
@@ -844,7 +732,6 @@
             position: relative;
             overflow: visible;
         }
-
         .tab-btn {
             flex: 1;
             padding: 12px 8px;
@@ -866,7 +753,6 @@
             justify-content: center;
             gap: 7px;
         }
-
         .tab-indicator {
             position: absolute;
             top: 7px;
@@ -880,18 +766,14 @@
             z-index: 1;
             will-change: transform, width;
         }
-
         .tab-btn.songs-tab.active ~ .tab-indicator {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--purple-dark) 100%);
         }
-
         .tab-btn.suffering-tab.active ~ .tab-indicator {
             background: linear-gradient(135deg, var(--danger) 0%, var(--danger-light) 100%);
         }
-
         .tab-btn.active { color: #FBF8F2 !important; }
         .tab-btn.active i, .tab-btn.active span, .tab-btn.active .price-badge { color: #FBF8F2 !important; }
-
         .price-badge {
             padding: 2px 7px;
             border-radius: var(--radius-sm);
@@ -902,22 +784,18 @@
             font-variant-numeric: tabular-nums;
             transition: all var(--transition-fast);
         }
-
         .tab-btn:not(.active) .price-badge {
             background: var(--bg-tertiary);
             color: var(--text-tertiary);
         }
-
-        /* Tab Content */
         .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
         .tab-content.active { display: block; }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== Hero Section ===== */
+        /* ===== Hero ===== */
         .hero-section {
             text-align: center;
             margin-bottom: 36px;
@@ -925,7 +803,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -940,9 +817,7 @@
             margin-bottom: 20px;
             box-shadow: var(--shadow-sm);
         }
-
         .hero-badge i { color: var(--gold); }
-
         .hero-title {
             font-family: var(--font-heading);
             font-size: 40px;
@@ -953,7 +828,6 @@
             margin-bottom: 14px;
             color: var(--text-primary);
         }
-
         .hero-description {
             font-size: 15px;
             color: var(--text-secondary);
@@ -971,7 +845,6 @@
             gap: 16px;
             margin-bottom: 36px;
         }
-
         .info-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -982,20 +855,17 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
-
         .info-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
             border-color: var(--border-hover);
         }
-
         .info-card-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 12px;
         }
-
         .info-card-icon {
             display: flex;
             align-items: center;
@@ -1008,7 +878,6 @@
             font-size: 16px;
             box-shadow: var(--shadow-primary);
         }
-
         .info-card-title {
             font-family: var(--font-heading);
             font-size: 16px;
@@ -1016,20 +885,18 @@
             color: var(--text-primary);
             letter-spacing: -0.01em;
         }
-
         .info-card-content {
             color: var(--text-secondary);
             line-height: 1.6;
             font-size: 13.5px;
         }
 
-        /* ===== Search Section (collapsible circle) ===== */
+        /* ===== Search ===== */
         .search-section {
             margin-bottom: 24px;
             display: flex;
             justify-content: center;
         }
-
         .search-container {
             position: relative;
             width: 100%;
@@ -1038,13 +905,10 @@
             flex: 0 1 auto;
             transition: max-width var(--transition-base);
         }
-
-        /* expand when focused OR has content */
         .search-container:has(.search-input:focus),
         .search-container:has(.search-input:not(:placeholder-shown)) {
             max-width: 520px;
         }
-
         .search-input {
             width: 100%;
             height: 100%;
@@ -1061,31 +925,19 @@
                         border-color var(--transition-fast),
                         box-shadow var(--transition-base);
         }
-
-        .search-input:hover {
-            border-color: var(--border-hover);
-        }
-
-        /* expanded look: focus OR has content */
+        .search-input:hover { border-color: var(--border-hover); }
         .search-input:focus,
         .search-input:not(:placeholder-shown) {
             outline: none;
             border-radius: var(--radius-lg);
             cursor: text;
         }
-
         .search-input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(110, 84, 152, 0.12);
         }
-
-        /* hide placeholder text while collapsed into a circle */
-        .search-input:placeholder-shown:not(:focus)::placeholder {
-            color: transparent;
-        }
-
+        .search-input:placeholder-shown:not(:focus)::placeholder { color: transparent; }
         .search-input::placeholder { color: var(--text-tertiary); }
-
         .search-icon {
             position: absolute;
             left: 50%;
@@ -1098,54 +950,77 @@
                         transform var(--transition-base),
                         color var(--transition-base);
         }
-
-        /* slide the icon to the left when expanded */
         .search-container:has(.search-input:focus) .search-icon,
         .search-container:has(.search-input:not(:placeholder-shown)) .search-icon {
             left: 20px;
             transform: translateY(-50%);
         }
-
-        .search-container:has(.search-input:focus) .search-icon {
-            color: var(--primary);
-        }
+        .search-container:has(.search-input:focus) .search-icon { color: var(--primary); }
 
         /* ===== Categories ===== */
         .categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 28px;
+            padding: 8px 4px;
+            background: rgba(251, 248, 242, 0.4);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(110, 84, 152, 0.08);
+            backdrop-filter: blur(4px);
+            justify-content: center;
         }
-
         .category-tag {
-            padding: 8px 16px;
+            padding: 10px 20px;
             background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--border-color);
             border-radius: var(--radius-full);
             color: var(--text-secondary);
-            font-size: 12.5px;
-            font-weight: 500;
+            font-size: 13.5px;
+            font-weight: 600;
             cursor: pointer;
             transition: all var(--transition-fast);
             position: relative;
             overflow: hidden;
-        }
-
-        .category-tag:hover {
-            background: var(--bg-tertiary);
-            transform: translateY(-2px);
-            border-color: var(--border-hover);
             box-shadow: var(--shadow-sm);
+            letter-spacing: 0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .category-tag::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            border-radius: inherit;
+            z-index: 0;
+        }
+        .category-tag:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
             color: var(--text-primary);
         }
-
         .category-tag.active {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: #FBF8F2;
             border-color: transparent;
             box-shadow: var(--shadow-primary);
+            transform: translateY(-2px);
+            font-weight: 700;
         }
+        .category-tag.active::before { opacity: 0; }
+        .category-tag span { position: relative; z-index: 1; }
+        .category-tag .tag-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        .category-tag.active .tag-icon { opacity: 1; }
 
         /* ===== Commands Grid ===== */
         .commands-grid {
@@ -1156,32 +1031,23 @@
             transition: opacity 180ms ease, transform 220ms ease, filter 180ms ease;
             will-change: opacity, transform, filter;
         }
-
         .commands-grid.is-switching {
             opacity: 0;
             transform: translateY(10px);
             filter: blur(4px);
         }
-
-        .command-card {
-            opacity: 1;
-        }
-
         .command-card.enter {
             animation: cmdEnter 420ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
         }
-
         @keyframes cmdEnter {
             0% { opacity: 0; transform: translateY(10px) scale(0.985); }
             55% { opacity: 1; transform: translateY(-2px) scale(1.01); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         @media (prefers-reduced-motion: reduce) {
             .commands-grid { transition: none !important; }
             .command-card.enter { animation: none !important; }
         }
-
         .command-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -1193,13 +1059,11 @@
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
-
         .command-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             border-color: var(--border-hover);
         }
-
         .command-header {
             display: flex;
             justify-content: space-between;
@@ -1207,7 +1071,6 @@
             gap: 10px;
             margin-bottom: 10px;
         }
-
         .command-name {
             font-family: var(--font-heading);
             font-size: 15px;
@@ -1216,7 +1079,6 @@
             word-break: break-word;
             letter-spacing: -0.01em;
         }
-
         .command-cost {
             display: flex;
             align-items: center;
@@ -1235,14 +1097,12 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
-
         .command-description {
             color: var(--text-secondary);
             line-height: 1.55;
             margin-bottom: 10px;
             font-size: 13.5px;
         }
-
         .command-category {
             display: inline-block;
             padding: 3px 10px;
@@ -1262,7 +1122,6 @@
             gap: 16px;
             margin-bottom: 28px;
         }
-
         .song-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -1277,13 +1136,11 @@
             gap: 14px;
             box-shadow: var(--shadow-sm);
         }
-
         .song-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             border-color: var(--border-hover);
         }
-
         .song-icon {
             display: flex;
             align-items: center;
@@ -1297,12 +1154,10 @@
             flex-shrink: 0;
             box-shadow: var(--shadow-purple);
         }
-
         .song-info {
             flex: 1;
             min-width: 0;
         }
-
         .song-artist {
             font-size: 12px;
             color: var(--text-tertiary);
@@ -1311,7 +1166,6 @@
             letter-spacing: 0.2px;
             text-transform: uppercase;
         }
-
         .song-title {
             font-family: var(--font-heading);
             font-size: 15px;
@@ -1324,7 +1178,6 @@
             white-space: nowrap;
             letter-spacing: -0.01em;
         }
-
         .song-price {
             display: flex;
             align-items: center;
@@ -1343,7 +1196,7 @@
             flex-shrink: 0;
         }
 
-        /* ===== Suffering Card ===== */
+        /* ===== Suffering ===== */
         .suffering-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -1359,14 +1212,12 @@
             box-shadow: var(--shadow-sm);
             border-left: 3px solid var(--danger);
         }
-
         .suffering-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 28px rgba(199, 107, 92, 0.16);
             border-color: var(--border-hover);
             border-left-color: var(--danger);
         }
-
         .suffering-icon {
             display: flex;
             align-items: center;
@@ -1380,12 +1231,10 @@
             flex-shrink: 0;
             box-shadow: 0 8px 22px rgba(199, 107, 92, 0.22);
         }
-
         .suffering-info {
             flex: 1;
             min-width: 0;
         }
-
         .suffering-title {
             font-family: var(--font-heading);
             font-size: 15px;
@@ -1396,14 +1245,12 @@
             word-break: break-word;
             letter-spacing: -0.01em;
         }
-
         .suffering-subtitle {
             font-size: 12px;
             color: var(--text-tertiary);
             font-weight: 500;
             letter-spacing: 0.1px;
         }
-
         .suffering-description {
             font-size: 11.5px;
             color: var(--text-secondary);
@@ -1412,7 +1259,6 @@
             border-top: 1px dashed rgba(199, 107, 92, 0.3);
             line-height: 1.5;
         }
-
         .suffering-price {
             display: flex;
             align-items: center;
@@ -1438,14 +1284,12 @@
             color: var(--text-tertiary);
             grid-column: 1 / -1;
         }
-
         .no-results i {
             font-size: 36px;
             margin-bottom: 14px;
             color: var(--text-tertiary);
             opacity: 0.5;
         }
-
         .no-results h3 {
             font-family: var(--font-heading);
             font-size: 19px;
@@ -1454,7 +1298,6 @@
             color: var(--text-secondary);
             letter-spacing: -0.01em;
         }
-
         .no-results p {
             font-size: 14px;
             color: var(--text-tertiary);
@@ -1483,17 +1326,11 @@
             font-weight: 500;
             font-size: 14px;
         }
-
         .notification.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
-
-        .notification i {
-            font-size: 18px;
-            color: var(--success);
-        }
-
+        .notification i { font-size: 18px; color: var(--success); }
         .notification.songs-notification { color: var(--bg-secondary); }
         .notification.songs-notification i { color: var(--purple-light); }
         .notification.suffering-notification { color: var(--bg-secondary); }
@@ -1506,7 +1343,6 @@
             border-top: 1px solid var(--border-color);
             text-align: center;
         }
-
         .footer-content p {
             color: var(--text-tertiary);
             font-size: 12.5px;
@@ -1530,8 +1366,15 @@
             .splash-content h1 { font-size: 30px; }
             .splash-content p { font-size: 14px; }
             .container { padding: 0 16px; }
+            .categories {
+                gap: 8px;
+                padding: 6px 2px;
+            }
+            .category-tag {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
         }
-
         @media (max-width: 480px) {
             .hero-title { font-size: 25px; }
             .hero-description { font-size: 13px; }
@@ -1548,9 +1391,12 @@
             .info-card-title { font-size: 15px; }
             .tab-btn { flex-direction: column; gap: 2px; padding: 8px 2px; }
             .price-badge { font-size: 9px; padding: 1px 4px; }
+            .category-tag {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
         }
 
-        /* Theme transition overlay (compat) */
         .theme-transition-overlay {
             position: fixed;
             inset: 0;
@@ -1560,11 +1406,8 @@
             display: none;
         }
 
-        /* ========= Контент-редактор ========= */
-        body.editor-open {
-            overflow: hidden;
-        }
-
+        /* ========= EDITOR ========= */
+        body.editor-open { overflow: hidden; }
         .editor-toggle {
             position: fixed;
             right: 20px;
@@ -1581,7 +1424,6 @@
             font-size: 14px;
             transition: all var(--transition-fast);
         }
-
         .editor-toggle:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-xl);
@@ -1599,11 +1441,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-
-        .editor-overlay.show {
-            display: flex;
-        }
-
+        .editor-overlay.show { display: flex; }
         .editor-modal {
             width: 100%;
             max-width: 980px;
@@ -1617,11 +1455,9 @@
             transform: translateY(6px) scale(0.99);
             transition: transform var(--transition-base);
         }
-
         .editor-overlay.show .editor-modal {
             transform: translateY(0) scale(1);
         }
-
         .editor-header {
             padding: 20px 22px;
             border-bottom: 1px solid var(--border-color);
@@ -1634,7 +1470,6 @@
             z-index: 2;
             background: var(--bg-secondary);
         }
-
         .editor-title {
             font-family: var(--font-heading);
             font-size: 17px;
@@ -1643,7 +1478,6 @@
             color: var(--text-primary);
             line-height: 1.1;
         }
-
         .editor-close-btn {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
@@ -1656,24 +1490,20 @@
             font-size: 15px;
             font-weight: 700;
         }
-
         .editor-close-btn:hover {
             border-color: var(--border-hover);
             color: var(--text-primary);
             transform: translateY(-1px);
         }
-
         .editor-body {
             padding: 20px 22px 24px;
             max-height: calc(90vh - 80px);
             overflow: auto;
             overscroll-behavior: contain;
             scroll-behavior: smooth;
-
             scrollbar-width: thin;
             scrollbar-color: rgba(110, 84, 152, 0.45) rgba(43, 37, 49, 0.06);
         }
-
         .editor-body::-webkit-scrollbar { width: 10px; }
         .editor-body::-webkit-scrollbar-track {
             background: rgba(43, 37, 49, 0.04);
@@ -1697,7 +1527,6 @@
             border: 1px solid var(--border-color);
             margin: 0 0 18px;
         }
-
         .editor-tab-btn {
             background: transparent;
             border: 1px solid transparent;
@@ -1710,9 +1539,7 @@
             transition: all var(--transition-fast);
             white-space: nowrap;
         }
-
         .editor-tab-btn:hover { color: var(--text-primary); }
-
         .editor-tab-btn.active {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-color: transparent;
@@ -1725,7 +1552,6 @@
             grid-template-columns: 1fr;
             gap: 16px;
         }
-
         .editor-tab-content { display: none; }
         .editor-tab-content.active { display: block; }
 
@@ -1743,11 +1569,7 @@
             gap: 14px;
             align-items: end;
         }
-
-        .editor-form .full {
-            grid-column: 1 / -1;
-        }
-
+        .editor-form .full { grid-column: 1 / -1; }
         .editor-label {
             display: block;
             font-size: 12px;
@@ -1756,7 +1578,6 @@
             margin-bottom: 7px;
             letter-spacing: 0.1px;
         }
-
         .editor-input, .editor-select, .editor-textarea {
             width: 100%;
             background: var(--bg-secondary);
@@ -1769,12 +1590,10 @@
             outline: none;
             transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
         }
-
         .editor-textarea {
             resize: vertical;
             min-height: 76px;
         }
-
         .editor-input:focus, .editor-select:focus, .editor-textarea:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(110, 84, 152, 0.12);
@@ -1787,7 +1606,6 @@
             align-items: center;
             justify-content: flex-end;
         }
-
         .editor-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border: none;
@@ -1800,19 +1618,25 @@
             transition: all var(--transition-fast);
             box-shadow: var(--shadow-primary);
         }
-
         .editor-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
         .editor-btn.secondary {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
             box-shadow: none;
             color: var(--text-secondary);
         }
-
         .editor-btn.danger {
             background: linear-gradient(135deg, var(--danger) 0%, var(--danger-light) 100%);
             box-shadow: 0 8px 22px rgba(199, 107, 92, 0.22);
+        }
+        .editor-btn.success {
+            background: linear-gradient(135deg, #6F9E6B 0%, #4CAF50 100%);
+            box-shadow: 0 8px 22px rgba(79, 172, 84, 0.3);
+        }
+        .editor-btn:disabled {
+            opacity: 0.6;
+            transform: none !important;
+            cursor: not-allowed;
         }
 
         .editor-table {
@@ -1820,7 +1644,6 @@
             grid-template-columns: 1fr;
             gap: 8px;
         }
-
         .editor-row {
             display: flex;
             gap: 12px;
@@ -1831,19 +1654,16 @@
             border-radius: var(--radius-md);
             padding: 12px 14px;
         }
-
         .editor-row-main {
             min-width: 0;
             flex: 1;
         }
-
         .editor-row-title {
             font-weight: 600;
             color: var(--text-primary);
             word-break: break-word;
             font-size: 14px;
         }
-
         .editor-row-sub {
             color: var(--text-secondary);
             font-size: 12px;
@@ -1851,17 +1671,93 @@
             white-space: pre-wrap;
             line-height: 1.5;
         }
-
         .editor-footnote {
             margin-top: 12px;
             color: var(--text-tertiary);
             font-size: 12px;
             line-height: 1.5;
         }
-
         .editor-card:hover { transform: none !important; }
 
-        /* Reduced motion */
+        .save-indicator {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            z-index: 2501;
+            pointer-events: none;
+            box-shadow: var(--shadow-md);
+        }
+        .save-indicator.show { opacity: 1; }
+
+        /* GitHub интеграция */
+        .github-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+        .github-section .github-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .github-section .github-row label {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-secondary);
+            min-width: 60px;
+        }
+        .github-section .github-row input {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 9px 13px;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+        .github-section .github-row input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(110, 84, 152, 0.12);
+        }
+        .github-status {
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+        .github-status.show { display: block; }
+        .github-status.success {
+            background: rgba(79, 172, 84, 0.15);
+            color: #4CAF50;
+            border: 1px solid rgba(79, 172, 84, 0.3);
+        }
+        .github-status.error {
+            background: rgba(199, 107, 92, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(199, 107, 92, 0.3);
+        }
+        .github-status.info {
+            background: rgba(110, 84, 152, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(110, 84, 152, 0.2);
+        }
+
         @media (prefers-reduced-motion: reduce) {
             body::before,
             .gradient-bg,
@@ -1873,7 +1769,7 @@
         }
     </style>
 </head>
-<body data-theme="light" class="">
+<body data-theme="dark" class="">
     <!-- Splash Screen -->
     <div class="splash-screen hidden" id="splash-screen">
         <div class="splash-content">
@@ -1920,7 +1816,7 @@
         </div>
     </div>
 
-    <!-- Animated Background -->
+    <!-- Background -->
     <div class="gradient-bg"></div>
     <div class="gradient-orbs">
         <div class="orb-1"></div>
@@ -1929,8 +1825,7 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <!-- Контейнер для лепестков -->
-    <div class="petals-container" id="petals"><div class="petal" style="left: 60.1717vw; animation-duration: 8.28739s; animation-delay: 3.29881s; width: 12.6876px; height: 10.6824px; transform: rotate(138.294deg);"></div><div class="petal" style="left: 96.4257vw; animation-duration: 8.5136s; animation-delay: 3.21315s; width: 15.4272px; height: 8.45696px; transform: rotate(350.782deg);"></div><div class="petal" style="left: 4.44237vw; animation-duration: 9.01094s; animation-delay: 2.23138s; width: 8.26501px; height: 9.91398px; transform: rotate(59.5452deg);"></div><div class="petal" style="left: 29.9864vw; animation-duration: 7.05429s; animation-delay: 4.17502s; width: 9.54552px; height: 9.07376px; transform: rotate(176.24deg);"></div><div class="petal" style="left: 64.8199vw; animation-duration: 6.81225s; animation-delay: 2.61287s; width: 10.1244px; height: 14.7899px; transform: rotate(2.71536deg);"></div><div class="petal" style="left: 29.2396vw; animation-duration: 7.62165s; animation-delay: 1.57252s; width: 9.02076px; height: 8.91776px; transform: rotate(126.027deg);"></div><div class="petal" style="left: 93.3867vw; animation-duration: 8.84243s; animation-delay: 0.626523s; width: 12.4747px; height: 9.41044px; transform: rotate(126.643deg);"></div><div class="petal" style="left: 67.9516vw; animation-duration: 6.03662s; animation-delay: 3.16199s; width: 11.0473px; height: 11.0336px; transform: rotate(136.207deg);"></div><div class="petal" style="left: 6.90589vw; animation-duration: 9.04307s; animation-delay: 3.04579s; width: 11.1476px; height: 9.7735px; transform: rotate(10.8833deg);"></div><div class="petal" style="left: 80.0294vw; animation-duration: 6.76044s; animation-delay: 4.65312s; width: 9.28234px; height: 14.6447px; transform: rotate(29.7554deg);"></div><div class="petal" style="left: 92.7204vw; animation-duration: 8.5212s; animation-delay: 0.225957s; width: 9.31719px; height: 15.3017px; transform: rotate(75.7882deg);"></div><div class="petal" style="left: 91.8873vw; animation-duration: 8.76019s; animation-delay: 1.19311s; width: 13.6165px; height: 15.4361px; transform: rotate(325.234deg);"></div><div class="petal" style="left: 19.5455vw; animation-duration: 5.85836s; animation-delay: 2.39406s; width: 11.9719px; height: 8.13126px; transform: rotate(354.501deg);"></div><div class="petal" style="left: 85.5397vw; animation-duration: 5.44993s; animation-delay: 4.54299s; width: 15.251px; height: 10.6121px; transform: rotate(188.021deg);"></div><div class="petal" style="left: 42.8149vw; animation-duration: 9.66538s; animation-delay: 3.37568s; width: 9.97799px; height: 15.3531px; transform: rotate(337.546deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 66.081vw; animation-duration: 5.42721s; animation-delay: 0.920755s; width: 8.36024px; height: 11.4915px; transform: rotate(11.7719deg);"></div><div class="petal" style="left: 60.1129vw; animation-duration: 6.43173s; animation-delay: 2.89121s; width: 14.3522px; height: 8.7898px; transform: rotate(92.5874deg);"></div><div class="petal" style="left: 78.9976vw; animation-duration: 5.25847s; animation-delay: 3.54627s; width: 8.97274px; height: 9.29222px; transform: rotate(72.6401deg);"></div><div class="petal" style="left: 8.11211vw; animation-duration: 6.57042s; animation-delay: 0.00706001s; width: 14.0815px; height: 10.794px; transform: rotate(342.651deg);"></div><div class="petal" style="left: 88.6472vw; animation-duration: 8.4854s; animation-delay: 4.13611s; width: 9.7989px; height: 10.5635px; transform: rotate(235.453deg);"></div><div class="petal" style="left: 30.3711vw; animation-duration: 9.34251s; animation-delay: 1.35833s; width: 12.8088px; height: 10.616px; transform: rotate(202.72deg);"></div><div class="petal" style="left: 92.8157vw; animation-duration: 7.77327s; animation-delay: 4.93147s; width: 15.2458px; height: 14.5298px; transform: rotate(61.748deg);"></div><div class="petal" style="left: 84.7218vw; animation-duration: 9.30436s; animation-delay: 1.95008s; width: 14.7996px; height: 14.5348px; transform: rotate(55.9236deg);"></div><div class="petal" style="left: 93.2743vw; animation-duration: 9.63869s; animation-delay: 3.20267s; width: 9.56457px; height: 11.195px; transform: rotate(174.91deg);"></div><div class="petal" style="left: 53.1376vw; animation-duration: 7.23522s; animation-delay: 1.74846s; width: 15.3372px; height: 14.7111px; transform: rotate(268.725deg);"></div><div class="petal" style="left: 65.2493vw; animation-duration: 6.55649s; animation-delay: 4.88878s; width: 15.5408px; height: 8.80897px; transform: rotate(275.631deg);"></div><div class="petal" style="left: 22.556vw; animation-duration: 6.52628s; animation-delay: 4.6395s; width: 8.41625px; height: 11.6726px; transform: rotate(205.427deg);"></div><div class="petal" style="left: 37.2772vw; animation-duration: 5.58297s; animation-delay: 2.71724s; width: 10.3293px; height: 12.5349px; transform: rotate(203.013deg);"></div><div class="petal" style="left: 72.1411vw; animation-duration: 7.12374s; animation-delay: 0.297788s; width: 8.37501px; height: 10.2161px; transform: rotate(146.939deg);"></div><div class="petal" style="left: 21.9022vw; animation-duration: 7.2617s; animation-delay: 2.99461s; width: 11.1184px; height: 8.5629px; transform: rotate(336.87deg);"></div></div>
 
     <!-- Header -->
     <header class="header">
@@ -1938,15 +1833,7 @@
             <a href="#" class="logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 64 64" role="img" aria-label="Логотип">
-                        <path fill="#FBF8F2" d="M32 16
-                            L40 22 L48 22
-                            L44 30 L46 40
-                            L38 46 L32 52
-                            L26 46 L18 40
-                            L20 30 L16 22
-                            L24 22 Z
-                            M26 28 L32 24 L38 28
-                            L36 36 L32 40 L28 36 Z"></path>
+                        <path fill="#FBF8F2" d="M32 16 L40 22 L48 22 L44 30 L46 40 L38 46 L32 52 L26 46 L18 40 L20 30 L16 22 L24 22 Z M26 28 L32 24 L38 28 L36 36 L32 40 L28 36 Z"></path>
                         <path d="M28 44 L36 26" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"></path>
                     </svg>
                 </div>
@@ -1989,7 +1876,7 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Tabs Navigation - 3 вкладки -->
+            <!-- Tabs -->
             <div class="tabs-nav" id="tabs-nav">
                 <div class="tab-indicator" id="tab-indicator" style="transform: translateX(1px); width: 388px;"></div>
                 <button class="tab-btn active" data-tab="commands">
@@ -2011,46 +1898,32 @@
 
             <!-- Commands Tab -->
             <div class="tab-content active" id="commands-tab">
-                <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-badge">
                         <i class="fas fa-bolt"></i>
                         <span>300 БУСЕК за команду</span>
                     </div>
                     <h1 class="hero-title">Библиотека звуковых команд</h1>
-                    <p class="hero-description">
-                        Выбирайте команды, копируйте и отправляйте в чат стрима.
-                    </p>
+                    <p class="hero-description">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
                 </section>
 
-                <!-- Info Cards -->
                 <div class="info-cards">
                     <div class="info-card">
                         <div class="info-card-header">
-                            <div class="info-card-icon">
-                                <i class="fas fa-gem"></i>
-                            </div>
+                            <div class="info-card-icon"><i class="fas fa-gem"></i></div>
                             <h3 class="info-card-title">Как получить БУСЬКИ</h3>
                         </div>
-                        <div class="info-card-content">
-                            <p>20 БУСЕК за сообщение, 1000 за 100 лайков.</p>
-                        </div>
+                        <div class="info-card-content"><p>20 БУСЕК за сообщение, 1000 за 100 лайков.</p></div>
                     </div>
-
                     <div class="info-card">
                         <div class="info-card-header">
-                            <div class="info-card-icon">
-                                <i class="fas fa-play-circle"></i>
-                            </div>
+                            <div class="info-card-icon"><i class="fas fa-play-circle"></i></div>
                             <h3 class="info-card-title">Как использовать</h3>
                         </div>
-                        <div class="info-card-content">
-                            <p>Нажмите → вставьте в чат → бот воспроизведет.</p>
-                        </div>
+                        <div class="info-card-content"><p>Нажмите → вставьте в чат → бот воспроизведет.</p></div>
                     </div>
                 </div>
 
-                <!-- Search Section -->
                 <section class="search-section">
                     <div class="search-container">
                         <i class="fas fa-search search-icon"></i>
@@ -2058,10 +1931,7 @@
                     </div>
                 </section>
 
-                <!-- Categories -->
-                <div class="categories" id="categories-tabs"><div class="category-tag active" data-category="Все">Все</div><div class="category-tag " data-category="💜 Приветствие">💜 Приветствие</div><div class="category-tag " data-category="👑 Мои">👑 Мои</div><div class="category-tag " data-category="💪 Боевой настрой">💪 Боевой настрой</div><div class="category-tag " data-category="🙈 Фиаско">🙈 Фиаско</div><div class="category-tag " data-category="💯 НетленОчки">💯 НетленОчки</div><div class="category-tag " data-category="💕 Приятности">💕 Приятности</div><div class="category-tag " data-category="💰 Донатики">💰 Донатики</div><div class="category-tag " data-category="🍳 Перерывчик">🍳 Перерывчик</div><div class="category-tag " data-category="💋 Завершение">💋 Завершение</div></div>
-
-                <!-- Commands Grid -->
+                <div class="categories" id="categories-tabs"><div class="category-tag active" data-category="Все"><span class="tag-icon">🔮</span><span>Все</span></div><div class="category-tag " data-category="EVRUS"><span class="tag-icon">▪️</span><span>EVRUS</span></div><div class="category-tag " data-category="🍳 Перерывчик"><span class="tag-icon">🍳</span><span>🍳 Перерывчик</span></div><div class="category-tag " data-category="👑 Мои"><span class="tag-icon">👑</span><span>👑 Мои</span></div><div class="category-tag " data-category="💋 Завершение"><span class="tag-icon">💋</span><span>💋 Завершение</span></div><div class="category-tag " data-category="💕 Приятности"><span class="tag-icon">💕</span><span>💕 Приятности</span></div><div class="category-tag " data-category="💜 Приветствие"><span class="tag-icon">👋</span><span>💜 Приветствие</span></div><div class="category-tag " data-category="💪 Боевой настрой"><span class="tag-icon">⚔️</span><span>💪 Боевой настрой</span></div><div class="category-tag " data-category="💯 НетленОчки"><span class="tag-icon">💎</span><span>💯 НетленОчки</span></div><div class="category-tag " data-category="💰 Донатики"><span class="tag-icon">💰</span><span>💰 Донатики</span></div><div class="category-tag " data-category="🙈 Фиаско"><span class="tag-icon">😱</span><span>🙈 Фиаско</span></div></div>
                 <div class="commands-grid" id="commands-container"><div class="command-card" data-command="!10000 лет" role="button" aria-label="Команда: !10000 лет. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!10000 лет</div>
@@ -3106,6 +2976,18 @@
                          
                         <div class="command-category">💯 НетленОчки</div>
                     </div>
+                </div><div class="command-card" data-command="!evrus" role="button" aria-label="Команда: !evrus. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!evrus</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">EVRUS</div>
+                    </div>
                 </div><div class="command-card" data-command="!fatality" role="button" aria-label="Команда: !fatality. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!fatality</div>
@@ -3179,8 +3061,6 @@
                         <div class="command-category">💪 Боевой настрой</div>
                     </div>
                 </div></div>
-
-                <!-- No Results -->
                 <div class="no-results" id="no-results" style="display: none;">
                     <i class="fas fa-search"></i>
                     <h3>Команды не найдены</h3>
@@ -3190,19 +3070,14 @@
 
             <!-- Songs Tab -->
             <div class="tab-content" id="songs-tab">
-                <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-badge">
                         <i class="fas fa-crown"></i>
                         <span>40,000 БУСЕК за песню</span>
                     </div>
                     <h1 class="hero-title">Закажите песню</h1>
-                    <p class="hero-description">
-                        Выберите песню и отправьте команду в чат.
-                    </p>
+                    <p class="hero-description">Выберите песню и отправьте команду в чат.</p>
                 </section>
-
-                <!-- Songs Grid -->
                 <div class="songs-grid" id="songs-container"><div class="song-card" data-command="!песня А-Студио - Мама-папа" role="button" aria-label="Заказать песню: А-Студио - Мама-папа" tabindex="0">
                     <div class="song-icon"><i class="fas fa-music"></i></div>
                     <div class="song-info">
@@ -3474,8 +3349,6 @@
                         <span>40,000</span>
                     </div>
                 </div></div>
-
-                <!-- No Results -->
                 <div class="no-results" id="no-songs-results" style="display: none;">
                     <i class="fas fa-music"></i>
                     <h3>Песни не найдены</h3>
@@ -3485,19 +3358,14 @@
 
             <!-- Suffering Tab -->
             <div class="tab-content" id="suffering-tab">
-                <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-badge">
                         <i class="fas fa-skull"></i>
                         <span>Страдание стримера — радость зрителя!</span>
                     </div>
                     <h1 class="hero-title">Мучительные испытания</h1>
-                    <p class="hero-description">
-                        5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК
-                    </p>
+                    <p class="hero-description">5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК</p>
                 </section>
-
-                <!-- Suffering Grid -->
                 <div class="songs-grid" id="suffering-container"><div class="suffering-card" data-command="!лечилка" role="button" aria-label="Испытание: Лечилка" tabindex="0">
                     <div class="suffering-icon"><i class="fas fa-ban"></i></div>
                     <div class="suffering-info">
@@ -3540,7 +3408,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>Цинтрибот 2026. Design by EVRUS</p>
+                <p>Заказывайте песни на стримах Цинтрийки</p>
+                <p>© 2024 Цинтриbot</p>
             </div>
         </div>
     </footer>
@@ -3548,10 +3417,13 @@
     <!-- Notification -->
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда скопирована!</span>
+        <span id="notification-text">❌ Ошибка загрузки на GitHub</span>
     </div>
 
     <div class="theme-transition-overlay" id="theme-transition-overlay" aria-hidden="true"></div>
+
+    <!-- Save Indicator -->
+    
 
     <!-- Editor toggle -->
     
@@ -3559,9 +3431,11 @@
     
 
     <script data-main-script="true">
-        // Data with all commands
+        // ============================================================
+        // 1. ИСХОДНЫЕ ДАННЫЕ
+        // ============================================================
         /*DATA_COMMANDS_BY_CATEGORY_START*/
-        let commandsByCategory = {
+        const DEFAULT_COMMANDS_BY_CATEGORY = {
         "💜 Приветствие": [
                 {
                         "name": "!здравствуйте",
@@ -4044,13 +3918,19 @@
                         "description": "",
                         "cost": 300
                 }
+        ],
+        "EVRUS": [
+                {
+                        "name": "!evrus",
+                        "description": "",
+                        "cost": 300
+                }
         ]
 };
 /*DATA_COMMANDS_BY_CATEGORY_END*/
 
-        // Songs data
         /*DATA_SONGS_START*/
-        let songs = [
+        const DEFAULT_SONGS = [
         {
                 "artist": "А-Студио",
                 "name": "Мама-папа"
@@ -4162,9 +4042,8 @@
 ];
 /*DATA_SONGS_END*/
 
-        // Suffering Items
         /*DATA_SUFFERING_ITEMS_START*/
-        let sufferingItems = [
+        const DEFAULT_SUFFERING_ITEMS = [
         {
                 "command": "!лечилка",
                 "description": "Не использует лечилки (5 мин, не на боссов)",
@@ -4189,7 +4068,82 @@
 ];
 /*DATA_SUFFERING_ITEMS_END*/
 
-        // DOM Elements
+        // ============================================================
+        // 2. localStorage
+        // ============================================================
+        const STORAGE_KEY_COMMANDS = 'cintribot_commands';
+        const STORAGE_KEY_SONGS = 'cintribot_songs';
+        const STORAGE_KEY_SUFFERING = 'cintribot_suffering';
+        const STORAGE_KEY_TOKEN = 'cintribot_github_token';
+
+        function loadData() {
+            let commands, songs, suffering;
+            try {
+                const savedCommands = localStorage.getItem(STORAGE_KEY_COMMANDS);
+                commands = savedCommands ? JSON.parse(savedCommands) : null;
+            } catch { commands = null; }
+            try {
+                const savedSongs = localStorage.getItem(STORAGE_KEY_SONGS);
+                songs = savedSongs ? JSON.parse(savedSongs) : null;
+            } catch { songs = null; }
+            try {
+                const savedSuffering = localStorage.getItem(STORAGE_KEY_SUFFERING);
+                suffering = savedSuffering ? JSON.parse(savedSuffering) : null;
+            } catch { suffering = null; }
+
+            if (!commands || Object.keys(commands).length === 0) {
+                commands = JSON.parse(JSON.stringify(DEFAULT_COMMANDS_BY_CATEGORY));
+            }
+            if (!songs || songs.length === 0) {
+                songs = JSON.parse(JSON.stringify(DEFAULT_SONGS));
+            }
+            if (!suffering || suffering.length === 0) {
+                suffering = JSON.parse(JSON.stringify(DEFAULT_SUFFERING_ITEMS));
+            }
+            return { commands, songs, suffering };
+        }
+
+        function saveData(commands, songs, suffering) {
+            try {
+                localStorage.setItem(STORAGE_KEY_COMMANDS, JSON.stringify(commands));
+                localStorage.setItem(STORAGE_KEY_SONGS, JSON.stringify(songs));
+                localStorage.setItem(STORAGE_KEY_SUFFERING, JSON.stringify(suffering));
+                showSaveIndicator();
+            } catch (e) {
+                console.warn('Не удалось сохранить данные в localStorage:', e);
+            }
+        }
+
+        function resetToDefaults() {
+            const commands = JSON.parse(JSON.stringify(DEFAULT_COMMANDS_BY_CATEGORY));
+            const songs = JSON.parse(JSON.stringify(DEFAULT_SONGS));
+            const suffering = JSON.parse(JSON.stringify(DEFAULT_SUFFERING_ITEMS));
+            saveData(commands, songs, suffering);
+            return { commands, songs, suffering };
+        }
+
+        let saveIndicatorTimer = null;
+        function showSaveIndicator() {
+            const el = document.getElementById('save-indicator');
+            if (!el) return;
+            el.classList.add('show');
+            clearTimeout(saveIndicatorTimer);
+            saveIndicatorTimer = setTimeout(() => {
+                el.classList.remove('show');
+            }, 1500);
+        }
+
+        // ============================================================
+        // 3. ЗАГРУЗКА ДАННЫХ
+        // ============================================================
+        const loaded = loadData();
+        let commandsByCategory = loaded.commands;
+        let songs = loaded.songs;
+        let sufferingItems = loaded.suffering;
+
+        // ============================================================
+        // 4. DOM
+        // ============================================================
         const splashScreen = document.getElementById('splash-screen');
         const welcomeScreen = document.getElementById('welcome-screen');
         const welcomeCloseBtn = document.getElementById('welcome-close-btn');
@@ -4212,11 +4166,17 @@
         const balanceBtn = document.getElementById('balance-value');
         const petalsContainer = document.getElementById('petals');
 
-        // Editor elements
+        // Editor
         const editorOpenBtn = document.getElementById('editor-open-btn');
         const editorOverlay = document.getElementById('editor-overlay');
         const editorCloseBtn = document.getElementById('editor-close-btn');
         const editorCompileBtn = document.getElementById('editor-compile-btn');
+        const editorResetBtn = document.getElementById('editor-reset-btn');
+
+        // GitHub
+        const githubTokenInput = document.getElementById('github-token');
+        const githubPushBtn = document.getElementById('github-push-btn');
+        const githubStatus = document.getElementById('github-status');
 
         const editorTabButtons = document.querySelectorAll('[data-editor-tab]');
         const editorTabCommands = document.getElementById('editor-tab-commands');
@@ -4233,14 +4193,12 @@
         const editorCmdCancelBtn = document.getElementById('cmd-cancel-btn');
         const editorCmdList = document.getElementById('cmd-list');
 
-        // Songs editor
         const editorSongArtist = document.getElementById('song-artist');
         const editorSongName = document.getElementById('song-name');
         const editorSongAddBtn = document.getElementById('song-add-btn');
         const editorSongCancelBtn = document.getElementById('song-cancel-btn');
         const editorSongList = document.getElementById('song-list');
 
-        // Suffering editor
         const editorSuffCommand = document.getElementById('suff-command');
         const editorSuffTitle = document.getElementById('suff-title');
         const editorSuffDescription = document.getElementById('suff-description');
@@ -4255,521 +4213,13 @@
         let allCommands = [];
         let currentTab = 'commands';
 
-        // --- EDITING STATE ---
-        let editingCommand = null; // { category: string, index: number }
-        let editingSong = null; // { index: number }
-        let editingSuffering = null; // { index: number }
+        let editingCommand = null;
+        let editingSong = null;
+        let editingSuffering = null;
 
-        const editorIsAvailable = !!(editorOpenBtn && editorOverlay && editorCloseBtn && editorCompileBtn);
-        if (editorIsAvailable) {
-            const openEditor = () => {
-                if (typeof hideWelcomeScreen === 'function') hideWelcomeScreen();
-                document.body.classList.add('editor-open');
-                editorOverlay.classList.add('show');
-                refreshAllEditorLists();
-                resetCommandForm();
-                resetSongForm();
-                resetSufferingForm();
-                setTimeout(() => {
-                    if (editorCmdName && typeof editorCmdName.focus === 'function') editorCmdName.focus();
-                }, 0);
-            };
-
-            const closeEditor = () => {
-                editorOverlay.classList.remove('show');
-                document.body.classList.remove('editor-open');
-                if (editorOpenBtn && typeof editorOpenBtn.focus === 'function') editorOpenBtn.focus();
-            };
-
-            editorOpenBtn.addEventListener('click', openEditor);
-            editorCloseBtn.addEventListener('click', closeEditor);
-            editorOverlay.addEventListener('click', (e) => {
-                if (e.target === editorOverlay) closeEditor();
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && editorOverlay.classList.contains('show')) {
-                    e.preventDefault();
-                    closeEditor();
-                }
-            });
-
-            editorTabButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    editorTabButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const tab = btn.getAttribute('data-editor-tab');
-                    editorTabCommands.classList.remove('active');
-                    editorTabSongs.classList.remove('active');
-                    editorTabSuffering.classList.remove('active');
-                    if (tab === 'commands') editorTabCommands.classList.add('active');
-                    if (tab === 'songs') editorTabSongs.classList.add('active');
-                    if (tab === 'suffering') editorTabSuffering.classList.add('active');
-                });
-            });
-
-            // ========== COMMANDS EDITOR ==========
-            function refreshEditorCategoryDatalist() {
-                editorCmdCategories.innerHTML = '';
-                Object.keys(commandsByCategory).sort((a, b) => a.localeCompare(b)).forEach(category => {
-                    const opt = document.createElement('option');
-                    opt.value = category;
-                    editorCmdCategories.appendChild(opt);
-                });
-            }
-
-            function editCommand(category, index) {
-                const cmd = commandsByCategory[category][index];
-                if (!cmd) return;
-                editorCmdCategory.value = category;
-                editorCmdName.value = cmd.name;
-                editorCmdDescription.value = cmd.description || '';
-                editorCmdCost.value = cmd.cost;
-                editingCommand = { category, index };
-                editorCmdAddBtn.textContent = 'Сохранить изменения';
-                editorCmdCancelBtn.style.display = 'inline-block';
-                document.querySelector('[data-editor-tab="commands"]').click();
-                editorCmdName.focus();
-            }
-
-            function resetCommandForm() {
-                editorCmdCategory.value = '';
-                editorCmdName.value = '';
-                editorCmdDescription.value = '';
-                editorCmdCost.value = '300';
-                editingCommand = null;
-                editorCmdAddBtn.textContent = 'Добавить команду';
-                editorCmdCancelBtn.style.display = 'none';
-            }
-
-            function deleteCommand(category, index) {
-                if (!commandsByCategory[category]) return;
-                commandsByCategory[category].splice(index, 1);
-                if (commandsByCategory[category].length === 0) delete commandsByCategory[category];
-                if (editingCommand && editingCommand.category === category && editingCommand.index === index) {
-                    resetCommandForm();
-                }
-                prepareAllCommands();
-                searchQuery = "";
-                activeCategoryFilter = "Все";
-                initCategories();
-                renderCommands();
-                refreshAllEditorLists();
-            }
-
-            function renderEditorCommandsList() {
-                editorCmdList.innerHTML = '';
-                const categories = Object.keys(commandsByCategory).sort((a, b) => a.localeCompare(b));
-                if (categories.length === 0) {
-                    const empty = document.createElement('div');
-                    empty.className = 'editor-row';
-                    empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет команд</div></div>';
-                    editorCmdList.appendChild(empty);
-                    return;
-                }
-                categories.forEach(category => {
-                    commandsByCategory[category].forEach((cmd, idx) => {
-                        const row = document.createElement('div');
-                        row.className = 'editor-row';
-                        const left = document.createElement('div');
-                        left.className = 'editor-row-main';
-                        const title = document.createElement('div');
-                        title.className = 'editor-row-title';
-                        title.textContent = `${cmd.name} (${category})`;
-                        const sub = document.createElement('div');
-                        sub.className = 'editor-row-sub';
-                        sub.textContent = `Описание: ${cmd.description || '-'}\nСтоимость: ${cmd.cost}`;
-                        left.appendChild(title);
-                        left.appendChild(sub);
-                        const actions = document.createElement('div');
-                        actions.className = 'editor-actions';
-                        actions.style.justifyContent = 'flex-end';
-                        const editBtn = document.createElement('button');
-                        editBtn.className = 'editor-btn secondary';
-                        editBtn.type = 'button';
-                        editBtn.textContent = 'Изменить';
-                        editBtn.style.marginRight = '8px';
-                        editBtn.addEventListener('click', () => editCommand(category, idx));
-                        const delBtn = document.createElement('button');
-                        delBtn.className = 'editor-btn danger';
-                        delBtn.type = 'button';
-                        delBtn.textContent = 'Удалить';
-                        delBtn.addEventListener('click', () => deleteCommand(category, idx));
-                        actions.appendChild(editBtn);
-                        actions.appendChild(delBtn);
-                        row.appendChild(left);
-                        row.appendChild(actions);
-                        editorCmdList.appendChild(row);
-                    });
-                });
-            }
-
-            function addOrUpdateCommand() {
-                const category = (editorCmdCategory.value || '').trim();
-                const name = (editorCmdName.value || '').trim();
-                const description = (editorCmdDescription.value || '').trim();
-                const cost = Number(editorCmdCost.value);
-                if (!category) return alert('Укажи категорию');
-                if (!name) return alert('Укажи команду');
-                if (!Number.isFinite(cost) || cost < 0) return alert('Стоимость должна быть числом >= 0');
-
-                if (editingCommand) {
-                    const oldCategory = editingCommand.category;
-                    const oldIndex = editingCommand.index;
-                    if (oldCategory !== category) {
-                        commandsByCategory[oldCategory].splice(oldIndex, 1);
-                        if (commandsByCategory[oldCategory].length === 0) delete commandsByCategory[oldCategory];
-                        if (!commandsByCategory[category]) commandsByCategory[category] = [];
-                        commandsByCategory[category].push({ name, description, cost });
-                    } else {
-                        commandsByCategory[category][oldIndex] = { name, description, cost };
-                    }
-                    resetCommandForm();
-                } else {
-                    if (!commandsByCategory[category]) commandsByCategory[category] = [];
-                    commandsByCategory[category].push({ name, description, cost });
-                }
-                prepareAllCommands();
-                searchQuery = "";
-                activeCategoryFilter = "Все";
-                initCategories();
-                renderCommands();
-                refreshAllEditorLists();
-                editorCmdName.value = '';
-                editorCmdDescription.value = '';
-            }
-
-            // ========== SONGS EDITOR ==========
-            function editSong(index) {
-                const song = songs[index];
-                if (!song) return;
-                editorSongArtist.value = song.artist;
-                editorSongName.value = song.name;
-                editingSong = { index };
-                editorSongAddBtn.textContent = 'Сохранить изменения';
-                editorSongCancelBtn.style.display = 'inline-block';
-                document.querySelector('[data-editor-tab="songs"]').click();
-                editorSongArtist.focus();
-            }
-
-            function resetSongForm() {
-                editorSongArtist.value = '';
-                editorSongName.value = '';
-                editingSong = null;
-                editorSongAddBtn.textContent = 'Добавить песню';
-                editorSongCancelBtn.style.display = 'none';
-            }
-
-            function deleteSong(index) {
-                songs.splice(index, 1);
-                if (editingSong && editingSong.index === index) resetSongForm();
-                prepareSongs();
-                renderSongs();
-                refreshAllEditorLists();
-            }
-
-            function renderEditorSongsList() {
-                editorSongList.innerHTML = '';
-                if (!songs.length) {
-                    const empty = document.createElement('div');
-                    empty.className = 'editor-row';
-                    empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет песен</div></div>';
-                    editorSongList.appendChild(empty);
-                    return;
-                }
-                songs.forEach((song, idx) => {
-                    const row = document.createElement('div');
-                    row.className = 'editor-row';
-                    const left = document.createElement('div');
-                    left.className = 'editor-row-main';
-                    const title = document.createElement('div');
-                    title.className = 'editor-row-title';
-                    title.textContent = `${song.artist} — ${song.name}`;
-                    const sub = document.createElement('div');
-                    sub.className = 'editor-row-sub';
-                    sub.textContent = 'Команда: !песня ' + song.artist + ' - ' + song.name;
-                    left.appendChild(title);
-                    left.appendChild(sub);
-                    const actions = document.createElement('div');
-                    actions.className = 'editor-actions';
-                    actions.style.justifyContent = 'flex-end';
-                    const editBtn = document.createElement('button');
-                    editBtn.className = 'editor-btn secondary';
-                    editBtn.type = 'button';
-                    editBtn.textContent = 'Изменить';
-                    editBtn.style.marginRight = '8px';
-                    editBtn.addEventListener('click', () => editSong(idx));
-                    const delBtn = document.createElement('button');
-                    delBtn.className = 'editor-btn danger';
-                    delBtn.type = 'button';
-                    delBtn.textContent = 'Удалить';
-                    delBtn.addEventListener('click', () => deleteSong(idx));
-                    actions.appendChild(editBtn);
-                    actions.appendChild(delBtn);
-                    row.appendChild(left);
-                    row.appendChild(actions);
-                    editorSongList.appendChild(row);
-                });
-            }
-
-            function addOrUpdateSong() {
-                const artist = (editorSongArtist.value || '').trim();
-                const name = (editorSongName.value || '').trim();
-                if (!artist) return alert('Укажи исполнителя');
-                if (!name) return alert('Укажи название песни');
-
-                if (editingSong) {
-                    songs[editingSong.index] = { artist, name };
-                    resetSongForm();
-                } else {
-                    songs.push({ artist, name });
-                }
-                prepareSongs();
-                renderSongs();
-                refreshAllEditorLists();
-                editorSongArtist.value = '';
-                editorSongName.value = '';
-            }
-
-            // ========== SUFFERING EDITOR ==========
-            function editSuffering(index) {
-                const item = sufferingItems[index];
-                if (!item) return;
-                editorSuffCommand.value = item.command;
-                editorSuffTitle.value = item.title;
-                editorSuffDescription.value = item.description || '';
-                editorSuffIcon.value = item.icon;
-                editorSuffCost.value = item.cost;
-                editingSuffering = { index };
-                editorSuffAddBtn.textContent = 'Сохранить изменения';
-                editorSuffCancelBtn.style.display = 'inline-block';
-                document.querySelector('[data-editor-tab="suffering"]').click();
-                editorSuffCommand.focus();
-            }
-
-            function resetSufferingForm() {
-                editorSuffCommand.value = '';
-                editorSuffTitle.value = '';
-                editorSuffDescription.value = '';
-                editorSuffIcon.value = '';
-                editorSuffCost.value = '';
-                editingSuffering = null;
-                editorSuffAddBtn.textContent = 'Добавить челлендж';
-                editorSuffCancelBtn.style.display = 'none';
-            }
-
-            function deleteSufferingItem(index) {
-                sufferingItems.splice(index, 1);
-                if (editingSuffering && editingSuffering.index === index) resetSufferingForm();
-                renderSuffering();
-                refreshAllEditorLists();
-            }
-
-            function renderEditorSufferingList() {
-                editorSuffList.innerHTML = '';
-                if (!sufferingItems.length) {
-                    const empty = document.createElement('div');
-                    empty.className = 'editor-row';
-                    empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет челленджей</div></div>';
-                    editorSuffList.appendChild(empty);
-                    return;
-                }
-                sufferingItems.forEach((item, idx) => {
-                    const row = document.createElement('div');
-                    row.className = 'editor-row';
-                    const left = document.createElement('div');
-                    left.className = 'editor-row-main';
-                    const title = document.createElement('div');
-                    title.className = 'editor-row-title';
-                    title.textContent = `${item.title || item.command} (${item.cost})`;
-                    const sub = document.createElement('div');
-                    sub.className = 'editor-row-sub';
-                    sub.textContent = `Команда: ${item.command}\nОписание: ${item.description || '-'}`;
-                    left.appendChild(title);
-                    left.appendChild(sub);
-                    const actions = document.createElement('div');
-                    actions.className = 'editor-actions';
-                    actions.style.justifyContent = 'flex-end';
-                    const editBtn = document.createElement('button');
-                    editBtn.className = 'editor-btn secondary';
-                    editBtn.type = 'button';
-                    editBtn.textContent = 'Изменить';
-                    editBtn.style.marginRight = '8px';
-                    editBtn.addEventListener('click', () => editSuffering(idx));
-                    const delBtn = document.createElement('button');
-                    delBtn.className = 'editor-btn danger';
-                    delBtn.type = 'button';
-                    delBtn.textContent = 'Удалить';
-                    delBtn.addEventListener('click', () => deleteSufferingItem(idx));
-                    actions.appendChild(editBtn);
-                    actions.appendChild(delBtn);
-                    row.appendChild(left);
-                    row.appendChild(actions);
-                    editorSuffList.appendChild(row);
-                });
-            }
-
-            function addOrUpdateSuffering() {
-                const command = (editorSuffCommand.value || '').trim();
-                const title = (editorSuffTitle.value || '').trim();
-                const description = (editorSuffDescription.value || '').trim();
-                const icon = (editorSuffIcon.value || '').trim();
-                const cost = (editorSuffCost.value || '').trim();
-                if (!command) return alert('Укажи команду челленджа');
-                if (!title) return alert('Укажи название');
-                if (!cost) return alert('Укажи стоимость');
-                if (!icon) return alert('Укажи icon (fa-...)');
-
-                const newItem = { command, title, description, cost, icon };
-                if (editingSuffering) {
-                    sufferingItems[editingSuffering.index] = newItem;
-                    resetSufferingForm();
-                } else {
-                    sufferingItems.push(newItem);
-                }
-                renderSuffering();
-                refreshAllEditorLists();
-                editorSuffCommand.value = '';
-                editorSuffTitle.value = '';
-                editorSuffDescription.value = '';
-                editorSuffIcon.value = '';
-                editorSuffCost.value = '';
-            }
-
-            // ========== COMPILE ==========
-            function replaceBetweenMarkers(src, startMarker, endMarker, newMiddle) {
-                const start = src.indexOf(startMarker);
-                const end = src.indexOf(endMarker);
-                if (start === -1 || end === -1 || end <= start) throw new Error('Markers not found');
-                return src.slice(0, start + startMarker.length) + '\n' + newMiddle + '\n' + src.slice(end);
-            }
-
-            function compileAndDownloadIndexHtml() {
-                const scriptEl = document.querySelector('script[data-main-script="true"]');
-                if (!scriptEl) return alert('Не найден script для компиляции');
-                let src = scriptEl.textContent;
-                const commandsStr = JSON.stringify(commandsByCategory, null, 8);
-                const songsStr = JSON.stringify(songs, null, 8);
-                const sufferingStr = JSON.stringify(sufferingItems, null, 8);
-                src = replaceBetweenMarkers(src, '/*DATA_COMMANDS_BY_CATEGORY_START*/', '/*DATA_COMMANDS_BY_CATEGORY_END*/', `        let commandsByCategory = ${commandsStr};`);
-                src = replaceBetweenMarkers(src, '/*DATA_SONGS_START*/', '/*DATA_SONGS_END*/', `        let songs = ${songsStr};`);
-                src = replaceBetweenMarkers(src, '/*DATA_SUFFERING_ITEMS_START*/', '/*DATA_SUFFERING_ITEMS_END*/', `        let sufferingItems = ${sufferingStr};`);
-                scriptEl.textContent = src;
-                const clone = document.documentElement.cloneNode(true);
-                const cloneOverlay = clone.querySelector('#editor-overlay');
-                const cloneBtn = clone.querySelector('#editor-open-btn');
-                if (cloneOverlay) cloneOverlay.remove();
-                if (cloneBtn) cloneBtn.remove();
-                const cloneBody = clone.querySelector('body');
-                if (cloneBody) cloneBody.classList.remove('editor-open');
-                const doctype = document.doctype ? '<!DOCTYPE ' + document.doctype.name + (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') + (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') + '>' : '<!DOCTYPE html>';
-                const html = doctype + '\n' + clone.outerHTML;
-                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'index.html';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                URL.revokeObjectURL(url);
-            }
-
-            function refreshAllEditorLists() {
-                refreshEditorCategoryDatalist();
-                renderEditorCommandsList();
-                renderEditorSongsList();
-                renderEditorSufferingList();
-            }
-
-            // Event listeners
-            editorCmdAddBtn.addEventListener('click', addOrUpdateCommand);
-            editorCmdCancelBtn.addEventListener('click', resetCommandForm);
-            editorSongAddBtn.addEventListener('click', addOrUpdateSong);
-            editorSongCancelBtn.addEventListener('click', resetSongForm);
-            editorSuffAddBtn.addEventListener('click', addOrUpdateSuffering);
-            editorSuffCancelBtn.addEventListener('click', resetSufferingForm);
-            editorCompileBtn.addEventListener('click', () => {
-                editorCompileBtn.disabled = true;
-                editorCompileBtn.textContent = 'Компилирую...';
-                setTimeout(() => {
-                    try { compileAndDownloadIndexHtml(); }
-                    finally {
-                        editorCompileBtn.disabled = false;
-                        editorCompileBtn.textContent = 'Скомпилировать index.html';
-                    }
-                }, 50);
-            });
-
-            refreshAllEditorLists();
-        }
-
-        // Initialize theme from localStorage or system preference
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'light' || savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', savedTheme);
-            } else if (systemPrefersDark) {
-                document.body.setAttribute('data-theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-            }
-        }
-
-        function toggleTheme() {
-            const currentTheme = document.body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            if (themeToggle) {
-                themeToggle.style.transform = 'scale(0.95)';
-                setTimeout(() => { themeToggle.style.transform = ''; }, 150);
-            }
-        }
-
-        function getThemeFxColors(theme) {
-            return { fx1: 'rgba(110, 84, 152, 0.0)', fx2: 'rgba(0,0,0,0.0)', fx3: 'rgba(0,0,0,0.0)' };
-        }
-
-        let welcomeAutoHideTimer = null;
-        function showWelcomeScreen() {
-            if (!welcomeScreen) return;
-            welcomeScreen.classList.add('show');
-            clearTimeout(welcomeAutoHideTimer);
-            welcomeAutoHideTimer = setTimeout(() => hideWelcomeScreen(), 9000);
-        }
-        function hideWelcomeScreen() {
-            if (!welcomeScreen) return;
-            welcomeScreen.classList.remove('show');
-        }
-        if (welcomeScreen) {
-            welcomeScreen.addEventListener('click', (e) => {
-                if (e.target && e.target.classList && e.target.classList.contains('welcome-backdrop')) hideWelcomeScreen();
-            });
-        }
-
-        function hideSplashScreen() {
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-                setTimeout(showWelcomeScreen, 180);
-            }, 2000);
-        }
-
-        function createPetals() {
-            const petalCount = 15;
-            for (let i = 0; i < petalCount; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                petal.style.animationDelay = (Math.random() * 5) + 's';
-                petal.style.width = (Math.random() * 8 + 8) + 'px';
-                petal.style.height = (Math.random() * 8 + 8) + 'px';
-                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-                petalsContainer.appendChild(petal);
-            }
-        }
-
+        // ============================================================
+        // 5. ОСНОВНЫЕ ФУНКЦИИ
+        // ============================================================
         function prepareAllCommands() {
             allCommands = [];
             Object.entries(commandsByCategory).forEach(([category, commands]) => {
@@ -4782,52 +4232,14 @@
             songs.sort((a, b) => a.artist.localeCompare(b.artist));
         }
 
-        function initialize() {
-            initTheme();
-            createPetals();
-            prepareAllCommands();
-            prepareSongs();
-            initCategories();
-            renderCommands();
-            renderSongs();
-            renderSuffering();
-            setTimeout(updateTabIndicator, 100);
-            hideSplashScreen();
-        }
-
-        function updateTabIndicator() {
-            const activeTab = document.querySelector('.tab-btn.active');
-            if (!activeTab || !tabIndicator || !tabsNav) return;
-            try {
-                const navRect = tabsNav.getBoundingClientRect();
-                const tabRect = activeTab.getBoundingClientRect();
-                const indicatorInsetX = parseFloat(getComputedStyle(tabIndicator).left) || 0;
-                const position = tabRect.left - navRect.left - indicatorInsetX;
-                const width = tabRect.width;
-                tabIndicator.style.transform = `translateX(${position}px)`;
-                tabIndicator.style.width = `${width}px`;
-            } catch (error) {
-                console.error('Error updating tab indicator:', error);
-            }
-        }
-
-        function handleTabSwitch(e) {
-            const tabId = e.currentTarget.getAttribute('data-tab');
-            if (currentTab === tabId) return;
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-            e.currentTarget.classList.add('active');
-            tabContents.forEach(content => content.classList.remove('active'));
-            document.getElementById(`${tabId}-tab`).classList.add('active');
-            currentTab = tabId;
-            setTimeout(() => { updateTabIndicator(); setTimeout(updateTabIndicator, 50); }, 20);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+        // ============================================================
+        // 6. РЕНДЕРИНГ
+        // ============================================================
         function initCategories() {
             categoriesTabs.innerHTML = '';
             const allTab = createCategoryTag("Все", "active");
             categoriesTabs.appendChild(allTab);
-            Object.entries(commandsByCategory).forEach(([category]) => {
+            Object.keys(commandsByCategory).sort().forEach(category => {
                 const tab = createCategoryTag(category, "");
                 categoriesTabs.appendChild(tab);
             });
@@ -4836,7 +4248,20 @@
         function createCategoryTag(name, extraClass = "") {
             const tag = document.createElement('div');
             tag.className = `category-tag ${extraClass}`;
-            tag.textContent = name;
+            const iconMap = {
+                "Все": "🔮",
+                "💜 Приветствие": "👋",
+                "👑 Мои": "👑",
+                "💪 Боевой настрой": "⚔️",
+                "🙈 Фиаско": "😱",
+                "💯 НетленОчки": "💎",
+                "💕 Приятности": "💕",
+                "💰 Донатики": "💰",
+                "🍳 Перерывчик": "🍳",
+                "💋 Завершение": "💋"
+            };
+            const icon = iconMap[name] || "▪️";
+            tag.innerHTML = `<span class="tag-icon">${icon}</span><span>${name}</span>`;
             tag.setAttribute('data-category', name);
             tag.addEventListener('click', handleCategoryClick);
             return tag;
@@ -4872,9 +4297,8 @@
                 commandsToDisplay = allCommands;
                 noResults.style.display = 'none';
             } else {
-                commandsToDisplay = commandsByCategory[activeCategoryFilter];
-                if (commandsToDisplay) commandsToDisplay = [...commandsToDisplay].sort((a, b) => a.name.localeCompare(b.name));
-                else commandsToDisplay = [];
+                commandsToDisplay = commandsByCategory[activeCategoryFilter] || [];
+                commandsToDisplay = [...commandsToDisplay].sort((a, b) => a.name.localeCompare(b.name));
                 noResults.style.display = 'none';
             }
             commandsToDisplay.forEach((command, idx) => {
@@ -4969,6 +4393,7 @@
         }
 
         function handleCommandClick(e) { handleCopyAction(e, 'commands'); }
+
         function handleCopyAction(e, forcedType = null) {
             const card = e.currentTarget;
             const command = card.getAttribute('data-command');
@@ -5028,23 +4453,636 @@
             setTimeout(() => { balanceBtn.style.transform = ''; }, 150);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initialize();
-            themeToggle.addEventListener('click', toggleTheme);
-            tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
-            balanceBtn.addEventListener('click', handleBalanceClick);
-            if (welcomeCloseBtn) welcomeCloseBtn.addEventListener('click', hideWelcomeScreen);
-            if (welcomeCloseSecondaryBtn) welcomeCloseSecondaryBtn.addEventListener('click', hideWelcomeScreen);
-            if (welcomeGoBtn) welcomeGoBtn.addEventListener('click', () => { hideWelcomeScreen(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-            initHoverTickSound();
-            window.addEventListener('resize', updateTabIndicator);
-            let searchTimeout;
-            searchBox.addEventListener('input', () => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(handleSearch, 300);
+        function updateTabIndicator() {
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (!activeTab || !tabIndicator || !tabsNav) return;
+            try {
+                const navRect = tabsNav.getBoundingClientRect();
+                const tabRect = activeTab.getBoundingClientRect();
+                const indicatorInsetX = parseFloat(getComputedStyle(tabIndicator).left) || 0;
+                const position = tabRect.left - navRect.left - indicatorInsetX;
+                const width = tabRect.width;
+                tabIndicator.style.transform = `translateX(${position}px)`;
+                tabIndicator.style.width = `${width}px`;
+            } catch (error) {
+                console.error('Error updating tab indicator:', error);
+            }
+        }
+
+        function handleTabSwitch(e) {
+            const tabId = e.currentTarget.getAttribute('data-tab');
+            if (currentTab === tabId) return;
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            currentTab = tabId;
+            setTimeout(() => { updateTabIndicator(); setTimeout(updateTabIndicator, 50); }, 20);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 7. РЕДАКТОР
+        // ============================================================
+        function refreshEditorCategoryDatalist() {
+            editorCmdCategories.innerHTML = '';
+            Object.keys(commandsByCategory).sort().forEach(category => {
+                const opt = document.createElement('option');
+                opt.value = category;
+                editorCmdCategories.appendChild(opt);
             });
-            setTimeout(updateTabIndicator, 300);
+        }
+
+        function renderEditorCommandsList() {
+            editorCmdList.innerHTML = '';
+            const categories = Object.keys(commandsByCategory).sort();
+            if (categories.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'editor-row';
+                empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет команд</div></div>';
+                editorCmdList.appendChild(empty);
+                return;
+            }
+            categories.forEach(category => {
+                commandsByCategory[category].forEach((cmd, idx) => {
+                    const row = document.createElement('div');
+                    row.className = 'editor-row';
+                    const left = document.createElement('div');
+                    left.className = 'editor-row-main';
+                    const title = document.createElement('div');
+                    title.className = 'editor-row-title';
+                    title.textContent = `${cmd.name} (${category})`;
+                    const sub = document.createElement('div');
+                    sub.className = 'editor-row-sub';
+                    sub.textContent = `Описание: ${cmd.description || '-'}\nСтоимость: ${cmd.cost}`;
+                    left.appendChild(title);
+                    left.appendChild(sub);
+                    const actions = document.createElement('div');
+                    actions.className = 'editor-actions';
+                    actions.style.justifyContent = 'flex-end';
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'editor-btn secondary';
+                    editBtn.type = 'button';
+                    editBtn.textContent = 'Изменить';
+                    editBtn.style.marginRight = '8px';
+                    editBtn.addEventListener('click', () => editCommand(category, idx));
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'editor-btn danger';
+                    delBtn.type = 'button';
+                    delBtn.textContent = 'Удалить';
+                    delBtn.addEventListener('click', () => deleteCommand(category, idx));
+                    actions.appendChild(editBtn);
+                    actions.appendChild(delBtn);
+                    row.appendChild(left);
+                    row.appendChild(actions);
+                    editorCmdList.appendChild(row);
+                });
+            });
+        }
+
+        function renderEditorSongsList() {
+            editorSongList.innerHTML = '';
+            if (!songs.length) {
+                const empty = document.createElement('div');
+                empty.className = 'editor-row';
+                empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет песен</div></div>';
+                editorSongList.appendChild(empty);
+                return;
+            }
+            songs.forEach((song, idx) => {
+                const row = document.createElement('div');
+                row.className = 'editor-row';
+                const left = document.createElement('div');
+                left.className = 'editor-row-main';
+                const title = document.createElement('div');
+                title.className = 'editor-row-title';
+                title.textContent = `${song.artist} — ${song.name}`;
+                const sub = document.createElement('div');
+                sub.className = 'editor-row-sub';
+                sub.textContent = 'Команда: !песня ' + song.artist + ' - ' + song.name;
+                left.appendChild(title);
+                left.appendChild(sub);
+                const actions = document.createElement('div');
+                actions.className = 'editor-actions';
+                actions.style.justifyContent = 'flex-end';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'editor-btn secondary';
+                editBtn.type = 'button';
+                editBtn.textContent = 'Изменить';
+                editBtn.style.marginRight = '8px';
+                editBtn.addEventListener('click', () => editSong(idx));
+                const delBtn = document.createElement('button');
+                delBtn.className = 'editor-btn danger';
+                delBtn.type = 'button';
+                delBtn.textContent = 'Удалить';
+                delBtn.addEventListener('click', () => deleteSong(idx));
+                actions.appendChild(editBtn);
+                actions.appendChild(delBtn);
+                row.appendChild(left);
+                row.appendChild(actions);
+                editorSongList.appendChild(row);
+            });
+        }
+
+        function renderEditorSufferingList() {
+            editorSuffList.innerHTML = '';
+            if (!sufferingItems.length) {
+                const empty = document.createElement('div');
+                empty.className = 'editor-row';
+                empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет челленджей</div></div>';
+                editorSuffList.appendChild(empty);
+                return;
+            }
+            sufferingItems.forEach((item, idx) => {
+                const row = document.createElement('div');
+                row.className = 'editor-row';
+                const left = document.createElement('div');
+                left.className = 'editor-row-main';
+                const title = document.createElement('div');
+                title.className = 'editor-row-title';
+                title.textContent = `${item.title || item.command} (${item.cost})`;
+                const sub = document.createElement('div');
+                sub.className = 'editor-row-sub';
+                sub.textContent = `Команда: ${item.command}\nОписание: ${item.description || '-'}`;
+                left.appendChild(title);
+                left.appendChild(sub);
+                const actions = document.createElement('div');
+                actions.className = 'editor-actions';
+                actions.style.justifyContent = 'flex-end';
+                const editBtn = document.createElement('button');
+                editBtn.className = 'editor-btn secondary';
+                editBtn.type = 'button';
+                editBtn.textContent = 'Изменить';
+                editBtn.style.marginRight = '8px';
+                editBtn.addEventListener('click', () => editSuffering(idx));
+                const delBtn = document.createElement('button');
+                delBtn.className = 'editor-btn danger';
+                delBtn.type = 'button';
+                delBtn.textContent = 'Удалить';
+                delBtn.addEventListener('click', () => deleteSufferingItem(idx));
+                actions.appendChild(editBtn);
+                actions.appendChild(delBtn);
+                row.appendChild(left);
+                row.appendChild(actions);
+                editorSuffList.appendChild(row);
+            });
+        }
+
+        function refreshAllEditorLists() {
+            refreshEditorCategoryDatalist();
+            renderEditorCommandsList();
+            renderEditorSongsList();
+            renderEditorSufferingList();
+        }
+
+        // --- COMMANDS CRUD ---
+        function editCommand(category, index) {
+            const cmd = commandsByCategory[category][index];
+            if (!cmd) return;
+            editorCmdCategory.value = category;
+            editorCmdName.value = cmd.name;
+            editorCmdDescription.value = cmd.description || '';
+            editorCmdCost.value = cmd.cost;
+            editingCommand = { category, index };
+            editorCmdAddBtn.textContent = 'Сохранить изменения';
+            editorCmdCancelBtn.style.display = 'inline-block';
+            document.querySelector('[data-editor-tab="commands"]').click();
+            editorCmdName.focus();
+        }
+
+        function resetCommandForm() {
+            editorCmdCategory.value = '';
+            editorCmdName.value = '';
+            editorCmdDescription.value = '';
+            editorCmdCost.value = '300';
+            editingCommand = null;
+            editorCmdAddBtn.textContent = 'Добавить команду';
+            editorCmdCancelBtn.style.display = 'none';
+        }
+
+        function deleteCommand(category, index) {
+            if (!commandsByCategory[category]) return;
+            commandsByCategory[category].splice(index, 1);
+            if (commandsByCategory[category].length === 0) delete commandsByCategory[category];
+            if (editingCommand && editingCommand.category === category && editingCommand.index === index) {
+                resetCommandForm();
+            }
+            saveData(commandsByCategory, songs, sufferingItems);
+            prepareAllCommands();
+            searchQuery = "";
+            activeCategoryFilter = "Все";
+            initCategories();
+            renderCommands();
+            refreshAllEditorLists();
+        }
+
+        function addOrUpdateCommand() {
+            const category = (editorCmdCategory.value || '').trim();
+            const name = (editorCmdName.value || '').trim();
+            const description = (editorCmdDescription.value || '').trim();
+            const cost = Number(editorCmdCost.value);
+            if (!category) return alert('Укажи категорию');
+            if (!name) return alert('Укажи команду');
+            if (!Number.isFinite(cost) || cost < 0) return alert('Стоимость должна быть числом >= 0');
+
+            if (editingCommand) {
+                const oldCategory = editingCommand.category;
+                const oldIndex = editingCommand.index;
+                if (oldCategory !== category) {
+                    commandsByCategory[oldCategory].splice(oldIndex, 1);
+                    if (commandsByCategory[oldCategory].length === 0) delete commandsByCategory[oldCategory];
+                    if (!commandsByCategory[category]) commandsByCategory[category] = [];
+                    commandsByCategory[category].push({ name, description, cost });
+                } else {
+                    commandsByCategory[category][oldIndex] = { name, description, cost };
+                }
+                resetCommandForm();
+            } else {
+                if (!commandsByCategory[category]) commandsByCategory[category] = [];
+                commandsByCategory[category].push({ name, description, cost });
+            }
+            saveData(commandsByCategory, songs, sufferingItems);
+            prepareAllCommands();
+            searchQuery = "";
+            activeCategoryFilter = "Все";
+            initCategories();
+            renderCommands();
+            refreshAllEditorLists();
+            editorCmdName.value = '';
+            editorCmdDescription.value = '';
+        }
+
+        // --- SONGS CRUD ---
+        function editSong(index) {
+            const song = songs[index];
+            if (!song) return;
+            editorSongArtist.value = song.artist;
+            editorSongName.value = song.name;
+            editingSong = { index };
+            editorSongAddBtn.textContent = 'Сохранить изменения';
+            editorSongCancelBtn.style.display = 'inline-block';
+            document.querySelector('[data-editor-tab="songs"]').click();
+            editorSongArtist.focus();
+        }
+
+        function resetSongForm() {
+            editorSongArtist.value = '';
+            editorSongName.value = '';
+            editingSong = null;
+            editorSongAddBtn.textContent = 'Добавить песню';
+            editorSongCancelBtn.style.display = 'none';
+        }
+
+        function deleteSong(index) {
+            songs.splice(index, 1);
+            if (editingSong && editingSong.index === index) resetSongForm();
+            saveData(commandsByCategory, songs, sufferingItems);
+            prepareSongs();
+            renderSongs();
+            refreshAllEditorLists();
+        }
+
+        function addOrUpdateSong() {
+            const artist = (editorSongArtist.value || '').trim();
+            const name = (editorSongName.value || '').trim();
+            if (!artist) return alert('Укажи исполнителя');
+            if (!name) return alert('Укажи название песни');
+
+            if (editingSong) {
+                songs[editingSong.index] = { artist, name };
+                resetSongForm();
+            } else {
+                songs.push({ artist, name });
+            }
+            saveData(commandsByCategory, songs, sufferingItems);
+            prepareSongs();
+            renderSongs();
+            refreshAllEditorLists();
+            editorSongArtist.value = '';
+            editorSongName.value = '';
+        }
+
+        // --- SUFFERING CRUD ---
+        function editSuffering(index) {
+            const item = sufferingItems[index];
+            if (!item) return;
+            editorSuffCommand.value = item.command;
+            editorSuffTitle.value = item.title;
+            editorSuffDescription.value = item.description || '';
+            editorSuffIcon.value = item.icon;
+            editorSuffCost.value = item.cost;
+            editingSuffering = { index };
+            editorSuffAddBtn.textContent = 'Сохранить изменения';
+            editorSuffCancelBtn.style.display = 'inline-block';
+            document.querySelector('[data-editor-tab="suffering"]').click();
+            editorSuffCommand.focus();
+        }
+
+        function resetSufferingForm() {
+            editorSuffCommand.value = '';
+            editorSuffTitle.value = '';
+            editorSuffDescription.value = '';
+            editorSuffIcon.value = '';
+            editorSuffCost.value = '';
+            editingSuffering = null;
+            editorSuffAddBtn.textContent = 'Добавить челлендж';
+            editorSuffCancelBtn.style.display = 'none';
+        }
+
+        function deleteSufferingItem(index) {
+            sufferingItems.splice(index, 1);
+            if (editingSuffering && editingSuffering.index === index) resetSufferingForm();
+            saveData(commandsByCategory, songs, sufferingItems);
+            renderSuffering();
+            refreshAllEditorLists();
+        }
+
+        function addOrUpdateSuffering() {
+            const command = (editorSuffCommand.value || '').trim();
+            const title = (editorSuffTitle.value || '').trim();
+            const description = (editorSuffDescription.value || '').trim();
+            const icon = (editorSuffIcon.value || '').trim();
+            const cost = (editorSuffCost.value || '').trim();
+            if (!command) return alert('Укажи команду челленджа');
+            if (!title) return alert('Укажи название');
+            if (!cost) return alert('Укажи стоимость');
+            if (!icon) return alert('Укажи icon (fa-...)');
+
+            const newItem = { command, title, description, cost, icon };
+            if (editingSuffering) {
+                sufferingItems[editingSuffering.index] = newItem;
+                resetSufferingForm();
+            } else {
+                sufferingItems.push(newItem);
+            }
+            saveData(commandsByCategory, songs, sufferingItems);
+            renderSuffering();
+            refreshAllEditorLists();
+            editorSuffCommand.value = '';
+            editorSuffTitle.value = '';
+            editorSuffDescription.value = '';
+            editorSuffIcon.value = '';
+            editorSuffCost.value = '';
+        }
+
+        // --- RESET ---
+        function handleReset() {
+            if (!confirm('Сбросить все данные к исходным? Все ваши изменения будут потеряны.')) return;
+            const data = resetToDefaults();
+            commandsByCategory = data.commands;
+            songs = data.songs;
+            sufferingItems = data.suffering;
+            prepareAllCommands();
+            prepareSongs();
+            initCategories();
+            renderCommands();
+            renderSongs();
+            renderSuffering();
+            refreshAllEditorLists();
+            resetCommandForm();
+            resetSongForm();
+            resetSufferingForm();
+            showNotification('Данные сброшены к исходным!', 'commands');
+        }
+
+        // --- COMPILE ---
+        function replaceBetweenMarkers(src, startMarker, endMarker, newMiddle) {
+            const start = src.indexOf(startMarker);
+            const end = src.indexOf(endMarker);
+            if (start === -1 || end === -1 || end <= start) throw new Error('Markers not found');
+            return src.slice(0, start + startMarker.length) + '\n' + newMiddle + '\n' + src.slice(end);
+        }
+
+        function compileAndDownloadIndexHtml() {
+            const scriptEl = document.querySelector('script[data-main-script="true"]');
+            if (!scriptEl) return alert('Не найден script для компиляции');
+            let src = scriptEl.textContent;
+            const commandsStr = JSON.stringify(commandsByCategory, null, 8);
+            const songsStr = JSON.stringify(songs, null, 8);
+            const sufferingStr = JSON.stringify(sufferingItems, null, 8);
+            src = replaceBetweenMarkers(src, '/*DATA_COMMANDS_BY_CATEGORY_START*/', '/*DATA_COMMANDS_BY_CATEGORY_END*/', `        const DEFAULT_COMMANDS_BY_CATEGORY = ${commandsStr};`);
+            src = replaceBetweenMarkers(src, '/*DATA_SONGS_START*/', '/*DATA_SONGS_END*/', `        const DEFAULT_SONGS = ${songsStr};`);
+            src = replaceBetweenMarkers(src, '/*DATA_SUFFERING_ITEMS_START*/', '/*DATA_SUFFERING_ITEMS_END*/', `        const DEFAULT_SUFFERING_ITEMS = ${sufferingStr};`);
+            scriptEl.textContent = src;
+            const clone = document.documentElement.cloneNode(true);
+            const cloneOverlay = clone.querySelector('#editor-overlay');
+            const cloneBtn = clone.querySelector('#editor-open-btn');
+            const cloneIndicator = clone.querySelector('#save-indicator');
+            if (cloneOverlay) cloneOverlay.remove();
+            if (cloneBtn) cloneBtn.remove();
+            if (cloneIndicator) cloneIndicator.remove();
+            const cloneBody = clone.querySelector('body');
+            if (cloneBody) cloneBody.classList.remove('editor-open');
+            const doctype = document.doctype ? '<!DOCTYPE ' + document.doctype.name + (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') + (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') + '>' : '<!DOCTYPE html>';
+            const html = doctype + '\n' + clone.outerHTML;
+            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============================================================
+        // 8. GITHUB API ИНТЕГРАЦИЯ
+        // ============================================================
+        const GITHUB_REPO = 'Redtl/Cintribot';
+        const GITHUB_PATH = 'index.html';
+        const GITHUB_BRANCH = 'main';
+
+        function setGithubStatus(message, type = 'info') {
+            githubStatus.textContent = message;
+            githubStatus.className = 'github-status show ' + type;
+        }
+
+        function clearGithubStatus() {
+            githubStatus.className = 'github-status';
+        }
+
+        // Загрузка сохранённого токена
+        try {
+            const savedToken = localStorage.getItem(STORAGE_KEY_TOKEN);
+            if (savedToken) {
+                githubTokenInput.value = savedToken;
+            }
+        } catch (e) {}
+
+        // Сохранение токена при вводе
+        githubTokenInput.addEventListener('input', () => {
+            try {
+                localStorage.setItem(STORAGE_KEY_TOKEN, githubTokenInput.value.trim());
+            } catch (e) {}
         });
+
+        async function pushToGitHub() {
+            const token = githubTokenInput.value.trim();
+            if (!token) {
+                setGithubStatus('❌ Введите GitHub Personal Access Token', 'error');
+                return;
+            }
+
+            // Сохраняем токен
+            try {
+                localStorage.setItem(STORAGE_KEY_TOKEN, token);
+            } catch (e) {}
+
+            githubPushBtn.disabled = true;
+            githubPushBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Загрузка...';
+            clearGithubStatus();
+            setGithubStatus('⏳ Получение информации о файле...', 'info');
+
+            try {
+                // 1. Получаем SHA текущего файла
+                const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+                const getResp = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                let sha = null;
+                if (getResp.status === 200) {
+                    const fileData = await getResp.json();
+                    sha = fileData.sha;
+                    setGithubStatus('✅ Файл найден, готов к обновлению...', 'info');
+                } else if (getResp.status === 404) {
+                    setGithubStatus('⚠️ Файл не найден. Будет создан новый.', 'info');
+                } else {
+                    const errData = await getResp.json().catch(() => ({}));
+                    throw new Error(`Ошибка получения файла: ${getResp.status} ${errData.message || ''}`);
+                }
+
+                // 2. Генерируем HTML
+                setGithubStatus('⏳ Генерация HTML...', 'info');
+                const scriptEl = document.querySelector('script[data-main-script="true"]');
+                if (!scriptEl) throw new Error('Не найден script для компиляции');
+
+                let src = scriptEl.textContent;
+                const commandsStr = JSON.stringify(commandsByCategory, null, 8);
+                const songsStr = JSON.stringify(songs, null, 8);
+                const sufferingStr = JSON.stringify(sufferingItems, null, 8);
+                src = replaceBetweenMarkers(src, '/*DATA_COMMANDS_BY_CATEGORY_START*/', '/*DATA_COMMANDS_BY_CATEGORY_END*/', `        const DEFAULT_COMMANDS_BY_CATEGORY = ${commandsStr};`);
+                src = replaceBetweenMarkers(src, '/*DATA_SONGS_START*/', '/*DATA_SONGS_END*/', `        const DEFAULT_SONGS = ${songsStr};`);
+                src = replaceBetweenMarkers(src, '/*DATA_SUFFERING_ITEMS_START*/', '/*DATA_SUFFERING_ITEMS_END*/', `        const DEFAULT_SUFFERING_ITEMS = ${sufferingStr};`);
+                scriptEl.textContent = src;
+
+                // Клонируем и удаляем редактор
+                const clone = document.documentElement.cloneNode(true);
+                const cloneOverlay = clone.querySelector('#editor-overlay');
+                const cloneBtn = clone.querySelector('#editor-open-btn');
+                const cloneIndicator = clone.querySelector('#save-indicator');
+                const cloneGithubSection = clone.querySelector('.github-section');
+                if (cloneOverlay) cloneOverlay.remove();
+                if (cloneBtn) cloneBtn.remove();
+                if (cloneIndicator) cloneIndicator.remove();
+                if (cloneGithubSection) cloneGithubSection.remove();
+                const cloneBody = clone.querySelector('body');
+                if (cloneBody) cloneBody.classList.remove('editor-open');
+
+                const doctype = document.doctype ? '<!DOCTYPE ' + document.doctype.name + (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') + (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') + '>' : '<!DOCTYPE html>';
+                const html = doctype + '\n' + clone.outerHTML;
+                const base64Content = btoa(unescape(encodeURIComponent(html)));
+
+                // 3. Отправляем на GitHub
+                setGithubStatus('⏳ Отправка на GitHub...', 'info');
+                const putUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+                const putBody = {
+                    message: `Обновление данных из редактора Цинтрибот (${new Date().toLocaleString('ru-RU')})`,
+                    content: base64Content,
+                    branch: GITHUB_BRANCH
+                };
+                if (sha) {
+                    putBody.sha = sha;
+                }
+
+                const putResp = await fetch(putUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+
+                if (putResp.status === 200 || putResp.status === 201) {
+                    const result = await putResp.json();
+                    setGithubStatus(`✅ Файл успешно обновлён на GitHub! Коммит: ${result.commit.sha.slice(0, 7)}`, 'success');
+                    showNotification('✅ Файл загружен на GitHub!', 'commands');
+                } else {
+                    const errData = await putResp.json().catch(() => ({}));
+                    throw new Error(`Ошибка отправки: ${putResp.status} ${errData.message || ''}`);
+                }
+
+            } catch (error) {
+                console.error('GitHub push error:', error);
+                setGithubStatus(`❌ ${error.message || 'Неизвестная ошибка'}`, 'error');
+                showNotification('❌ Ошибка загрузки на GitHub', 'commands');
+            } finally {
+                githubPushBtn.disabled = false;
+                githubPushBtn.innerHTML = '<i class="fab fa-github"></i> Загрузить на GitHub';
+            }
+        }
+
+        // ============================================================
+        // 9. ИНИЦИАЛИЗАЦИЯ
+        // ============================================================
+        function initTheme() {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+
+        function toggleTheme() {
+            if (themeToggle) {
+                themeToggle.style.transform = 'scale(0.95)';
+                setTimeout(() => { themeToggle.style.transform = ''; }, 150);
+            }
+        }
+
+        let welcomeAutoHideTimer = null;
+
+        function showWelcomeScreen() {
+            if (!welcomeScreen) return;
+            welcomeScreen.classList.add('show');
+            clearTimeout(welcomeAutoHideTimer);
+            welcomeAutoHideTimer = setTimeout(() => hideWelcomeScreen(), 9000);
+        }
+
+        function hideWelcomeScreen() {
+            if (!welcomeScreen) return;
+            welcomeScreen.classList.remove('show');
+        }
+
+        if (welcomeScreen) {
+            welcomeScreen.addEventListener('click', (e) => {
+                if (e.target && e.target.classList && e.target.classList.contains('welcome-backdrop')) hideWelcomeScreen();
+            });
+        }
+
+        function hideSplashScreen() {
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                setTimeout(showWelcomeScreen, 180);
+            }, 2000);
+        }
+
+        function createPetals() {
+            const petalCount = 15;
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                petal.style.animationDelay = (Math.random() * 5) + 's';
+                petal.style.width = (Math.random() * 8 + 8) + 'px';
+                petal.style.height = (Math.random() * 8 + 8) + 'px';
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                petalsContainer.appendChild(petal);
+            }
+        }
 
         function initHoverTickSound() {
             let audioCtx = null;
@@ -5108,8 +5146,126 @@
             document.addEventListener('mouseover', onMouseOver, { passive: true });
         }
 
+        function initialize() {
+            initTheme();
+            createPetals();
+            prepareAllCommands();
+            prepareSongs();
+            initCategories();
+            renderCommands();
+            renderSongs();
+            renderSuffering();
+            setTimeout(updateTabIndicator, 100);
+            hideSplashScreen();
+
+            // Editor
+            if (editorOpenBtn && editorOverlay && editorCloseBtn) {
+                const openEditor = () => {
+                    if (typeof hideWelcomeScreen === 'function') hideWelcomeScreen();
+                    document.body.classList.add('editor-open');
+                    editorOverlay.classList.add('show');
+                    refreshAllEditorLists();
+                    resetCommandForm();
+                    resetSongForm();
+                    resetSufferingForm();
+                    setTimeout(() => {
+                        if (editorCmdName && typeof editorCmdName.focus === 'function') editorCmdName.focus();
+                    }, 0);
+                };
+
+                const closeEditor = () => {
+                    editorOverlay.classList.remove('show');
+                    document.body.classList.remove('editor-open');
+                    if (editorOpenBtn && typeof editorOpenBtn.focus === 'function') editorOpenBtn.focus();
+                };
+
+                editorOpenBtn.addEventListener('click', openEditor);
+                editorCloseBtn.addEventListener('click', closeEditor);
+                editorOverlay.addEventListener('click', (e) => {
+                    if (e.target === editorOverlay) closeEditor();
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && editorOverlay.classList.contains('show')) {
+                        e.preventDefault();
+                        closeEditor();
+                    }
+                });
+
+                editorTabButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        editorTabButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const tab = btn.getAttribute('data-editor-tab');
+                        editorTabCommands.classList.remove('active');
+                        editorTabSongs.classList.remove('active');
+                        editorTabSuffering.classList.remove('active');
+                        if (tab === 'commands') editorTabCommands.classList.add('active');
+                        if (tab === 'songs') editorTabSongs.classList.add('active');
+                        if (tab === 'suffering') editorTabSuffering.classList.add('active');
+                    });
+                });
+
+                // Editor events
+                editorCmdAddBtn.addEventListener('click', addOrUpdateCommand);
+                editorCmdCancelBtn.addEventListener('click', resetCommandForm);
+                editorSongAddBtn.addEventListener('click', addOrUpdateSong);
+                editorSongCancelBtn.addEventListener('click', resetSongForm);
+                editorSuffAddBtn.addEventListener('click', addOrUpdateSuffering);
+                editorSuffCancelBtn.addEventListener('click', resetSufferingForm);
+
+                editorCompileBtn.addEventListener('click', () => {
+                    editorCompileBtn.disabled = true;
+                    editorCompileBtn.textContent = 'Компилирую...';
+                    setTimeout(() => {
+                        try { compileAndDownloadIndexHtml(); }
+                        finally {
+                            editorCompileBtn.disabled = false;
+                            editorCompileBtn.textContent = 'Скачать index.html';
+                        }
+                    }, 50);
+                });
+
+                if (editorResetBtn) {
+                    editorResetBtn.addEventListener('click', handleReset);
+                }
+
+                // GitHub push
+                githubPushBtn.addEventListener('click', pushToGitHub);
+
+                refreshAllEditorLists();
+            }
+        }
+
+        // ============================================================
+        // 10. ЗАПУСК
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initialize();
+
+            themeToggle.addEventListener('click', toggleTheme);
+            tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
+            balanceBtn.addEventListener('click', handleBalanceClick);
+
+            if (welcomeCloseBtn) welcomeCloseBtn.addEventListener('click', hideWelcomeScreen);
+            if (welcomeCloseSecondaryBtn) welcomeCloseSecondaryBtn.addEventListener('click', hideWelcomeScreen);
+            if (welcomeGoBtn) welcomeGoBtn.addEventListener('click', () => {
+                hideWelcomeScreen();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            initHoverTickSound();
+            window.addEventListener('resize', updateTabIndicator);
+
+            let searchTimeout;
+            searchBox.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(handleSearch, 300);
+            });
+
+            setTimeout(updateTabIndicator, 300);
+        });
+
         window.addEventListener('load', () => { setTimeout(updateTabIndicator, 300); });
     </script>
-
 
 </body></html>
