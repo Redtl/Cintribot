@@ -79,14 +79,12 @@
         }
 
         body[data-theme="dark"] {
-            /* Brand deep purple/violet gets optimized for contrast in dark theme */
             --primary: #8A6FB6;
             --primary-light: #A48CD1;
             --primary-dark: #6E5498;
             --secondary: #5C4682;
             --secondary-light: #7A5FA8;
 
-            /* Atmospheric Dark Palette */
             --bg-primary: #120F15;
             --bg-secondary: #1A1521;
             --bg-tertiary: #231C2D;
@@ -115,7 +113,6 @@
             --logo-color: #EDE6D8;
         }
 
-        /* Smoothly animate variable changes when theme toggled */
         body, header, .command-card, .song-card, .suffering-card, .theme-toggle, .balance-btn, .tabs-nav, .tab-btn, .info-card, .search-input, .category-tag, .editor-modal, .editor-header, .editor-row, .editor-input, .editor-select, .editor-textarea, .welcome-modal {
             transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
         }
@@ -149,9 +146,6 @@
         .petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
         .petal { position: absolute; background: linear-gradient(135deg, rgba(110, 84, 152, 0.5) 0%, rgba(198, 168, 102, 0.45) 100%); border-radius: 15px 0 15px 0; opacity: 0.18; animation: fall linear infinite; }
         @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; } 10% { opacity: 0.22; } 90% { opacity: 0.22; } 100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } }
-
-        .grid-pattern { display: none; }
-        .witcher-runes { display: none; }
 
         /* Splash Screen */
         .splash-screen { position: fixed; inset: 0; background: var(--bg-gradient); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity var(--transition-slow), visibility var(--transition-slow); }
@@ -200,7 +194,6 @@
         .welcome-btn { border: none; cursor: pointer; padding: 13px 20px; border-radius: var(--radius-md); font-weight: 700; font-size: 14px; color: #FBF8F2; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); box-shadow: var(--shadow-primary); transition: all var(--transition-fast); }
         .welcome-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
         .welcome-btn.secondary { background: var(--bg-tertiary); border: 1px solid var(--border-color); box-shadow: none; color: var(--text-secondary); }
-        @media (prefers-reduced-motion: reduce) { .welcome-screen.show .welcome-modal, .welcome-screen.show .welcome-emblem { animation: none !important; } }
 
         .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
@@ -216,13 +209,11 @@
         
         .header-actions { display: flex; align-items: center; gap: 12px; }
         
-        /* Theme Toggle styles */
         .theme-toggle { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); position: relative; overflow: hidden; }
         .theme-toggle:hover { background: var(--bg-tertiary); transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-hover); color: var(--primary); }
         .theme-toggle:active { transform: scale(0.95); }
         .theme-toggle i { font-size: 17px; transition: transform var(--transition-base); }
         
-        /* Show appropriate icon based on the active theme setting */
         body[data-theme="light"] .theme-toggle .fa-sun { display: none; }
         body[data-theme="light"] .theme-toggle .fa-moon { display: block; }
         body[data-theme="dark"] .theme-toggle .fa-sun { display: block; }
@@ -295,7 +286,6 @@
         .command-card { opacity: 1; }
         .command-card.enter { animation: cmdEnter 420ms cubic-bezier(0.2, 0.9, 0.2, 1) both; }
         @keyframes cmdEnter { 0% { opacity: 0; transform: translateY(10px) scale(0.985); } 55% { opacity: 1; transform: translateY(-2px) scale(1.01); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-        @media (prefers-reduced-motion: reduce) { .commands-grid { transition: none !important; } .command-card.enter { animation: none !important; } }
         
         .command-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-fast); cursor: pointer; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
         .command-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-hover); }
@@ -481,7 +471,7 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 81.1192vw; animation-duration: 6.6641s; animation-delay: 3.76241s; width: 15.3282px; height: 12.4785px; transform: rotate(76.5384deg);"></div><div class="petal" style="left: 5.00561vw; animation-duration: 5.01082s; animation-delay: 3.05372s; width: 14.1758px; height: 13.2769px; transform: rotate(65.3258deg);"></div><div class="petal" style="left: 16.5858vw; animation-duration: 7.56542s; animation-delay: 1.36064s; width: 9.76147px; height: 15.9106px; transform: rotate(66.1227deg);"></div><div class="petal" style="left: 15.1518vw; animation-duration: 9.08909s; animation-delay: 4.50336s; width: 10.9986px; height: 13.9368px; transform: rotate(151.919deg);"></div><div class="petal" style="left: 14.3328vw; animation-duration: 6.77348s; animation-delay: 0.366042s; width: 12.719px; height: 8.04811px; transform: rotate(301.809deg);"></div><div class="petal" style="left: 30.7784vw; animation-duration: 6.41854s; animation-delay: 0.947127s; width: 11.0243px; height: 11.8509px; transform: rotate(292.333deg);"></div><div class="petal" style="left: 50.8899vw; animation-duration: 6.79194s; animation-delay: 0.588748s; width: 10.5286px; height: 12.8132px; transform: rotate(294.465deg);"></div><div class="petal" style="left: 48.2955vw; animation-duration: 9.56998s; animation-delay: 4.06865s; width: 14.0514px; height: 10.5929px; transform: rotate(267.763deg);"></div><div class="petal" style="left: 60.5347vw; animation-duration: 7.90163s; animation-delay: 0.523708s; width: 14.2201px; height: 10.0264px; transform: rotate(99.3428deg);"></div><div class="petal" style="left: 80.1471vw; animation-duration: 5.06956s; animation-delay: 2.20745s; width: 9.78704px; height: 8.04823px; transform: rotate(55.0332deg);"></div><div class="petal" style="left: 4.12975vw; animation-duration: 6.38364s; animation-delay: 2.41535s; width: 11.8757px; height: 10.0629px; transform: rotate(109.353deg);"></div><div class="petal" style="left: 95.7047vw; animation-duration: 6.25719s; animation-delay: 3.80993s; width: 14.029px; height: 9.26388px; transform: rotate(291.555deg);"></div><div class="petal" style="left: 92.7442vw; animation-duration: 8.94397s; animation-delay: 2.96904s; width: 14.1695px; height: 12.3176px; transform: rotate(79.6327deg);"></div><div class="petal" style="left: 13.4762vw; animation-duration: 7.08411s; animation-delay: 3.11117s; width: 14.2601px; height: 12.5768px; transform: rotate(1.30684deg);"></div><div class="petal" style="left: 71.4629vw; animation-duration: 9.17599s; animation-delay: 3.20222s; width: 12.7654px; height: 14.2694px; transform: rotate(39.667deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 52.9207vw; animation-duration: 5.81485s; animation-delay: 0.239998s; width: 15.8119px; height: 13.7202px; transform: rotate(125.871deg);"></div><div class="petal" style="left: 7.47491vw; animation-duration: 8.65852s; animation-delay: 0.312944s; width: 12.4314px; height: 14.987px; transform: rotate(80.4531deg);"></div><div class="petal" style="left: 42.5665vw; animation-duration: 5.50616s; animation-delay: 0.867938s; width: 10.4438px; height: 11.1784px; transform: rotate(241.236deg);"></div><div class="petal" style="left: 91.6786vw; animation-duration: 8.46229s; animation-delay: 1.10287s; width: 12.1231px; height: 12.2421px; transform: rotate(166.577deg);"></div><div class="petal" style="left: 50.3224vw; animation-duration: 5.89405s; animation-delay: 0.737089s; width: 10.0738px; height: 15.5905px; transform: rotate(301.669deg);"></div><div class="petal" style="left: 72.5888vw; animation-duration: 9.35294s; animation-delay: 2.0928s; width: 9.72756px; height: 11.4709px; transform: rotate(214.506deg);"></div><div class="petal" style="left: 53.1943vw; animation-duration: 8.23644s; animation-delay: 0.63944s; width: 9.02609px; height: 14.502px; transform: rotate(161.401deg);"></div><div class="petal" style="left: 40.0066vw; animation-duration: 5.45571s; animation-delay: 2.95807s; width: 15.0683px; height: 14.0614px; transform: rotate(143.989deg);"></div><div class="petal" style="left: 21.4713vw; animation-duration: 5.70137s; animation-delay: 2.75858s; width: 11.6723px; height: 13.4879px; transform: rotate(132.609deg);"></div><div class="petal" style="left: 31.9998vw; animation-duration: 8.10527s; animation-delay: 3.15206s; width: 11.4568px; height: 13.2248px; transform: rotate(94.1318deg);"></div><div class="petal" style="left: 61.6091vw; animation-duration: 7.64703s; animation-delay: 2.07737s; width: 12.8439px; height: 10.3812px; transform: rotate(329.381deg);"></div><div class="petal" style="left: 81.8688vw; animation-duration: 6.41619s; animation-delay: 1.41964s; width: 11.883px; height: 14.0611px; transform: rotate(111.405deg);"></div><div class="petal" style="left: 32.9431vw; animation-duration: 9.67481s; animation-delay: 4.85682s; width: 13.8301px; height: 10.0149px; transform: rotate(260.889deg);"></div><div class="petal" style="left: 57.297vw; animation-duration: 7.88594s; animation-delay: 3.22346s; width: 13.5312px; height: 14.5342px; transform: rotate(308.028deg);"></div><div class="petal" style="left: 45.2041vw; animation-duration: 9.98697s; animation-delay: 3.50348s; width: 14.679px; height: 14.0096px; transform: rotate(61.5117deg);"></div></div>
 
     <!-- Header -->
     <header class="header">
@@ -515,7 +505,7 @@
                     </a>
                 </div>
 
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" style="">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-wand-magic-sparkles"></i>
@@ -1154,7 +1144,7 @@
     <!-- Notification -->
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда скопирована!</span>
+        <span id="notification-text">Светлая тема включена ☀️</span>
     </div>
 
     
@@ -1948,7 +1938,6 @@
         const editorCloseBtn = document.getElementById('editor-close-btn');
         const editorCompileBtn = document.getElementById('editor-compile-btn');
         const editorSaveBtn = document.getElementById('editor-save-btn');
-        const editorGithubBtn = document.getElementById('editor-github-btn');
         const githubTokenInput = document.getElementById('github-token');
 
         const editorTabButtons = document.querySelectorAll('[data-editor-tab]');
@@ -2397,7 +2386,8 @@
                 if (!editingSuffering) showNotification(`Челлендж "${title}" добавлен`, 'suffering');
             }
 
-            // Compile
+            // --- КОМПИЛЯЦИЯ И ОТПРАВКА НА GITHUB ---
+
             function replaceBetweenMarkers(src, startMarker, endMarker, newMiddle) {
                 const start = src.indexOf(startMarker);
                 const end = src.indexOf(endMarker);
@@ -2408,18 +2398,23 @@
             function generateCompiledHtmlString() {
                 const scriptEl = document.querySelector('script[data-main-script="true"]');
                 if (!scriptEl) throw new Error('Не найден script для компиляции');
+                
                 let src = scriptEl.textContent;
                 const commandsStr = JSON.stringify(commandsByCategory, null, 8);
                 const songsStr = JSON.stringify(songs, null, 8);
                 const sufferingStr = JSON.stringify(sufferingItems, null, 8);
+                
                 src = replaceBetweenMarkers(src, '/*DATA_COMMANDS_BY_CATEGORY_START*/', '/*DATA_COMMANDS_BY_CATEGORY_END*/', `        let commandsByCategory = ${commandsStr};`);
                 src = replaceBetweenMarkers(src, '/*DATA_SONGS_START*/', '/*DATA_SONGS_END*/', `        let songs = ${songsStr};`);
                 src = replaceBetweenMarkers(src, '/*DATA_SUFFERING_ITEMS_START*/', '/*DATA_SUFFERING_ITEMS_END*/', `        let sufferingItems = ${sufferingStr};`);
+                
                 scriptEl.textContent = src;
+                
                 const clone = document.documentElement.cloneNode(true);
                 const cloneOverlay = clone.querySelector('#editor-overlay');
                 const cloneBtn = clone.querySelector('#editor-open-btn');
                 const cloneThemeOverlay = clone.querySelector('#theme-transition-overlay');
+                
                 if (cloneOverlay) cloneOverlay.remove();
                 if (cloneBtn) cloneBtn.remove();
                 if (cloneThemeOverlay) cloneThemeOverlay.remove();
@@ -2431,27 +2426,64 @@
                 return doctype + '\n' + clone.outerHTML;
             }
 
-            function compileAndDownloadIndexHtml() {
-                try {
-                    const html = generateCompiledHtmlString();
-                    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'index.html';
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    URL.revokeObjectURL(url);
-                    showNotification('Файл index.html скачан!', 'commands');
-                } catch (e) {
-                    alert('Ошибка компиляции: ' + e.message);
+            // Надежная конвертация строки с кириллицей в Base64 (синхронная)
+            function encodeUTF8ToBase64(str) {
+                return btoa(unescape(encodeURIComponent(str)));
+            }
+
+            async function deployToGithubString(htmlContent, token) {
+                const owner = 'Redtl';
+                const repo = 'Cintribot';
+                const path = 'index.html';
+                const branch = 'main';
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+                // 1. Получаем текущий SHA файла (нужно для перезаписи)
+                let sha = '';
+                const getRes = await fetch(`${url}?ref=${branch}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'X-GitHub-Api-Version': '2022-11-28'
+                    }
+                });
+                
+                if (getRes.ok) {
+                    const data = await getRes.json();
+                    sha = data.sha;
+                } else if (getRes.status !== 404) {
+                    const errData = await getRes.json().catch(() => ({}));
+                    throw new Error(`Ошибка получения файла (${getRes.status}): ${errData.message || getRes.statusText}`);
+                }
+
+                // 2. Кодируем HTML в Base64 
+                const base64Content = encodeUTF8ToBase64(htmlContent);
+
+                // 3. Отправляем обновленный файл на GitHub
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                        'X-GitHub-Api-Version': '2022-11-28'
+                    },
+                    body: JSON.stringify({
+                        message: 'Обновление библиотеки команд и песен (Редактор)',
+                        content: base64Content,
+                        sha: sha || undefined,
+                        branch: branch
+                    })
+                });
+
+                if (!putRes.ok) {
+                    const errData = await putRes.json().catch(() => ({}));
+                    throw new Error(`Ошибка сохранения на GitHub (${putRes.status}): ${errData.message || putRes.statusText}`);
                 }
             }
 
-            // GitHub Deploy Logic
+            // Загружаем токен при открытии
             if (githubTokenInput) {
-                // Загружаем сохраненный токен
                 const savedToken = localStorage.getItem('cintribot_gh_token');
                 if (savedToken) githubTokenInput.value = savedToken;
 
@@ -2460,90 +2492,46 @@
                 });
             }
 
-            // Надежная конвертация текста с кириллицей в Base64 для API GitHub
-            function convertToBase64(str) {
-                return new Promise((resolve) => {
-                    const blob = new Blob([str], { type: 'text/html;charset=utf-8' });
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        resolve(reader.result.split(',')[1]); // Берем только саму base64 строку
-                    };
-                    reader.readAsDataURL(blob);
-                });
-            }
-
-            async function deployToGithub() {
+            // Основная кнопка Компиляции
+            editorCompileBtn.addEventListener('click', async () => {
                 const token = githubTokenInput.value.trim();
-                if (!token) {
-                    alert('Пожалуйста, введите GitHub Personal Access Token');
-                    return;
-                }
-
-                editorGithubBtn.disabled = true;
-                const originalBtnContent = editorGithubBtn.innerHTML;
-                editorGithubBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+                
+                editorCompileBtn.disabled = true;
+                const originalContent = editorCompileBtn.innerHTML;
+                editorCompileBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обработка...';
 
                 try {
-                    const htmlContent = generateCompiledHtmlString();
-                    const owner = 'Redtl';
-                    const repo = 'Cintribot';
-                    const path = 'index.html';
-                    const branch = 'main'; // Явно указываем ветку
-                    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+                    // Генерируем финальный HTML
+                    const html = generateCompiledHtmlString();
 
-                    // 1. Получаем текущий SHA файла (нужно для перезаписи)
-                    let sha = '';
-                    const getRes = await fetch(url, {
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'X-GitHub-Api-Version': '2022-11-28'
-                        }
-                    });
-                    
-                    if (getRes.ok) {
-                        const data = await getRes.json();
-                        sha = data.sha;
-                    } else if (getRes.status !== 404) {
-                        const errData = await getRes.json().catch(() => ({}));
-                        throw new Error(`Ошибка получения файла (${getRes.status}): ${errData.message || getRes.statusText}`);
+                    if (token) {
+                        // Если токен есть -> обновляем GitHub
+                        await deployToGithubString(html, token);
+                        showNotification('Успешно обновлено на GitHub!', 'commands');
+                        
+                        // Можно закрыть редактор после успешного обновления
+                        setTimeout(() => closeEditor(), 1000); 
+                    } else {
+                        // Если токена нет -> скачиваем локально как раньше
+                        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'index.html';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        URL.revokeObjectURL(url);
+                        showNotification('Файл скачан локально (токен не указан)', 'commands');
                     }
-
-                    // 2. Кодируем в Base64 безопасным способом
-                    const base64Content = await convertToBase64(htmlContent);
-
-                    // 3. Загружаем новый файл
-                    const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-                    const putRes = await fetch(putUrl, {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Content-Type': 'application/json',
-                            'X-GitHub-Api-Version': '2022-11-28'
-                        },
-                        body: JSON.stringify({
-                            message: 'Обновление библиотеки через встроенный редактор Цинтрибота',
-                            content: base64Content,
-                            sha: sha || undefined,
-                            branch: branch
-                        })
-                    });
-
-                    if (!putRes.ok) {
-                        const errData = await putRes.json().catch(() => ({}));
-                        throw new Error(`Ошибка сохранения (${putRes.status}): ${errData.message || putRes.statusText}`);
-                    }
-
-                    showNotification('Успешно обновлено на GitHub!', 'commands');
-                } catch (error) {
-                    console.error('GitHub API Error:', error);
-                    alert('Не удалось обновить файл!\nПричина: ' + error.message);
+                } catch (e) {
+                    console.error(e);
+                    alert('Ошибка: ' + e.message);
                 } finally {
-                    editorGithubBtn.disabled = false;
-                    editorGithubBtn.innerHTML = originalBtnContent;
+                    editorCompileBtn.disabled = false;
+                    editorCompileBtn.innerHTML = originalContent;
                 }
-            }
+            });
 
             function refreshAllEditorLists() {
                 refreshEditorCategoryDatalist();
@@ -2552,6 +2540,7 @@
                 renderEditorSufferingList();
             }
 
+            // Подключение остальных обработчиков
             editorCmdAddBtn.addEventListener('click', addOrUpdateCommand);
             editorCmdCancelBtn.addEventListener('click', resetCommandForm);
             editorSongAddBtn.addEventListener('click', addOrUpdateSong);
@@ -2559,29 +2548,12 @@
             editorSuffAddBtn.addEventListener('click', addOrUpdateSuffering);
             editorSuffCancelBtn.addEventListener('click', resetSufferingForm);
             
-            if (editorGithubBtn) {
-                editorGithubBtn.addEventListener('click', deployToGithub);
-            }
-
-            editorCompileBtn.addEventListener('click', () => {
-                editorCompileBtn.disabled = true;
-                editorCompileBtn.textContent = 'Компилирую...';
-                setTimeout(() => {
-                    try { compileAndDownloadIndexHtml(); }
-                    finally {
-                        editorCompileBtn.disabled = false;
-                        editorCompileBtn.textContent = 'Скомпилировать index.html';
-                    }
-                }, 50);
-            });
-
             refreshAllEditorLists();
         }
 
         // ========== MAIN APP FUNCTIONS ==========
         
         function initTheme() {
-            // Check localStorage or default to dark theme
             const savedTheme = localStorage.getItem('cintribot_theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
         }
@@ -2593,7 +2565,6 @@
             document.body.setAttribute('data-theme', newTheme);
             localStorage.setItem('cintribot_theme', newTheme);
             
-            // Show short premium visual feedback
             const themeLabel = newTheme === 'dark' ? 'Тёмная тема включена 🌙' : 'Светлая тема включена ☀️';
             showNotification(themeLabel, 'commands');
 
@@ -2656,12 +2627,8 @@
         function prepareSongs() { songs.sort((a, b) => a.artist.localeCompare(b.artist)); }
 
         function initialize() {
-            // Load from localStorage first
             loadFromLocalStorage();
-
-            // Setup proper theme on start
             initTheme();
-            
             createPetals();
             prepareAllCommands();
             prepareSongs();
@@ -2863,7 +2830,6 @@
             setTimeout(() => { card.style.transform = ''; }, 200);
         }
 
-        // Search action
         function handleSearch() {
             searchQuery = searchBox.value.trim();
             if (!searchQuery) { renderCommands(false); return; }
@@ -2877,11 +2843,9 @@
             renderCommands(true);
         }
 
-        // Bypassing restricted navigator.clipboard due to iframe/Permissions-Policy blocks
         function copyToClipboard(text) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
-            // Prevent zooming/focus jumps on mobile layout
             textArea.style.position = 'fixed';
             textArea.style.top = '0';
             textArea.style.left = '0';
@@ -2926,9 +2890,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initialize();
             
-            // Connect toggle button to toggleTheme
             themeToggle.addEventListener('click', toggleTheme);
-            
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
             if (welcomeCloseBtn) welcomeCloseBtn.addEventListener('click', hideWelcomeScreen);
