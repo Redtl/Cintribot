@@ -8,6 +8,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#F3EEE4">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/LDJR2vX4/klh.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/LDJR2vX4/klh.png">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -73,7 +77,7 @@
             --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-            --header-height: 76px;
+            --header-height: 86px;
             --sidebar-width: 280px;
             --logo-color: #584176;
         }
@@ -113,7 +117,7 @@
             --logo-color: #EDE6D8;
         }
 
-        body, header, .command-card, .song-card, .suffering-card, .theme-toggle, .balance-btn, .tabs-nav, .tab-btn, .info-card, .search-input, .category-tag, .editor-modal, .editor-header, .editor-row, .editor-input, .editor-select, .editor-textarea, .welcome-modal {
+        body, header, .command-card, .song-card, .suffering-card, .theme-toggle, .balance-btn, .tabs-nav, .tab-btn, .info-card, .search-input, .category-tag, .editor-modal, .editor-header, .editor-row, .editor-input, .editor-select, .editor-textarea {
             transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
         }
 
@@ -135,6 +139,76 @@
             font-feature-settings: "ss01", "cv11";
         }
 
+        /* === PAGE LOAD ANIMATIONS === */
+        body:not(.page-loaded) .header { opacity: 0; transform: translateY(-20px); }
+        body:not(.page-loaded) .tabs-nav { opacity: 0; transform: translateY(-14px); }
+        body:not(.page-loaded) .hero-section > *:not(.hero-bus) { opacity: 0; transform: translateY(24px); }
+        body:not(.page-loaded) .info-card { opacity: 0; transform: translateY(28px) scale(0.98); }
+        body:not(.page-loaded) .search-section { opacity: 0; transform: translateY(20px); }
+        body:not(.page-loaded) .category-tag { opacity: 0; transform: translateY(16px) scale(0.95); }
+        body:not(.page-loaded) .command-card { opacity: 0; transform: translateY(30px) scale(0.97); }
+        body:not(.page-loaded) .footer { opacity: 0; transform: translateY(16px); }
+
+        .header,
+        .tabs-nav,
+        .hero-section > *:not(.hero-bus),
+        .info-card,
+        .search-section,
+        .category-tag,
+        .command-card,
+        .song-card,
+        .suffering-card,
+        .footer {
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-in {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+        }
+
+        /* === BUS ANIMATION === */
+        .hero-bus {
+            opacity: 0;
+            transform: translateX(-80px) scale(0.85) rotate(-8deg);
+            transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+                        transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+                        filter var(--transition-base);
+            will-change: opacity, transform;
+        }
+        body.page-loaded .hero-bus {
+            opacity: 0.9;
+            transform: translateX(0) scale(1) rotate(0deg);
+            animation: busFloat 6s ease-in-out 1.6s infinite;
+        }
+        body[data-theme="dark"].page-loaded .hero-bus {
+            opacity: 0.75;
+        }
+        @keyframes busFloat {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(-2deg); }
+            50% { transform: translateX(0) translateY(-18px) rotate(2deg); }
+        }
+        /* === END BUS ANIMATION === */
+
+        .gradient-orbs {
+            opacity: 0;
+            transition: opacity 1.8s ease-out 0.2s;
+        }
+        body.page-loaded .gradient-orbs {
+            opacity: 0.55;
+        }
+
+        .petals-container {
+            opacity: 0;
+            transition: opacity 1.4s ease-out 0.8s;
+        }
+        body.page-loaded .petals-container {
+            opacity: 1;
+        }
+        /* === END PAGE LOAD ANIMATIONS === */
+
         .gradient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; background: var(--bg-gradient); }
         .gradient-orbs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; opacity: 0.55; filter: blur(90px); }
         .orb-1 { position: absolute; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(110, 84, 152, 0.28) 0%, transparent 70%); top: -220px; right: -140px; animation: orbBreath 14s ease-in-out infinite; }
@@ -151,68 +225,60 @@
         .splash-screen { position: fixed; inset: 0; background: var(--bg-gradient); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity var(--transition-slow), visibility var(--transition-slow); }
         .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .splash-content { text-align: center; animation: splashAnimation 2s ease-in-out; position: relative; z-index: 2; }
-        .splash-icon { width: 112px; height: 112px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; box-shadow: var(--shadow-lg); animation: pulse 2.4s infinite; position: relative; }
-        .splash-icon i.fa-robot { font-size: 50px; color: #FBF8F2; animation: bounceSoft 3s ease-in-out infinite; }
-        .splash-icon i.fa-heart { position: absolute; bottom: 18px; right: 18px; font-size: 24px; color: var(--danger-light); animation: pulseHeart 1.5s infinite; }
-        .splash-content h1 { font-family: var(--font-heading); font-size: 44px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--text-primary); animation: fadeInUp 1s ease-out; }
-        .splash-content p { font-size: 16px; color: var(--text-secondary); margin-bottom: 28px; animation: fadeInUp 1s ease-out 0.2s both; }
-        .splash-progress { width: 220px; height: 4px; background: rgba(43, 37, 49, 0.08); border-radius: var(--radius-full); margin: 0 auto; overflow: hidden; animation: fadeInUp 1s ease-out 0.4s both; position: relative; }
+        .splash-icon { width: 180px; height: 180px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; box-shadow: var(--shadow-xl); animation: pulse 2.4s infinite; position: relative; overflow: hidden; }
+        .splash-icon img { width: 120px; height: 120px; object-fit: contain; display: block; }
+        .splash-icon i.fa-heart { position: absolute; bottom: 24px; right: 24px; font-size: 32px; color: var(--danger-light); animation: pulseHeart 1.5s infinite; z-index: 2; }
+        .splash-content h1 { font-family: var(--font-heading); font-size: 52px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; color: var(--text-primary); animation: fadeInUp 1s ease-out; }
+        .splash-content p { font-size: 17px; color: var(--text-secondary); margin-bottom: 32px; animation: fadeInUp 1s ease-out 0.2s both; }
+        .splash-progress { width: 260px; height: 5px; background: rgba(43, 37, 49, 0.08); border-radius: var(--radius-full); margin: 0 auto; overflow: hidden; animation: fadeInUp 1s ease-out 0.4s both; position: relative; }
         .splash-progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold)); border-radius: var(--radius-full); animation: progress 2s ease-in-out forwards; }
 
         @keyframes splashAnimation { 0% { transform: scale(0.92); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); } 50% { transform: scale(1.04); box-shadow: var(--shadow-xl); } }
         @keyframes pulseHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-        @keyframes bounceSoft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
-
-        /* Welcome Screen */
-        .welcome-screen { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 18px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--transition-slow), visibility var(--transition-slow); }
-        .welcome-screen.show { opacity: 1; visibility: visible; pointer-events: auto; }
-        .welcome-backdrop { position: absolute; inset: 0; background: rgba(43, 37, 49, 0.32); backdrop-filter: blur(14px) saturate(130%); -webkit-backdrop-filter: blur(14px) saturate(130%); z-index: 0; }
-        body[data-theme="dark"] .welcome-backdrop { background: rgba(10, 8, 15, 0.55); }
-        
-        .welcome-modal { position: relative; width: 100%; max-width: 860px; z-index: 1; border-radius: var(--radius-xl); background: var(--bg-secondary); border: 1px solid var(--border-color); box-shadow: var(--shadow-xl); overflow: hidden; transform: translateY(10px) scale(0.98); opacity: 0; }
-        .welcome-screen.show .welcome-modal { animation: welcomeIn 560ms cubic-bezier(0.2, 0.9, 0.2, 1) both; }
-        @keyframes welcomeIn { 0% { transform: translateY(14px) scale(0.985); opacity: 0; } 45% { transform: translateY(-3px) scale(1.01); opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
-        .welcome-inner { position: relative; padding: 28px; display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; }
-        @media (max-width: 700px) { .welcome-inner { grid-template-columns: 1fr; text-align: center; } }
-        .welcome-close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); cursor: pointer; font-size: 15px; font-weight: 700; transition: all var(--transition-fast); }
-        .welcome-close:hover { transform: translateY(-1px); border-color: var(--border-hover); color: var(--text-primary); }
-        .welcome-emblem { width: 120px; height: 120px; border-radius: var(--radius-xl); margin: 0 auto; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border: none; box-shadow: var(--shadow-primary); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .welcome-emblem svg { width: 60px; height: 60px; display: block; }
-        .welcome-screen.show .welcome-emblem { animation: emblemFloat 1.1s ease-in-out both; }
-        @keyframes emblemFloat { 0% { transform: translateY(8px) rotate(-3deg); opacity: 0; } 60% { transform: translateY(-3px) rotate(2deg); opacity: 1; } 100% { transform: translateY(0) rotate(0deg); opacity: 1; } }
-        .welcome-text .eyebrow { font-family: var(--font-sans); letter-spacing: 1.4px; font-size: 11px; color: var(--primary); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
-        .welcome-text h2 { font-family: var(--font-heading); font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 10px; color: var(--text-primary); }
-        .welcome-text p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 18px; max-width: 620px; }
-        .welcome-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-        .welcome-badge { padding: 7px 13px; border-radius: var(--radius-full); background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 7px; }
-        .welcome-badge i { color: var(--primary); }
-        .welcome-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; }
-        @media (max-width: 700px) { .welcome-actions { justify-content: center; } }
-        .welcome-btn { border: none; cursor: pointer; padding: 13px 20px; border-radius: var(--radius-md); font-weight: 700; font-size: 14px; color: #FBF8F2; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); box-shadow: var(--shadow-primary); transition: all var(--transition-fast); }
-        .welcome-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-        .welcome-btn.secondary { background: var(--bg-tertiary); border: 1px solid var(--border-color); box-shadow: none; color: var(--text-secondary); }
 
         .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
         .header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--header-bg); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; align-items: center; }
         .header-container { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 100%; }
-        .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-        .logo-icon { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 14px; color: #FBF8F2; font-size: 20px; box-shadow: var(--shadow-primary); transition: transform var(--transition-base), box-shadow var(--transition-base); position: relative; overflow: hidden; transform: translateZ(0); }
-        .logo-icon svg { width: 28px; height: 28px; display: block; }
-        .logo:hover .logo-icon { transform: translateY(-2px) scale(1.02); }
+        .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+
+        /* ИЗМЕНЕНИЕ: Убрана фиолетовая подложка, значок увеличен в 2 раза */
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 124px;  /* было 62px, стало 124px (x2) */
+            height: 124px; /* было 62px, стало 124px (x2) */
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            transition: transform var(--transition-base);
+            position: relative;
+            overflow: visible;
+            transform: translateZ(0);
+            flex-shrink: 0;
+        }
+        .logo-icon img {
+            width: 104px;  /* было 52px, стало 104px (x2) */
+            height: 104px; /* было 52px, стало 104px (x2) */
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+        .logo:hover .logo-icon { transform: translateY(-2px) scale(1.05); }
         .logo-text { display: flex; flex-direction: column; }
-        .logo-text h1 { font-family: var(--font-heading); font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--logo-color); line-height: 1.2; display: flex; align-items: center; gap: 6px; }
-        .logo-text span { font-size: 12px; color: var(--text-tertiary); font-weight: 500; letter-spacing: 0.1px; }
+        .logo-text h1 { font-family: var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: -0.01em; color: var(--logo-color); line-height: 1.2; display: flex; align-items: center; gap: 6px; }
+        .logo-text span { font-size: 13px; color: var(--text-tertiary); font-weight: 500; letter-spacing: 0.1px; }
         
         .header-actions { display: flex; align-items: center; gap: 12px; }
         
-        .theme-toggle { width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); position: relative; overflow: hidden; }
+        .theme-toggle { width: 50px; height: 50px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--transition-fast); position: relative; overflow: hidden; }
         .theme-toggle:hover { background: var(--bg-tertiary); transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-hover); color: var(--primary); }
         .theme-toggle:active { transform: scale(0.95); }
-        .theme-toggle i { font-size: 17px; transition: transform var(--transition-base); }
+        .theme-toggle i { font-size: 19px; transition: transform var(--transition-base); }
         
         body[data-theme="light"] .theme-toggle .fa-sun { display: none; }
         body[data-theme="light"] .theme-toggle .fa-moon { display: block; }
@@ -220,14 +286,15 @@
         body[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
         .theme-toggle .fa-wand-magic-sparkles { display: none; }
 
-        .balance-btn { display: flex; align-items: center; gap: 8px; padding: 11px 18px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border: none; border-radius: var(--radius-md); color: #FBF8F2; font-weight: 600; font-size: 14px; cursor: pointer; transition: all var(--transition-fast); box-shadow: var(--shadow-primary); }
+        .balance-btn { display: flex; align-items: center; gap: 8px; padding: 14px 22px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border: none; border-radius: var(--radius-md); color: #FBF8F2; font-weight: 600; font-size: 15px; cursor: pointer; transition: all var(--transition-fast); box-shadow: var(--shadow-primary); }
         .balance-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
         .balance-btn:active { transform: translateY(0); }
-        .balance-btn i { font-size: 15px; }
+        .balance-btn i { font-size: 17px; }
 
         .social-links { display: flex; gap: 10px; }
-        .social-link { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); text-decoration: none; transition: all var(--transition-fast); position: relative; overflow: hidden; }
+        .social-link { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); text-decoration: none; transition: all var(--transition-fast); position: relative; overflow: hidden; }
         .social-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-hover); background: var(--bg-tertiary); }
+        .social-link i { font-size: 18px; }
         .social-link.telegram:hover { color: var(--primary); }
         .social-link.youtube:hover { color: var(--danger); }
         .social-link.twitch:hover { color: var(--purple); }
@@ -249,14 +316,48 @@
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero-section { text-align: center; margin-bottom: 36px; max-width: 760px; margin-left: auto; margin-right: auto; }
+        .hero-section { text-align: center; margin-bottom: 36px; max-width: 760px; margin-left: auto; margin-right: auto; position: relative; }
         .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--primary); font-weight: 600; font-size: 12px; padding: 6px 16px; border-radius: var(--radius-full); margin-bottom: 20px; box-shadow: var(--shadow-sm); }
         .hero-badge i { color: var(--gold); }
         .hero-title { font-family: var(--font-heading); font-size: 40px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; text-transform: uppercase; margin-bottom: 14px; color: var(--text-primary); }
         .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0; max-width: 540px; margin-left: auto; margin-right: auto; }
 
+        /* === BUS DECORATION === */
+        .hero-bus {
+            position: absolute;
+            top: -90px;
+            left: -660px;
+            right: auto;
+            width: 600px;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 20px 50px rgba(110, 84, 152, 0.35));
+            transform-origin: center bottom;
+            z-index: 5;
+        }
+        body[data-theme="dark"] .hero-bus {
+            filter: drop-shadow(0 20px 50px rgba(142, 111, 191, 0.4)) brightness(1.1);
+        }
+        @media (max-width: 1600px) {
+            .hero-bus { left: -480px; width: 480px; top: -70px; }
+        }
+        @media (max-width: 1400px) {
+            .hero-bus { left: -360px; width: 380px; top: -50px; }
+        }
+        @media (max-width: 1200px) {
+            .hero-bus { left: -280px; width: 300px; top: -40px; }
+        }
+        @media (max-width: 900px) {
+            .hero-bus { position: relative; display: block; margin: 0 auto 20px; top: auto; left: auto; width: 220px; }
+        }
+        @media (max-width: 480px) {
+            .hero-bus { width: 160px; margin-bottom: 14px; }
+        }
+        /* === END BUS DECORATION === */
+
         .info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 36px; }
-        .info-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; transition: all var(--transition-base); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .info-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-fast), opacity 0.7s ease, background-color var(--transition-base), color var(--transition-base); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
         .info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-hover); }
         .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
         .info-card-icon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: var(--radius-md); color: #FBF8F2; font-size: 16px; box-shadow: var(--shadow-primary); }
@@ -277,8 +378,8 @@
         .search-container:has(.search-input:focus) .search-icon { color: var(--primary); }
 
         .categories { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-        .category-tag { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-full); color: var(--text-secondary); font-size: 12.5px; font-weight: 500; cursor: pointer; transition: all var(--transition-fast); position: relative; overflow: hidden; }
-        .category-tag:hover { background: var(--bg-tertiary); transform: translateY(-2px); border-color: var(--border-hover); box-shadow: var(--shadow-sm); color: var(--text-primary); }
+        .category-tag { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-full); color: var(--text-secondary); font-size: 12.5px; font-weight: 500; cursor: pointer; transition: all var(--transition-fast), opacity 0.6s ease, transform 0.6s ease; position: relative; overflow: hidden; }
+        .category-tag:hover { background: var(--bg-tertiary); transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: var(--border-hover); color: var(--text-primary); }
         .category-tag.active { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: #FBF8F2; border-color: transparent; box-shadow: var(--shadow-primary); }
 
         .commands-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 28px; transition: opacity 180ms ease, transform 220ms ease, filter 180ms ease; will-change: opacity, transform, filter; }
@@ -287,7 +388,7 @@
         .command-card.enter { animation: cmdEnter 420ms cubic-bezier(0.2, 0.9, 0.2, 1) both; }
         @keyframes cmdEnter { 0% { opacity: 0; transform: translateY(10px) scale(0.985); } 55% { opacity: 1; transform: translateY(-2px) scale(1.01); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
         
-        .command-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-fast); cursor: pointer; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+        .command-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-fast), opacity 0.7s ease; cursor: pointer; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
         .command-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-hover); }
         .command-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
         .command-name { font-family: var(--font-heading); font-size: 15px; font-weight: 600; color: var(--text-primary); word-break: break-word; letter-spacing: -0.01em; }
@@ -335,15 +436,23 @@
             .songs-grid { grid-template-columns: 1fr; gap: 12px; }
             .info-cards { grid-template-columns: 1fr; }
             .header-container { gap: 10px; }
-            .social-link { width: 38px; height: 38px; }
-            .balance-btn { padding: 8px 12px; font-size: 13px; }
+            .social-link { width: 42px; height: 42px; }
+            .social-link i { font-size: 16px; }
+            .balance-btn { padding: 10px 14px; font-size: 13px; }
+            .theme-toggle { width: 42px; height: 42px; }
+            /* адаптив логотипа */
+            .logo-icon { width: 88px; height: 88px; }
+            .logo-icon img { width: 72px; height: 72px; }
+            .logo-text h1 { font-size: 20px; }
+            .logo-text span { font-size: 12px; }
             .tab-btn { font-size: 13px; padding: 10px 4px; }
             .hero-description { font-size: 14px; }
-            .splash-icon { width: 84px; height: 84px; }
-            .splash-icon i.fa-robot { font-size: 38px; }
-            .splash-icon i.fa-heart { font-size: 20px; }
-            .splash-content h1 { font-size: 30px; }
-            .splash-content p { font-size: 14px; }
+            .splash-icon { width: 140px; height: 140px; border-radius: 34px; }
+            .splash-icon img { width: 90px; height: 90px; }
+            .splash-icon i.fa-heart { font-size: 26px; bottom: 18px; right: 18px; }
+            .splash-content h1 { font-size: 38px; }
+            .splash-content p { font-size: 15px; }
+            .splash-progress { width: 220px; }
             .container { padding: 0 16px; }
         }
         @media (max-width: 480px) {
@@ -354,14 +463,20 @@
             .song-card, .suffering-card { flex-direction: column; text-align: center; gap: 10px; }
             .song-price, .suffering-price { width: 100%; }
             .social-links { gap: 6px; }
-            .social-link { width: 36px; height: 36px; font-size: 13px; }
-            .theme-toggle, .balance-btn { height: 38px; }
+            .social-link { width: 38px; height: 38px; font-size: 13px; }
+            .theme-toggle, .balance-btn { height: 42px; }
+            .theme-toggle { width: 42px; }
             .balance-btn span { display: none; }
-            .balance-btn { padding: 0 12px; justify-content: center; width: 38px; }
+            .balance-btn { padding: 0 14px; justify-content: center; width: 42px; }
             .info-card { padding: 16px; }
             .info-card-title { font-size: 15px; }
             .tab-btn { flex-direction: column; gap: 2px; padding: 8px 2px; }
             .price-badge { font-size: 9px; padding: 1px 4px; }
+            /* логотип на очень маленьких экранах */
+            .logo-icon { width: 72px; height: 72px; }
+            .logo-icon img { width: 60px; height: 60px; }
+            .logo-text h1 { font-size: 18px; }
+            .logo-text span { display: none; }
         }
 
         .theme-transition-overlay { position: fixed; inset: 0; z-index: 5000; pointer-events: none; opacity: 0; display: none; }
@@ -412,52 +527,24 @@
         .editor-footnote { margin-top: 12px; color: var(--text-tertiary); font-size: 12px; line-height: 1.5; }
         .editor-card:hover { transform: none !important; }
 
-        @media (prefers-reduced-motion: reduce) { body::before, .gradient-bg, .gradient-orbs, .theme-transition-overlay, .editor-toggle { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) { 
+            body::before, .gradient-bg, .gradient-orbs, .theme-transition-overlay, .editor-toggle, .hero-bus { animation: none !important; } 
+            .header, .tabs-nav, .hero-section > *, .info-card, .search-section, .category-tag, .command-card, .footer { transition: none !important; opacity: 1 !important; transform: none !important; }
+        }
     </style>
 </head>
-<body data-theme="light" class="">
+<body data-theme="dark" class="page-loaded">
     <!-- Splash Screen -->
     <div class="splash-screen hidden" id="splash-screen">
         <div class="splash-content">
             <div class="splash-icon">
-                <i class="fas fa-robot"></i>
+                <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="Цинтрибот">
                 <i class="fas fa-heart"></i>
             </div>
             <h1>Цинтрибот</h1>
             <p>Загружаем звуковые команды и песни...</p>
             <div class="splash-progress">
                 <div class="splash-progress-bar"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcome-screen" role="dialog" aria-modal="true" aria-label="Приветствие">
-        <div class="welcome-backdrop" aria-hidden="true"></div>
-        <div class="welcome-modal">
-            <button class="welcome-close" id="welcome-close-btn" type="button" aria-label="Закрыть">✕</button>
-            <div class="welcome-inner">
-                <div class="welcome-emblem" aria-hidden="true">
-                    <svg viewBox="0 0 64 64">
-                        <circle cx="32" cy="32" r="22" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" opacity="0.85"></circle>
-                        <path d="M32 14 L40 22 L48 24 L42 32 L44 44 L32 39 L20 44 L22 32 L16 24 L24 22 Z" fill="rgba(255,255,255,0.4)"></path>
-                        <path d="M28 40 L36 24" stroke="rgba(255,255,255,0.7)" stroke-width="3" stroke-linecap="round"></path>
-                    </svg>
-                </div>
-                <div class="welcome-text">
-                    <div class="eyebrow">Цинтрибот • Библиотека звуков</div>
-                    <h2>Добро пожаловать</h2>
-                    <p>Выбирай команды, заказывай песни и кидай челленджи в чат стрима. Всё уже готово — осталось нажать и отправить.</p>
-                    <div class="welcome-badges">
-                        <div class="welcome-badge"><i class="fas fa-bolt"></i> Быстро</div>
-                        <div class="welcome-badge"><i class="fas fa-music"></i> Песни</div>
-                        <div class="welcome-badge"><i class="fas fa-skull"></i> Челленджи</div>
-                    </div>
-                    <div class="welcome-actions">
-                        <button class="welcome-btn" id="welcome-go-btn" type="button">К библиотеке</button>
-                        <button class="welcome-btn secondary" id="welcome-close-secondary" type="button">Скрыть</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -471,17 +558,14 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 27.4972vw; animation-duration: 8.3893s; animation-delay: 4.72894s; width: 10.5462px; height: 10.9721px; transform: rotate(3.71451deg);"></div><div class="petal" style="left: 86.5038vw; animation-duration: 5.48688s; animation-delay: 3.06283s; width: 8.97321px; height: 11.4149px; transform: rotate(0.928286deg);"></div><div class="petal" style="left: 95.2781vw; animation-duration: 6.59075s; animation-delay: 4.05166s; width: 12.8236px; height: 10.4948px; transform: rotate(34.4046deg);"></div><div class="petal" style="left: 49.3531vw; animation-duration: 9.99688s; animation-delay: 2.66357s; width: 8.78971px; height: 9.96724px; transform: rotate(212.809deg);"></div><div class="petal" style="left: 4.11617vw; animation-duration: 8.90691s; animation-delay: 1.37885s; width: 8.02028px; height: 14.9934px; transform: rotate(230.945deg);"></div><div class="petal" style="left: 99.7518vw; animation-duration: 6.02569s; animation-delay: 4.04056s; width: 14.4989px; height: 11.0852px; transform: rotate(237.248deg);"></div><div class="petal" style="left: 37.5012vw; animation-duration: 8.79614s; animation-delay: 2.18451s; width: 14.3128px; height: 8.02528px; transform: rotate(347.794deg);"></div><div class="petal" style="left: 95.9647vw; animation-duration: 8.21476s; animation-delay: 0.529248s; width: 15.7566px; height: 11.3327px; transform: rotate(84.1956deg);"></div><div class="petal" style="left: 95.5466vw; animation-duration: 8.04585s; animation-delay: 4.63458s; width: 11.5316px; height: 15.7408px; transform: rotate(298.045deg);"></div><div class="petal" style="left: 36.5925vw; animation-duration: 6.98074s; animation-delay: 3.79927s; width: 13.9336px; height: 13.1587px; transform: rotate(19.1172deg);"></div><div class="petal" style="left: 56.2052vw; animation-duration: 9.15145s; animation-delay: 0.561413s; width: 9.19963px; height: 15.8214px; transform: rotate(206.485deg);"></div><div class="petal" style="left: 15.9917vw; animation-duration: 9.04914s; animation-delay: 1.28659s; width: 15.4882px; height: 13.2037px; transform: rotate(20.9746deg);"></div><div class="petal" style="left: 87.6574vw; animation-duration: 5.76048s; animation-delay: 1.50664s; width: 15.9824px; height: 15.6688px; transform: rotate(178.853deg);"></div><div class="petal" style="left: 34.7672vw; animation-duration: 7.24322s; animation-delay: 1.54146s; width: 11.275px; height: 8.32181px; transform: rotate(233.066deg);"></div><div class="petal" style="left: 14.6639vw; animation-duration: 8.61069s; animation-delay: 2.05163s; width: 11.6845px; height: 12.1682px; transform: rotate(163.109deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 31.063vw; animation-duration: 9.66376s; animation-delay: 4.51815s; width: 8.25928px; height: 8.62261px; transform: rotate(269.842deg);"></div><div class="petal" style="left: 19.9464vw; animation-duration: 5.4224s; animation-delay: 3.29805s; width: 14.7147px; height: 13.587px; transform: rotate(54.0328deg);"></div><div class="petal" style="left: 3.91441vw; animation-duration: 9.28302s; animation-delay: 2.28284s; width: 9.47921px; height: 8.86062px; transform: rotate(309.635deg);"></div><div class="petal" style="left: 68.7839vw; animation-duration: 8.9149s; animation-delay: 2.10529s; width: 10.407px; height: 12.3276px; transform: rotate(179.509deg);"></div><div class="petal" style="left: 89.0339vw; animation-duration: 9.66582s; animation-delay: 1.5113s; width: 11.1077px; height: 14.8805px; transform: rotate(292.319deg);"></div><div class="petal" style="left: 57.4601vw; animation-duration: 8.31218s; animation-delay: 3.76873s; width: 10.6755px; height: 9.35542px; transform: rotate(172.757deg);"></div><div class="petal" style="left: 79.3261vw; animation-duration: 9.14001s; animation-delay: 3.25145s; width: 13.1014px; height: 10.7782px; transform: rotate(84.0218deg);"></div><div class="petal" style="left: 92.5171vw; animation-duration: 9.56179s; animation-delay: 0.661973s; width: 11.9949px; height: 8.38047px; transform: rotate(238.732deg);"></div><div class="petal" style="left: 90.0994vw; animation-duration: 8.08119s; animation-delay: 1.81349s; width: 14.4978px; height: 13.0216px; transform: rotate(148.148deg);"></div><div class="petal" style="left: 99.8498vw; animation-duration: 6.02047s; animation-delay: 4.88647s; width: 12.1305px; height: 8.74133px; transform: rotate(61.1448deg);"></div><div class="petal" style="left: 61.1281vw; animation-duration: 6.73265s; animation-delay: 2.54205s; width: 15.3479px; height: 14.7278px; transform: rotate(133.424deg);"></div><div class="petal" style="left: 73.4143vw; animation-duration: 6.00513s; animation-delay: 1.26969s; width: 11.5525px; height: 11.2353px; transform: rotate(8.02679deg);"></div><div class="petal" style="left: 57.6167vw; animation-duration: 9.09372s; animation-delay: 2.83055s; width: 9.26612px; height: 12.275px; transform: rotate(256.226deg);"></div><div class="petal" style="left: 74.1786vw; animation-duration: 7.47049s; animation-delay: 0.961521s; width: 12.1995px; height: 9.40647px; transform: rotate(74.2834deg);"></div><div class="petal" style="left: 24.7493vw; animation-duration: 5.87001s; animation-delay: 0.611065s; width: 13.4907px; height: 9.90512px; transform: rotate(120.311deg);"></div></div>
 
     <!-- Header -->
-    <header class="header">
+    <header class="header reveal-in">
         <div class="container header-container">
             <a href="#" class="logo">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 64 64" role="img" aria-label="Логотип">
-                        <path fill="#FBF8F2" d="M32 16 L40 22 L48 22 L44 30 L46 40 L38 46 L32 52 L26 46 L18 40 L20 30 L16 22 L24 22 Z M26 28 L32 24 L38 28 L36 36 L32 40 L28 36 Z"></path>
-                        <path d="M28 44 L36 26" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"></path>
-                    </svg>
+                    <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="Цинтрибот">
                 </div>
                 <div class="logo-text">
                     <h1>Цинтрибот</h1>
@@ -505,7 +589,7 @@
                     </a>
                 </div>
 
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" style="">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-wand-magic-sparkles"></i>
@@ -523,7 +607,7 @@
     <main class="main-content">
         <div class="container">
             <!-- Tabs Navigation -->
-            <div class="tabs-nav" id="tabs-nav">
+            <div class="tabs-nav reveal-in" id="tabs-nav">
                 <div class="tab-indicator" id="tab-indicator" style="transform: translateX(1px); width: 388px;"></div>
                 <button class="tab-btn active" data-tab="commands">
                     <i class="fas fa-microphone-alt"></i>
@@ -545,20 +629,23 @@
             <!-- Commands Tab -->
             <div class="tab-content active" id="commands-tab">
                 <section class="hero-section">
-                    <div class="hero-badge"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
-                    <h1 class="hero-title">Библиотека звуковых команд</h1>
-                    <p class="hero-description">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
+                    <!-- Bus decoration -->
+                    <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="" class="hero-bus" aria-hidden="true" loading="lazy">
+                    
+                    <div class="hero-badge reveal-in"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
+                    <h1 class="hero-title reveal-in">Библиотека звуковых команд</h1>
+                    <p class="hero-description reveal-in">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
                 </section>
 
                 <div class="info-cards">
-                    <div class="info-card">
+                    <div class="info-card reveal-in">
                         <div class="info-card-header">
                             <div class="info-card-icon"><i class="fas fa-gem"></i></div>
                             <h3 class="info-card-title">Как получить БУСЬКИ</h3>
                         </div>
                         <div class="info-card-content"><p>20 БУСЕК за сообщение, 1000 за 100 лайков.</p></div>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card reveal-in">
                         <div class="info-card-header">
                             <div class="info-card-icon"><i class="fas fa-play-circle"></i></div>
                             <h3 class="info-card-title">Как использовать</h3>
@@ -567,16 +654,16 @@
                     </div>
                 </div>
 
-                <section class="search-section">
+                <section class="search-section reveal-in">
                     <div class="search-container">
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" class="search-input" id="search-box" placeholder="Поиск команд..." aria-label="Поиск команд">
                     </div>
                 </section>
 
-                <div class="categories" id="categories-tabs"><div class="category-tag" data-category="Все">Все</div><div class="category-tag" data-category="☢ S.T.A.L.K.E.R.">☢ S.T.A.L.K.E.R.</div><div class="category-tag" data-category="🍳 Перерывчик">🍳 Перерывчик</div><div class="category-tag" data-category="👑 Мои">👑 Мои</div><div class="category-tag" data-category="💋 Завершение">💋 Завершение</div><div class="category-tag" data-category="💕 Приятности">💕 Приятности</div><div class="category-tag" data-category="💜 Приветствие">💜 Приветствие</div><div class="category-tag" data-category="💪 Боевой настрой">💪 Боевой настрой</div><div class="category-tag active" data-category="💯 НетленОчки">💯 НетленОчки</div><div class="category-tag" data-category="💰 Донатики">💰 Донатики</div><div class="category-tag" data-category="🙈 Фиаско">🙈 Фиаско</div><div class="category-tag" data-category="Розыгрыш">Розыгрыш</div></div>
+                <div class="categories" id="categories-tabs"><div class="category-tag active reveal-in" data-category="Все">Все</div><div class="category-tag reveal-in" data-category="🍳 Перерывчик">🍳 Перерывчик</div><div class="category-tag reveal-in" data-category="🎮 S.T.A.L.K.E.R.">🎮 S.T.A.L.K.E.R.</div><div class="category-tag reveal-in" data-category="👑 Мои">👑 Мои</div><div class="category-tag reveal-in" data-category="💋 Завершение">💋 Завершение</div><div class="category-tag reveal-in" data-category="💕 Приятности">💕 Приятности</div><div class="category-tag reveal-in" data-category="💜 Приветствие">💜 Приветствие</div><div class="category-tag reveal-in" data-category="💪 Боевой настрой">💪 Боевой настрой</div><div class="category-tag reveal-in" data-category="💯 НетленОчки">💯 НетленОчки</div><div class="category-tag reveal-in" data-category="💰 Донатики">💰 Донатики</div><div class="category-tag reveal-in" data-category="🙈 Фиаско">🙈 Фиаско</div></div>
 
-                <div class="commands-grid" id="commands-container"><div class="command-card" data-command="!10000 лет" role="button" aria-label="Команда: !10000 лет. Нет описания" tabindex="0">
+                <div class="commands-grid" id="commands-container"><div class="command-card reveal-in" data-command="!10000 лет" role="button" aria-label="Команда: !10000 лет. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!10000 лет</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -586,9 +673,129 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!вот это поворот" role="button" aria-label="Команда: !вот это поворот. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!28 ударов ножом" role="button" aria-label="Команда: !28 ударов ножом. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!28 ударов ножом</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ай мля" role="button" aria-label="Команда: !ай мля. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ай мля</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!алигофрен" role="button" aria-label="Команда: !алигофрен. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!алигофрен</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!асталависта" role="button" aria-label="Команда: !асталависта. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!асталависта</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💋 Завершение</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ау" role="button" aria-label="Команда: !ау. Классическое приветствие" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ау</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Классическое приветствие
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ах за душу" role="button" aria-label="Команда: !ах за душу. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ах за душу</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!бабу бы" role="button" aria-label="Команда: !бабу бы. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!бабу бы</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!беги ска" role="button" aria-label="Команда: !беги ска. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!беги ска</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!бомжа пробовала" role="button" aria-label="Команда: !бомжа пробовала. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!бомжа пробовала</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!бриллианты" role="button" aria-label="Команда: !бриллианты. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!бриллианты</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!вот это поворот" role="button" aria-label="Команда: !вот это поворот. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!вот это поворот</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -598,9 +805,177 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!жизнь одна кайфуйте" role="button" aria-label="Команда: !жизнь одна кайфуйте. Бузова" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!все спиздили" role="button" aria-label="Команда: !все спиздили. Леон Кеннеди" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!все спиздили</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Леон Кеннеди
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!всем пока" role="button" aria-label="Команда: !всем пока. мем" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!всем пока</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        мем
+                        <div class="command-category">💋 Завершение</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!гони две сотни" role="button" aria-label="Команда: !гони две сотни. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!гони две сотни</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!гони две сотни" role="button" aria-label="Команда: !гони две сотни. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!гони две сотни</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💰 Донатики</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!Госпади" role="button" aria-label="Команда: !Госпади. удивление" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!Госпади</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        удивление
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!граждане алкоголики" role="button" aria-label="Команда: !граждане алкоголики. Операция 'Ы'" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!граждане алкоголики</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Операция 'Ы'
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!давай мяса" role="button" aria-label="Команда: !давай мяса. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!давай мяса</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!давай червонец" role="button" aria-label="Команда: !давай червонец. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!давай червонец</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💰 Донатики</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!день добрый" role="button" aria-label="Команда: !день добрый. Джек Воробей" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!день добрый</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джек Воробей
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!деньжата посыпались" role="button" aria-label="Команда: !деньжата посыпались. Звук денег" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!деньжата посыпались</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Звук денег
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!дробовик" role="button" aria-label="Команда: !дробовик. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!дробовик</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!дрын" role="button" aria-label="Команда: !дрын. Оружие" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!дрын</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Оружие
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ебанько" role="button" aria-label="Команда: !ебанько. Ведьмак 3" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ебанько</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Ведьмак 3
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ералаш" role="button" aria-label="Команда: !ералаш. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ералаш</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!жизнь одна кайфуйте" role="button" aria-label="Команда: !жизнь одна кайфуйте. Бузова" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!жизнь одна кайфуйте</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -610,9 +985,33 @@
                     </div>
                     <div class="command-description">
                         Бузова
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!зажги туши" role="button" aria-label="Команда: !зажги туши. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!жрать охота" role="button" aria-label="Команда: !жрать охота. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!жрать охота</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!жрать охота" role="button" aria-label="Команда: !жрать охота. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!жрать охота</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!зажги туши" role="button" aria-label="Команда: !зажги туши. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!зажги туши</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -622,9 +1021,165 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!Ламберт" role="button" aria-label="Команда: !Ламберт. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!здарова бандиты" role="button" aria-label="Команда: !здарова бандиты. 'Брат'" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!здарова бандиты</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        'Брат'
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!здарова братиш" role="button" aria-label="Команда: !здарова братиш. торчок Валера" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!здарова братиш</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        торчок Валера
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!здарова братья" role="button" aria-label="Команда: !здарова братья. Бригада" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!здарова братья</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Бригада
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!здравствуйте" role="button" aria-label="Команда: !здравствуйте. Голодные игры" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!здравствуйте</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Голодные игры
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!и восстали машины" role="button" aria-label="Команда: !и восстали машины. Терминатор" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!и восстали машины</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Терминатор
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!как дела сталкер" role="button" aria-label="Команда: !как дела сталкер. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!как дела сталкер</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!какая отвратительная рожа" role="button" aria-label="Команда: !какая отвратительная рожа. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!какая отвратительная рожа</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!кина не будет" role="button" aria-label="Команда: !кина не будет. Джентельмены удачи" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!кина не будет</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джентельмены удачи
+                        <div class="command-category">💋 Завершение</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!колеса катит" role="button" aria-label="Команда: !колеса катит. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!колеса катит</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!конишуа" role="button" aria-label="Команда: !конишуа. Комиссар Жобер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!конишуа</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Комиссар Жобер
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!Корбен детка" role="button" aria-label="Команда: !Корбен детка. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!Корбен детка</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!кто не работает тот ест" role="button" aria-label="Команда: !кто не работает тот ест. Приключения Шурика" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!кто не работает тот ест</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Приключения Шурика
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!лайкос кокос" role="button" aria-label="Команда: !лайкос кокос. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!лайкос кокос</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!Ламберт" role="button" aria-label="Команда: !Ламберт. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!Ламберт</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -634,9 +1189,9 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!ля ты крыса" role="button" aria-label="Команда: !ля ты крыса. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!ля ты крыса" role="button" aria-label="Команда: !ля ты крыса. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!ля ты крыса</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -646,9 +1201,117 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!немножко страшно" role="button" aria-label="Команда: !немножко страшно. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!маза фака" role="button" aria-label="Команда: !маза фака. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!маза фака</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!маслину поймал" role="button" aria-label="Команда: !маслину поймал. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!маслину поймал</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!маслину поймал" role="button" aria-label="Команда: !маслину поймал. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!маслину поймал</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!молодец" role="button" aria-label="Команда: !молодец. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!молодец</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!молодец" role="button" aria-label="Команда: !молодец. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!молодец</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!мы кушаем" role="button" aria-label="Команда: !мы кушаем. Warcraft" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!мы кушаем</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Warcraft
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!наши полномочия" role="button" aria-label="Команда: !наши полномочия. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!наши полномочия</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!не научитесь" role="button" aria-label="Команда: !не научитесь. Ведьмак 3" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!не научитесь</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Ведьмак 3
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!не хочу разговаривать" role="button" aria-label="Команда: !не хочу разговаривать. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!не хочу разговаривать</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!немножко страшно" role="button" aria-label="Команда: !немножко страшно. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!немножко страшно</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -658,9 +1321,21 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!ничего страшного" role="button" aria-label="Команда: !ничего страшного. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!никак не научитесь" role="button" aria-label="Команда: !никак не научитесь. Ведьмак" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!никак не научитесь</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Ведьмак
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ничего страшного" role="button" aria-label="Команда: !ничего страшного. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!ничего страшного</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -670,9 +1345,69 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!очень страшно" role="button" aria-label="Команда: !очень страшно. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!ну и пожалуйста" role="button" aria-label="Команда: !ну и пожалуйста. мемный кот" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ну и пожалуйста</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        мемный кот
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ну нахер" role="button" aria-label="Команда: !ну нахер. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ну нахер</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!он улетел" role="button" aria-label="Команда: !он улетел. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!он улетел</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!опа здрасти" role="button" aria-label="Команда: !опа здрасти. приветствие" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!опа здрасти</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        приветствие
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!оу е" role="button" aria-label="Команда: !оу е. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!оу е</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💕 Приятности</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!очень страшно" role="button" aria-label="Команда: !очень страшно. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!очень страшно</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -682,9 +1417,21 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!по новой Миша" role="button" aria-label="Команда: !по новой Миша. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!пельмени всему голова" role="button" aria-label="Команда: !пельмени всему голова. Особенности нац. рыбалки" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!пельмени всему голова</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Особенности нац. рыбалки
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!по новой Миша" role="button" aria-label="Команда: !по новой Миша. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!по новой Миша</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -694,9 +1441,45 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!сколько" role="button" aria-label="Команда: !сколько. кофе 36 гривен" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!получить пи" role="button" aria-label="Команда: !получить пи. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!получить пи</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!пришел увидел" role="button" aria-label="Команда: !пришел увидел. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!пришел увидел</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!садитесь жрать пожалуйста" role="button" aria-label="Команда: !садитесь жрать пожалуйста. Джентельмены удачи" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!садитесь жрать пожалуйста</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джентельмены удачи
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!сколько" role="button" aria-label="Команда: !сколько. кофе 36 гривен" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!сколько</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -706,9 +1489,45 @@
                     </div>
                     <div class="command-description">
                         кофе 36 гривен
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!смекаешь" role="button" aria-label="Команда: !смекаешь. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!сколько" role="button" aria-label="Команда: !сколько. кофе 36 гривен" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!сколько</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        кофе 36 гривен
+                        <div class="command-category">💰 Донатики</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!скоро встретимся" role="button" aria-label="Команда: !скоро встретимся. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!скоро встретимся</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💋 Завершение</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!слоумо" role="button" aria-label="Команда: !слоумо. Замедление" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!слоумо</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Замедление
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!смекаешь" role="button" aria-label="Команда: !смекаешь. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!смекаешь</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -718,9 +1537,81 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!текнолоджия" role="button" aria-label="Команда: !текнолоджия. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!стволы для лохов" role="button" aria-label="Команда: !стволы для лохов. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!стволы для лохов</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!стелс" role="button" aria-label="Команда: !стелс. Скрытность" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!стелс</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Скрытность
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!суету навести" role="button" aria-label="Команда: !суету навести. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!суету навести</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!сыыыр" role="button" aria-label="Команда: !сыыыр. Чип и Дейл" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!сыыыр</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Чип и Дейл
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!танцуют все" role="button" aria-label="Команда: !танцуют все. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!танцуют все</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!твое слово пупсик" role="button" aria-label="Команда: !твое слово пупсик. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!твое слово пупсик</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💕 Приятности</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!текнолоджия" role="button" aria-label="Команда: !текнолоджия. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!текнолоджия</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -730,9 +1621,189 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!что такое безумие" role="button" aria-label="Команда: !что такое безумие. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!ты туда не ходи" role="button" aria-label="Команда: !ты туда не ходи. Джентельмены удачи" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ты туда не ходи</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джентельмены удачи
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ублюдок мать твою" role="button" aria-label="Команда: !ублюдок мать твою. озвучка 90-х" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ублюдок мать твою</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        озвучка 90-х
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!удачной охоты" role="button" aria-label="Команда: !удачной охоты. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!удачной охоты</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ужин" role="button" aria-label="Команда: !ужин. Джентельмены удачи" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ужин</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джентельмены удачи
+                        <div class="command-category">🍳 Перерывчик</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!улыбаемся и машем" role="button" aria-label="Команда: !улыбаемся и машем. Мадагаскар" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!улыбаемся и машем</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Мадагаскар
+                        <div class="command-category">💋 Завершение</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ути пути" role="button" aria-label="Команда: !ути пути. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ути пути</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💕 Приятности</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!фраер не пугайся" role="button" aria-label="Команда: !фраер не пугайся. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!фраер не пугайся</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!хвать охота" role="button" aria-label="Команда: !хвать охота. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!хвать охота</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!хороший товар" role="button" aria-label="Команда: !хороший товар. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!хороший товар</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!хьюстон" role="button" aria-label="Команда: !хьюстон. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!хьюстон</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!чем могу служить" role="button" aria-label="Команда: !чем могу служить. Джаффар 'Алладин'" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!чем могу служить</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Джаффар 'Алладин'
+                        <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!черичь их" role="button" aria-label="Команда: !черичь их. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!черичь их</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!чики брики" role="button" aria-label="Команда: !чики брики. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!чики брики</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!чики брики" role="button" aria-label="Команда: !чики брики. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!чики брики</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!что принес и вали" role="button" aria-label="Команда: !что принес и вали. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!что принес и вали</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!что такое безумие" role="button" aria-label="Команда: !что такое безумие. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!что такое безумие</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -742,9 +1813,33 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!шинима куйня" role="button" aria-label="Команда: !шинима куйня. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!чудесно пахнешь" role="button" aria-label="Команда: !чудесно пахнешь. Ведьмак и Йен" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!чудесно пахнешь</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Ведьмак и Йен
+                        <div class="command-category">💕 Приятности</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!шеф всё пропало" role="button" aria-label="Команда: !шеф всё пропало. Бриллиантовая Рука" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!шеф всё пропало</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Бриллиантовая Рука
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!шинима куйня" role="button" aria-label="Команда: !шинима куйня. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!шинима куйня</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -754,9 +1849,57 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card" data-command="!я сам решу" role="button" aria-label="Команда: !я сам решу. Нет описания" tabindex="0">
+                </div><div class="command-card reveal-in" data-command="!я же королева" role="button" aria-label="Команда: !я же королева. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!я же королева</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!я не понял" role="button" aria-label="Команда: !я не понял. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!я не понял</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!я обсикалась" role="button" aria-label="Команда: !я обсикалась. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!я обсикалась</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">👑 Мои</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!я один тупой" role="button" aria-label="Команда: !я один тупой. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!я один тупой</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!я сам решу" role="button" aria-label="Команда: !я сам решу. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!я сам решу</div>
                         <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
@@ -766,7 +1909,91 @@
                     </div>
                     <div class="command-description">
                          
-                        
+                        <div class="command-category">💯 НетленОчки</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!fatality" role="button" aria-label="Команда: !fatality. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!fatality</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!fight" role="button" aria-label="Команда: !fight. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!fight</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!finish him" role="button" aria-label="Команда: !finish him. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!finish him</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!oh shit" role="button" aria-label="Команда: !oh shit. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!oh shit</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">🙈 Фиаско</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!pole чудес" role="button" aria-label="Команда: !pole чудес. При победе" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!pole чудес</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        При победе
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!round one" role="button" aria-label="Команда: !round one. Нет описания" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!round one</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                         
+                        <div class="command-category">💪 Боевой настрой</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!Snoop Dogg" role="button" aria-label="Команда: !Snoop Dogg. ла-ла-ла" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!Snoop Dogg</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        ла-ла-ла
+                        <div class="command-category">💪 Боевой настрой</div>
                     </div>
                 </div></div>
 
@@ -780,9 +2007,9 @@
             <!-- Songs Tab -->
             <div class="tab-content" id="songs-tab">
                 <section class="hero-section">
-                    <div class="hero-badge"><i class="fas fa-crown"></i><span>40,000 БУСЕК за песню</span></div>
-                    <h1 class="hero-title">Закажите песню</h1>
-                    <p class="hero-description">Выберите песню и отправьте команду в чат.</p>
+                    <div class="hero-badge reveal-in"><i class="fas fa-crown"></i><span>40,000 БУСЕК за песню</span></div>
+                    <h1 class="hero-title reveal-in">Закажите песню</h1>
+                    <p class="hero-description reveal-in">Выберите песню и отправьте команду в чат.</p>
                 </section>
                 <div class="songs-grid" id="songs-container"><div class="song-card" data-command="!песня А-Студио - Мама-папа" role="button" aria-label="Заказать песню: А-Студио - Мама-папа" tabindex="0">
                     <div class="song-icon"><i class="fas fa-music"></i></div>
@@ -954,10 +2181,10 @@
                         <i class="fas fa-gem"></i>
                         <span>40,000</span>
                     </div>
-                </div><div class="song-card" data-command="!песня Мираж - Музыка нас связала" role="button" aria-label="Заказать песню: Мираж - Музыка нас связала" tabindex="0">
+                </div><div class="song-card" data-command="!песня Мраж - Музыка нас связала" role="button" aria-label="Заказать песню: Мраж - Музыка нас связала" tabindex="0">
                     <div class="song-icon"><i class="fas fa-music"></i></div>
                     <div class="song-info">
-                        <div class="song-artist">Мираж</div>
+                        <div class="song-artist">Мраж</div>
                         <div class="song-title">Музыка нас связала</div>
                     </div>
                     <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
@@ -1065,9 +2292,9 @@
             <!-- Suffering Tab -->
             <div class="tab-content" id="suffering-tab">
                 <section class="hero-section">
-                    <div class="hero-badge"><i class="fas fa-skull"></i><span>Страдание стримера — радость зрителя!</span></div>
-                    <h1 class="hero-title">Мучительные испытания</h1>
-                    <p class="hero-description">5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК</p>
+                    <div class="hero-badge reveal-in"><i class="fas fa-skull"></i><span>Страдание стримера — радость зрителя!</span></div>
+                    <h1 class="hero-title reveal-in">Мучительные испытания</h1>
+                    <p class="hero-description reveal-in">5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК</p>
                 </section>
                 <div class="songs-grid" id="suffering-container"><div class="suffering-card" data-command="!лечилка" role="button" aria-label="Испытание: Лечилка" tabindex="0">
                     <div class="suffering-icon"><i class="fas fa-ban"></i></div>
@@ -1108,7 +2335,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer reveal-in">
         <div class="container">
             <div class="footer-content">
                 <p>design and development by EVRUS</p>
@@ -1120,7 +2347,7 @@
     <!-- Notification -->
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда "!розыгрыш" добавлена в "Розыгрыш"</span>
+        <span id="notification-text">Файл скачан локально (токен не указан)</span>
     </div>
 
     
@@ -1187,6 +2414,98 @@
                 {
                         "name": "!суету навести",
                         "description": "",
+                        "cost": 300
+                }
+        ],
+        "🎮 S.T.A.L.K.E.R.": [
+                {
+                        "name": "!бабу бы",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!гони две сотни",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!жрать охота",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!как дела сталкер",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!колеса катит",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!маслину поймал",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!молодец",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!не хочу разговаривать",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!удачной охоты",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!фраер не пугайся",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!хвать охота",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!черичь их",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!хороший товар",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!чики брики",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!что принес и вали",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!ах за душу",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!я не понял",
+                        "description": "Сталкер",
+                        "cost": 300
+                },
+                {
+                        "name": "!я один тупой",
+                        "description": "Сталкер",
                         "cost": 300
                 }
         ],
@@ -1354,7 +2673,7 @@
                         "cost": 300
                 },
                 {
-                        "name": "!поле чудес",
+                        "name": "!pole чудес",
                         "description": "При победе",
                         "cost": 300
                 },
@@ -1615,105 +2934,6 @@
                         "description": "",
                         "cost": 300
                 }
-        ],
-        "☢ S.T.A.L.K.E.R.": [
-                {
-                        "name": "!бабу бы",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!колеса катит",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!удачной охоты",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!хороший товар",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!я не понял",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!гони две сотни",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!маслину поймал",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!фраер не пугайся",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!чики брики",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!я один тупой",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!жрать охота",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!молодец",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!хавать охота",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!что принес и вали",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!как дела сталкер",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!не хочу разговаривать",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!херачь их",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!эх за душу",
-                        "description": "Сталкер",
-                        "cost": 300
-                }
-        ],
-        "Розыгрыш": [
-                {
-                        "name": "!розыгрыш",
-                        "description": "",
-                        "cost": 2000
-                }
         ]
 };
 /*DATA_COMMANDS_BY_CATEGORY_END*/
@@ -1789,7 +3009,7 @@
                 "name": "Текила-любовь"
         },
         {
-                "artist": "Мираж",
+                "artist": "Мраж",
                 "name": "Музыка нас связала"
         },
         {
@@ -1860,17 +3080,10 @@
         // ========== localStorage functions ==========
         function saveToLocalStorage() {
             try {
-                const data = {
-                    commandsByCategory: commandsByCategory,
-                    songs: songs,
-                    sufferingItems: sufferingItems
-                };
+                const data = { commandsByCategory, songs, sufferingItems };
                 localStorage.setItem('cintribot_data', JSON.stringify(data));
                 return true;
-            } catch (e) {
-                console.error('Error saving to localStorage:', e);
-                return false;
-            }
+            } catch (e) { console.error('Error saving:', e); return false; }
         }
 
         function loadFromLocalStorage() {
@@ -1878,28 +3091,15 @@
                 const raw = localStorage.getItem('cintribot_data');
                 if (!raw) return false;
                 const data = JSON.parse(raw);
-                if (data.commandsByCategory && Object.keys(data.commandsByCategory).length > 0) {
-                    commandsByCategory = data.commandsByCategory;
-                }
-                if (data.songs && data.songs.length > 0) {
-                    songs = data.songs;
-                }
-                if (data.sufferingItems && data.sufferingItems.length > 0) {
-                    sufferingItems = data.sufferingItems;
-                }
+                if (data.commandsByCategory && Object.keys(data.commandsByCategory).length > 0) commandsByCategory = data.commandsByCategory;
+                if (data.songs && data.songs.length > 0) songs = data.songs;
+                if (data.sufferingItems && data.sufferingItems.length > 0) sufferingItems = data.sufferingItems;
                 return true;
-            } catch (e) {
-                console.error('Error loading from localStorage:', e);
-                return false;
-            }
+            } catch (e) { console.error('Error loading:', e); return false; }
         }
 
         // ========== DOM Elements ==========
         const splashScreen = document.getElementById('splash-screen');
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const welcomeCloseBtn = document.getElementById('welcome-close-btn');
-        const welcomeCloseSecondaryBtn = document.getElementById('welcome-close-secondary');
-        const welcomeGoBtn = document.getElementById('welcome-go-btn');
         const themeToggle = document.getElementById('theme-toggle');
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -1956,51 +3156,56 @@
         let searchQuery = "";
         let allCommands = [];
         let currentTab = 'commands';
+        let editingCommand = null, editingSong = null, editingSuffering = null;
 
-        let editingCommand = null;
-        let editingSong = null;
-        let editingSuffering = null;
+        // ========== ANIMATION HELPERS ==========
+        function revealElement(el, delay = 0) {
+            if (!el) return;
+            setTimeout(() => el.classList.add('reveal-in'), delay);
+        }
+
+        function runPageLoadAnimation() {
+            document.body.classList.add('page-loaded');
+            revealElement(document.querySelector('.header'), 0);
+            revealElement(document.querySelector('.tabs-nav'), 100);
+            const heroChildren = document.querySelectorAll('.hero-section > *:not(.hero-bus)');
+            heroChildren.forEach((el, i) => revealElement(el, 200 + i * 90));
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach((el, i) => revealElement(el, 550 + i * 110));
+            revealElement(document.querySelector('.search-section'), 800);
+            const catTags = document.querySelectorAll('.category-tag');
+            catTags.forEach((el, i) => revealElement(el, 900 + i * 40));
+            const cmdCards = document.querySelectorAll('.command-card');
+            cmdCards.forEach((el, i) => revealElement(el, 1050 + Math.min(i * 55, 700)));
+            revealElement(document.querySelector('.footer'), 1200);
+        }
 
         // ========== EDITOR FUNCTIONS ==========
         if (editorOpenBtn && editorOverlay) {
             const openEditor = () => {
-                if (typeof hideWelcomeScreen === 'function') hideWelcomeScreen();
                 document.body.classList.add('editor-open');
                 editorOverlay.classList.add('show');
                 refreshAllEditorLists();
-                resetCommandForm();
-                resetSongForm();
-                resetSufferingForm();
+                resetCommandForm(); resetSongForm(); resetSufferingForm();
                 setTimeout(() => { if (editorCmdName) editorCmdName.focus(); }, 0);
             };
-
             const closeEditor = () => {
                 editorOverlay.classList.remove('show');
                 document.body.classList.remove('editor-open');
                 if (editorOpenBtn) editorOpenBtn.focus();
             };
-
             editorOpenBtn.addEventListener('click', openEditor);
             editorCloseBtn.addEventListener('click', closeEditor);
             editorOverlay.addEventListener('click', (e) => { if (e.target === editorOverlay) closeEditor(); });
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && editorOverlay.classList.contains('show')) {
-                    e.preventDefault();
-                    closeEditor();
-                }
+                if (e.key === 'Escape' && editorOverlay.classList.contains('show')) { e.preventDefault(); closeEditor(); }
             });
-
-            // Save button
             if (editorSaveBtn) {
                 editorSaveBtn.addEventListener('click', () => {
-                    if (saveToLocalStorage()) {
-                        showNotification('Данные сохранены в localStorage!', 'commands');
-                    } else {
-                        showNotification('Ошибка сохранения!', 'commands');
-                    }
+                    if (saveToLocalStorage()) showNotification('Данные сохранены в localStorage!', 'commands');
+                    else showNotification('Ошибка сохранения!', 'commands');
                 });
             }
-
             editorTabButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     editorTabButtons.forEach(b => b.classList.remove('active'));
@@ -2014,41 +3219,31 @@
                     if (tab === 'suffering') editorTabSuffering.classList.add('active');
                 });
             });
-
-            // Commands
             function refreshEditorCategoryDatalist() {
                 editorCmdCategories.innerHTML = '';
                 Object.keys(commandsByCategory).sort((a, b) => a.localeCompare(b)).forEach(category => {
-                    const opt = document.createElement('option');
-                    opt.value = category;
+                    const opt = document.createElement('option'); opt.value = category;
                     editorCmdCategories.appendChild(opt);
                 });
             }
-
             function editCommand(category, index) {
                 const cmd = commandsByCategory[category][index];
                 if (!cmd) return;
-                editorCmdCategory.value = category;
-                editorCmdName.value = cmd.name;
-                editorCmdDescription.value = cmd.description || '';
-                editorCmdCost.value = cmd.cost;
+                editorCmdCategory.value = category; editorCmdName.value = cmd.name;
+                editorCmdDescription.value = cmd.description || ''; editorCmdCost.value = cmd.cost;
                 editingCommand = { category, index };
                 editorCmdAddBtn.textContent = 'Сохранить изменения';
                 editorCmdCancelBtn.style.display = 'inline-block';
                 document.querySelector('[data-editor-tab="commands"]').click();
                 editorCmdName.focus();
             }
-
             function resetCommandForm() {
-                editorCmdCategory.value = '';
-                editorCmdName.value = '';
-                editorCmdDescription.value = '';
-                editorCmdCost.value = '300';
+                editorCmdCategory.value = ''; editorCmdName.value = '';
+                editorCmdDescription.value = ''; editorCmdCost.value = '300';
                 editingCommand = null;
                 editorCmdAddBtn.textContent = 'Добавить команду';
                 editorCmdCancelBtn.style.display = 'none';
             }
-
             function deleteCommand(category, index) {
                 if (!commandsByCategory[category]) return;
                 commandsByCategory[category].splice(index, 1);
@@ -2062,13 +3257,9 @@
                         if (t.getAttribute('data-category') === "Все") t.classList.add('active');
                     });
                 }
-                searchQuery = "";
-                initCategories();
-                renderCommands();
-                refreshAllEditorLists();
-                saveToLocalStorage();
+                searchQuery = ""; initCategories(); renderCommands();
+                refreshAllEditorLists(); saveToLocalStorage();
             }
-
             function renderEditorCommandsList() {
                 editorCmdList.innerHTML = '';
                 const categories = Object.keys(commandsByCategory).sort((a, b) => a.localeCompare(b));
@@ -2076,46 +3267,33 @@
                     const empty = document.createElement('div');
                     empty.className = 'editor-row';
                     empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет команд</div></div>';
-                    editorCmdList.appendChild(empty);
-                    return;
+                    editorCmdList.appendChild(empty); return;
                 }
                 categories.forEach(category => {
                     commandsByCategory[category].forEach((cmd, idx) => {
-                        const row = document.createElement('div');
-                        row.className = 'editor-row';
-                        const left = document.createElement('div');
-                        left.className = 'editor-row-main';
-                        const title = document.createElement('div');
-                        title.className = 'editor-row-title';
+                        const row = document.createElement('div'); row.className = 'editor-row';
+                        const left = document.createElement('div'); left.className = 'editor-row-main';
+                        const title = document.createElement('div'); title.className = 'editor-row-title';
                         title.textContent = `${cmd.name} (${category})`;
-                        const sub = document.createElement('div');
-                        sub.className = 'editor-row-sub';
+                        const sub = document.createElement('div'); sub.className = 'editor-row-sub';
                         sub.textContent = `Описание: ${cmd.description || '-'}\nСтоимость: ${cmd.cost}`;
-                        left.appendChild(title);
-                        left.appendChild(sub);
-                        const actions = document.createElement('div');
-                        actions.className = 'editor-actions';
+                        left.appendChild(title); left.appendChild(sub);
+                        const actions = document.createElement('div'); actions.className = 'editor-actions';
                         actions.style.justifyContent = 'flex-end';
                         const editBtn = document.createElement('button');
-                        editBtn.className = 'editor-btn secondary';
-                        editBtn.type = 'button';
-                        editBtn.textContent = 'Изменить';
-                        editBtn.style.marginRight = '8px';
+                        editBtn.className = 'editor-btn secondary'; editBtn.type = 'button';
+                        editBtn.textContent = 'Изменить'; editBtn.style.marginRight = '8px';
                         editBtn.addEventListener('click', () => editCommand(category, idx));
                         const delBtn = document.createElement('button');
-                        delBtn.className = 'editor-btn danger';
-                        delBtn.type = 'button';
+                        delBtn.className = 'editor-btn danger'; delBtn.type = 'button';
                         delBtn.textContent = 'Удалить';
                         delBtn.addEventListener('click', () => deleteCommand(category, idx));
-                        actions.appendChild(editBtn);
-                        actions.appendChild(delBtn);
-                        row.appendChild(left);
-                        row.appendChild(actions);
+                        actions.appendChild(editBtn); actions.appendChild(delBtn);
+                        row.appendChild(left); row.appendChild(actions);
                         editorCmdList.appendChild(row);
                     });
                 });
             }
-
             function addOrUpdateCommand() {
                 let category = (editorCmdCategory.value || '').trim();
                 const name = (editorCmdName.value || '').trim();
@@ -2124,9 +3302,7 @@
                 if (!category) return alert('Укажи категорию');
                 if (!name) return alert('Укажи команду');
                 if (!Number.isFinite(cost) || cost < 0) return alert('Стоимость должна быть числом >= 0');
-
                 if (!commandsByCategory[category]) commandsByCategory[category] = [];
-
                 if (editingCommand) {
                     const oldCategory = editingCommand.category;
                     const oldIndex = editingCommand.index;
@@ -2141,9 +3317,7 @@
                 } else {
                     commandsByCategory[category].push({ name, description, cost });
                 }
-
-                prepareAllCommands();
-                searchQuery = "";
+                prepareAllCommands(); searchQuery = "";
                 if (!commandsByCategory[activeCategoryFilter] && activeCategoryFilter !== "Все") activeCategoryFilter = "Все";
                 initCategories();
                 document.querySelectorAll('.category-tag').forEach(t => {
@@ -2158,117 +3332,75 @@
                         if (t.getAttribute('data-category') === "Все") t.classList.add('active');
                     });
                 }
-                renderCommands();
-                refreshAllEditorLists();
-                saveToLocalStorage();
-                editorCmdName.value = '';
-                editorCmdDescription.value = '';
+                renderCommands(); refreshAllEditorLists(); saveToLocalStorage();
+                editorCmdName.value = ''; editorCmdDescription.value = '';
                 if (!editingCommand) showNotification(`Команда "${name}" добавлена в "${category}"`, 'commands');
             }
-
-            // Songs
             function editSong(index) {
-                const song = songs[index];
-                if (!song) return;
-                editorSongArtist.value = song.artist;
-                editorSongName.value = song.name;
+                const song = songs[index]; if (!song) return;
+                editorSongArtist.value = song.artist; editorSongName.value = song.name;
                 editingSong = { index };
                 editorSongAddBtn.textContent = 'Сохранить изменения';
                 editorSongCancelBtn.style.display = 'inline-block';
                 document.querySelector('[data-editor-tab="songs"]').click();
                 editorSongArtist.focus();
             }
-
             function resetSongForm() {
-                editorSongArtist.value = '';
-                editorSongName.value = '';
+                editorSongArtist.value = ''; editorSongName.value = '';
                 editingSong = null;
                 editorSongAddBtn.textContent = 'Добавить песню';
                 editorSongCancelBtn.style.display = 'none';
             }
-
             function deleteSong(index) {
                 songs.splice(index, 1);
                 if (editingSong && editingSong.index === index) resetSongForm();
-                prepareSongs();
-                renderSongs();
-                refreshAllEditorLists();
-                saveToLocalStorage();
+                prepareSongs(); renderSongs(); refreshAllEditorLists(); saveToLocalStorage();
             }
-
             function renderEditorSongsList() {
                 editorSongList.innerHTML = '';
                 if (!songs.length) {
-                    const empty = document.createElement('div');
-                    empty.className = 'editor-row';
+                    const empty = document.createElement('div'); empty.className = 'editor-row';
                     empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет песен</div></div>';
-                    editorSongList.appendChild(empty);
-                    return;
+                    editorSongList.appendChild(empty); return;
                 }
                 songs.forEach((song, idx) => {
-                    const row = document.createElement('div');
-                    row.className = 'editor-row';
-                    const left = document.createElement('div');
-                    left.className = 'editor-row-main';
-                    const title = document.createElement('div');
-                    title.className = 'editor-row-title';
+                    const row = document.createElement('div'); row.className = 'editor-row';
+                    const left = document.createElement('div'); left.className = 'editor-row-main';
+                    const title = document.createElement('div'); title.className = 'editor-row-title';
                     title.textContent = `${song.artist} — ${song.name}`;
-                    const sub = document.createElement('div');
-                    sub.className = 'editor-row-sub';
+                    const sub = document.createElement('div'); sub.className = 'editor-row-sub';
                     sub.textContent = 'Команда: !песня ' + song.artist + ' - ' + song.name;
-                    left.appendChild(title);
-                    left.appendChild(sub);
-                    const actions = document.createElement('div');
-                    actions.className = 'editor-actions';
+                    left.appendChild(title); left.appendChild(sub);
+                    const actions = document.createElement('div'); actions.className = 'editor-actions';
                     actions.style.justifyContent = 'flex-end';
                     const editBtn = document.createElement('button');
-                    editBtn.className = 'editor-btn secondary';
-                    editBtn.type = 'button';
-                    editBtn.textContent = 'Изменить';
-                    editBtn.style.marginRight = '8px';
+                    editBtn.className = 'editor-btn secondary'; editBtn.type = 'button';
+                    editBtn.textContent = 'Изменить'; editBtn.style.marginRight = '8px';
                     editBtn.addEventListener('click', () => editSong(idx));
                     const delBtn = document.createElement('button');
-                    delBtn.className = 'editor-btn danger';
-                    delBtn.type = 'button';
+                    delBtn.className = 'editor-btn danger'; delBtn.type = 'button';
                     delBtn.textContent = 'Удалить';
                     delBtn.addEventListener('click', () => deleteSong(idx));
-                    actions.appendChild(editBtn);
-                    actions.appendChild(delBtn);
-                    row.appendChild(left);
-                    row.appendChild(actions);
+                    actions.appendChild(editBtn); actions.appendChild(delBtn);
+                    row.appendChild(left); row.appendChild(actions);
                     editorSongList.appendChild(row);
                 });
             }
-
             function addOrUpdateSong() {
                 const artist = (editorSongArtist.value || '').trim();
                 const name = (editorSongName.value || '').trim();
                 if (!artist) return alert('Укажи исполнителя');
                 if (!name) return alert('Укажи название песни');
-
-                if (editingSong) {
-                    songs[editingSong.index] = { artist, name };
-                    resetSongForm();
-                } else {
-                    songs.push({ artist, name });
-                }
-                prepareSongs();
-                renderSongs();
-                refreshAllEditorLists();
-                saveToLocalStorage();
-                editorSongArtist.value = '';
-                editorSongName.value = '';
+                if (editingSong) { songs[editingSong.index] = { artist, name }; resetSongForm(); }
+                else { songs.push({ artist, name }); }
+                prepareSongs(); renderSongs(); refreshAllEditorLists(); saveToLocalStorage();
+                editorSongArtist.value = ''; editorSongName.value = '';
                 if (!editingSong) showNotification(`Песня "${artist} — ${name}" добавлена`, 'songs');
             }
-
-            // Suffering
             function editSuffering(index) {
-                const item = sufferingItems[index];
-                if (!item) return;
-                editorSuffCommand.value = item.command;
-                editorSuffTitle.value = item.title;
-                editorSuffDescription.value = item.description || '';
-                editorSuffIcon.value = item.icon;
+                const item = sufferingItems[index]; if (!item) return;
+                editorSuffCommand.value = item.command; editorSuffTitle.value = item.title;
+                editorSuffDescription.value = item.description || ''; editorSuffIcon.value = item.icon;
                 editorSuffCost.value = item.cost;
                 editingSuffering = { index };
                 editorSuffAddBtn.textContent = 'Сохранить изменения';
@@ -2276,70 +3408,48 @@
                 document.querySelector('[data-editor-tab="suffering"]').click();
                 editorSuffCommand.focus();
             }
-
             function resetSufferingForm() {
-                editorSuffCommand.value = '';
-                editorSuffTitle.value = '';
-                editorSuffDescription.value = '';
-                editorSuffIcon.value = '';
-                editorSuffCost.value = '';
+                editorSuffCommand.value = ''; editorSuffTitle.value = '';
+                editorSuffDescription.value = ''; editorSuffIcon.value = ''; editorSuffCost.value = '';
                 editingSuffering = null;
                 editorSuffAddBtn.textContent = 'Добавить челлендж';
                 editorSuffCancelBtn.style.display = 'none';
             }
-
             function deleteSufferingItem(index) {
                 sufferingItems.splice(index, 1);
                 if (editingSuffering && editingSuffering.index === index) resetSufferingForm();
-                renderSuffering();
-                refreshAllEditorLists();
-                saveToLocalStorage();
+                renderSuffering(); refreshAllEditorLists(); saveToLocalStorage();
             }
-
             function renderEditorSufferingList() {
                 editorSuffList.innerHTML = '';
                 if (!sufferingItems.length) {
-                    const empty = document.createElement('div');
-                    empty.className = 'editor-row';
+                    const empty = document.createElement('div'); empty.className = 'editor-row';
                     empty.innerHTML = '<div class="editor-row-main"><div class="editor-row-title">Пока нет челленджей</div></div>';
-                    editorSuffList.appendChild(empty);
-                    return;
+                    editorSuffList.appendChild(empty); return;
                 }
                 sufferingItems.forEach((item, idx) => {
-                    const row = document.createElement('div');
-                    row.className = 'editor-row';
-                    const left = document.createElement('div');
-                    left.className = 'editor-row-main';
-                    const title = document.createElement('div');
-                    title.className = 'editor-row-title';
+                    const row = document.createElement('div'); row.className = 'editor-row';
+                    const left = document.createElement('div'); left.className = 'editor-row-main';
+                    const title = document.createElement('div'); title.className = 'editor-row-title';
                     title.textContent = `${item.title || item.command} (${item.cost})`;
-                    const sub = document.createElement('div');
-                    sub.className = 'editor-row-sub';
+                    const sub = document.createElement('div'); sub.className = 'editor-row-sub';
                     sub.textContent = `Команда: ${item.command}\nОписание: ${item.description || '-'}`;
-                    left.appendChild(title);
-                    left.appendChild(sub);
-                    const actions = document.createElement('div');
-                    actions.className = 'editor-actions';
+                    left.appendChild(title); left.appendChild(sub);
+                    const actions = document.createElement('div'); actions.className = 'editor-actions';
                     actions.style.justifyContent = 'flex-end';
                     const editBtn = document.createElement('button');
-                    editBtn.className = 'editor-btn secondary';
-                    editBtn.type = 'button';
-                    editBtn.textContent = 'Изменить';
-                    editBtn.style.marginRight = '8px';
+                    editBtn.className = 'editor-btn secondary'; editBtn.type = 'button';
+                    editBtn.textContent = 'Изменить'; editBtn.style.marginRight = '8px';
                     editBtn.addEventListener('click', () => editSuffering(idx));
                     const delBtn = document.createElement('button');
-                    delBtn.className = 'editor-btn danger';
-                    delBtn.type = 'button';
+                    delBtn.className = 'editor-btn danger'; delBtn.type = 'button';
                     delBtn.textContent = 'Удалить';
                     delBtn.addEventListener('click', () => deleteSufferingItem(idx));
-                    actions.appendChild(editBtn);
-                    actions.appendChild(delBtn);
-                    row.appendChild(left);
-                    row.appendChild(actions);
+                    actions.appendChild(editBtn); actions.appendChild(delBtn);
+                    row.appendChild(left); row.appendChild(actions);
                     editorSuffList.appendChild(row);
                 });
             }
-
             function addOrUpdateSuffering() {
                 const command = (editorSuffCommand.value || '').trim();
                 const title = (editorSuffTitle.value || '').trim();
@@ -2350,240 +3460,132 @@
                 if (!title) return alert('Укажи название');
                 if (!cost) return alert('Укажи стоимость');
                 if (!icon) return alert('Укажи icon (fa-...)');
-
                 const newItem = { command, title, description, cost, icon };
-                if (editingSuffering) {
-                    sufferingItems[editingSuffering.index] = newItem;
-                    resetSufferingForm();
-                } else {
-                    sufferingItems.push(newItem);
-                }
-                renderSuffering();
-                refreshAllEditorLists();
-                saveToLocalStorage();
-                editorSuffCommand.value = '';
-                editorSuffTitle.value = '';
-                editorSuffDescription.value = '';
-                editorSuffIcon.value = '';
-                editorSuffCost.value = '';
+                if (editingSuffering) { sufferingItems[editingSuffering.index] = newItem; resetSufferingForm(); }
+                else { sufferingItems.push(newItem); }
+                renderSuffering(); refreshAllEditorLists(); saveToLocalStorage();
+                editorSuffCommand.value = ''; editorSuffTitle.value = '';
+                editorSuffDescription.value = ''; editorSuffIcon.value = ''; editorSuffCost.value = '';
                 if (!editingSuffering) showNotification(`Челлендж "${title}" добавлен`, 'suffering');
             }
-
-            // --- КОМПИЛЯЦИЯ И ОТПРАВКА НА GITHUB ---
-
             function replaceBetweenMarkers(src, startMarker, endMarker, newMiddle) {
                 const start = src.indexOf(startMarker);
                 const end = src.indexOf(endMarker);
                 if (start === -1 || end === -1 || end <= start) throw new Error('Markers not found');
                 return src.slice(0, start + startMarker.length) + '\n' + newMiddle + '\n' + src.slice(end);
             }
-
             function generateCompiledHtmlString() {
                 const scriptEl = document.querySelector('script[data-main-script="true"]');
                 if (!scriptEl) throw new Error('Не найден script для компиляции');
-                
                 let src = scriptEl.textContent;
                 const commandsStr = JSON.stringify(commandsByCategory, null, 8);
                 const songsStr = JSON.stringify(songs, null, 8);
                 const sufferingStr = JSON.stringify(sufferingItems, null, 8);
-                
                 src = replaceBetweenMarkers(src, '/*DATA_COMMANDS_BY_CATEGORY_START*/', '/*DATA_COMMANDS_BY_CATEGORY_END*/', `        let commandsByCategory = ${commandsStr};`);
                 src = replaceBetweenMarkers(src, '/*DATA_SONGS_START*/', '/*DATA_SONGS_END*/', `        let songs = ${songsStr};`);
                 src = replaceBetweenMarkers(src, '/*DATA_SUFFERING_ITEMS_START*/', '/*DATA_SUFFERING_ITEMS_END*/', `        let sufferingItems = ${sufferingStr};`);
-                
                 scriptEl.textContent = src;
-                
                 const clone = document.documentElement.cloneNode(true);
                 const cloneOverlay = clone.querySelector('#editor-overlay');
                 const cloneBtn = clone.querySelector('#editor-open-btn');
                 const cloneThemeOverlay = clone.querySelector('#theme-transition-overlay');
-                
                 if (cloneOverlay) cloneOverlay.remove();
                 if (cloneBtn) cloneBtn.remove();
                 if (cloneThemeOverlay) cloneThemeOverlay.remove();
-                
                 const cloneBody = clone.querySelector('body');
                 if (cloneBody) cloneBody.classList.remove('editor-open');
-                
                 const doctype = document.doctype ? '<!DOCTYPE ' + document.doctype.name + (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') + (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') + '>' : '<!DOCTYPE html>';
                 return doctype + '\n' + clone.outerHTML;
             }
-
-            // Надежная конвертация строки с кириллицей в Base64 (синхронная)
-            function encodeUTF8ToBase64(str) {
-                return btoa(unescape(encodeURIComponent(str)));
-            }
-
+            function encodeUTF8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
             async function deployToGithubString(htmlContent, token) {
-                const owner = 'Redtl';
-                const repo = 'Cintribot';
-                const path = 'index.html';
-                const branch = 'main';
+                const owner = 'Redtl', repo = 'Cintribot', path = 'index.html', branch = 'main';
                 const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-                // 1. Получаем текущий SHA файла (нужно для перезаписи)
                 let sha = '';
                 const getRes = await fetch(`${url}?ref=${branch}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'X-GitHub-Api-Version': '2022-11-28'
-                    }
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'X-GitHub-Api-Version': '2022-11-28' }
                 });
-                
-                if (getRes.ok) {
-                    const data = await getRes.json();
-                    sha = data.sha;
-                } else if (getRes.status !== 404) {
+                if (getRes.ok) { const data = await getRes.json(); sha = data.sha; }
+                else if (getRes.status !== 404) {
                     const errData = await getRes.json().catch(() => ({}));
                     throw new Error(`Ошибка получения файла (${getRes.status}): ${errData.message || getRes.statusText}`);
                 }
-
-                // 2. Кодируем HTML в Base64 
                 const base64Content = encodeUTF8ToBase64(htmlContent);
-
-                // 3. Отправляем обновленный файл на GitHub
                 const putRes = await fetch(url, {
                     method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json',
-                        'X-GitHub-Api-Version': '2022-11-28'
-                    },
-                    body: JSON.stringify({
-                        message: 'Обновление библиотеки команд и песен (Редактор)',
-                        content: base64Content,
-                        sha: sha || undefined,
-                        branch: branch
-                    })
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
+                    body: JSON.stringify({ message: 'Обновление библиотеки команд и песен (Редактор)', content: base64Content, sha: sha || undefined, branch })
                 });
-
                 if (!putRes.ok) {
                     const errData = await putRes.json().catch(() => ({}));
                     throw new Error(`Ошибка сохранения на GitHub (${putRes.status}): ${errData.message || putRes.statusText}`);
                 }
             }
-
-            // Загружаем токен при открытии
             if (githubTokenInput) {
                 const savedToken = localStorage.getItem('cintribot_gh_token');
                 if (savedToken) githubTokenInput.value = savedToken;
-
                 githubTokenInput.addEventListener('change', (e) => {
                     localStorage.setItem('cintribot_gh_token', e.target.value.trim());
                 });
             }
-
-            // Основная кнопка Компиляции
             editorCompileBtn.addEventListener('click', async () => {
                 const token = githubTokenInput.value.trim();
-                
                 editorCompileBtn.disabled = true;
                 const originalContent = editorCompileBtn.innerHTML;
                 editorCompileBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Обработка...';
-
                 try {
-                    // Генерируем финальный HTML
                     const html = generateCompiledHtmlString();
-
                     if (token) {
-                        // Если токен есть -> обновляем GitHub
                         await deployToGithubString(html, token);
                         showNotification('Успешно обновлено на GitHub!', 'commands');
-                        
-                        // Можно закрыть редактор после успешного обновления
-                        setTimeout(() => closeEditor(), 1000); 
+                        setTimeout(() => closeEditor(), 1000);
                     } else {
-                        // Если токена нет -> скачиваем локально как раньше
                         const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
                         const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'index.html';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        URL.revokeObjectURL(url);
+                        const a = document.createElement('a'); a.href = url; a.download = 'index.html';
+                        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
                         showNotification('Файл скачан локально (токен не указан)', 'commands');
                     }
-                } catch (e) {
-                    console.error(e);
-                    alert('Ошибка: ' + e.message);
-                } finally {
-                    editorCompileBtn.disabled = false;
-                    editorCompileBtn.innerHTML = originalContent;
-                }
+                } catch (e) { console.error(e); alert('Ошибка: ' + e.message); }
+                finally { editorCompileBtn.disabled = false; editorCompileBtn.innerHTML = originalContent; }
             });
-
             function refreshAllEditorLists() {
                 refreshEditorCategoryDatalist();
                 renderEditorCommandsList();
                 renderEditorSongsList();
                 renderEditorSufferingList();
             }
-
-            // Подключение остальных обработчиков
             editorCmdAddBtn.addEventListener('click', addOrUpdateCommand);
             editorCmdCancelBtn.addEventListener('click', resetCommandForm);
             editorSongAddBtn.addEventListener('click', addOrUpdateSong);
             editorSongCancelBtn.addEventListener('click', resetSongForm);
             editorSuffAddBtn.addEventListener('click', addOrUpdateSuffering);
             editorSuffCancelBtn.addEventListener('click', resetSufferingForm);
-            
             refreshAllEditorLists();
         }
 
         // ========== MAIN APP FUNCTIONS ==========
-        
         function initTheme() {
             const savedTheme = localStorage.getItem('cintribot_theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
         }
-
         function toggleTheme() {
             const currentTheme = document.body.getAttribute('data-theme') || 'dark';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
             document.body.setAttribute('data-theme', newTheme);
             localStorage.setItem('cintribot_theme', newTheme);
-            
-            const themeLabel = newTheme === 'dark' ? 'Тёмная тема включена 🌙' : 'Светлая тема включена ☀️';
-            showNotification(themeLabel, 'commands');
-
+            showNotification(newTheme === 'dark' ? 'Тёмная тема включена 🌙' : 'Светлая тема включена ☀️', 'commands');
             if (themeToggle) {
                 themeToggle.style.transform = 'scale(0.95)';
                 setTimeout(() => { themeToggle.style.transform = ''; }, 150);
             }
         }
-
-        let welcomeAutoHideTimer = null;
-
-        function showWelcomeScreen() {
-            if (!welcomeScreen) return;
-            welcomeScreen.classList.add('show');
-            clearTimeout(welcomeAutoHideTimer);
-            welcomeAutoHideTimer = setTimeout(() => hideWelcomeScreen(), 9000);
-        }
-
-        function hideWelcomeScreen() {
-            if (!welcomeScreen) return;
-            welcomeScreen.classList.remove('show');
-        }
-
-        if (welcomeScreen) {
-            welcomeScreen.addEventListener('click', (e) => {
-                if (e.target && e.target.classList && e.target.classList.contains('welcome-backdrop')) hideWelcomeScreen();
-            });
-        }
-
         function hideSplashScreen() {
             setTimeout(() => {
                 splashScreen.classList.add('hidden');
-                setTimeout(showWelcomeScreen, 180);
+                setTimeout(runPageLoadAnimation, 100);
             }, 2000);
         }
-
         function createPetals() {
             const petalCount = 15;
             for (let i = 0; i < petalCount; i++) {
@@ -2598,7 +3600,6 @@
                 petalsContainer.appendChild(petal);
             }
         }
-
         function prepareAllCommands() {
             allCommands = [];
             Object.entries(commandsByCategory).forEach(([category, commands]) => {
@@ -2606,9 +3607,7 @@
             });
             allCommands.sort((a, b) => a.name.localeCompare(b.name));
         }
-
         function prepareSongs() { songs.sort((a, b) => a.artist.localeCompare(b.artist)); }
-
         function initialize() {
             loadFromLocalStorage();
             initTheme();
@@ -2622,7 +3621,6 @@
             setTimeout(updateTabIndicator, 100);
             hideSplashScreen();
         }
-
         function updateTabIndicator() {
             const activeTab = document.querySelector('.tab-btn.active');
             if (!activeTab || !tabIndicator || !tabsNav) return;
@@ -2634,11 +3632,8 @@
                 const width = tabRect.width;
                 tabIndicator.style.transform = `translateX(${position}px)`;
                 tabIndicator.style.width = `${width}px`;
-            } catch (error) {
-                console.error('Error updating tab indicator:', error);
-            }
+            } catch (error) { console.error('Error updating tab indicator:', error); }
         }
-
         function handleTabSwitch(e) {
             const tabId = e.currentTarget.getAttribute('data-tab');
             if (currentTab === tabId) return;
@@ -2650,7 +3645,6 @@
             setTimeout(() => { updateTabIndicator(); setTimeout(updateTabIndicator, 50); }, 20);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
         function initCategories() {
             categoriesTabs.innerHTML = '';
             const allTab = createCategoryTag("Все", "active");
@@ -2659,8 +3653,8 @@
                 const tab = createCategoryTag(category, "");
                 categoriesTabs.appendChild(tab);
             });
+            document.querySelectorAll('.category-tag').forEach((el, i) => revealElement(el, 900 + i * 40));
         }
-
         function createCategoryTag(name, extraClass = "") {
             const tag = document.createElement('div');
             tag.className = `category-tag ${extraClass}`;
@@ -2669,16 +3663,12 @@
             tag.addEventListener('click', handleCategoryClick);
             return tag;
         }
-
         function handleCategoryClick(e) {
             const category = e.currentTarget.getAttribute('data-category');
             if (category === activeCategoryFilter) return;
             document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
             e.currentTarget.classList.add('active');
-            if (searchQuery) {
-                searchBox.value = "";
-                searchQuery = "";
-            }
+            if (searchQuery) { searchBox.value = ""; searchQuery = ""; }
             if (commandsContainer) commandsContainer.classList.add('is-switching');
             setTimeout(() => {
                 activeCategoryFilter = category;
@@ -2686,7 +3676,6 @@
                 requestAnimationFrame(() => { if (commandsContainer) commandsContainer.classList.remove('is-switching'); });
             }, 170);
         }
-
         function renderCommands(withAnimation = false) {
             commandsContainer.innerHTML = '';
             let commandsToDisplay = [];
@@ -2737,7 +3726,6 @@
                 }
             });
         }
-
         function renderSongs() {
             songsContainer.innerHTML = '';
             songs.forEach((song) => {
@@ -2766,7 +3754,6 @@
                 songsContainer.appendChild(songCard);
             });
         }
-
         function renderSuffering() {
             sufferingContainer.innerHTML = '';
             sufferingItems.forEach((item) => {
@@ -2795,9 +3782,7 @@
                 sufferingContainer.appendChild(card);
             });
         }
-
         function handleCommandClick(e) { handleCopyAction(e, 'commands'); }
-
         function handleCopyAction(e, forcedType = null) {
             const card = e.currentTarget;
             const command = card.getAttribute('data-command');
@@ -2812,7 +3797,6 @@
             card.style.transform = 'scale(0.98)';
             setTimeout(() => { card.style.transform = ''; }, 200);
         }
-
         function handleSearch() {
             searchQuery = searchBox.value.trim();
             if (!searchQuery) { renderCommands(false); return; }
@@ -2825,31 +3809,18 @@
             }
             renderCommands(true);
         }
-
         function copyToClipboard(text) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.top = '0';
-            textArea.style.left = '0';
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            textArea.style.padding = '0';
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            textArea.style.background = 'transparent';
+            textArea.style.position = 'fixed'; textArea.style.top = '0'; textArea.style.left = '0';
+            textArea.style.width = '2em'; textArea.style.height = '2em';
+            textArea.style.padding = '0'; textArea.style.border = 'none'; textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none'; textArea.style.background = 'transparent';
             document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                document.execCommand("copy");
-            } catch (err) {
-                console.error('Ошибка копирования в буфер:', err);
-            }
+            textArea.focus(); textArea.select();
+            try { document.execCommand("copy"); } catch (err) { console.error('Ошибка копирования:', err); }
             document.body.removeChild(textArea);
         }
-
         function showNotification(message, type = 'commands') {
             notificationText.textContent = message;
             notification.classList.remove('songs-notification', 'suffering-notification');
@@ -2858,7 +3829,6 @@
             notification.classList.add('show');
             setTimeout(() => { notification.classList.remove('show'); }, 3000);
         }
-
         function handleBalanceClick() {
             copyToClipboard('!буськи');
             let notifType = 'commands';
@@ -2872,13 +3842,9 @@
         // ========== EVENT LISTENERS ==========
         document.addEventListener('DOMContentLoaded', () => {
             initialize();
-            
             themeToggle.addEventListener('click', toggleTheme);
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
-            if (welcomeCloseBtn) welcomeCloseBtn.addEventListener('click', hideWelcomeScreen);
-            if (welcomeCloseSecondaryBtn) welcomeCloseSecondaryBtn.addEventListener('click', hideWelcomeScreen);
-            if (welcomeGoBtn) welcomeGoBtn.addEventListener('click', () => { hideWelcomeScreen(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             initHoverTickSound();
             window.addEventListener('resize', updateTabIndicator);
             let searchTimeout;
@@ -2891,10 +3857,7 @@
 
         // ========== HOVER TICK SOUND ==========
         function initHoverTickSound() {
-            let audioCtx = null;
-            let unlocked = false;
-            let lastAt = 0;
-            let lastEl = null;
+            let audioCtx = null, unlocked = false, lastAt = 0, lastEl = null;
             const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
             const unlock = async () => {
                 if (unlocked) return;
@@ -2915,10 +3878,8 @@
                 gain.gain.setValueAtTime(0.0001, t);
                 gain.gain.exponentialRampToValueAtTime(0.06, t + 0.003);
                 gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.020);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start(t);
-                osc.stop(t + 0.022);
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(t); osc.stop(t + 0.022);
             };
             const isInteractive = (el) => {
                 if (!el || el === document.documentElement) return false;
@@ -2931,21 +3892,18 @@
                     el.classList.contains('command-card') || el.classList.contains('song-card') ||
                     el.classList.contains('suffering-card') || el.classList.contains('editor-btn') ||
                     el.classList.contains('editor-tab-btn') || el.classList.contains('theme-toggle') ||
-                    el.classList.contains('balance-btn') || el.classList.contains('social-link') ||
-                    el.classList.contains('welcome-btn')
+                    el.classList.contains('balance-btn') || el.classList.contains('social-link')
                 );
             };
             const onMouseOver = (e) => {
                 if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
-                const target = e.target && e.target.closest ? e.target.closest('button, a, [role="button"], .tab-btn, .category-tag, .command-card, .song-card, .suffering-card, .editor-btn, .editor-tab-btn, .theme-toggle, .balance-btn, .social-link, .welcome-btn') : null;
+                const target = e.target && e.target.closest ? e.target.closest('button, a, [role="button"], .tab-btn, .category-tag, .command-card, .song-card, .suffering-card, .editor-btn, .editor-tab-btn, .theme-toggle, .balance-btn, .social-link') : null;
                 if (!target || !isInteractive(target)) return;
                 if (e.relatedTarget && target.contains(e.relatedTarget)) return;
                 const ts = now();
                 if (target === lastEl && ts - lastAt < 120) return;
                 if (ts - lastAt < 40) return;
-                lastEl = target;
-                lastAt = ts;
-                playTick();
+                lastEl = target; lastAt = ts; playTick();
             };
             const unlockEvents = ['pointerdown', 'keydown', 'touchstart'];
             unlockEvents.forEach(ev => window.addEventListener(ev, () => unlock(), { once: true, passive: true }));
