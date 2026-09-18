@@ -245,12 +245,13 @@
         .header-container { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 100%; }
         .logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
 
+        /* ИЗМЕНЕНИЕ: Убрана фиолетовая подложка, значок увеличен в 2 раза */
         .logo-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 124px;
-            height: 124px;
+            width: 124px;  /* было 62px, стало 124px (x2) */
+            height: 124px; /* было 62px, стало 124px (x2) */
             background: transparent;
             border-radius: 0;
             box-shadow: none;
@@ -261,8 +262,8 @@
             flex-shrink: 0;
         }
         .logo-icon img {
-            width: 104px;
-            height: 104px;
+            width: 104px;  /* было 52px, стало 104px (x2) */
+            height: 104px; /* было 52px, стало 104px (x2) */
             object-fit: contain;
             display: block;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
@@ -532,9 +533,9 @@
         }
     </style>
 </head>
-<body data-theme="dark" class="">
+<body data-theme="dark" class="page-loaded">
     <!-- Splash Screen -->
-    <div class="splash-screen" id="splash-screen">
+    <div class="splash-screen hidden" id="splash-screen">
         <div class="splash-content">
             <div class="splash-icon">
                 <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="Цинтрибот">
@@ -557,7 +558,7 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 10.8803vw; animation-duration: 7.39293s; animation-delay: 0.109336s; width: 9.76335px; height: 15.3689px; transform: rotate(110.533deg);"></div><div class="petal" style="left: 71.592vw; animation-duration: 7.55003s; animation-delay: 4.73423s; width: 13.8129px; height: 10.8475px; transform: rotate(213.416deg);"></div><div class="petal" style="left: 62.54vw; animation-duration: 7.86611s; animation-delay: 4.63663s; width: 12.0552px; height: 8.16018px; transform: rotate(23.2323deg);"></div><div class="petal" style="left: 12.3645vw; animation-duration: 7.28285s; animation-delay: 4.61778s; width: 12.9398px; height: 11.6708px; transform: rotate(159.047deg);"></div><div class="petal" style="left: 14.6077vw; animation-duration: 8.4285s; animation-delay: 3.86559s; width: 10.0833px; height: 12.6905px; transform: rotate(243.288deg);"></div><div class="petal" style="left: 7.48057vw; animation-duration: 7.50831s; animation-delay: 4.72268s; width: 13.788px; height: 11.3679px; transform: rotate(197.414deg);"></div><div class="petal" style="left: 43.3483vw; animation-duration: 8.38588s; animation-delay: 3.30376s; width: 11.4044px; height: 8.1178px; transform: rotate(250.344deg);"></div><div class="petal" style="left: 6.16541vw; animation-duration: 5.76844s; animation-delay: 0.263435s; width: 10.7274px; height: 14.2436px; transform: rotate(306.926deg);"></div><div class="petal" style="left: 10.9804vw; animation-duration: 9.54669s; animation-delay: 1.53834s; width: 11.4525px; height: 8.95406px; transform: rotate(123.57deg);"></div><div class="petal" style="left: 39.8244vw; animation-duration: 9.98087s; animation-delay: 3.32343s; width: 15.4607px; height: 8.35108px; transform: rotate(227.704deg);"></div><div class="petal" style="left: 81.5213vw; animation-duration: 8.34839s; animation-delay: 1.92002s; width: 13.682px; height: 8.29043px; transform: rotate(171.509deg);"></div><div class="petal" style="left: 37.0973vw; animation-duration: 6.7312s; animation-delay: 4.81411s; width: 12.7792px; height: 15.3319px; transform: rotate(94.2518deg);"></div><div class="petal" style="left: 80.4305vw; animation-duration: 9.04316s; animation-delay: 3.07833s; width: 13.7024px; height: 11.2443px; transform: rotate(280.842deg);"></div><div class="petal" style="left: 85.0483vw; animation-duration: 9.87192s; animation-delay: 3.64827s; width: 9.03495px; height: 13.5461px; transform: rotate(62.4886deg);"></div><div class="petal" style="left: 78.5462vw; animation-duration: 9.07549s; animation-delay: 4.98533s; width: 15.909px; height: 13.1052px; transform: rotate(94.7692deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 82.1817vw; animation-duration: 5.18989s; animation-delay: 2.56284s; width: 8.16425px; height: 12.2865px; transform: rotate(341.938deg);"></div><div class="petal" style="left: 98.1216vw; animation-duration: 8.98198s; animation-delay: 1.50179s; width: 8.82948px; height: 14.0553px; transform: rotate(6.31604deg);"></div><div class="petal" style="left: 90.5435vw; animation-duration: 5.86398s; animation-delay: 3.02638s; width: 9.63539px; height: 14.4878px; transform: rotate(168.99deg);"></div><div class="petal" style="left: 11.031vw; animation-duration: 7.95882s; animation-delay: 3.10364s; width: 15.075px; height: 9.59151px; transform: rotate(178.328deg);"></div><div class="petal" style="left: 90.6414vw; animation-duration: 8.76936s; animation-delay: 4.36435s; width: 10.1755px; height: 15.0158px; transform: rotate(113.562deg);"></div><div class="petal" style="left: 48.7486vw; animation-duration: 9.57944s; animation-delay: 4.71488s; width: 11.5249px; height: 11.8591px; transform: rotate(39.8678deg);"></div><div class="petal" style="left: 75.4044vw; animation-duration: 7.03507s; animation-delay: 1.76774s; width: 9.05074px; height: 9.40584px; transform: rotate(141.024deg);"></div><div class="petal" style="left: 45.1558vw; animation-duration: 7.895s; animation-delay: 4.4723s; width: 12.0679px; height: 8.32625px; transform: rotate(207.725deg);"></div><div class="petal" style="left: 7.76194vw; animation-duration: 7.24799s; animation-delay: 1.98152s; width: 12.3381px; height: 13.8338px; transform: rotate(24.701deg);"></div><div class="petal" style="left: 54.6494vw; animation-duration: 5.40482s; animation-delay: 4.94584s; width: 8.99406px; height: 12.5107px; transform: rotate(28.1739deg);"></div><div class="petal" style="left: 28.4322vw; animation-duration: 9.10319s; animation-delay: 3.5192s; width: 10.7145px; height: 11.0189px; transform: rotate(121.232deg);"></div><div class="petal" style="left: 42.1845vw; animation-duration: 7.80425s; animation-delay: 0.171304s; width: 14.2986px; height: 13.4272px; transform: rotate(110.014deg);"></div><div class="petal" style="left: 85.9123vw; animation-duration: 5.51508s; animation-delay: 4.34097s; width: 10.5525px; height: 8.03008px; transform: rotate(21.1611deg);"></div><div class="petal" style="left: 42.4522vw; animation-duration: 9.61056s; animation-delay: 3.24615s; width: 13.9157px; height: 12.4214px; transform: rotate(289.757deg);"></div><div class="petal" style="left: 69.0196vw; animation-duration: 7.96982s; animation-delay: 2.57365s; width: 10.0389px; height: 8.07309px; transform: rotate(326.533deg);"></div></div>
 
     <!-- Header -->
     <header class="header reveal-in">
@@ -733,6 +734,18 @@
                     <div class="command-description">
                         Классическое приветствие
                         <div class="command-category">💜 Приветствие</div>
+                    </div>
+                </div><div class="command-card reveal-in" data-command="!ах за душу" role="button" aria-label="Команда: !ах за душу. Сталкер" tabindex="0">
+                    <div class="command-header">
+                        <div class="command-name">!ах за душу</div>
+                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
+                            <i class="fas fa-coins" aria-hidden="true"></i>
+                            <span>300</span>
+                        </div>
+                    </div>
+                    <div class="command-description">
+                        Сталкер
+                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
                     </div>
                 </div><div class="command-card reveal-in" data-command="!бабу бы" role="button" aria-label="Команда: !бабу бы. Сталкер" tabindex="0">
                     <div class="command-header">
@@ -1838,18 +1851,6 @@
                          
                         <div class="command-category">💯 НетленОчки</div>
                     </div>
-                </div><div class="command-card reveal-in" data-command="!эх за душу" role="button" aria-label="Команда: !эх за душу. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!эх за душу</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
                 </div><div class="command-card reveal-in" data-command="!я же королева" role="button" aria-label="Команда: !я же королева. Нет описания" tabindex="0">
                     <div class="command-header">
                         <div class="command-name">!я же королева</div>
@@ -2180,10 +2181,10 @@
                         <i class="fas fa-gem"></i>
                         <span>40,000</span>
                     </div>
-                </div><div class="song-card" data-command="!песня Мраж - Музыка нас связала" role="button" aria-label="Заказать песню: Мраж - Музыка нас связала" tabindex="0">
+                </div><div class="song-card" data-command="!песня Мираж - Музыка нас связала" role="button" aria-label="Заказать песню: Мираж - Музыка нас связала" tabindex="0">
                     <div class="song-icon"><i class="fas fa-music"></i></div>
                     <div class="song-info">
-                        <div class="song-artist">Мраж</div>
+                        <div class="song-artist">Мираж</div>
                         <div class="song-title">Музыка нас связала</div>
                     </div>
                     <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
@@ -2344,9 +2345,9 @@
     </footer>
 
     <!-- Notification -->
-    <div class="notification" id="notification">
+    <div class="notification songs-notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда скопирована!</span>
+        <span id="notification-text">Песня "Мираж — Музыка нас связала" добавлена</span>
     </div>
 
     
@@ -2493,7 +2494,7 @@
                         "cost": 300
                 },
                 {
-                        "name": "!эх за душу",
+                        "name": "!ах за душу",
                         "description": "Сталкер",
                         "cost": 300
                 },
@@ -3008,7 +3009,7 @@
                 "name": "Текила-любовь"
         },
         {
-                "artist": "Мраж",
+                "artist": "Мираж",
                 "name": "Музыка нас связала"
         },
         {
@@ -3492,12 +3493,7 @@
                 if (cloneBtn) cloneBtn.remove();
                 if (cloneThemeOverlay) cloneThemeOverlay.remove();
                 const cloneBody = clone.querySelector('body');
-                if (cloneBody) {
-                    cloneBody.classList.remove('editor-open');
-                    cloneBody.classList.remove('page-loaded');
-                }
-                const cloneSplash = clone.querySelector('#splash-screen');
-                if (cloneSplash) cloneSplash.classList.remove('hidden');
+                if (cloneBody) cloneBody.classList.remove('editor-open');
                 const doctype = document.doctype ? '<!DOCTYPE ' + document.doctype.name + (document.doctype.publicId ? ' PUBLIC "' + document.doctype.publicId + '"' : '') + (document.doctype.systemId ? ' "' + document.doctype.systemId + '"' : '') + '>' : '<!DOCTYPE html>';
                 return doctype + '\n' + clone.outerHTML;
             }
