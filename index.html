@@ -356,6 +356,26 @@
         .giveaway-header { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
         .giveaway-heading { margin: 0 0 5px; font-family: var(--font-heading); color: var(--text-primary); font-size: 25px; font-weight: 800; letter-spacing: -0.02em; }
         .giveaway-description { margin: 0; color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; }
+        .giveaway-note {
+            margin: 8px 0 0;
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            max-width: 640px;
+        }
+        .giveaway-note i {
+            color: var(--gold);
+            font-size: 14px;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+        .giveaway-note strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
         .giveaway-count { flex: 0 0 auto; padding: 7px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-full); background: var(--bg-secondary); color: var(--text-secondary); font-size: 12px; font-weight: 700; }
         .giveaway-header-actions { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; }
         .giveaway-jump-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 14px; border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius-full); background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); box-shadow: var(--shadow-primary); color: #fff; font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast); }
@@ -1078,7 +1098,7 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 51.6628vw; animation-duration: 8.92633s; animation-delay: 4.38733s; width: 11.9699px; height: 8.12653px; transform: rotate(126.676deg);"></div><div class="petal" style="left: 3.64079vw; animation-duration: 6.26698s; animation-delay: 0.114082s; width: 11.9315px; height: 10.026px; transform: rotate(338.323deg);"></div><div class="petal" style="left: 27.9907vw; animation-duration: 5.35197s; animation-delay: 2.89644s; width: 8.44005px; height: 14.6727px; transform: rotate(347.481deg);"></div><div class="petal" style="left: 0.666436vw; animation-duration: 8.16447s; animation-delay: 0.694064s; width: 10.2692px; height: 14.6638px; transform: rotate(102.592deg);"></div><div class="petal" style="left: 62.0989vw; animation-duration: 6.84539s; animation-delay: 0.0209324s; width: 10.7969px; height: 9.08285px; transform: rotate(315.749deg);"></div><div class="petal" style="left: 55.9891vw; animation-duration: 8.1085s; animation-delay: 1.1543s; width: 13.7133px; height: 12.1049px; transform: rotate(90.3708deg);"></div><div class="petal" style="left: 15.6459vw; animation-duration: 5.70246s; animation-delay: 0.922575s; width: 12.1531px; height: 8.14392px; transform: rotate(138.69deg);"></div><div class="petal" style="left: 7.5695vw; animation-duration: 9.79594s; animation-delay: 4.63766s; width: 8.38584px; height: 8.99185px; transform: rotate(241.498deg);"></div><div class="petal" style="left: 10.189vw; animation-duration: 7.16683s; animation-delay: 0.4147s; width: 13.0601px; height: 15.6373px; transform: rotate(289.158deg);"></div><div class="petal" style="left: 64.3659vw; animation-duration: 8.22811s; animation-delay: 2.38662s; width: 15.9163px; height: 13.131px; transform: rotate(83.8494deg);"></div><div class="petal" style="left: 59.3152vw; animation-duration: 6.65651s; animation-delay: 4.42866s; width: 8.04942px; height: 10.3982px; transform: rotate(242.973deg);"></div><div class="petal" style="left: 26.6967vw; animation-duration: 7.6583s; animation-delay: 1.26921s; width: 9.58662px; height: 11.4236px; transform: rotate(182.015deg);"></div><div class="petal" style="left: 39.623vw; animation-duration: 6.64806s; animation-delay: 0.888324s; width: 15.6139px; height: 13.4192px; transform: rotate(227.53deg);"></div><div class="petal" style="left: 72.0109vw; animation-duration: 9.67024s; animation-delay: 0.416886s; width: 15.1834px; height: 14.7091px; transform: rotate(18.6928deg);"></div><div class="petal" style="left: 0.0721532vw; animation-duration: 6.99232s; animation-delay: 3.66707s; width: 13.1091px; height: 12.2389px; transform: rotate(15.3539deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 8.3067vw; animation-duration: 8.79305s; animation-delay: 3.05314s; width: 9.0826px; height: 14.8867px; transform: rotate(101.402deg);"></div><div class="petal" style="left: 22.2281vw; animation-duration: 5.55558s; animation-delay: 2.1688s; width: 10.0409px; height: 14.7353px; transform: rotate(47.0073deg);"></div><div class="petal" style="left: 84.7177vw; animation-duration: 5.78534s; animation-delay: 4.53831s; width: 13.5793px; height: 11.4642px; transform: rotate(232.78deg);"></div><div class="petal" style="left: 68.9927vw; animation-duration: 7.56234s; animation-delay: 3.70839s; width: 9.98624px; height: 15.7097px; transform: rotate(14.161deg);"></div><div class="petal" style="left: 37.334vw; animation-duration: 5.83726s; animation-delay: 1.6308s; width: 13.3931px; height: 15.1269px; transform: rotate(337.448deg);"></div><div class="petal" style="left: 80.138vw; animation-duration: 9.60444s; animation-delay: 2.57197s; width: 15.6585px; height: 14.3059px; transform: rotate(119.583deg);"></div><div class="petal" style="left: 90.4826vw; animation-duration: 6.74843s; animation-delay: 3.67165s; width: 14.8219px; height: 15.6657px; transform: rotate(131.085deg);"></div><div class="petal" style="left: 34.5725vw; animation-duration: 5.33739s; animation-delay: 2.37246s; width: 13.777px; height: 9.19796px; transform: rotate(1.51132deg);"></div><div class="petal" style="left: 71.2132vw; animation-duration: 9.63367s; animation-delay: 2.56189s; width: 9.35599px; height: 10.5464px; transform: rotate(227.025deg);"></div><div class="petal" style="left: 47.0324vw; animation-duration: 9.51999s; animation-delay: 0.34543s; width: 12.7067px; height: 9.63283px; transform: rotate(75.5876deg);"></div><div class="petal" style="left: 92.4599vw; animation-duration: 9.80653s; animation-delay: 2.82569s; width: 8.19286px; height: 14.7982px; transform: rotate(260.844deg);"></div><div class="petal" style="left: 61.9744vw; animation-duration: 8.10862s; animation-delay: 4.75118s; width: 9.02517px; height: 14.0234px; transform: rotate(53.1829deg);"></div><div class="petal" style="left: 35.6262vw; animation-duration: 8.85576s; animation-delay: 3.01176s; width: 15.9533px; height: 14.7914px; transform: rotate(34.4173deg);"></div><div class="petal" style="left: 58.8305vw; animation-duration: 6.09142s; animation-delay: 3.90088s; width: 8.43299px; height: 8.96038px; transform: rotate(84.2296deg);"></div><div class="petal" style="left: 9.78007vw; animation-duration: 9.26883s; animation-delay: 0.873279s; width: 10.8109px; height: 13.9084px; transform: rotate(85.7812deg);"></div></div>
 
     <header class="header reveal-in">
         <div class="container header-container">
@@ -1108,7 +1128,7 @@
                     </a>
                 </div>
 
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" style="">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-wand-magic-sparkles"></i>
@@ -1173,7 +1193,13 @@
                     <div class="giveaway-header">
                         <div>
                             <h2 class="giveaway-heading" id="giveaway-heading">Розыгрыш игр</h2>
-                            <p class="giveaway-description">Наведите на карточку, чтобы услышать тему; нажмите, чтобы скопировать команду.</p>
+                            <p class="giveaway-description">
+                                Наведите на карточку, чтобы услышать тему; нажмите, чтобы скопировать команду.
+                            </p>
+                            <p class="giveaway-note">
+                                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                <span>Перед отправкой команды с игрой обязательно проверьте свой баланс БУСЕК — нажмите кнопку <strong>«Проверить баланс»</strong> в шапке сайта. Если БУСЕК недостаточно, команда не сработает.</span>
+                            </p>
                         </div>
                         <div class="giveaway-header-actions">
                             <span class="giveaway-count">6 игр</span>
@@ -1183,43 +1209,43 @@
                         </div>
                     </div>
                     <div class="giveaway-grid">
-                        <article class="giveaway-card fx-paused" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: 0.010deg; --giveaway-tilt-y: -0.000deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="https://downloads.khinsider.com/game-soundtracks/album/dark-souls-iii-original-soundtrack-2016-ffsa-st008/02%20Dark%20Souls%20III.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -0.00; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: -2.205deg; --giveaway-tilt-y: 0.675deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="sounds/dark-souls-3.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.92; --cpy: 3.68;"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Dark Souls III</h3><span class="giveaway-command">!Dark Souls 3</span></div>
                                 <span class="giveaway-price">25 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg; --giveaway-tilt-x: 0.009deg; --giveaway-tilt-y: -0.010deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="https://downloads.khinsider.com/game-soundtracks/album/resident-evil-village-original-soundtrack/01.%20Ripples%20in%20the%20Calm.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -0.01; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg; --giveaway-tilt-x: 0.634deg; --giveaway-tilt-y: -1.222deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="sounds/resident-evil-village.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -1.66; --cpy: -1.06;"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Resident Evil 8</h3><span class="giveaway-command">!Resident Evil Village</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg; --giveaway-tilt-x: 0.009deg; --giveaway-tilt-y: 0.004deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="https://archive.org/download/Grand%20Theft%20Auto%20%5BGTA%5D%20V%20-%20Original%20Main%20%28Opening%20Introduction-Intro%29%20Theme%20Music-Song.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.00; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg; --giveaway-tilt-x: -1.001deg; --giveaway-tilt-y: 2.582deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="sounds/gta-5.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 3.52; --cpy: 1.67;"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">GTA 5</h3><span class="giveaway-command">!Grand Theft Auto V</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: -0.008deg; --giveaway-tilt-y: 0.009deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="https://downloads.khinsider.com/game-soundtracks/album/days-gone-original-soundtrack/01.%20Days%20Gone.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.01; --cpy: 0.01;"><img class="giveaway-char" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="ash" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="sounds/days-gone.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="ash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Days Gone</h3><span class="giveaway-command">!Days Gone</span></div>
                                 <span class="giveaway-price">10 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Ori and the Will of the Wisps" data-tint="#2E6BF0" style="--card-tint: #2E6BF0; --cmx: 48%; --cmy: 33%; --crx: 52%; --cry: 30%; --char-idle-dur: 4.4s; --char-bob: -6.5px; --char-breath: 1.02; --char-rot: 0.9deg; --giveaway-tilt-x: -0.005deg; --giveaway-tilt-y: 0.009deg;" role="button" tabindex="0" aria-label="Скопировать команду !Ori and the Will of the Wisps (Ori and the Will of the Wisps, 7 000 бусек)" data-sound-url="https://downloads.khinsider.com/game-soundtracks/album/ori-and-the-will-of-the-wisps-gamerip/01.%20Main%20Theme.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.01; --cpy: 0.01;"><img class="giveaway-char" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="spirit" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Ori and the Will of the Wisps" data-tint="#2E6BF0" style="--card-tint: #2E6BF0; --cmx: 48%; --cmy: 33%; --crx: 52%; --cry: 30%; --char-idle-dur: 4.4s; --char-bob: -6.5px; --char-breath: 1.02; --char-rot: 0.9deg;" role="button" tabindex="0" aria-label="Скопировать команду !Ori and the Will of the Wisps (Ori and the Will of the Wisps, 7 000 бусек)" data-sound-url="sounds/ori-wisps.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="spirit" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Ori and the Will of the Wisps</h3><span class="giveaway-command">!Ori and the Will of the Wisps</span></div>
                                 <span class="giveaway-price">7 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Mafia II" data-tint="#D9363E" style="--card-tint: #D9363E; --cmx: 67%; --cmy: 35%; --crx: 40%; --cry: 42%; --char-idle-dur: 5.8s; --char-bob: -4.5px; --char-breath: 1.012; --char-rot: 0.55deg; --giveaway-tilt-x: 0.004deg; --giveaway-tilt-y: 0.009deg;" role="button" tabindex="0" aria-label="Скопировать команду !Mafia II (Mafia 2 DE, 7 000 бусек)" data-sound-url="https://downloads.khinsider.com/game-soundtracks/album/mafia-ii-official-orchestral-score/01.%20Main%20Theme.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.01; --cpy: -0.00;"><img class="giveaway-char" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="snow" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Mafia II" data-tint="#D9363E" style="--card-tint: #D9363E; --cmx: 67%; --cmy: 35%; --crx: 40%; --cry: 42%; --char-idle-dur: 5.8s; --char-bob: -4.5px; --char-breath: 1.012; --char-rot: 0.55deg;" role="button" tabindex="0" aria-label="Скопировать команду !Mafia II (Mafia 2 DE, 7 000 бусек)" data-sound-url="sounds/mafia-2.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="snow" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Mafia 2 DE</h3><span class="giveaway-command">!Mafia II</span></div>
                                 <span class="giveaway-price">7 000 бусек</span>
@@ -2929,7 +2955,7 @@
 
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Тёмная тема включена 🌙</span>
+        <span id="notification-text">"!Dark Souls 3" скопировано!</span>
     </div>
 
     
@@ -3664,7 +3690,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":2,"updatedAt":"2026-10-19T15:51:37.909Z"};
+        let dataMeta = {"version":3,"updatedAt":"2026-10-19T14:08:19.579Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
