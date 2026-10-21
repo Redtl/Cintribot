@@ -1079,6 +1079,131 @@
             body:not(.page-loaded) .giveaway-card { opacity: 1; translate: none; scale: none; }
             body.page-loaded .giveaway-card { animation: none !important; }
         }
+
+        /* ============ HOVER-ПОДЛОЖКА: КОМАНДЫ · ПЕСНИ · ИСПЫТАНИЯ ============ */
+        /* Один и тот же набор эффектов для трёх типов карточек:
+           .command-card (команды), .song-card (песни), .suffering-card (страдания).
+           Подложка: linear-gradient(135deg, #FF7A00 0%, #10B981 100%)
+           живёт в ::before и плавно проявляется (обычный градиент не анимируется),
+           ::after — слой зернистости. Текст лежит выше (z-index 1). */
+        :is(.command-card, .song-card, .suffering-card) {
+            isolation: isolate;
+            --grain-opacity: 0;
+            --hover-grad: linear-gradient(135deg, #FF7A00 0%, #10B981 100%);
+        }
+        :is(.command-card, .song-card, .suffering-card)::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            background-image:
+                url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='1.05' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='120' height='120' filter='url(%23f)' opacity='0.7'/></svg>"),
+                var(--hover-grad);
+            background-repeat: repeat, no-repeat;
+            background-size: 150px 150px, 100% 100%;
+            background-blend-mode: overlay, normal;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 280ms cubic-bezier(.2, .75, .25, 1);
+        }
+        :is(.command-card, .song-card, .suffering-card)::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='1.65' intercept='-0.36'/><feFuncG type='linear' slope='1.65' intercept='-0.36'/><feFuncB type='linear' slope='1.65' intercept='-0.36'/></feComponentTransfer></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+            background-repeat: repeat;
+            background-size: 215px 215px;
+            mix-blend-mode: overlay;
+            opacity: var(--grain-opacity);
+            transition: opacity 320ms cubic-bezier(.2, .75, .25, 1);
+        }
+        :is(.command-card, .song-card, .suffering-card) > * { position: relative; z-index: 1; }
+
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible)::before { opacity: 1; }
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) { --grain-opacity: .6; }
+
+        /* Тень под градиент. border-color: transparent — убирает тонкий полупрозрачный
+           контур (в т.ч. красную полоску слева у карточки испытания). */
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) {
+            border-color: transparent;
+            border-left-color: transparent;
+            box-shadow: 0 14px 32px rgba(255, 122, 0, .22), 0 12px 30px rgba(16, 185, 129, .20);
+        }
+        :is(.command-card, .song-card, .suffering-card):focus-visible { outline-color: #FF7A00; }
+
+        /* Плавные переходы цвета/фона у текстовых элементов */
+        :is(.command-card, .song-card, .suffering-card) :is(
+            .command-name, .command-description, .command-category, .command-cost, .command-cost i,
+            .song-icon, .song-icon i, .song-artist, .song-title, .song-price, .song-price i,
+            .suffering-icon, .suffering-icon i, .suffering-title, .suffering-subtitle,
+            .suffering-description, .suffering-price, .suffering-price i
+        ) {
+            transition: color 220ms ease, background 220ms ease, background-color 220ms ease,
+                        border-color 220ms ease, box-shadow 220ms ease, text-shadow 220ms ease;
+        }
+
+        /* ---- Адаптация шрифта: белый текст на насыщенном оранжево-зелёном ---- */
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) :is(
+            .command-name, .song-title, .suffering-title
+        ) {
+            color: #FFFFFF;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, .30);
+        }
+
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) :is(
+            .command-description, .suffering-description
+        ) {
+            color: rgba(255, 255, 255, .95);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .22);
+        }
+
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) :is(
+            .song-artist, .suffering-subtitle
+        ) {
+            color: rgba(255, 255, 255, .88);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .22);
+        }
+
+        /* Разделитель в описании испытания — белый вместо красного */
+        .suffering-card:is(:hover, .is-wave-hover, :focus-visible) .suffering-description {
+            border-top-color: rgba(255, 255, 255, .45);
+        }
+
+        /* Бейдж категории — полупрозрачная белая «таблетка» */
+        .command-card:is(:hover, .is-wave-hover, :focus-visible) .command-category {
+            background: rgba(255, 255, 255, .20);
+            border-color: rgba(255, 255, 255, .42);
+            color: #FFFFFF;
+        }
+
+        /* Бейджи стоимости — белые с тёмно-зелёным текстом (максимальный контраст) */
+        :is(.command-card, .song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) :is(
+            .command-cost, .song-price, .suffering-price
+        ) {
+            background: rgba(255, 255, 255, .96);
+            border-color: rgba(255, 255, 255, .60);
+            color: #10301F;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+        }
+
+        /* Иконки песен и испытаний — прозрачно-белые с белым глифом */
+        :is(.song-card, .suffering-card):is(:hover, .is-wave-hover, :focus-visible) :is(
+            .song-icon, .suffering-icon
+        ) {
+            background: rgba(255, 255, 255, .22);
+            border: 1px solid rgba(255, 255, 255, .42);
+            color: #FFFFFF;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .16);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            :is(.command-card, .song-card, .suffering-card)::before,
+            :is(.command-card, .song-card, .suffering-card)::after { transition: none; }
+        }
     </style>
 </head>
 <body data-theme="dark" class="page-loaded">
@@ -1098,7 +1223,7 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 53.6442vw; animation-duration: 6.4661s; animation-delay: 2.96181s; width: 14.3543px; height: 14.8028px; transform: rotate(104.008deg);"></div><div class="petal" style="left: 6.02102vw; animation-duration: 8.9739s; animation-delay: 2.09185s; width: 8.71675px; height: 11.3953px; transform: rotate(269.437deg);"></div><div class="petal" style="left: 21.9746vw; animation-duration: 8.55054s; animation-delay: 3.40324s; width: 14.6868px; height: 10.5857px; transform: rotate(239.786deg);"></div><div class="petal" style="left: 91.196vw; animation-duration: 5.17075s; animation-delay: 0.0198872s; width: 13.5025px; height: 14.6047px; transform: rotate(185.874deg);"></div><div class="petal" style="left: 85.8201vw; animation-duration: 6.45939s; animation-delay: 2.77054s; width: 11.4309px; height: 10.2649px; transform: rotate(292.317deg);"></div><div class="petal" style="left: 19.3643vw; animation-duration: 7.58328s; animation-delay: 0.129583s; width: 14.1052px; height: 8.61898px; transform: rotate(108.182deg);"></div><div class="petal" style="left: 18.3768vw; animation-duration: 8.95314s; animation-delay: 1.67337s; width: 10.5098px; height: 11.536px; transform: rotate(60.6631deg);"></div><div class="petal" style="left: 95.0291vw; animation-duration: 7.94037s; animation-delay: 2.29021s; width: 12.1179px; height: 8.80576px; transform: rotate(210.078deg);"></div><div class="petal" style="left: 55.6071vw; animation-duration: 9.60992s; animation-delay: 4.87455s; width: 14.6671px; height: 14.4557px; transform: rotate(213.256deg);"></div><div class="petal" style="left: 14.0537vw; animation-duration: 6.92028s; animation-delay: 2.93801s; width: 9.76106px; height: 14.4799px; transform: rotate(116.597deg);"></div><div class="petal" style="left: 21.3921vw; animation-duration: 9.74781s; animation-delay: 4.23521s; width: 15.4408px; height: 13.5484px; transform: rotate(144.71deg);"></div><div class="petal" style="left: 15.4773vw; animation-duration: 9.10125s; animation-delay: 4.87227s; width: 13.1004px; height: 12.2877px; transform: rotate(21.0593deg);"></div><div class="petal" style="left: 1.92187vw; animation-duration: 6.24819s; animation-delay: 4.12857s; width: 15.0832px; height: 11.1653px; transform: rotate(98.4275deg);"></div><div class="petal" style="left: 83.0899vw; animation-duration: 5.6034s; animation-delay: 2.05912s; width: 14.3828px; height: 10.7461px; transform: rotate(155.771deg);"></div><div class="petal" style="left: 85.9509vw; animation-duration: 6.19721s; animation-delay: 3.26599s; width: 11.7557px; height: 15.9843px; transform: rotate(70.0402deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 76.1821vw; animation-duration: 8.94967s; animation-delay: 1.73404s; width: 14.2768px; height: 15.4825px; transform: rotate(101.68deg);"></div><div class="petal" style="left: 55.2928vw; animation-duration: 9.3652s; animation-delay: 2.29161s; width: 10.7815px; height: 11.4216px; transform: rotate(208.376deg);"></div><div class="petal" style="left: 88.1055vw; animation-duration: 9.65892s; animation-delay: 2.07147s; width: 13.1855px; height: 15.1429px; transform: rotate(138.911deg);"></div><div class="petal" style="left: 32.4736vw; animation-duration: 6.15755s; animation-delay: 1.15628s; width: 13.9618px; height: 8.33563px; transform: rotate(238.223deg);"></div><div class="petal" style="left: 96.5896vw; animation-duration: 6.83843s; animation-delay: 4.78192s; width: 15.2086px; height: 13.8569px; transform: rotate(159.269deg);"></div><div class="petal" style="left: 95.8037vw; animation-duration: 7.00726s; animation-delay: 1.91866s; width: 8.58291px; height: 13.178px; transform: rotate(273.301deg);"></div><div class="petal" style="left: 89.4212vw; animation-duration: 6.87264s; animation-delay: 1.63925s; width: 15.6807px; height: 12.4532px; transform: rotate(74.5091deg);"></div><div class="petal" style="left: 5.92118vw; animation-duration: 5.5426s; animation-delay: 4.52114s; width: 9.68341px; height: 10.3042px; transform: rotate(349.624deg);"></div><div class="petal" style="left: 12.9411vw; animation-duration: 6.84076s; animation-delay: 1.93286s; width: 10.4287px; height: 9.6908px; transform: rotate(116.676deg);"></div><div class="petal" style="left: 22.1102vw; animation-duration: 6.1872s; animation-delay: 1.29262s; width: 10.9575px; height: 10.5156px; transform: rotate(67.0544deg);"></div><div class="petal" style="left: 68.501vw; animation-duration: 7.58937s; animation-delay: 1.3482s; width: 15.6176px; height: 9.70807px; transform: rotate(280.97deg);"></div><div class="petal" style="left: 95.372vw; animation-duration: 9.74922s; animation-delay: 1.54024s; width: 8.47059px; height: 13.6579px; transform: rotate(272.593deg);"></div><div class="petal" style="left: 33.3109vw; animation-duration: 5.87506s; animation-delay: 0.700701s; width: 10.5025px; height: 12.4458px; transform: rotate(148.873deg);"></div><div class="petal" style="left: 84.8932vw; animation-duration: 6.89146s; animation-delay: 0.265887s; width: 10.6261px; height: 15.2096px; transform: rotate(337.85deg);"></div><div class="petal" style="left: 27.4539vw; animation-duration: 7.77805s; animation-delay: 3.95357s; width: 10.1317px; height: 10.0208px; transform: rotate(107.883deg);"></div></div>
 
     <header class="header reveal-in">
         <div class="container header-container">
@@ -3689,7 +3814,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":7,"updatedAt":"2026-10-21T01:37:16.726Z"};
+        let dataMeta = {"version":8,"updatedAt":"2026-10-21T02:00:35.856Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
@@ -5344,5 +5469,5 @@
 
         window.addEventListener('load', () => { setTimeout(updateTabIndicator, 300); });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc29683f32e846',t:'MTc5MjU0MjcxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc29683f32e846',t:'MTc5MjU0MjcxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc59425907e960',t:'MTc5MjU0NDY3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
 </body></html>
