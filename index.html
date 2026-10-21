@@ -21,19 +21,19 @@
 
     <style>
         :root {
-            --primary: #6E5498;
-            --primary-light: #8A6FB6;
-            --primary-dark: #584176;
-            --secondary: #4B3B6E;
-            --secondary-light: #6A558F;
+            --primary: #1A1A1A;
+            --primary-light: #3A3A3A;
+            --primary-dark: #000000;
+            --secondary: #1A1A1A;
+            --secondary-light: #3A3A3A;
             --accent: #9FB59E;
             --success: #6F9E6B;
             --danger: #C76B5C;
             --danger-light: #D98A7C;
             --gold: #C6A866;
-            --purple: #7A5FA8;
-            --purple-light: #9A82C4;
-            --purple-dark: #5C4682;
+            --purple: #1A1A1A;
+            --purple-light: #3A3A3A;
+            --purple-dark: #000000;
 
             --bg-primary: #F3EEE4;
             --bg-secondary: #FBF8F2;
@@ -46,10 +46,10 @@
             --text-primary: #2B2531;
             --text-secondary: #6A6276;
             --text-tertiary: #968FA0;
-            --text-accent: #584176;
+            --text-accent: #1A1A1A;
 
             --border-color: rgba(43, 37, 49, 0.10);
-            --border-hover: rgba(110, 84, 152, 0.35);
+            --border-hover: rgba(0, 0, 0, 0.35);
             --shadow-color: rgba(43, 37, 49, 0.08);
 
             --radius-sm: 10px;
@@ -62,8 +62,8 @@
             --shadow-md: 0 8px 24px rgba(43, 37, 49, 0.07);
             --shadow-lg: 0 16px 40px rgba(43, 37, 49, 0.10);
             --shadow-xl: 0 28px 64px rgba(43, 37, 49, 0.14);
-            --shadow-primary: 0 8px 24px rgba(110, 84, 152, 0.18);
-            --shadow-purple: 0 8px 24px rgba(75, 59, 110, 0.18);
+            --shadow-primary: 0 8px 24px rgba(0, 0, 0, 0.18);
+            --shadow-purple: 0 8px 24px rgba(0, 0, 0, 0.18);
             --shadow-gold: 0 8px 24px rgba(198, 168, 102, 0.20);
 
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -75,7 +75,7 @@
 
             --header-height: 86px;
             --sidebar-width: 280px;
-            --logo-color: #584176;
+            --logo-color: #1A1A1A;
         }
 
         body[data-theme="dark"] {
@@ -215,6 +215,9 @@
 
         .splash-screen { position: fixed; inset: 0; background: var(--bg-gradient); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity var(--transition-slow), visibility var(--transition-slow); }
         .splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .splash-logo { position: relative; top: -24px; display: block; width: min(420px, 80vw); height: auto; margin: calc(min(420px, 80vw) * -0.1935) auto calc(min(420px, 80vw) * -0.225); }
+        .splash-spinner { width: 40px; height: 40px; margin: 0 auto; border-radius: 50%; border: 8px solid rgba(110, 84, 152, 0.18); border-top-color: var(--primary); border-right-color: var(--gold); animation: splashSpin 0.9s linear infinite; }
+        @keyframes splashSpin { to { transform: rotate(360deg); } }
         .splash-content { text-align: center; animation: splashAnimation 2s ease-in-out; position: relative; z-index: 2; }
         .splash-icon { width: 180px; height: 180px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 40px; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; box-shadow: var(--shadow-xl); animation: pulse 2.4s infinite; position: relative; overflow: hidden; }
         .splash-icon img { width: 120px; height: 120px; object-fit: contain; display: block; }
@@ -309,7 +312,13 @@
         .hero-section { text-align: center; margin-bottom: 36px; max-width: 760px; margin-left: auto; margin-right: auto; position: relative; }
         .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--primary); font-weight: 600; font-size: 12px; padding: 6px 16px; border-radius: var(--radius-full); margin-bottom: 20px; box-shadow: var(--shadow-sm); }
         .hero-badge i { color: var(--gold); }
-        .hero-title { font-family: var(--font-heading); font-size: 40px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; text-transform: uppercase; margin-bottom: 14px; color: var(--text-primary); }
+        .hero-title { font-family: var(--font-heading); font-size: 30px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; text-transform: uppercase; margin-bottom: 14px; color: var(--text-primary); }
+        .tabs-nav { position: relative; z-index: 20; }
+        .hero-logo { pointer-events: none; display: block; width: min(760px, 100%); height: auto; margin: calc(min(760px, 100%) * -0.1935 + 12px) auto calc(min(760px, 100%) * -0.225 + 16px); border-radius: 12px; }
+        .hero-logo { animation: heroLogoIn 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both, heroLogoFloat 6.5s ease-in-out 1.5s infinite; will-change: translate, opacity, filter; }
+        @keyframes heroLogoIn { from { opacity: 0; scale: 0.9; filter: blur(14px); } to { opacity: 1; scale: 1; filter: blur(0); } }
+        @keyframes heroLogoFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+        @media (prefers-reduced-motion: reduce) { .hero-logo { animation: none; } }
         .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0; max-width: 540px; margin-left: auto; margin-right: auto; }
 
         .hero-bus {
@@ -323,7 +332,7 @@
             user-select: none;
             filter: drop-shadow(0 20px 50px rgba(110, 84, 152, 0.35));
             transform-origin: center bottom;
-            z-index: 5;
+            z-index: 1500;
         }
         body[data-theme="dark"] .hero-bus {
             filter: drop-shadow(0 20px 50px rgba(142, 111, 191, 0.4)) brightness(1.1);
@@ -880,7 +889,7 @@
                         background 400ms var(--ease-soft), box-shadow 400ms var(--ease-soft);
             will-change: transform, width;
         }
-        .tab-content { animation: tabFadeSmooth 560ms var(--ease-out) both; }
+        .tab-content { animation: tabFadeSmooth 560ms var(--ease-out) backwards; }
         @keyframes tabFadeSmooth { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
         .search-container { transition: max-width 520ms var(--ease-out); }
@@ -1075,18 +1084,12 @@
         }
     </style>
 </head>
-<body data-theme="dark" class="page-loaded">
+<body data-theme="light" class="page-loaded">
     <div class="splash-screen hidden" id="splash-screen">
         <div class="splash-content">
-            <div class="splash-icon">
-                <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="Цинтрибот">
-                <i class="fas fa-heart"></i>
-            </div>
-            <h1>Цинтрибот</h1>
+            <img src="https://i.ibb.co/bgNnngJg/dfg.png" alt="dfg" class="splash-logo">
             <p>Загружаем звуковые команды и песни...</p>
-            <div class="splash-progress">
-                <div class="splash-progress-bar"></div>
-            </div>
+            <div class="splash-spinner"></div>
         </div>
     </div>
 
@@ -1098,14 +1101,11 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 8.3067vw; animation-duration: 8.79305s; animation-delay: 3.05314s; width: 9.0826px; height: 14.8867px; transform: rotate(101.402deg);"></div><div class="petal" style="left: 22.2281vw; animation-duration: 5.55558s; animation-delay: 2.1688s; width: 10.0409px; height: 14.7353px; transform: rotate(47.0073deg);"></div><div class="petal" style="left: 84.7177vw; animation-duration: 5.78534s; animation-delay: 4.53831s; width: 13.5793px; height: 11.4642px; transform: rotate(232.78deg);"></div><div class="petal" style="left: 68.9927vw; animation-duration: 7.56234s; animation-delay: 3.70839s; width: 9.98624px; height: 15.7097px; transform: rotate(14.161deg);"></div><div class="petal" style="left: 37.334vw; animation-duration: 5.83726s; animation-delay: 1.6308s; width: 13.3931px; height: 15.1269px; transform: rotate(337.448deg);"></div><div class="petal" style="left: 80.138vw; animation-duration: 9.60444s; animation-delay: 2.57197s; width: 15.6585px; height: 14.3059px; transform: rotate(119.583deg);"></div><div class="petal" style="left: 90.4826vw; animation-duration: 6.74843s; animation-delay: 3.67165s; width: 14.8219px; height: 15.6657px; transform: rotate(131.085deg);"></div><div class="petal" style="left: 34.5725vw; animation-duration: 5.33739s; animation-delay: 2.37246s; width: 13.777px; height: 9.19796px; transform: rotate(1.51132deg);"></div><div class="petal" style="left: 71.2132vw; animation-duration: 9.63367s; animation-delay: 2.56189s; width: 9.35599px; height: 10.5464px; transform: rotate(227.025deg);"></div><div class="petal" style="left: 47.0324vw; animation-duration: 9.51999s; animation-delay: 0.34543s; width: 12.7067px; height: 9.63283px; transform: rotate(75.5876deg);"></div><div class="petal" style="left: 92.4599vw; animation-duration: 9.80653s; animation-delay: 2.82569s; width: 8.19286px; height: 14.7982px; transform: rotate(260.844deg);"></div><div class="petal" style="left: 61.9744vw; animation-duration: 8.10862s; animation-delay: 4.75118s; width: 9.02517px; height: 14.0234px; transform: rotate(53.1829deg);"></div><div class="petal" style="left: 35.6262vw; animation-duration: 8.85576s; animation-delay: 3.01176s; width: 15.9533px; height: 14.7914px; transform: rotate(34.4173deg);"></div><div class="petal" style="left: 58.8305vw; animation-duration: 6.09142s; animation-delay: 3.90088s; width: 8.43299px; height: 8.96038px; transform: rotate(84.2296deg);"></div><div class="petal" style="left: 9.78007vw; animation-duration: 9.26883s; animation-delay: 0.873279s; width: 10.8109px; height: 13.9084px; transform: rotate(85.7812deg);"></div></div>
+    <div class="petals-container" id="petals"><div class="petal" style="left: 31.7212vw; animation-duration: 9.15598s; animation-delay: 4.38144s; width: 11.8526px; height: 15.9084px; transform: rotate(243.917deg);"></div><div class="petal" style="left: 51.314vw; animation-duration: 8.10005s; animation-delay: 3.05008s; width: 9.29792px; height: 10.3405px; transform: rotate(98.3434deg);"></div><div class="petal" style="left: 46.9221vw; animation-duration: 6.62646s; animation-delay: 1.82707s; width: 13.1076px; height: 15.4136px; transform: rotate(334.378deg);"></div><div class="petal" style="left: 28.9288vw; animation-duration: 9.48648s; animation-delay: 0.366522s; width: 15.5451px; height: 12.6326px; transform: rotate(132.456deg);"></div><div class="petal" style="left: 20.3433vw; animation-duration: 5.9391s; animation-delay: 1.60023s; width: 9.58341px; height: 15.3139px; transform: rotate(269.034deg);"></div><div class="petal" style="left: 4.06173vw; animation-duration: 9.57534s; animation-delay: 0.267962s; width: 15.2763px; height: 12.6878px; transform: rotate(153.964deg);"></div><div class="petal" style="left: 70.0219vw; animation-duration: 8.58754s; animation-delay: 2.09117s; width: 14.4934px; height: 10.1908px; transform: rotate(228.27deg);"></div><div class="petal" style="left: 62.777vw; animation-duration: 6.49418s; animation-delay: 1.31197s; width: 14.9988px; height: 14.9732px; transform: rotate(106.505deg);"></div><div class="petal" style="left: 40.4125vw; animation-duration: 8.94512s; animation-delay: 0.284991s; width: 10.0865px; height: 12.3259px; transform: rotate(152.381deg);"></div><div class="petal" style="left: 45.9584vw; animation-duration: 7.29113s; animation-delay: 4.83761s; width: 15.2836px; height: 15.8417px; transform: rotate(338.348deg);"></div><div class="petal" style="left: 4.36305vw; animation-duration: 5.89086s; animation-delay: 1.90304s; width: 8.27617px; height: 15.5484px; transform: rotate(42.5055deg);"></div><div class="petal" style="left: 24.12vw; animation-duration: 6.29873s; animation-delay: 2.89903s; width: 12.0017px; height: 10.8047px; transform: rotate(161.735deg);"></div><div class="petal" style="left: 86.9725vw; animation-duration: 9.72372s; animation-delay: 4.9635s; width: 8.71135px; height: 14.3749px; transform: rotate(132.064deg);"></div><div class="petal" style="left: 88.9835vw; animation-duration: 7.50015s; animation-delay: 2.06197s; width: 12.1384px; height: 10.65px; transform: rotate(289.496deg);"></div><div class="petal" style="left: 84.0918vw; animation-duration: 9.49925s; animation-delay: 1.44855s; width: 13.5572px; height: 10.5104px; transform: rotate(147.246deg);"></div></div>
 
     <header class="header reveal-in">
         <div class="container header-container">
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="Цинтрибот">
-                </div>
                 <div class="logo-text">
                     <h1>Цинтрибот</h1>
                     <span>Звуковые команды и песни</span>
@@ -1128,7 +1128,7 @@
                     </a>
                 </div>
 
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" style="">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-wand-magic-sparkles"></i>
@@ -1167,9 +1167,11 @@
                 <section class="hero-section">
                     <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="" class="hero-bus" aria-hidden="true" loading="lazy">
 
-                    <div class="hero-badge reveal-in"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
+                    <img src="https://i.ibb.co/bgNnngJg/dfg.png" alt="dfg" class="hero-logo reveal-in" loading="lazy">
+
                     <h1 class="hero-title reveal-in">Библиотека звуковых команд</h1>
                     <p class="hero-description reveal-in">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
+                    <div class="hero-badge reveal-in" style="margin-top: 20px; margin-bottom: 0;"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
                 </section>
 
                 <div class="info-cards">
@@ -1209,42 +1211,42 @@
                         </div>
                     </div>
                     <div class="giveaway-grid">
-                        <article class="giveaway-card" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: -2.205deg; --giveaway-tilt-y: 0.675deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="sounds/dark-souls-3.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.92; --cpy: 3.68;"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="sounds/dark-souls-3.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Dark Souls III</h3><span class="giveaway-command">!Dark Souls 3</span></div>
                                 <span class="giveaway-price">25 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg; --giveaway-tilt-x: 0.634deg; --giveaway-tilt-y: -1.222deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="sounds/resident-evil-village.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -1.66; --cpy: -1.06;"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="sounds/resident-evil-village.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Resident Evil 8</h3><span class="giveaway-command">!Resident Evil Village</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg; --giveaway-tilt-x: -1.001deg; --giveaway-tilt-y: 2.582deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="sounds/gta-5.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 3.52; --cpy: 1.67;"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="sounds/gta-5.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">GTA 5</h3><span class="giveaway-command">!Grand Theft Auto V</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="sounds/days-gone.mp3">
+                        <article class="giveaway-card fx-paused" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="sounds/days-gone.mp3">
                             <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="ash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Days Gone</h3><span class="giveaway-command">!Days Gone</span></div>
                                 <span class="giveaway-price">10 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Ori and the Will of the Wisps" data-tint="#2E6BF0" style="--card-tint: #2E6BF0; --cmx: 48%; --cmy: 33%; --crx: 52%; --cry: 30%; --char-idle-dur: 4.4s; --char-bob: -6.5px; --char-breath: 1.02; --char-rot: 0.9deg;" role="button" tabindex="0" aria-label="Скопировать команду !Ori and the Will of the Wisps (Ori and the Will of the Wisps, 7 000 бусек)" data-sound-url="sounds/ori-wisps.mp3">
+                        <article class="giveaway-card fx-paused" data-command="!Ori and the Will of the Wisps" data-tint="#2E6BF0" style="--card-tint: #2E6BF0; --cmx: 48%; --cmy: 33%; --crx: 52%; --cry: 30%; --char-idle-dur: 4.4s; --char-bob: -6.5px; --char-breath: 1.02; --char-rot: 0.9deg;" role="button" tabindex="0" aria-label="Скопировать команду !Ori and the Will of the Wisps (Ori and the Will of the Wisps, 7 000 бусек)" data-sound-url="sounds/ori-wisps.mp3">
                             <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/9HkvFH4x/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="spirit" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Ori and the Will of the Wisps</h3><span class="giveaway-command">!Ori and the Will of the Wisps</span></div>
                                 <span class="giveaway-price">7 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Mafia II" data-tint="#D9363E" style="--card-tint: #D9363E; --cmx: 67%; --cmy: 35%; --crx: 40%; --cry: 42%; --char-idle-dur: 5.8s; --char-bob: -4.5px; --char-breath: 1.012; --char-rot: 0.55deg;" role="button" tabindex="0" aria-label="Скопировать команду !Mafia II (Mafia 2 DE, 7 000 бусек)" data-sound-url="sounds/mafia-2.mp3">
+                        <article class="giveaway-card fx-paused" data-command="!Mafia II" data-tint="#D9363E" style="--card-tint: #D9363E; --cmx: 67%; --cmy: 35%; --crx: 40%; --cry: 42%; --char-idle-dur: 5.8s; --char-bob: -4.5px; --char-breath: 1.012; --char-rot: 0.55deg;" role="button" tabindex="0" aria-label="Скопировать команду !Mafia II (Mafia 2 DE, 7 000 бусек)" data-sound-url="sounds/mafia-2.mp3">
                             <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/rDVFWhB/2.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="snow" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Mafia 2 DE</h3><span class="giveaway-command">!Mafia II</span></div>
@@ -2955,7 +2957,7 @@
 
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">"!Dark Souls 3" скопировано!</span>
+        <span id="notification-text">Светлая тема включена ☀️</span>
     </div>
 
     
@@ -3690,7 +3692,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":3,"updatedAt":"2026-10-19T14:08:19.579Z"};
+        let dataMeta = {"version":4,"updatedAt":"2026-10-21T01:22:09.146Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
@@ -5308,19 +5310,12 @@
                     unlocked = true;
                 } catch { unlocked = false; }
             };
+            const TICK_SRC = 'data:audio/mpeg;base64,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h1TEOMhTeIA08u4m9A88l8pppw1F2UcTj2oaN8eGedM3XMTe6LEpEBqWYUmUNTQaFE614RrEFLf8zKcJ3P/7mGSoiEMYNUJIZh6AaecYNQzDlg21BwQDDFxBWplh5BGKaOo/RNUMLwwXxPJhRPBajl504GSmxeZOZ5goqZFgECA+XrZ/HRfz7KjPuiy7nX7kEFbPPe0s1YrA/sT9TST0nwAqLECgAAWaqra2Z8zOVW/+Z/nDsYkFaaAr/hQETD+hSAgI1WlDqrts2uzHsbNzCgQrX/9VVelRvUqCQCgVklbtVkMaY3N/MhjaGdSlKUxjG0eYxnUv/KVCspWl9vqZ1KyGoVqG6mfzB43KgqExglOrGFeVcCsSgqWPRFkJ9yQCCiVfsDT5k0FAIBAKTz5k0iROJa8rXLXlB9YqKit/8Nc/rqut87M3/7MHQLg+qLWmta4FgbA2D4OgbX6qsM3Nfquy8N6qrcN/81tqqrfqv7fKkqs113w3/sULNqzNf8rw2zfHw2tKv+zX37MzN7MzR+rMzepKs3//8rXKqUc2IAq2EhgaciMuRl9hIzJp+X/+ZGZNf/EZEaaEoYGFBOhlkbWcVgYKOhkysDBxyMv2v6tZHIyZZQccj/z/1YGCjoZMrKFjofY5l5qwMECeLypo00q4tna9zc2TjSij4vNmjTSnh2dj7i8SIkhIEBCzE1LmjTSj4tiyj7zcoiSEgQEeQTUlJxppR4GAKLH/7ZWsqOhHZZyqywGCdHZWssdJ//////2WWWxZZUMUFDAwQMIHRLLLDJQwUEDBBwjmX//LLLLP/////VQwUMDBB0c1ayyxlYGCBo6Eyyyy2WWVHP/7mETtgMPLcL/Iwy1AgxEXsATIPlEaIqBAjNzJ6b9NiACMof//2VrLHSf/5KGCggYIOEeyyyoYoBDBQQMIHCI/6tAxKoMrpppMQU1FMy4xMDCqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqg==';
             const playTick = () => {
-                if (!unlocked || !audioCtx) return;
-                const t = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(1400, t);
-                osc.frequency.exponentialRampToValueAtTime(900, t + 0.015);
-                gain.gain.setValueAtTime(0.0001, t);
-                gain.gain.exponentialRampToValueAtTime(0.06, t + 0.003);
-                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.020);
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                osc.start(t); osc.stop(t + 0.022);
+                if (!unlocked) return;
+                const a = new Audio(TICK_SRC);
+                a.volume = 0.175;
+                a.play().catch(() => {});
             };
             const isInteractive = (el) => {
                 if (!el || el === document.documentElement) return false;
@@ -5348,10 +5343,10 @@
             };
             const unlockEvents = ['pointerdown', 'keydown', 'touchstart'];
             unlockEvents.forEach(ev => window.addEventListener(ev, () => unlock(), { once: true, passive: true }));
-            document.addEventListener('mouseover', onMouseOver, { passive: true });
+            document.addEventListener('click', onMouseOver, { passive: true });
         }
 
         window.addEventListener('load', () => { setTimeout(updateTabIndicator, 300); });
     </script>
-
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc1fdb78c8e846',t:'MTc5MjU0MjMxOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
 </body></html>
