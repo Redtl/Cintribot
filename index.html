@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru"><head>
+<html lang="ru" class=""><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Цинтрибот | Звуковые команды и песни</title>
@@ -361,29 +361,109 @@
         .info-card-title { font-family: var(--font-heading); font-size: 16px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
         .info-card-content { color: var(--text-secondary); line-height: 1.6; font-size: 13.5px; }
 
-        .giveaway-section { margin: 0 0 36px; }
-        .giveaway-header { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
-        .giveaway-heading { margin: 0 0 5px; font-family: var(--font-heading); color: var(--text-primary); font-size: 25px; font-weight: 800; letter-spacing: -0.02em; }
-        .giveaway-description { margin: 0; color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; }
+        .giveaway-section {
+            margin: 0 0 36px;
+            scroll-margin-top: calc(var(--header-height) + 20px);
+            --giveaway-accent: #8C5811;
+        }
+        body[data-theme="dark"] .giveaway-section {
+            --giveaway-accent: #ECCB7E;
+        }
+        .giveaway-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+        .giveaway-heading { margin: 0; font-family: var(--font-heading); color: var(--text-primary); font-size: clamp(26px, 2.6vw, 34px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; scroll-margin-top: calc(var(--header-height) + 20px); }
+        .giveaway-info-banner {
+            position: relative;
+            overflow: hidden;
+            margin: 0 0 24px;
+            padding: 30px 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid color-mix(in srgb, var(--text-primary) 9%, transparent);
+            background:
+                radial-gradient(900px 320px at 0% 0%, color-mix(in srgb, var(--primary) 14%, transparent) 0%, transparent 65%),
+                radial-gradient(700px 280px at 100% 100%, color-mix(in srgb, var(--gold) 14%, transparent) 0%, transparent 65%),
+                var(--bg-card);
+            box-shadow: var(--shadow-md);
+            transition: background-color var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+        }
+        .giveaway-rules {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .giveaway-rule-line {
+            margin: 0;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: clamp(18px, 1.72vw, 23px);
+            font-weight: 700;
+            line-height: 1.44;
+            letter-spacing: -0.012em;
+        }
+        .giveaway-nowrap {
+            white-space: nowrap;
+        }
+        .giveaway-accent {
+            color: var(--giveaway-accent);
+            font-weight: 800;
+        }
+        .giveaway-instructions {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid color-mix(in srgb, var(--text-primary) 11%, transparent);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .giveaway-description {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: clamp(17px, 1.55vw, 20.5px);
+            font-weight: 600;
+            line-height: 1.48;
+        }
         .giveaway-note {
-            margin: 8px 0 0;
-            color: var(--text-secondary);
-            font-size: 12.5px;
+            position: relative;
+            margin: 0;
+            padding: 16px 20px 16px 24px;
+            border-radius: var(--radius-md);
+            background: color-mix(in srgb, var(--gold) 13%, var(--bg-tertiary));
+            border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+            color: var(--text-primary);
+            font-size: clamp(17px, 1.55vw, 20.5px);
+            font-weight: 600;
             line-height: 1.5;
             display: flex;
             align-items: flex-start;
-            gap: 8px;
-            max-width: 640px;
+            gap: 12px;
+            max-width: none;
         }
-        .giveaway-note i {
-            color: var(--gold);
-            font-size: 14px;
-            margin-top: 1px;
+        .giveaway-note::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 12px;
+            bottom: 12px;
+            width: 4px;
+            border-radius: 999px;
+            background: var(--gold);
+        }
+        .giveaway-note-icon {
+            color: var(--giveaway-accent);
+            width: 24px;
+            height: 24px;
+            margin-top: 3px;
             flex-shrink: 0;
         }
         .giveaway-note strong {
-            color: var(--text-primary);
-            font-weight: 600;
+            color: var(--giveaway-accent);
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+        .giveaway-note strong:hover {
+            opacity: 0.85;
         }
         .giveaway-count { flex: 0 0 auto; padding: 7px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-full); background: var(--bg-secondary); color: var(--text-secondary); font-size: 12px; font-weight: 700; }
         .giveaway-header-actions { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; }
@@ -482,8 +562,12 @@
             .giveaway-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 480px) {
-            .giveaway-heading { font-size: 22px; }
+            .giveaway-heading { font-size: 24px; }
             .giveaway-header { align-items: center; flex-wrap: wrap; }
+            .giveaway-info-banner { padding: 20px 18px; margin-bottom: 18px; }
+            .giveaway-rules { gap: 10px; }
+            .giveaway-instructions { margin-top: 16px; padding-top: 16px; gap: 12px; }
+            .giveaway-note { padding: 14px 14px 14px 21px; gap: 10px; }
             .giveaway-header-actions { gap: 6px; }
             .giveaway-count { padding: 7px 9px; }
             .giveaway-jump-link { padding: 8px 10px; gap: 6px; font-size: 11px; }
@@ -1206,8 +1290,8 @@
         }
     </style>
 </head>
-<body data-theme="dark" class="page-loaded">
-    <div class="splash-screen hidden" id="splash-screen">
+<body data-theme="dark" class="">
+    <div class="splash-screen" id="splash-screen">
         <div class="splash-content">
             <img src="https://i.ibb.co/bgNnngJg/dfg.png" alt="dfg" class="splash-logo">
             <p>Загружаем звуковые команды и песни...</p>
@@ -1223,9 +1307,9 @@
     </div>
     <div class="grid-pattern"></div>
     <div class="witcher-runes" aria-hidden="true"></div>
-    <div class="petals-container" id="petals"><div class="petal" style="left: 76.1821vw; animation-duration: 8.94967s; animation-delay: 1.73404s; width: 14.2768px; height: 15.4825px; transform: rotate(101.68deg);"></div><div class="petal" style="left: 55.2928vw; animation-duration: 9.3652s; animation-delay: 2.29161s; width: 10.7815px; height: 11.4216px; transform: rotate(208.376deg);"></div><div class="petal" style="left: 88.1055vw; animation-duration: 9.65892s; animation-delay: 2.07147s; width: 13.1855px; height: 15.1429px; transform: rotate(138.911deg);"></div><div class="petal" style="left: 32.4736vw; animation-duration: 6.15755s; animation-delay: 1.15628s; width: 13.9618px; height: 8.33563px; transform: rotate(238.223deg);"></div><div class="petal" style="left: 96.5896vw; animation-duration: 6.83843s; animation-delay: 4.78192s; width: 15.2086px; height: 13.8569px; transform: rotate(159.269deg);"></div><div class="petal" style="left: 95.8037vw; animation-duration: 7.00726s; animation-delay: 1.91866s; width: 8.58291px; height: 13.178px; transform: rotate(273.301deg);"></div><div class="petal" style="left: 89.4212vw; animation-duration: 6.87264s; animation-delay: 1.63925s; width: 15.6807px; height: 12.4532px; transform: rotate(74.5091deg);"></div><div class="petal" style="left: 5.92118vw; animation-duration: 5.5426s; animation-delay: 4.52114s; width: 9.68341px; height: 10.3042px; transform: rotate(349.624deg);"></div><div class="petal" style="left: 12.9411vw; animation-duration: 6.84076s; animation-delay: 1.93286s; width: 10.4287px; height: 9.6908px; transform: rotate(116.676deg);"></div><div class="petal" style="left: 22.1102vw; animation-duration: 6.1872s; animation-delay: 1.29262s; width: 10.9575px; height: 10.5156px; transform: rotate(67.0544deg);"></div><div class="petal" style="left: 68.501vw; animation-duration: 7.58937s; animation-delay: 1.3482s; width: 15.6176px; height: 9.70807px; transform: rotate(280.97deg);"></div><div class="petal" style="left: 95.372vw; animation-duration: 9.74922s; animation-delay: 1.54024s; width: 8.47059px; height: 13.6579px; transform: rotate(272.593deg);"></div><div class="petal" style="left: 33.3109vw; animation-duration: 5.87506s; animation-delay: 0.700701s; width: 10.5025px; height: 12.4458px; transform: rotate(148.873deg);"></div><div class="petal" style="left: 84.8932vw; animation-duration: 6.89146s; animation-delay: 0.265887s; width: 10.6261px; height: 15.2096px; transform: rotate(337.85deg);"></div><div class="petal" style="left: 27.4539vw; animation-duration: 7.77805s; animation-delay: 3.95357s; width: 10.1317px; height: 10.0208px; transform: rotate(107.883deg);"></div></div>
+    <div class="petals-container" id="petals"></div>
 
-    <header class="header reveal-in">
+    <header class="header">
         <div class="container header-container">
             <a href="#" class="logo">
                 <div class="logo-text">
@@ -1250,13 +1334,13 @@
                     </a>
                 </div>
 
-                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" style="">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-wand-magic-sparkles"></i>
                 </button>
 
-                <button class="balance-btn" id="balance-value" aria-label="Проверить баланс БУСЕК">
+                <button class="balance-btn" id="balance-value" aria-label="Проверить баланс БУСЕК" style="">
                     <i class="fas fa-coins"></i>
                     <span>Проверить баланс</span>
                 </button>
@@ -1266,7 +1350,7 @@
 
     <main class="main-content">
         <div class="container">
-            <div class="tabs-nav reveal-in" id="tabs-nav">
+            <div class="tabs-nav" id="tabs-nav">
                 <div class="tab-indicator" id="tab-indicator" style="transform: translateX(1px); width: 388px;"></div>
                 <button class="tab-btn active" data-tab="commands">
                     <i class="fas fa-microphone-alt"></i>
@@ -1289,22 +1373,22 @@
                 <section class="hero-section">
                     <img src="https://i.ibb.co/LDJR2vX4/klh.png" alt="" class="hero-bus" aria-hidden="true" loading="lazy">
 
-                    <img src="https://i.ibb.co/bgNnngJg/dfg.png" alt="dfg" class="hero-logo reveal-in" loading="lazy">
+                    <img src="https://i.ibb.co/bgNnngJg/dfg.png" alt="dfg" class="hero-logo" loading="lazy">
 
-                    <h1 class="hero-title reveal-in">Библиотека звуковых команд</h1>
-                    <p class="hero-description reveal-in">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
-                    <div class="hero-badge reveal-in" style="margin-top: 20px; margin-bottom: 0;"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
+                    <h1 class="hero-title">Библиотека звуковых команд</h1>
+                    <p class="hero-description">Выбирайте команды, копируйте и отправляйте в чат стрима.</p>
+                    <div class="hero-badge" style="margin-top: 20px; margin-bottom: 0;"><i class="fas fa-bolt"></i><span>300 БУСЕК за команду</span></div>
                 </section>
 
                 <div class="info-cards">
-                    <div class="info-card reveal-in">
+                    <div class="info-card">
                         <div class="info-card-header">
                             <div class="info-card-icon"><i class="fas fa-gem"></i></div>
                             <h3 class="info-card-title">Как получить БУСЬКИ</h3>
                         </div>
                         <div class="info-card-content"><p>20 БУСЕК за сообщение, 1000 за 100 лайков.</p></div>
                     </div>
-                    <div class="info-card reveal-in">
+                    <div class="info-card">
                         <div class="info-card-header">
                             <div class="info-card-icon"><i class="fas fa-play-circle"></i></div>
                             <h3 class="info-card-title">Как использовать</h3>
@@ -1315,16 +1399,7 @@
 
                 <section class="giveaway-section" aria-labelledby="giveaway-heading">
                     <div class="giveaway-header">
-                        <div>
-                            <h2 class="giveaway-heading" id="giveaway-heading">Розыгрыш игр</h2>
-                            <p class="giveaway-description">
-                                Наведите на карточку, чтобы услышать тему; нажмите, чтобы скопировать команду.
-                            </p>
-                            <p class="giveaway-note">
-                                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span>Перед отправкой команды с игрой обязательно проверьте свой баланс БУСЕК — нажмите кнопку <strong>«Проверить баланс»</strong> в шапке сайта. Если БУСЕК недостаточно, команда не сработает.</span>
-                            </p>
-                        </div>
+                        <h2 class="giveaway-heading" id="giveaway-heading">Розыгрыш игр</h2>
                         <div class="giveaway-header-actions">
                             <span class="giveaway-count">6 игр</span>
                             <a class="giveaway-jump-link" href="#commands-container" aria-label="Перейти к звуковым командам">
@@ -1332,30 +1407,47 @@
                             </a>
                         </div>
                     </div>
+                    <div class="giveaway-info-banner">
+                        <div class="giveaway-rules">
+                            <p class="giveaway-rule-line">Чтобы участвовать в розыгрыше, Вам необходимо присутствовать на <span class="giveaway-accent">ПРАЗДНИЧНОМ</span> стриме!</p>
+                            <p class="giveaway-rule-line">Для участия необходимо накопить баллы канала - <span class="giveaway-nowrap">💋 <span class="giveaway-accent">буськи</span> !</span></p>
+                            <p class="giveaway-rule-line">Для каждой игры будет выставлен отдельный тариф для участия !</p>
+                            <p class="giveaway-rule-line">🍷 Выбор победителя пройдет через рандомайзер на праздничном <span class="giveaway-nowrap">стриме! 🎊</span></p>
+                        </div>
+                        <div class="giveaway-instructions">
+                            <p class="giveaway-description">
+                                Наведите на карточку, чтобы услышать тему; нажмите, чтобы скопировать команду.
+                            </p>
+                            <p class="giveaway-note">
+                                <svg class="giveaway-note-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2L1 21h22L12 2zm1 15h-2v-2h2v2zm0-4h-2V9h2v4z"></path></svg>
+                                <span>Перед отправкой команды с игрой обязательно проверьте свой баланс БУСЕК — нажмите кнопку <strong id="giveaway-balance-inline" role="button" tabindex="0" title="Скопировать команду !буськи">«Проверить баланс»</strong> в шапке сайта. Если БУСЕК недостаточно, команда не сработает.</span>
+                            </p>
+                        </div>
+                    </div>
                     <div class="giveaway-grid">
-                        <article class="giveaway-card" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="sounds/dark-souls-3.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Dark Souls 3" data-tint="#D4900F" style="--card-tint: #D4900F; --cmx: 66%; --cmy: 33%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.6s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: 0.008deg; --giveaway-tilt-y: 0.009deg;" role="button" tabindex="0" aria-label="Скопировать команду !Dark Souls 3 (Dark Souls III, 25 000 бусек)" data-sound-url="sounds/dark-souls-3.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.01; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/VWNkQ2Mt/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="embers" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Dark Souls III</h3><span class="giveaway-command">!Dark Souls 3</span></div>
                                 <span class="giveaway-price">25 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="sounds/resident-evil-village.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Resident Evil Village" data-tint="#B4532A" style="--card-tint: #B4532A; --cmx: 66%; --cmy: 40%; --crx: 52%; --cry: 46%; --char-idle-dur: 5.6s; --char-bob: -5px; --char-breath: 1.013; --char-rot: 0.7deg; --giveaway-tilt-x: 0.009deg; --giveaway-tilt-y: 0.008deg;" role="button" tabindex="0" aria-label="Скопировать команду !Resident Evil Village (Resident Evil 8, 20 000 бусек)" data-sound-url="sounds/resident-evil-village.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: 0.01; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/1YtX4JgQ/8.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="mist" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Resident Evil 8</h3><span class="giveaway-command">!Resident Evil Village</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="sounds/gta-5.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card" data-command="!Grand Theft Auto V" data-tint="#9CCB0A" style="--card-tint: #9CCB0A; --cmx: 62%; --cmy: 33%; --crx: 48%; --cry: 42%; --char-idle-dur: 5.2s; --char-bob: -4px; --char-breath: 1.012; --char-rot: 0.5deg; --giveaway-tilt-x: 0.009deg; --giveaway-tilt-y: -0.009deg;" role="button" tabindex="0" aria-label="Скопировать команду !Grand Theft Auto V (GTA 5, 20 000 бусек)" data-sound-url="sounds/gta-5.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -0.01; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/tw55XSVf/5.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="cash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">GTA 5</h3><span class="giveaway-command">!Grand Theft Auto V</span></div>
                                 <span class="giveaway-price">20 000 бусек</span>
                             </div>
                         </article>
-                        <article class="giveaway-card fx-paused" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="sounds/days-gone.mp3">
-                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par"><img class="giveaway-char" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="ash" width="374" height="663"></canvas></div>
+                        <article class="giveaway-card fx-paused" data-command="!Days Gone" data-tint="#14BFA6" style="--card-tint: #14BFA6; --cmx: 63%; --cmy: 38%; --crx: 42%; --cry: 40%; --char-idle-dur: 6.8s; --char-bob: -3.5px; --char-breath: 1.01; --char-rot: 0.35deg; --giveaway-tilt-x: 0.010deg; --giveaway-tilt-y: -0.005deg;" role="button" tabindex="0" aria-label="Скопировать команду !Days Gone (Days Gone, 10 000 бусек)" data-sound-url="sounds/days-gone.mp3">
+                            <div class="giveaway-poster-bg" aria-hidden="true"><img class="giveaway-poster" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"><div class="giveaway-char-par" style="--cpx: -0.00; --cpy: -0.01;"><img class="giveaway-char" src="https://i.ibb.co/HT6X4f4k/image.png" alt="" loading="lazy" decoding="async"></div><div class="giveaway-char-glow"></div><canvas class="giveaway-fx" data-fx="ash" width="374" height="663"></canvas></div>
                             <div class="giveaway-card-body">
                                 <div><h3 class="giveaway-game-name">Days Gone</h3><span class="giveaway-command">!Days Gone</span></div>
                                 <span class="giveaway-price">10 000 бусек</span>
@@ -1378,1360 +1470,16 @@
                     </div>
                 </section>
 
-                <section class="search-section reveal-in">
+                <section class="search-section">
                     <div class="search-container">
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" class="search-input" id="search-box" placeholder="Поиск команд..." aria-label="Поиск команд">
                     </div>
                 </section>
 
-                <div class="categories" id="categories-tabs"><div class="category-tag active reveal-in" data-category="Все">Все</div><div class="category-tag reveal-in" data-category="🍳 Перерывчик">🍳 Перерывчик</div><div class="category-tag reveal-in" data-category="🎮 S.T.A.L.K.E.R.">🎮 S.T.A.L.K.E.R.</div><div class="category-tag reveal-in" data-category="👑 Мои">👑 Мои</div><div class="category-tag reveal-in" data-category="💋 Завершение">💋 Завершение</div><div class="category-tag reveal-in" data-category="💕 Приятности">💕 Приятности</div><div class="category-tag reveal-in" data-category="💜 Приветствие">💜 Приветствие</div><div class="category-tag reveal-in" data-category="💪 Боевой настрой">💪 Боевой настрой</div><div class="category-tag reveal-in" data-category="💯 НетленОчки">💯 НетленОчки</div><div class="category-tag reveal-in" data-category="💰 Донатики">💰 Донатики</div><div class="category-tag reveal-in" data-category="🙈 Фиаско">🙈 Фиаско</div></div>
+                <div class="categories" id="categories-tabs"></div>
 
-                <div class="commands-grid" id="commands-container"><div class="command-card reveal-in" data-command="!10000 лет" role="button" aria-label="Команда: !10000 лет. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!10000 лет</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!28 ударов ножом" role="button" aria-label="Команда: !28 ударов ножом. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!28 ударов ножом</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ай мля" role="button" aria-label="Команда: !ай мля. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ай мля</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!алигофрен" role="button" aria-label="Команда: !алигофрен. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!алигофрен</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!асталависта" role="button" aria-label="Команда: !асталависта. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!асталависта</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💋 Завершение</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ау" role="button" aria-label="Команда: !ау. Классическое приветствие" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ау</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Классическое приветствие
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ах за душу" role="button" aria-label="Команда: !ах за душу. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ах за душу</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!бабу бы" role="button" aria-label="Команда: !бабу бы. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!бабу бы</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!беги ска" role="button" aria-label="Команда: !беги ска. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!беги ска</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!бомжа пробовала" role="button" aria-label="Команда: !бомжа пробовала. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!бомжа пробовала</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!бриллианты" role="button" aria-label="Команда: !бриллианты. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!бриллианты</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!вот это поворот" role="button" aria-label="Команда: !вот это поворот. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!вот это поворот</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!все спиздили" role="button" aria-label="Команда: !все спиздили. Леон Кеннеди" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!все спиздили</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Леон Кеннеди
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!всем пока" role="button" aria-label="Команда: !всем пока. мем" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!всем пока</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        мем
-                        <div class="command-category">💋 Завершение</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!гони две сотни" role="button" aria-label="Команда: !гони две сотни. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!гони две сотни</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!гони две сотни" role="button" aria-label="Команда: !гони две сотни. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!гони две сотни</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💰 Донатики</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!Госпади" role="button" aria-label="Команда: !Госпади. удивление" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!Госпади</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        удивление
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!граждане алкоголики" role="button" aria-label="Команда: !граждане алкоголики. Операция 'Ы'" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!граждане алкоголики</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Операция 'Ы'
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!давай мяса" role="button" aria-label="Команда: !давай мяса. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!давай мяса</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!давай червонец" role="button" aria-label="Команда: !давай червонец. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!давай червонец</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💰 Донатики</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!день добрый" role="button" aria-label="Команда: !день добрый. Джек Воробей" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!день добрый</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джек Воробей
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!деньжата посыпались" role="button" aria-label="Команда: !деньжата посыпались. Звук денег" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!деньжата посыпались</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Звук денег
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!дробовик" role="button" aria-label="Команда: !дробовик. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!дробовик</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!дрын" role="button" aria-label="Команда: !дрын. Оружие" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!дрын</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Оружие
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ебанько" role="button" aria-label="Команда: !ебанько. Ведьмак 3" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ебанько</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Ведьмак 3
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ералаш" role="button" aria-label="Команда: !ералаш. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ералаш</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!жизнь одна кайфуйте" role="button" aria-label="Команда: !жизнь одна кайфуйте. Бузова" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!жизнь одна кайфуйте</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Бузова
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!жрать охота" role="button" aria-label="Команда: !жрать охота. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!жрать охота</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!жрать охота" role="button" aria-label="Команда: !жрать охота. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!жрать охота</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!зажги туши" role="button" aria-label="Команда: !зажги туши. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!зажги туши</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!здарова бандиты" role="button" aria-label="Команда: !здарова бандиты. 'Брат'" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!здарова бандиты</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        'Брат'
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!здарова братиш" role="button" aria-label="Команда: !здарова братиш. торчок Валера" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!здарова братиш</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        торчок Валера
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!здарова братья" role="button" aria-label="Команда: !здарова братья. Бригада" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!здарова братья</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Бригада
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!здравствуйте" role="button" aria-label="Команда: !здравствуйте. Голодные игры" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!здравствуйте</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Голодные игры
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!и восстали машины" role="button" aria-label="Команда: !и восстали машины. Терминатор" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!и восстали машины</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Терминатор
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!как дела сталкер" role="button" aria-label="Команда: !как дела сталкер. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!как дела сталкер</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!какая отвратительная рожа" role="button" aria-label="Команда: !какая отвратительная рожа. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!какая отвратительная рожа</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!кина не будет" role="button" aria-label="Команда: !кина не будет. Джентельмены удачи" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!кина не будет</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джентельмены удачи
-                        <div class="command-category">💋 Завершение</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!колеса катит" role="button" aria-label="Команда: !колеса катит. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!колеса катит</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!конишуа" role="button" aria-label="Команда: !конишуа. Комиссар Жобер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!конишуа</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Комиссар Жобер
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!Корбен детка" role="button" aria-label="Команда: !Корбен детка. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!Корбен детка</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!кто не работает тот ест" role="button" aria-label="Команда: !кто не работает тот ест. Приключения Шурика" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!кто не работает тот ест</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Приключения Шурика
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!лайкос кокос" role="button" aria-label="Команда: !лайкос кокос. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!лайкос кокос</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!Ламберт" role="button" aria-label="Команда: !Ламберт. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!Ламберт</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ля ты крыса" role="button" aria-label="Команда: !ля ты крыса. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ля ты крыса</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!маза фака" role="button" aria-label="Команда: !маза фака. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!маза фака</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!маслину поймал" role="button" aria-label="Команда: !маслину поймал. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!маслину поймал</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!маслину поймал" role="button" aria-label="Команда: !маслину поймал. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!маслину поймал</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!молодец" role="button" aria-label="Команда: !молодец. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!молодец</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!молодец" role="button" aria-label="Команда: !молодец. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!молодец</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!мы кушаем" role="button" aria-label="Команда: !мы кушаем. Warcraft" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!мы кушаем</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Warcraft
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!наши полномочия" role="button" aria-label="Команда: !наши полномочия. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!наши полномочия</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!не научитесь" role="button" aria-label="Команда: !не научитесь. Ведьмак 3" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!не научитесь</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Ведьмак 3
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!не хочу разговаривать" role="button" aria-label="Команда: !не хочу разговаривать. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!не хочу разговаривать</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!немножко страшно" role="button" aria-label="Команда: !немножко страшно. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!немножко страшно</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!никак не научитесь" role="button" aria-label="Команда: !никак не научитесь. Ведьмак" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!никак не научитесь</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Ведьмак
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ничего страшного" role="button" aria-label="Команда: !ничего страшного. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ничего страшного</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ну и пожалуйста" role="button" aria-label="Команда: !ну и пожалуйста. мемный кот" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ну и пожалуйста</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        мемный кот
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ну нахер" role="button" aria-label="Команда: !ну нахер. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ну нахер</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!он улетел" role="button" aria-label="Команда: !он улетел. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!он улетел</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!опа здрасти" role="button" aria-label="Команда: !опа здрасти. приветствие" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!опа здрасти</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        приветствие
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!оу е" role="button" aria-label="Команда: !оу е. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!оу е</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💕 Приятности</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!очень страшно" role="button" aria-label="Команда: !очень страшно. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!очень страшно</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!пельмени всему голова" role="button" aria-label="Команда: !пельмени всему голова. Особенности нац. рыбалки" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!пельмени всему голова</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Особенности нац. рыбалки
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!по новой Миша" role="button" aria-label="Команда: !по новой Миша. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!по новой Миша</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!получить пи" role="button" aria-label="Команда: !получить пи. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!получить пи</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!пришел увидел" role="button" aria-label="Команда: !пришел увидел. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!пришел увидел</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!садитесь жрать пожалуйста" role="button" aria-label="Команда: !садитесь жрать пожалуйста. Джентельмены удачи" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!садитесь жрать пожалуйста</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джентельмены удачи
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!сколько" role="button" aria-label="Команда: !сколько. кофе 36 гривен" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!сколько</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        кофе 36 гривен
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!сколько" role="button" aria-label="Команда: !сколько. кофе 36 гривен" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!сколько</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        кофе 36 гривен
-                        <div class="command-category">💰 Донатики</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!скоро встретимся" role="button" aria-label="Команда: !скоро встретимся. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!скоро встретимся</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💋 Завершение</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!слоумо" role="button" aria-label="Команда: !слоумо. Замедление" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!слоумо</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Замедление
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!смекаешь" role="button" aria-label="Команда: !смекаешь. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!смекаешь</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!стволы для лохов" role="button" aria-label="Команда: !стволы для лохов. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!стволы для лохов</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!стелс" role="button" aria-label="Команда: !стелс. Скрытность" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!стелс</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Скрытность
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!суету навести" role="button" aria-label="Команда: !суету навести. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!суету навести</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!сыыыр" role="button" aria-label="Команда: !сыыыр. Чип и Дейл" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!сыыыр</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Чип и Дейл
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!танцуют все" role="button" aria-label="Команда: !танцуют все. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!танцуют все</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!твое слово пупсик" role="button" aria-label="Команда: !твое слово пупсик. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!твое слово пупсик</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💕 Приятности</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!текнолоджия" role="button" aria-label="Команда: !текнолоджия. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!текнолоджия</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ты туда не ходи" role="button" aria-label="Команда: !ты туда не ходи. Джентельмены удачи" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ты туда не ходи</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джентельмены удачи
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ублюдок мать твою" role="button" aria-label="Команда: !ублюдок мать твою. озвучка 90-х" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ублюдок мать твою</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        озвучка 90-х
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!удачной охоты" role="button" aria-label="Команда: !удачной охоты. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!удачной охоты</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ужин" role="button" aria-label="Команда: !ужин. Джентельмены удачи" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ужин</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джентельмены удачи
-                        <div class="command-category">🍳 Перерывчик</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!улыбаемся и машем" role="button" aria-label="Команда: !улыбаемся и машем. Мадагаскар" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!улыбаемся и машем</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Мадагаскар
-                        <div class="command-category">💋 Завершение</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!ути пути" role="button" aria-label="Команда: !ути пути. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!ути пути</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💕 Приятности</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!фраер не пугайся" role="button" aria-label="Команда: !фраер не пугайся. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!фраер не пугайся</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!хвать охота" role="button" aria-label="Команда: !хвать охота. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!хвать охота</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!хороший товар" role="button" aria-label="Команда: !хороший товар. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!хороший товар</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!хьюстон" role="button" aria-label="Команда: !хьюстон. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!хьюстон</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!хэдшот" role="button" aria-label="Команда: !хэдшот. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!хэдшот</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!чем могу служить" role="button" aria-label="Команда: !чем могу служить. Джаффар 'Алладин'" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!чем могу служить</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Джаффар 'Алладин'
-                        <div class="command-category">💜 Приветствие</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!черичь их" role="button" aria-label="Команда: !черичь их. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!черичь их</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!чики брики" role="button" aria-label="Команда: !чики брики. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!чики брики</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!чики брики" role="button" aria-label="Команда: !чики брики. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!чики брики</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!что принес и вали" role="button" aria-label="Команда: !что принес и вали. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!что принес и вали</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!что такое безумие" role="button" aria-label="Команда: !что такое безумие. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!что такое безумие</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!чудесно пахнешь" role="button" aria-label="Команда: !чудесно пахнешь. Ведьмак и Йен" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!чудесно пахнешь</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Ведьмак и Йен
-                        <div class="command-category">💕 Приятности</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!шеф всё пропало" role="button" aria-label="Команда: !шеф всё пропало. Бриллиантовая Рука" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!шеф всё пропало</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Бриллиантовая Рука
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!шинима куйня" role="button" aria-label="Команда: !шинима куйня. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!шинима куйня</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!я же королева" role="button" aria-label="Команда: !я же королева. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!я же королева</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!я не понял" role="button" aria-label="Команда: !я не понял. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!я не понял</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!я обсикалась" role="button" aria-label="Команда: !я обсикалась. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!я обсикалась</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">👑 Мои</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!я один тупой" role="button" aria-label="Команда: !я один тупой. Сталкер" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!я один тупой</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        Сталкер
-                        <div class="command-category">🎮 S.T.A.L.K.E.R.</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!я сам решу" role="button" aria-label="Команда: !я сам решу. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!я сам решу</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💯 НетленОчки</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!fatality" role="button" aria-label="Команда: !fatality. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!fatality</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!fight" role="button" aria-label="Команда: !fight. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!fight</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!finish him" role="button" aria-label="Команда: !finish him. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!finish him</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!oh shit" role="button" aria-label="Команда: !oh shit. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!oh shit</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">🙈 Фиаско</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!pole чудес" role="button" aria-label="Команда: !pole чудес. При победе" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!pole чудес</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        При победе
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!round one" role="button" aria-label="Команда: !round one. Нет описания" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!round one</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                         
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div><div class="command-card reveal-in" data-command="!Snoop Dogg" role="button" aria-label="Команда: !Snoop Dogg. ла-ла-ла" tabindex="0">
-                    <div class="command-header">
-                        <div class="command-name">!Snoop Dogg</div>
-                        <div class="command-cost" aria-label="Стоимость: 300 БУСЕК">
-                            <i class="fas fa-coins" aria-hidden="true"></i>
-                            <span>300</span>
-                        </div>
-                    </div>
-                    <div class="command-description">
-                        ла-ла-ла
-                        <div class="command-category">💪 Боевой настрой</div>
-                    </div>
-                </div></div>
+                <div class="commands-grid" id="commands-container"></div>
 
                 <div class="no-results" id="no-results" style="display: none;">
                     <i class="fas fa-search"></i>
@@ -2742,281 +1490,11 @@
 
             <div class="tab-content" id="songs-tab">
                 <section class="hero-section">
-                    <div class="hero-badge reveal-in"><i class="fas fa-crown"></i><span>40,000 БУСЕК за песню</span></div>
-                    <h1 class="hero-title reveal-in">Закажите песню</h1>
-                    <p class="hero-description reveal-in">Выберите песню и отправьте команду в чат.</p>
+                    <div class="hero-badge"><i class="fas fa-crown"></i><span>40,000 БУСЕК за песню</span></div>
+                    <h1 class="hero-title">Закажите песню</h1>
+                    <p class="hero-description">Выберите песню и отправьте команду в чат.</p>
                 </section>
-                <div class="songs-grid" id="songs-container"><div class="song-card" data-command="!песня А-Студио - Мама-папа" role="button" aria-label="Заказать песню: А-Студио - Мама-папа" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">А-Студио</div>
-                        <div class="song-title">Мама-папа</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Алсу - Весна" role="button" aria-label="Заказать песню: Алсу - Весна" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Алсу</div>
-                        <div class="song-title">Весна</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Алсу - Зимний сон" role="button" aria-label="Заказать песню: Алсу - Зимний сон" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Алсу</div>
-                        <div class="song-title">Зимний сон</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Антон Токарев - Седьмой лепесток" role="button" aria-label="Заказать песню: Антон Токарев - Седьмой лепесток" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Антон Токарев</div>
-                        <div class="song-title">Седьмой лепесток</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Валентин Стрыкало - Наше Лето" role="button" aria-label="Заказать песню: Валентин Стрыкало - Наше Лето" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Валентин Стрыкало</div>
-                        <div class="song-title">Наше Лето</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня ВИА-Гра - Попытка №5" role="button" aria-label="Заказать песню: ВИА-Гра - Попытка №5" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">ВИА-Гра</div>
-                        <div class="song-title">Попытка №5</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Градусы - Голая" role="button" aria-label="Заказать песню: Градусы - Голая" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Градусы</div>
-                        <div class="song-title">Голая</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Жуки - Батарейка" role="button" aria-label="Заказать песню: Жуки - Батарейка" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Жуки</div>
-                        <div class="song-title">Батарейка</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня КиШ - Кукла колдуна" role="button" aria-label="Заказать песню: КиШ - Кукла колдуна" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">КиШ</div>
-                        <div class="song-title">Кукла колдуна</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня КиШ - Лесник" role="button" aria-label="Заказать песню: КиШ - Лесник" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">КиШ</div>
-                        <div class="song-title">Лесник</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня КиШ - Мастер приглашает в гости" role="button" aria-label="Заказать песню: КиШ - Мастер приглашает в гости" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">КиШ</div>
-                        <div class="song-title">Мастер приглашает в гости</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня КняZz - Адель" role="button" aria-label="Заказать песню: КняZz - Адель" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">КняZz</div>
-                        <div class="song-title">Адель</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Лицей - Осень" role="button" aria-label="Заказать песню: Лицей - Осень" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Лицей</div>
-                        <div class="song-title">Осень</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Лобода - Твои глаза" role="button" aria-label="Заказать песню: Лобода - Твои глаза" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Лобода</div>
-                        <div class="song-title">Твои глаза</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Лобода - Пуля-дура" role="button" aria-label="Заказать песню: Лобода - Пуля-дура" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Лобода</div>
-                        <div class="song-title">Пуля-дура</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Меладзе - Салют, Вера!" role="button" aria-label="Заказать песню: Меладзе - Салют, Вера!" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Меладзе</div>
-                        <div class="song-title">Салют, Вера!</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Меладзе - Текила-любовь" role="button" aria-label="Заказать песню: Меладзе - Текила-любовь" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Меладзе</div>
-                        <div class="song-title">Текила-любовь</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Мраж - Музыка нас связала" role="button" aria-label="Заказать песню: Мраж - Музыка нас связала" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Мраж</div>
-                        <div class="song-title">Музыка нас связала</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Мумий-Тролль - Медведица" role="button" aria-label="Заказать песню: Мумий-Тролль - Медведица" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Мумий-Тролль</div>
-                        <div class="song-title">Медведица</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Николай Носков - А на меньшее я не согласен" role="button" aria-label="Заказать песню: Николай Носков - А на меньшее я не согласен" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Николай Носков</div>
-                        <div class="song-title">А на меньшее я не согласен</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Николай Носков - Снег" role="button" aria-label="Заказать песню: Николай Носков - Снег" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Николай Носков</div>
-                        <div class="song-title">Снег</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Николай Носков - Это здорово" role="button" aria-label="Заказать песню: Николай Носков - Это здорово" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Николай Носков</div>
-                        <div class="song-title">Это здорово</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Чиж и Ко - О любви" role="button" aria-label="Заказать песню: Чиж и Ко - О любви" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Чиж и Ко</div>
-                        <div class="song-title">О любви</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Чичерина - Ту-лу-ла" role="button" aria-label="Заказать песню: Чичерина - Ту-лу-ла" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Чичерина</div>
-                        <div class="song-title">Ту-лу-ла</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня Чичерина - Жара" role="button" aria-label="Заказать песню: Чичерина - Жара" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">Чичерина</div>
-                        <div class="song-title">Жара</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня No Doubt - Don't Speak" role="button" aria-label="Заказать песню: No Doubt - Don't Speak" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">No Doubt</div>
-                        <div class="song-title">Don't Speak</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div><div class="song-card" data-command="!песня The Cranberries - Zombie" role="button" aria-label="Заказать песню: The Cranberries - Zombie" tabindex="0">
-                    <div class="song-icon"><i class="fas fa-music"></i></div>
-                    <div class="song-info">
-                        <div class="song-artist">The Cranberries</div>
-                        <div class="song-title">Zombie</div>
-                    </div>
-                    <div class="song-price" aria-label="Стоимость: 40,000 БУСЕК">
-                        <i class="fas fa-gem"></i>
-                        <span>40,000</span>
-                    </div>
-                </div></div>
+                <div class="songs-grid" id="songs-container"></div>
                 <div class="no-results" id="no-songs-results" style="display: none;">
                     <i class="fas fa-music"></i>
                     <h3>Песни не найдены</h3>
@@ -3026,49 +1504,16 @@
 
             <div class="tab-content" id="suffering-tab">
                 <section class="hero-section">
-                    <div class="hero-badge reveal-in"><i class="fas fa-skull"></i><span>Страдание стримера — радость зрителя!</span></div>
-                    <h1 class="hero-title reveal-in">Мучительные испытания</h1>
-                    <p class="hero-description reveal-in">5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК</p>
+                    <div class="hero-badge"><i class="fas fa-skull"></i><span>Страдание стримера — радость зрителя!</span></div>
+                    <h1 class="hero-title">Мучительные испытания</h1>
+                    <p class="hero-description">5 минут • Не на боссов • 5 раз за стрим • 1000 БУСЕК</p>
                 </section>
-                <div class="songs-grid" id="suffering-container"><div class="suffering-card" data-command="!лечилка" role="button" aria-label="Испытание: Лечилка" tabindex="0">
-                    <div class="suffering-icon"><i class="fas fa-ban"></i></div>
-                    <div class="suffering-info">
-                        <div class="suffering-title">Лечилка</div>
-                        <div class="suffering-subtitle">⏱️ 5 мин • 🚫 Не на боссов</div>
-                        <div class="suffering-description">Не использует лечилки (5 мин, не на боссов)</div>
-                    </div>
-                    <div class="suffering-price" aria-label="Стоимость: 1,000 БУСЕК">
-                        <i class="fas fa-skull"></i>
-                        <span>1,000</span>
-                    </div>
-                </div><div class="suffering-card" data-command="!одно оружие" role="button" aria-label="Испытание: Одно оружие" tabindex="0">
-                    <div class="suffering-icon"><i class="fas fa-gun"></i></div>
-                    <div class="suffering-info">
-                        <div class="suffering-title">Одно оружие</div>
-                        <div class="suffering-subtitle">⏱️ 5 мин • 🚫 Не на боссов</div>
-                        <div class="suffering-description">Только одно оружие (5 мин, не на боссов)</div>
-                    </div>
-                    <div class="suffering-price" aria-label="Стоимость: 1,000 БУСЕК">
-                        <i class="fas fa-skull"></i>
-                        <span>1,000</span>
-                    </div>
-                </div><div class="suffering-card" data-command="!стелс миссия" role="button" aria-label="Испытание: Стелс миссия" tabindex="0">
-                    <div class="suffering-icon"><i class="fas fa-eye-slash"></i></div>
-                    <div class="suffering-info">
-                        <div class="suffering-title">Стелс миссия</div>
-                        <div class="suffering-subtitle">⏱️ 5 мин • 🚫 Не на боссов</div>
-                        <div class="suffering-description">Пройти миссию по стелсу (5 мин, не на боссов)</div>
-                    </div>
-                    <div class="suffering-price" aria-label="Стоимость: 1,000 БУСЕК">
-                        <i class="fas fa-skull"></i>
-                        <span>1,000</span>
-                    </div>
-                </div></div>
+                <div class="songs-grid" id="suffering-container"></div>
             </div>
         </div>
     </main>
 
-    <footer class="footer reveal-in">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <p>design and development by EVRUS</p>
@@ -3079,7 +1524,7 @@
 
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда скопирована!</span>
+        <span id="notification-text">Тёмная тема включена 🌙</span>
     </div>
 
     
@@ -3814,7 +2259,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":8,"updatedAt":"2026-10-21T02:00:35.856Z"};
+        let dataMeta = {"version":9,"updatedAt":"2026-10-22T14:55:14.416Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
@@ -4337,12 +2782,21 @@
                 if (cloneBtn) cloneBtn.remove();
                 if (cloneThemeOverlay) cloneThemeOverlay.remove();
                 const cloneBody = clone.querySelector('body');
-                if (cloneBody) cloneBody.classList.remove('editor-open');
+                if (cloneBody) cloneBody.classList.remove('editor-open', 'page-loaded');
                 if (cloneBody) {
                     cloneBody.classList.remove('is-tinted');
                     cloneBody.style.removeProperty('--tint');
                     if (!cloneBody.getAttribute('style')) cloneBody.removeAttribute('style');
                 }
+                const cloneSplash = clone.querySelector('#splash-screen');
+                if (cloneSplash) cloneSplash.classList.remove('hidden');
+                const clonePetals = clone.querySelector('#petals');
+                if (clonePetals) clonePetals.innerHTML = '';
+                clone.querySelectorAll('.reveal-in').forEach(el => el.classList.remove('reveal-in'));
+                ['#categories-tabs', '#commands-container', '#songs-container', '#suffering-container'].forEach(sel => {
+                    const node = clone.querySelector(sel);
+                    if (node) node.innerHTML = '';
+                });
                 clone.querySelectorAll('.tint-wave').forEach(el => el.remove());
                 clone.classList.remove('tint-wave-running', 'theme-switching');
                 ['--wave-x', '--wave-y', '--wave-r', '--wave-duration', '--wave-color'].forEach(v => clone.style.removeProperty(v));
@@ -5410,6 +3864,16 @@
             themeToggle.addEventListener('click', toggleTheme);
             tabBtns.forEach(btn => btn.addEventListener('click', handleTabSwitch));
             balanceBtn.addEventListener('click', handleBalanceClick);
+            const inlineBalanceTrigger = document.getElementById('giveaway-balance-inline');
+            if (inlineBalanceTrigger) {
+                inlineBalanceTrigger.addEventListener('click', handleBalanceClick);
+                inlineBalanceTrigger.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleBalanceClick();
+                    }
+                });
+            }
             initHoverTickSound();
             window.addEventListener('resize', updateTabIndicator);
             let searchTimeout;
@@ -5469,5 +3933,5 @@
 
         window.addEventListener('load', () => { setTimeout(updateTabIndicator, 300); });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc29683f32e846',t:'MTc5MjU0MjcxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc59425907e960',t:'MTc5MjU0NDY3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc29683f32e846',t:'MTc5MjU0MjcxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4dc59425907e960',t:'MTc5MjU0NDY3MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a4e951893a78f111',t:'MTc5MjY4MDY2OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
 </body></html>
