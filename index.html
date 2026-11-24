@@ -1507,6 +1507,304 @@
         @media (max-width:900px) { .games-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
         @media (max-width:650px) { .tabs-nav { overflow-x:auto; scrollbar-width:none; } .tabs-nav::-webkit-scrollbar { display:none; } .tab-btn { flex:0 0 auto; min-width:110px; } .games-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .game-card-info { padding:11px 11px 12px; } .game-card-info h2 { font-size:12px; min-height:54px; } .game-open { font-size:11px; } .games-toolbar { align-items:stretch; flex-direction:column; gap:9px; } .games-total { align-self:flex-end; } }
         @media (max-width:390px) { .games-grid { grid-template-columns:1fr; } .game-card-info h2 { min-height:0; font-size:14px; } }
+
+        /* ==================================================================
+           MOBILE REWORK — компактная шапка, липкие вкладки, чипы, карточки,
+           bottom-sheet редактор, safe-area, тач-аффордансы
+           ================================================================== */
+        :root { --header-safe: calc(var(--header-height) + env(safe-area-inset-top, 0px)); }
+        .tab-label-s { display: none; }
+        .editor-toggle { display: inline-flex; align-items: center; gap: 8px; }
+        .editor-toggle svg { width: 16px; height: 16px; flex: 0 0 auto; }
+        /* тосты поверх оверлея редактора (иначе на мобиле их не видно под bottom-sheet) */
+        .notification { z-index: 12600; }
+
+        /* --- Тач-устройства: без ховеров, но с понятными аффордансами --- */
+        @media (hover: none), (pointer: coarse) {
+            .social-tooltip { display: none; }
+            .game-play { opacity: 1; transform: none; }
+            .game-play i {
+                font-size: 19px; width: 40px; height: 40px; display: grid; place-items: center;
+                border-radius: 50%; color: #ff5f56; background: rgba(10, 8, 12, .58);
+                border: 1px solid rgba(255, 255, 255, .22);
+                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+                box-shadow: 0 6px 18px rgba(0, 0, 0, .35); text-shadow: none;
+            }
+            .game-card:active { transform: scale(.985); }
+            .game-card:active .game-thumb img { transform: none; }
+        }
+
+        /* ------------------------- Планшеты и телефоны (<= 900px) ------------------------- */
+        @media (max-width: 900px) {
+            :root { --header-height: 64px; }
+
+            /* Шапка */
+            .header { height: var(--header-safe); padding-top: env(safe-area-inset-top, 0px); }
+            .header-container { gap: 10px; }
+            .logo { min-width: 0; gap: 10px; }
+            .logo-text { min-width: 0; }
+            .logo-text h1 { white-space: nowrap; }
+            .header-actions { gap: 8px; flex: 0 0 auto; }
+
+            /* Каркас */
+            .main-content {
+                margin-top: var(--header-safe);
+                padding: 20px 0 30px;
+                min-height: calc(100vh - var(--header-safe));
+                min-height: calc(100dvh - var(--header-safe));
+            }
+            .container { padding: 0 16px; }
+            .commands-grid { scroll-margin-top: calc(var(--header-safe) + 78px); }
+
+            /* Вкладки: липкая стеклянная пилюля */
+            .tabs-wrap { position: sticky; top: calc(var(--header-safe) + 8px); z-index: 900; margin-bottom: 22px; }
+            .tabs-nav {
+                margin-bottom: 0;
+                background: var(--bg-glass);
+                backdrop-filter: blur(16px) saturate(150%);
+                -webkit-backdrop-filter: blur(16px) saturate(150%);
+                box-shadow: var(--shadow-md);
+                overflow-x: auto;
+                scrollbar-width: none;
+                overscroll-behavior-x: contain;
+                scroll-snap-type: x proximity;
+                -webkit-overflow-scrolling: touch;
+            }
+            .tabs-nav::-webkit-scrollbar { display: none; }
+            .tab-btn {
+                flex: 1 0 auto; min-width: 0; min-height: 46px;
+                padding: 12px 13px; font-size: 13px; gap: 7px;
+                scroll-snap-align: center; touch-action: manipulation;
+            }
+            .tab-indicator { box-shadow: 0 3px 10px rgba(0, 0, 0, .16); }
+
+            /* Hero */
+            .hero-section { margin-bottom: 26px; }
+            .hero-title { font-size: clamp(23px, 6.2vw, 30px); }
+            .hero-description { font-size: 13.5px; }
+            .hero-bus { z-index: 3; width: 190px; margin: 0 auto 4px; }
+            body.page-loaded .hero-bus { transform: translateX(7%); animation-name: busFloatM; }
+            @keyframes busFloatM {
+                0%, 100% { transform: translateX(7%) translateY(0) rotate(-2deg); }
+                50% { transform: translateX(7%) translateY(-12px) rotate(2deg); }
+            }
+
+            /* Поиск: всегда раскрыт, 16px — iOS не зумит */
+            .search-section { margin-bottom: 18px; }
+            .search-container { max-width: 100%; width: 100%; height: 50px; }
+            .search-icon { left: 19px; transform: translateY(-50%); font-size: 15px; }
+            .search-input {
+                border-radius: var(--radius-lg);
+                padding: 0 18px 0 48px;
+                font-size: 16px;
+                cursor: text;
+            }
+            .search-input:placeholder-shown:not(:focus)::placeholder { color: var(--text-tertiary); }
+
+            /* Категории: горизонтальный скролл чипов от края до края */
+            .categories {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x proximity;
+                gap: 8px;
+                margin: 0 -16px 20px;
+                padding: 2px 16px 6px;
+            }
+            .categories::-webkit-scrollbar { display: none; }
+            .category-tag {
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+                display: inline-flex; align-items: center;
+                min-height: 40px; padding: 8px 15px;
+                font-size: 13px; touch-action: manipulation;
+            }
+
+            /* Карточки */
+            .info-cards { gap: 10px; margin-bottom: 24px; }
+            .info-card { padding: 16px; border-radius: 18px; }
+
+            .commands-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
+            .command-card {
+                padding: 15px 16px; border-radius: 18px;
+                touch-action: manipulation;
+                -webkit-user-select: none; user-select: none;
+            }
+            .command-header { margin-bottom: 8px; }
+            .command-name { font-size: 14.5px; }
+            .command-description { font-size: 13px; margin-bottom: 2px; }
+
+            .songs-grid { grid-template-columns: 1fr; gap: 10px; }
+            .song-card, .suffering-card {
+                flex-direction: row; text-align: left;
+                padding: 14px; gap: 12px; border-radius: 18px;
+                touch-action: manipulation;
+                -webkit-user-select: none; user-select: none;
+            }
+            .song-icon, .suffering-icon { width: 46px; height: 46px; font-size: 17px; border-radius: 14px; }
+            .song-price, .suffering-price { width: auto; min-width: 0; padding: 8px 12px; font-size: 12.5px; border-radius: 12px; }
+            .song-title, .suffering-title { font-size: 14px; }
+            .suffering-description { font-size: 11.5px; }
+
+            /* Пройденные игры */
+            .games-toolbar { flex-direction: row; align-items: center; gap: 10px; margin: 0 0 16px; }
+            .games-search-wrap { flex: 1 1 auto; width: auto; min-height: 46px; padding: 0 14px; gap: 9px; }
+            .games-search-wrap input { font-size: 16px; }
+            .games-total {
+                align-self: center; font-size: 12px; padding: 8px 12px;
+                background: var(--bg-secondary); border: 1px solid var(--border-color);
+                border-radius: var(--radius-full); box-shadow: var(--shadow-sm);
+            }
+            .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            .game-card { border-radius: 16px; touch-action: manipulation; }
+            .game-card-info { padding: 11px 12px 12px; }
+            .game-card-info h2 {
+                min-height: 0; margin-bottom: 8px;
+                font-size: 12.5px; line-height: 1.35;
+                display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+            }
+            .game-open { font-size: 11px; }
+            .game-video-count { left: 8px; bottom: 8px; font-size: 10px; padding: 4px 8px; gap: 5px; }
+            .games-source { font-size: 11.5px; margin-top: 18px; }
+
+            /* Баннер */
+            .tg-banner { margin-bottom: 14px; }
+            .tg-banner-close { width: 30px; height: 30px; }
+
+            /* Футер / тост / кнопка редактора */
+            .footer { margin-top: 30px; padding: 22px 0 calc(24px + env(safe-area-inset-bottom, 0px)); }
+            .notification {
+                bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+                z-index: 12600;
+                max-width: calc(100vw - 28px);
+                padding: 13px 18px; font-size: 13.5px; border-radius: 16px;
+                justify-content: center; text-align: center;
+            }
+            .editor-toggle {
+                right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+                touch-action: manipulation;
+            }
+
+            /* Декор: дешевле для мобильных GPU */
+            .gradient-orbs { filter: blur(60px); }
+            .orb-3 { display: none; }
+
+            /* Редактор: 16px против iOS-зума */
+            .editor-input, .editor-select, .editor-textarea { font-size: 16px; }
+        }
+
+        /* ------------------------- <= 640px: редактор как bottom-sheet ------------------------- */
+        @media (max-width: 640px) {
+            .editor-overlay { padding: 0; align-items: flex-end; }
+            .editor-modal {
+                max-width: 100%;
+                height: calc(100vh - 40px);
+                height: calc(100dvh - 40px);
+                max-height: none;
+                display: flex; flex-direction: column;
+                border-radius: 24px 24px 0 0;
+                border-left: 0; border-right: 0; border-bottom: 0;
+                transform: none;
+            }
+            .editor-header { position: relative; padding: 22px 16px 14px; flex: 0 0 auto; }
+            .editor-header::after {
+                content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+                width: 40px; height: 4px; border-radius: 999px;
+                background: var(--text-tertiary); opacity: .4;
+            }
+            .editor-body {
+                flex: 1 1 auto; max-height: none;
+                padding: 14px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+            }
+            .editor-card { padding: 16px; border-radius: 18px; }
+            .editor-form { grid-template-columns: 1fr; gap: 12px; }
+            .editor-tabs { display: flex; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
+            .editor-tabs::-webkit-scrollbar { display: none; }
+            .editor-tab-btn { flex: 1 0 auto; text-align: center; padding: 10px 16px; }
+            .editor-actions { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
+            .editor-btn {
+                width: 100%; min-height: 44px; justify-content: center;
+                display: inline-flex; align-items: center; gap: 8px;
+            }
+            .editor-row { flex-direction: column; align-items: stretch; gap: 10px; }
+            .editor-row .editor-actions { display: flex; flex-direction: row; gap: 8px; }
+            .editor-row .editor-actions .editor-btn { flex: 1 1 0; margin-right: 0 !important; }
+            .editor-overlay.show .editor-modal { animation: editorSheetIn 460ms var(--ease-out) both; }
+            @keyframes editorSheetIn { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        }
+
+        /* ------------------------- <= 560px: компактная шапка и вкладки ------------------------- */
+        @media (max-width: 560px) {
+            :root { --header-height: 60px; }
+            .container { padding: 0 14px; }
+            .categories { margin-left: -14px; margin-right: -14px; padding-left: 14px; padding-right: 14px; }
+
+            .header-actions { gap: 6px; }
+            .social-links { gap: 6px; }
+            .social-link { width: 38px; height: 38px; border-radius: 12px; }
+            .social-link i { font-size: 15px; }
+            .theme-toggle { width: 38px; height: 38px; border-radius: 12px; }
+            .theme-toggle i { font-size: 16px; }
+            .balance-btn { width: 38px; height: 38px; padding: 0; border-radius: 12px; justify-content: center; }
+            .balance-btn span { display: none; }
+            .balance-btn i { font-size: 15px; margin: 0; }
+            .logo-text h1 {
+                display: block; font-size: 17px; letter-spacing: -0.02em;
+                overflow: hidden; text-overflow: ellipsis;
+            }
+            .logo-text span { display: none; }
+
+            /* Вкладки в один ряд: иконка + короткая подпись, без бейджей */
+            .games-tab .tab-label { display: none; }
+            .games-tab .tab-label-s { display: inline; }
+            .price-badge { display: none; }
+            .tab-btn { flex-direction: row; padding: 10px 9px; font-size: 12px; gap: 5px; min-height: 44px; }
+            .tab-btn i { font-size: 12.5px; }
+
+            /* Редактор: круглый FAB */
+            .editor-toggle { width: 52px; height: 52px; padding: 0; border-radius: 50%; display: grid; place-items: center; gap: 0; }
+            .editor-toggle span { display: none; }
+            .editor-toggle svg { width: 20px; height: 20px; }
+
+            /* Hero-мелочи */
+            .hero-sticker { width: 116px; }
+            .hero-sticker + .hero-sticker { margin-left: -18px; }
+            .hero-stickers { margin-top: 18px; }
+            .hero-stickers-note { font-size: 11.5px; padding: 8px 12px; }
+            .hero-badge { font-size: 11.5px; padding: 6px 13px; }
+        }
+
+        /* ------------------------- <= 390px: узкие экраны ------------------------- */
+        @media (max-width: 390px) {
+            .social-link, .theme-toggle, .balance-btn { width: 34px; height: 34px; border-radius: 11px; }
+            .social-link i { font-size: 14px; }
+            .theme-toggle i { font-size: 15px; }
+            .balance-btn i { font-size: 14px; }
+            .logo-text h1 { font-size: 15px; }
+            .header-actions { gap: 5px; }
+            .social-links { gap: 5px; }
+            .hero-title { font-size: 22px; }
+            .hero-bus { width: 158px; }
+            .hero-sticker { width: 104px; }
+            .games-grid { gap: 10px; }
+            .game-card-info h2 { font-size: 12px; }
+            .notification { font-size: 13px; padding: 12px 16px; }
+            .tab-btn { padding: 10px 7px; }
+        }
+
+        /* ------------------------- <= 349px: совсем крошечные ------------------------- */
+        @media (max-width: 349px) {
+            .social-link, .theme-toggle, .balance-btn { width: 30px; height: 30px; border-radius: 10px; }
+            .header-actions { gap: 4px; }
+            .social-links { gap: 4px; }
+            .logo-text h1 { font-size: 14px; }
+        }
+
+        @media (max-width: 359px) {
+            .games-grid { grid-template-columns: 1fr; }
+        }
+
 </style>
 </head>
 <body data-theme="dark" class="">
@@ -1582,8 +1880,9 @@
                 </a>
                 <button class="tg-banner-close" id="tg-banner-close" type="button" aria-label="Скрыть объявление">✕</button>
             </div>
+            <div class="tabs-wrap">
             <div class="tabs-nav" id="tabs-nav">
-                <div class="tab-indicator" id="tab-indicator" style="transform: translateX(887.5px); width: 289.5px;"></div>
+                <div class="tab-indicator" id="tab-indicator" style="transform: translateX(1px); width: 289.5px;"></div>
                 <button class="tab-btn active" data-tab="commands">
                     <i class="fas fa-microphone-alt"></i>
                     <span>Команды</span>
@@ -1601,9 +1900,11 @@
                 </button>
                 <button class="tab-btn games-tab" data-tab="games">
                     <i class="fas fa-gamepad"></i>
-                    <span>Пройденные игры</span>
+                    <span class="tab-label">Пройденные игры</span>
+                    <span class="tab-label-s">Игры</span>
                     <span class="price-badge">118</span>
                 </button>
+            </div>
             </div>
 
             <div class="tab-content active" id="commands-tab">
@@ -1699,7 +2000,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLDWC2W52Suow" target="_blank" rel="noopener noreferrer" data-game-title="mafia: definitive edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/9s-rZ-P3p90/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAwUpeM8lJj0xNCmbxcIprz5Vb9Fw" alt="Обложка плейлиста Mafia: Definitive Edition" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Mafia: Definitive Edition</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1707,7 +2008,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLLB-nDxKqBzA" target="_blank" rel="noopener noreferrer" data-game-title="ghost buster: village">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/FICwkel-8sw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDKk7f17hr8b73At7CyUQyxCznz_Q" alt="Обложка плейлиста Ghost Buster: Village" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Ghost Buster: Village</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1715,7 +2016,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLV4S399zh9cY" target="_blank" rel="noopener noreferrer" data-game-title="☢️s.t.a.l.k.e.r.2 : heart of chornobyl">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/hGq2VDrrt5Q/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBWttRN0TRfKyrObNvjK8n2z_4Ctw" alt="Обложка плейлиста ☢️S.T.A.L.K.E.R.2 : Heart of Chornobyl" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 8 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 8 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>☢️S.T.A.L.K.E.R.2 : Heart of Chornobyl</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1723,7 +2024,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLMhpxdo7PrQc" target="_blank" rel="noopener noreferrer" data-game-title="silent hill: townfall">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Ep-TS5lB6-M/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLA3rHSKl6LnDUS4OQnVlrykBEe4Lg" alt="Обложка плейлиста Silent Hill: Townfall" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Silent Hill: Townfall</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1731,7 +2032,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLaBkl2SmJNFQ" target="_blank" rel="noopener noreferrer" data-game-title="ori and the blind forest">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/IyGK4mfOnoY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBpsGQTSpHr5mavVw4RNFMnjvkjzg" alt="Обложка плейлиста Ori and The Blind Forest" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Ori and The Blind Forest</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1739,7 +2040,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLOCXP302gNCM" target="_blank" rel="noopener noreferrer" data-game-title="s.t.a.l.k.e.r.: зов припяти">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/F24vCsBS3qY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDdvhaV1trtULTU0kbNwVu1zPor6w" alt="Обложка плейлиста S.T.A.L.K.E.R.: Зов Припяти" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>S.T.A.L.K.E.R.: Зов Припяти</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1747,7 +2048,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLI2wzDv39lCA" target="_blank" rel="noopener noreferrer" data-game-title="resonance: a plague tale legacy">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/0lX93AjDsCo/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLADePsaLE_wVXOu4mSpMh4c046q5A" alt="Обложка плейлиста Resonance: A Plague Tale Legacy" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resonance: A Plague Tale Legacy</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1755,7 +2056,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLB-YvH2NyDqY" target="_blank" rel="noopener noreferrer" data-game-title="a plague tale: requiem">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/9DtrUgSo4g8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDQMeVLYkmQ4wgsyBqXJf9ehP1nWQ" alt="Обложка плейлиста A Plague Tale: Requiem" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>A Plague Tale: Requiem</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1763,7 +2064,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLT0xBOQ2aYTw" target="_blank" rel="noopener noreferrer" data-game-title="dying light 2 stay human: reloaded edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/c4KDgyxgzAA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDgE87NVc2Ax-utMlqiF6E4-RnahA" alt="Обложка плейлиста Dying Light 2 Stay Human: Reloaded Edition" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Dying Light 2 Stay Human: Reloaded Edition</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1771,7 +2072,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLSGFi2iIFV8Y" target="_blank" rel="noopener noreferrer" data-game-title="the last of us">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/flmjUaD3tyQ/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDtcWxVVn7WYrzRpOZrVcW_kUHS_w" alt="Обложка плейлиста THE LAST OF US" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 8 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 8 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>THE LAST OF US</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1779,7 +2080,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLaAv_jONOXxU" target="_blank" rel="noopener noreferrer" data-game-title="crysis remastered">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/KpDDQPU4k1c/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBOT5-84IFkjXxxVV-zzbJfHkYM_g" alt="Обложка плейлиста Crysis Remastered" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Crysis Remastered</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1787,7 +2088,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLBLPiQWPavzU" target="_blank" rel="noopener noreferrer" data-game-title="forza horizon 5">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/iIZ1Irl7hJI/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBDXSQCU7PLyP9txhUDgWAESOF3mA" alt="Обложка плейлиста Forza Horizon 5" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Forza Horizon 5</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1795,7 +2096,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB9I94JAMgAOG-QpgHoi34d" target="_blank" rel="noopener noreferrer" data-game-title="clair obscur expedition 33 💫">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/BeMPXeXmmqk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTlSEtb_je1LoLYB2j1sN5cpDNGA" alt="Обложка плейлиста Clair Obscur Expedition 33 💫" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Clair Obscur Expedition 33 💫</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1803,7 +2104,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBaRerF2AwMvDJeonOZ9uv7" target="_blank" rel="noopener noreferrer" data-game-title="far cry new dawn 💞">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/eLnt3CcYGPM/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBvAd3ZfADZY_bH1sju0mKcdoFAmw" alt="Обложка плейлиста Far Cry New Dawn 💞" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Far Cry New Dawn 💞</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1811,7 +2112,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAgInahvcWgev0QhyaCduJU" target="_blank" rel="noopener noreferrer" data-game-title="wolfenstein: эпоха перезапуска сюжета">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/IK9zTu7Z5u0/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB-hTxcc0-BawFK2Bwbq1wgSdrJGg" alt="Обложка плейлиста Wolfenstein: Эпоха перезапуска сюжета" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 11 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 11 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Wolfenstein: Эпоха перезапуска сюжета</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1819,7 +2120,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAI45WRdvmN4ANCGWQu3Q_P" target="_blank" rel="noopener noreferrer" data-game-title="call of duty 2 (2005)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/EipE4kio6xU/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAblW5lzNSTiOG0NndJ20TD0sBCqg" alt="Обложка плейлиста Call of Duty 2 (2005)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Call of Duty 2 (2005)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1827,7 +2128,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD1vGJFqmDzdH6C7Yj0vc7Z" target="_blank" rel="noopener noreferrer" data-game-title="black mesa">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/U7S6DEYeLNg/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDdVRBjB--84crF88dZtxrk1rWe3Q" alt="Обложка плейлиста BLACK MESA" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>BLACK MESA</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1835,7 +2136,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDonV9xpTfMUo3M2oQC4NIH" target="_blank" rel="noopener noreferrer" data-game-title="f.e.a.r. 2 project origin">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/_HpDrWBMglc/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLArPW6l7VGlhm_Kan_sgKLDM8rq_A" alt="Обложка плейлиста F.E.A.R. 2 Project Origin" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>F.E.A.R. 2 Project Origin</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1843,7 +2144,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCi_YMAUgLXw7xRxwyMkMQN" target="_blank" rel="noopener noreferrer" data-game-title="doom eternal">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/hCSoC8pbcdk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLD8Zq9BDL9a23yWfe6P6O3qSqnHEA" alt="Обложка плейлиста Doom Eternal" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Doom Eternal</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1851,7 +2152,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBGo031e1s_lR7n4Irb_lg4" target="_blank" rel="noopener noreferrer" data-game-title="resident evil requiem">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/EmDoF5ClfZY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBXs_DJCNTFxCtExFsdDSfOg3gRig" alt="Обложка плейлиста Resident Evil Requiem" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil Requiem</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1859,7 +2160,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDOPZ5Aq-73vB9XiOOAxZGc" target="_blank" rel="noopener noreferrer" data-game-title="madison | психологический хоррор">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/gCPlKMdlMd8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAj9e65K7YtHfnieyyd3atFDEPnHg" alt="Обложка плейлиста MADiSON | Психологический хоррор" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>MADiSON | Психологический хоррор</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1867,7 +2168,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDMgZUz8yarlTmUkKG1JN2U" target="_blank" rel="noopener noreferrer" data-game-title="reanimal">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/xbDeUU53mI4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCt2b1th-OGXxIA0vFYeDCOgyCOlg" alt="Обложка плейлиста REANIMAL" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>REANIMAL</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1875,7 +2176,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDvyHjTtZ-sJnoteDogUEx-" target="_blank" rel="noopener noreferrer" data-game-title="mass effect legendary edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/xw3wTAcsoN4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAqUx737HZv8UXpI21IhKuJUblQqg" alt="Обложка плейлиста MASS EFFECT LEGENDARY EDITION" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 16 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 16 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>MASS EFFECT LEGENDARY EDITION</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1883,7 +2184,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBYzx3NPcthiQAFRcqSYjZd" target="_blank" rel="noopener noreferrer" data-game-title="tom clancy’s the division 2">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Hrmz8PaXJvk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLChuA0eoENSl5EIr9GXks8GxaKphQ" alt="Обложка плейлиста Tom Clancy’s The Division 2" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Tom Clancy’s The Division 2</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1891,7 +2192,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBbgFMyYFdbF-wurY4dikLl" target="_blank" rel="noopener noreferrer" data-game-title="the evil within 2🩸">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/eLYLGumUAFQ/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB0wtqFdDcgIeLaUH6n-dTTBAfRbA" alt="Обложка плейлиста THE EVIL WITHIN 2🩸" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>THE EVIL WITHIN 2🩸</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1899,7 +2200,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCs7Jjx5GKVRRn2Bd0f7kJ_" target="_blank" rel="noopener noreferrer" data-game-title="metro exodus i enhanced edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlCs7Jjx5GKVRRn2Bd0f7kJ_/studio_square_thumbnail.jpg?sqp=COrukdgG-oaymwEICKoDEPABSFqi85f_AwYIi-njygY=&amp;rs=AOn4CLDbU79Rjr5gElbsHCRXVqEeJu5DCQ" alt="Обложка плейлиста METRO EXODUS I Enhanced Edition" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>METRO EXODUS I Enhanced Edition</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1907,7 +2208,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDTwVhd_Ug7MweqSe1jveaG" target="_blank" rel="noopener noreferrer" data-game-title="🎄tmnt: shredder`s revenge 🎄 кооп с красотками">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/DHmQW1jpyBk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDlSWGSHY3pYHdCedZhxG2TQEw-ow" alt="Обложка плейлиста 🎄TMNT: SHREDDER`S REVENGE 🎄 КООП с красотками" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>🎄TMNT: SHREDDER`S REVENGE 🎄 КООП с красотками</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1915,7 +2216,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAnW2NTPMDkbZXnEvQdp4Uj" target="_blank" rel="noopener noreferrer" data-game-title="metro: last light redux | хардкор">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/lrgJpkj2ABI/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCVSuhztWk9Y_xn2rTLOq_Z-Y_6yQ" alt="Обложка плейлиста Metro: Last Light Redux | ХАРДКОР" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Metro: Last Light Redux | ХАРДКОР</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1923,7 +2224,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAu4krxnaasQgAII-AKki2i" target="_blank" rel="noopener noreferrer" data-game-title="f.e.a.r. первое прохождение">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/FqrAi6oM4Pk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLApY9EvCUwG1OSXwrXoLwbhJnhCnw" alt="Обложка плейлиста F.E.A.R. Первое прохождение" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>F.E.A.R. Первое прохождение</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1931,7 +2232,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlARC0I_uQ-0ovJ1TfgfX-lU" target="_blank" rel="noopener noreferrer" data-game-title="метро 2033 redux на хардкоре">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/eKXER-mVm8E/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCWrSlWEK0iSLtzAGBEF2bpM0ZtjA" alt="Обложка плейлиста МЕТРО 2033 REDUX на Хардкоре" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>МЕТРО 2033 REDUX на Хардкоре</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1939,7 +2240,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCplsfpuvyAvd_7b9mh__Cf" target="_blank" rel="noopener noreferrer" data-game-title="call of duty: modern warfare remastered">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/vpWLSXchTKg/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDwANLfaCSp-Nu3F0SUmsmrfNo7YQ" alt="Обложка плейлиста Call of Duty: Modern Warfare Remastered" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Call of Duty: Modern Warfare Remastered</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1947,7 +2248,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCvT8RnxulNbtapAqgb_l82" target="_blank" rel="noopener noreferrer" data-game-title="the evil within🩸">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlCvT8RnxulNbtapAqgb_l82/studio_square_thumbnail.jpg?sqp=CO3lkdgG-oaymwEICKoDEPABSFqi85f_AwYI5q-Q2AY=&amp;rs=AOn4CLASf1wzSx9ZxRl6v4ZfWjQ2a1lihA" alt="Обложка плейлиста THE EVIL WITHIN🩸" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>THE EVIL WITHIN🩸</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1955,7 +2256,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB-xzYbDziRnyI__JRmIHkG" target="_blank" rel="noopener noreferrer" data-game-title="outlast ii👻">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/B_ElB3btWfY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDUGFdInStFINHAsrSOH4qWw7dNiQ" alt="Обложка плейлиста Outlast II👻" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Outlast II👻</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1963,7 +2264,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDIz3R2zZOf_Ji7bjmZnIpp" target="_blank" rel="noopener noreferrer" data-game-title="assassin's creed valhalla">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/J5hmF_-XQLc/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAkO8Jp-8OtHlfRgPxMgklQX5PMZg" alt="Обложка плейлиста Assassin's Creed Valhalla" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 14 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 14 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Assassin's Creed Valhalla</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1971,7 +2272,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCXVKDzOzX-0pXWjjXX1Zyg" target="_blank" rel="noopener noreferrer" data-game-title="little nightmares iii 🌙">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/uDtizf5PVV8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB8xQbP6qAGq3KcLYYZkqTFDEwwBA" alt="Обложка плейлиста Little Nightmares III 🌙" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Little Nightmares III 🌙</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1979,7 +2280,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAK1eCYS5fjkJ2bS1tkL8ZW" target="_blank" rel="noopener noreferrer" data-game-title="алан вейк 2🔦">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlAK1eCYS5fjkJ2bS1tkL8ZW/studio_square_thumbnail.jpg?sqp=CLWHktgG-oaymwEICKoDEPABSFqi85f_AwYI8aGQ2AY=&amp;rs=AOn4CLC4vDqp00tbAwSmayRk6eBVLAfN1Q" alt="Обложка плейлиста Алан Вейк 2🔦" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Алан Вейк 2🔦</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1987,7 +2288,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBJuDAuI3JLpsGM24vCCtbl" target="_blank" rel="noopener noreferrer" data-game-title="indika">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/RH3qrTCJ5rs/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC7tbLjVsy_SshZMY85jWvQU6qMvg" alt="Обложка плейлиста Indika" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Indika</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -1995,7 +2296,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlC3tyICOKTQRpNuAo6JnxHC" target="_blank" rel="noopener noreferrer" data-game-title="silent hill f">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/56Oy_P3wg84/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB9VQHXPTsPJi5QuJF5ay0DG4i4CA" alt="Обложка плейлиста Silent Hill f" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Silent Hill f</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2003,7 +2304,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCgl9MFFNO0UFgch0HkR7Ui" target="_blank" rel="noopener noreferrer" data-game-title="need for speed payback">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/R2_MyMHmKx8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLA6SPbeU7YHhBdJBly2xbwgVo83Ig" alt="Обложка плейлиста Need for Speed Payback" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Need for Speed Payback</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2011,7 +2312,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDAqot_4_UqYL8C2DEOL7f1" target="_blank" rel="noopener noreferrer" data-game-title="ведьмак 3 некстген">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/56rLMALsKVE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAE9iyLFe5yy2ZPqp6Wp6-8L6PhVw" alt="Обложка плейлиста Ведьмак 3 Некстген" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 33 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 33 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Ведьмак 3 Некстген</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2019,7 +2320,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBTbUlml6D7N90Lt5jxRwgu" target="_blank" rel="noopener noreferrer" data-game-title="far cry 4 🔪">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/jVZ7pUASeZ8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDsyMnjYvWddZ4ZAqvUrCKsDrl-Aw" alt="Обложка плейлиста Far Cry 4 🔪" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 8 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 8 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Far Cry 4 🔪</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2027,7 +2328,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBQTS8m4MIeorQ9DG9v1ezh" target="_blank" rel="noopener noreferrer" data-game-title="алан вейк 🔦">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/fhyaBtVw5iA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBFGShBmy02KxTI_U2KjStWetAEUA" alt="Обложка плейлиста Алан Вейк 🔦" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Алан Вейк 🔦</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2035,7 +2336,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCom4MAP2MYdcQ7-c8Tr1xC" target="_blank" rel="noopener noreferrer" data-game-title="outlast">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Y2HD_3B-hvk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLD-FtF4LW1Im9Ctunk90VE2xwwjpQ" alt="Обложка плейлиста outlast" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>outlast</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2043,7 +2344,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlANPAQI1a5ktgQxaKByuZG6" target="_blank" rel="noopener noreferrer" data-game-title="far cry 3 🔪">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/G_VoMZ743hw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDlXWxA8zcfwwT9Gx-48LCL9iUV2g" alt="Обложка плейлиста Far Cry 3 🔪" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Far Cry 3 🔪</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2051,7 +2352,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlC8_ueAtTi2LkmVbJt4lWSi" target="_blank" rel="noopener noreferrer" data-game-title="euro truck simulator 2">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/OmvA_vOyGvw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAOWy-RHFnx7hIB3QgPuQzp8okoWQ" alt="Обложка плейлиста Euro Truck Simulator 2" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 12 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 12 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Euro Truck Simulator 2</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2059,7 +2360,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlC0QC7nVGDBpF2NzcRBgNcW" target="_blank" rel="noopener noreferrer" data-game-title="⭐call of duty: black ops⭐">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/f8MYAujT_Ic/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBDgjyPHnrZ0PjIHXO7bjRzmNm5zA" alt="Обложка плейлиста ⭐Call of Duty: Black Ops⭐" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>⭐Call of Duty: Black Ops⭐</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2067,7 +2368,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBlAS0PtdfjoeNjfsM_Dx9Y" target="_blank" rel="noopener noreferrer" data-game-title="⚔️elden ring⚔️">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/dUeydPKuN8k/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCBYFLDU8Q3JqWrHSpc5nhnu9FnzA" alt="Обложка плейлиста ⚔️ELDEN RING⚔️" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 45 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 45 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>⚔️ELDEN RING⚔️</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2075,7 +2376,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlANvlx_ZS-F2Sme9Wi8snl1" target="_blank" rel="noopener noreferrer" data-game-title="dead space 3">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/D2Y-MNw3oFw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBBGcyyL0sxg9J2wzncHQ0dPQyZFA" alt="Обложка плейлиста Dead Space 3" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Dead Space 3</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2083,7 +2384,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDMCSvn11sI48i6Q_hDJAjF" target="_blank" rel="noopener noreferrer" data-game-title="red dead redemption 2🤠">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/QriUDPNUfUw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBkCue3EVJKyzHwwsRjb3XP56fYaA" alt="Обложка плейлиста Red Dead Redemption 2🤠" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 14 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 14 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Red Dead Redemption 2🤠</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2091,7 +2392,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBXNpTDlIh0Z2MNo0xZiKac" target="_blank" rel="noopener noreferrer" data-game-title="alien isolation">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/VOKDfB5gzNE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAMK5_DfNORwlmaGyqlHrj_F0k4RA" alt="Обложка плейлиста ALIEN ISOLATION" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>ALIEN ISOLATION</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2099,7 +2400,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBrKmtS0QdfbfJIKCS7vGx7" target="_blank" rel="noopener noreferrer" data-game-title="call of duty: wwii.">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Lh2PkxA5OHs/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBE-bVlxs9sfSeU9JjM4-as30OyUQ" alt="Обложка плейлиста Call of Duty: WWII." loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Call of Duty: WWII.</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2107,7 +2408,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBs_MWIg2ZZTVp28WLPq12a" target="_blank" rel="noopener noreferrer" data-game-title="☢️s.t.a.l.k.e.r.: зов припяти ☢️">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/uNkpF4lqTJ4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLChnl3ss_VDpbXRBktixUnRusp34w" alt="Обложка плейлиста ☢️S.T.A.L.K.E.R.: Зов Припяти ☢️" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>☢️S.T.A.L.K.E.R.: Зов Припяти ☢️</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2115,7 +2416,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBOHMXzp4ZmSIbAFo9Cjy_Y" target="_blank" rel="noopener noreferrer" data-game-title="the last of us. part ii">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Vnubwv0x4zk/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCYXLWeFTAxYKFPzPDmo196X0gmOA" alt="Обложка плейлиста The Last of Us. PART II" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 16 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 16 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Last of Us. PART II</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2123,7 +2424,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDQR5CXagTj9DcW_PErUaMs" target="_blank" rel="noopener noreferrer" data-game-title="🎶 inzoi 🎶">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/vtekl68RURs/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCmz4LSyx5JGqck9PIfvEZSoU2Jbg" alt="Обложка плейлиста 🎶 InZoi 🎶" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>🎶 InZoi 🎶</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2131,7 +2432,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCR3S9it8sStlByiZh4aBe8" target="_blank" rel="noopener noreferrer" data-game-title="little nightmares ii 🌙">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/PlRowhIL7-I/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDy95lHjWtsTHuTleUnX5YgkmbZwA" alt="Обложка плейлиста Little Nightmares II 🌙" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Little Nightmares II 🌙</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2139,7 +2440,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDreuobpJ5mJsUgavRyZDsw" target="_blank" rel="noopener noreferrer" data-game-title="ведьмак 2: убийцы королей">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/gmk4877C_NE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCQ095AW0nBW_GsvXesHtRdGg5uFw" alt="Обложка плейлиста Ведьмак 2: Убийцы королей" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Ведьмак 2: Убийцы королей</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2147,7 +2448,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDv6jAoBuCVRKqW4YFweB_Z" target="_blank" rel="noopener noreferrer" data-game-title="assаssin's creed 3 (iii) remastered">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/iedNDv8rCAA/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAtMq6XFavdJPWb6tYZy6TOWDgUfg" alt="Обложка плейлиста Assаssin's Creed 3 (III) Remastered" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Assаssin's Creed 3 (III) Remastered</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2155,7 +2456,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD14RlrX6IxdtiBMAt36vze" target="_blank" rel="noopener noreferrer" data-game-title="dead space 2">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/WOVYhDELT6U/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC70XJQsgZF_9jq72UU-IuVV8wEyQ" alt="Обложка плейлиста Dead Space 2" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Dead Space 2</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2163,7 +2464,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBOnYYlPtjBSXN5xk9mNxFr" target="_blank" rel="noopener noreferrer" data-game-title="the medium">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/aSOFJGEVE00/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDU7Fu6EB0Mw-mA_yrCvIZyWnOCEw" alt="Обложка плейлиста The Medium" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Medium</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2171,7 +2472,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBGiFjvUvy4H1e7ipnomQSQ" target="_blank" rel="noopener noreferrer" data-game-title="marvel's spider-man remastered">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/tuv4F3c5tn8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDE9AezPpBzM_3hgXbEhnbxh5cWAg" alt="Обложка плейлиста Marvel's Spider-Man Remastered" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Marvel's Spider-Man Remastered</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2179,7 +2480,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAh5k-8A6mM07JiVtjyXTeF" target="_blank" rel="noopener noreferrer" data-game-title="☢️ s.t.a.l.k.e.r.: чистое небо. ☢️">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/-FDLtIjcfz4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC4k0cQEUz24cXzJMqGmNwAbPhgUw" alt="Обложка плейлиста ☢️ S.T.A.L.K.E.R.: Чистое небо. ☢️" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 17 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 17 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>☢️ S.T.A.L.K.E.R.: Чистое небо. ☢️</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2187,7 +2488,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCRmlFzNVAqmd5l8CCfVhFR" target="_blank" rel="noopener noreferrer" data-game-title="the outer worlds">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Mc68jbAO9iU/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLANI3YEHD1Ukd_ue8I_qY0Fn7D4iA" alt="Обложка плейлиста The Outer Worlds" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 10 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 10 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Outer Worlds</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2195,7 +2496,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB-GUfK6OBYlExzm5DyksNr" target="_blank" rel="noopener noreferrer" data-game-title="dead space 2008">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/5-AxY0XiijE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAsuq93an4SO4fzv9JO_x4vdqQIPw" alt="Обложка плейлиста Dead Space 2008" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Dead Space 2008</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2203,7 +2504,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD6munkZjxjKW67LNUbA6Hz" target="_blank" rel="noopener noreferrer" data-game-title="bramble the mountain king">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/A45NO_wRZvw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDYTss8h5_AbGJM2gR8sUf5zZEm9A" alt="Обложка плейлиста Bramble The Mountain King" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Bramble The Mountain King</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2211,7 +2512,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCDxT47jzhpDIUpEL8k9mko" target="_blank" rel="noopener noreferrer" data-game-title="☢️ s.t.a.l.k.e.r.: тень чернобыля. ☢️">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/7R7QjclKonc/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBSfkywuH59jA-Y8hg7p7v13LwXdA" alt="Обложка плейлиста ☢️ S.T.A.L.K.E.R.: Тень Чернобыля. ☢️" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 11 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 11 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>☢️ S.T.A.L.K.E.R.: Тень Чернобыля. ☢️</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2219,7 +2520,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDAjbJOnma15CtsOdDfBl_8" target="_blank" rel="noopener noreferrer" data-game-title="hogwarts legacy на русском!">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/jl0MjUJ6KkQ/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBWx1MO3hzGx4I2dwvXVVfSSLSozA" alt="Обложка плейлиста Hogwarts Legacy на русском!" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Hogwarts Legacy на русском!</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2227,7 +2528,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCxo7Xy7DzODQ1n_LfywetF" target="_blank" rel="noopener noreferrer" data-game-title="resident evil village хард!">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/we396hNpPDo/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC6hveFmmc6XtY88wiVfVb4QbI_Vw" alt="Обложка плейлиста Resident Evil Village ХАРД!" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil Village ХАРД!</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2235,7 +2536,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlC5295W7WOzw0u0Wb9lhZdv" target="_blank" rel="noopener noreferrer" data-game-title="little nightmares 🌙">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/3AcTW_W2mxc/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDsl9tzTP49QeEk-7v5aMiCQEGOQA" alt="Обложка плейлиста Little Nightmares 🌙" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Little Nightmares 🌙</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2243,7 +2544,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlClQzdwbFixZt2EYRhAVeFA" target="_blank" rel="noopener noreferrer" data-game-title="assassin's creed: revelations">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/0X6kNsuy5LQ/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAiWjrhFyT4PdzlY9HKwn6zjHl_7w" alt="Обложка плейлиста Assassin's Creed: Revelations" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Assassin's Creed: Revelations</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2251,7 +2552,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD9OwVUPKQoBgRRGYnoXqSG" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 5">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/hHVL7a3Qwpw/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDM2mNCMWgk0TuN0TXSly-PDWReDg" alt="Обложка плейлиста Resident Evil 5" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 5</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2259,7 +2560,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCKlgOhkRlGlrnCNlndiGML" target="_blank" rel="noopener noreferrer" data-game-title="horizon zero dawn❤️‍ remastered">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/aDYikeBO1Ik/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCiY87V2JsmG7Yo3lGOM_rP2YjL6w" alt="Обложка плейлиста Horizon Zero Dawn❤️‍ Remastered" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 16 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 16 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Horizon Zero Dawn❤️‍ Remastered</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2267,7 +2568,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlClRjahZ8iqB3t-MWWnLFTt" target="_blank" rel="noopener noreferrer" data-game-title="need for speed (2015)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/377QOuHjRow/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCDo4BtLrr-oDRvjGikoApac1dpTw" alt="Обложка плейлиста Need for Speed (2015)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Need for Speed (2015)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2275,7 +2576,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCVRUtmjeqzzU13jEMpKLes" target="_blank" rel="noopener noreferrer" data-game-title="silent hill 2 remake 💔">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/lbpvcPhtV_o/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCFNdQ1JlP6rBoeLu0zpzigQFFghQ" alt="Обложка плейлиста SILENT HILL 2 REMAKE 💔" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 13 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 13 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>SILENT HILL 2 REMAKE 💔</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2283,7 +2584,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBt-1lICFyx0-ZT3x7cC1mY" target="_blank" rel="noopener noreferrer" data-game-title="❤ spiritfarer ❤">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/nXQBJsgkoek/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC8GzxBIU-fxyLHfwI8b7Ml_KSr6w" alt="Обложка плейлиста ❤ Spiritfarer ❤" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 19 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 19 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>❤ Spiritfarer ❤</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2291,7 +2592,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAf0jPsU7xBMriQ-QTWeLqQ" target="_blank" rel="noopener noreferrer" data-game-title="need for speed: carbon">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/kXZOKqJ6Jic/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLD4w1Q4z-4Sf_k2HidFd-4gucrOXw" alt="Обложка плейлиста Need For Speed: Carbon" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Need For Speed: Carbon</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2299,7 +2600,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCH6T3MNgoUxzUUIErIINMH" target="_blank" rel="noopener noreferrer" data-game-title="cyberpunk 2077">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/AVnO1rklN4U/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDZabqcjqhVgqzj8z-lRZOM_9Rm7Q" alt="Обложка плейлиста Cyberpunk 2077" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 20 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 20 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Cyberpunk 2077</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2307,7 +2608,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDUKzI4ba_dYUfSsCK3bgU_" target="_blank" rel="noopener noreferrer" data-game-title="visage - психологический хоррор😱">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/ysb0mxOfs9U/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCiEcuY3GUaHxP3zWUOSUmKkKq8NA" alt="Обложка плейлиста Visage - психологический хоррор😱" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Visage - психологический хоррор😱</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2315,7 +2616,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBxrBek9P-tk6dy3sNFyBnC" target="_blank" rel="noopener noreferrer" data-game-title="stray. пушистики в деле =)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/olD_39bq_jc/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAhUZLfsdSnBg_UdN2cxGo42zpVdQ" alt="Обложка плейлиста Stray. Пушистики в деле =)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Stray. Пушистики в деле =)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2323,7 +2624,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDiQWHZv84WKC1FKBjZ5wtC" target="_blank" rel="noopener noreferrer" data-game-title="days gone">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/6oo_W5_JjfQ/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCvy2HnZBs1rJ9qUxBkgJ3aZPk8IQ" alt="Обложка плейлиста Days Gone" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 20 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 20 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Days Gone</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2331,7 +2632,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCAapquxhkHMRn6buDiYifs" target="_blank" rel="noopener noreferrer" data-game-title="ведьмак 3 для начинающих игроков.">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/AykTSZs4JeI/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDTriodbjBsLhuFdVbUQ-333uOq-w" alt="Обложка плейлиста Ведьмак 3 для начинающих игроков." loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Ведьмак 3 для начинающих игроков.</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2339,7 +2640,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBu9kH1HwnAvZa67O3a8E7P" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 3">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Y1lU32zFudY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAoTSV4POPMbnZ8f-XQyEXxUyZGVg" alt="Обложка плейлиста Resident Evil 3" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 3</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2347,7 +2648,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDzFJIANlqxURQfxyIWNjWd" target="_blank" rel="noopener noreferrer" data-game-title="the quarry | первое прохождение |">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/NJkzOBvc6z4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAFu7auxgbVEa9tPQxD-SoSZDZFsQ" alt="Обложка плейлиста The Quarry | ПЕРВОЕ прохождение |" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Quarry | ПЕРВОЕ прохождение |</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2355,7 +2656,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBVp4_okAO60CpHtRXLdARd" target="_blank" rel="noopener noreferrer" data-game-title="🔻assassin’s creed: brotherhood🔺">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/SWUFFm0Lhts/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDp13RUWemHxB8d4X-c2iroudi2XA" alt="Обложка плейлиста 🔻Assassin’s Creed: Brotherhood🔺" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 10 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 10 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>🔻Assassin’s Creed: Brotherhood🔺</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2363,7 +2664,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDBwNMDt5-_95FV-QRi1YjI" target="_blank" rel="noopener noreferrer" data-game-title="beyond: two souls 👻">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/M0aiaa2oniE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBk3mCtPIuUNAnMzvPVfTgvy6THPQ" alt="Обложка плейлиста Beyond: Two Souls 👻" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Beyond: Two Souls 👻</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2371,7 +2672,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAKMadarfZtVCJpDg58hDtd" target="_blank" rel="noopener noreferrer" data-game-title="озвучка трейлеров">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/IgcZaoZhFC4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDJZmtpwA3kpQxswOfzxCRVicdQLw" alt="Обложка плейлиста Озвучка трейлеров" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Озвучка трейлеров</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2379,7 +2680,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDosqBtQnUo0th5EtX5CoGb" target="_blank" rel="noopener noreferrer" data-game-title="the dark pictures anthology">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/6vP-4PTYN3A/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCTVTu7jzJkIaWGa3aUTx_N5nPhgA" alt="Обложка плейлиста The Dark Pictures Anthology" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Dark Pictures Anthology</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2387,7 +2688,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCuGfE6dg37izkPk9xvJp1w" target="_blank" rel="noopener noreferrer" data-game-title="🪓god of war🪓">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Gi4o8aRbnjM/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDXmjZt7E9lg0a9rzP5uXRX6IHDGw" alt="Обложка плейлиста 🪓God of War🪓" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 17 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 17 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>🪓God of War🪓</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2395,7 +2696,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB6pMlhPkpwN5yNk4d4A55R" target="_blank" rel="noopener noreferrer" data-game-title="need for speed heat =)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/zzv1bcajPoU/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLD_5fF2H__yZwckEaHtPQoXZtbVWQ" alt="Обложка плейлиста Need for Speed Heat =)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 1 video</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 1 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Need for Speed Heat =)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2403,7 +2704,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBXeNLAA56PTACDg1UZpSgB" target="_blank" rel="noopener noreferrer" data-game-title="heavy rain">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/f1VtaFZZxs0/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLA8lIgFtQdU8Pl33uCu23pse007pw" alt="Обложка плейлиста Heavy Rain" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Heavy Rain</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2411,7 +2712,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlA9MJ0PM2L-lKaemKv_J-VO" target="_blank" rel="noopener noreferrer" data-game-title="it takes two =)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/JKC-8-NAcjo/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC-_0o-krFJOxnvJTdngdhKhcB06w" alt="Обложка плейлиста It takes two =)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>It takes two =)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2419,7 +2720,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB9h_0d90t0l_gt4JbCrbVu" target="_blank" rel="noopener noreferrer" data-game-title="hitman: absolution">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Hl5I-VOvKzE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC6LCiY_ES-8OwUhdaJSvx1OKY3dA" alt="Обложка плейлиста Hitman: Absolution" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 5 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 5 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Hitman: Absolution</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2427,7 +2728,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBcbkUzNMqADpdyCYoAq9oN" target="_blank" rel="noopener noreferrer" data-game-title="alone in the dark">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/8aYxrpEJ8ig/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDbatF5lmVdGxnMufcm7c6_tyMSlQ" alt="Обложка плейлиста Alone in the dark" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 4 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 4 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Alone in the dark</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2435,7 +2736,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBTJ8M1BDZP-92WSH4SHBfi" target="_blank" rel="noopener noreferrer" data-game-title="need for speed: most wanted">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/SeB6wJ1SP6s/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDbJ5f68j50lSiZLkr8C0bpelNbTg" alt="Обложка плейлиста Need for Speed: Most Wanted" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 31 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 31 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Need for Speed: Most Wanted</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2443,7 +2744,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAoU7JqVHGpVxH6RRdhN9nv" target="_blank" rel="noopener noreferrer" data-game-title="assassin’s creed ii">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/o4CpJOqXXuM/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBJugxlUfw5m_r6ADUezPve58vvgA" alt="Обложка плейлиста Assassin’s Creed II" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 16 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 16 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Assassin’s Creed II</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2451,7 +2752,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCK3ktoiZGbci8OMzYNpFGA" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 2 remake">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/VMi4tZ19nuU/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5KK9DA1V2E4-E222hnQUoDYnGlw" alt="Обложка плейлиста Resident Evil 2 Remake" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 10 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 10 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 2 Remake</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2459,7 +2760,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBcRBwt8e-WZ8Wy-gUnxAad" target="_blank" rel="noopener noreferrer" data-game-title="как достать соседа">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/3VCeG-f96cU/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCGadyPaoYT_ZJVjg3ICOqaXFUPXA" alt="Обложка плейлиста Как достать соседа" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Как достать соседа</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2467,7 +2768,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD8ak3XhpHpt2YrW4rnJOq9" target="_blank" rel="noopener noreferrer" data-game-title="assasin&quot;s creed. первая часть.">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/MhusJtyCC8U/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBiV1NjkmfWt9EqlTtsChImlutjfQ" alt="Обложка плейлиста Assasin&quot;s Creed. Первая часть." loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 9 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 9 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Assasin"s Creed. Первая часть.</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2475,7 +2776,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDpovuLAyR8u6SPzHVgyVVz" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 4 | remake">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlDpovuLAyR8u6SPzHVgyVVz/studio_square_thumbnail.jpg?sqp=CJWcktgG-oaymwEICKoDEPABSFqi85f_AwYI4LrcxAY=&amp;rs=AOn4CLAhVrGjuctwHpOWu6i_izYHOU4maw" alt="Обложка плейлиста Resident Evil 4 | Remake" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 21 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 21 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 4 | Remake</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2483,7 +2784,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDbFEJ5ocwXUNwQLnPwTx6m" target="_blank" rel="noopener noreferrer" data-game-title="nfs 2 undergraund">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/uWktEQm0q6I/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLD-jWzx5cyliBj_k6ojLjJpkxztFg" alt="Обложка плейлиста NFS 2 Undergraund" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 19 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 19 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>NFS 2 Undergraund</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2491,7 +2792,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBS05DbnEAozJqQTx39mcmS" target="_blank" rel="noopener noreferrer" data-game-title="the witcher. enhanced edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/JifRqXjm2g0/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLA5JFfSFfNFR4cQRvqlLAdJxBJYbw" alt="Обложка плейлиста The Witcher. Enhanced edition" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 26 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 26 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Witcher. Enhanced edition</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2499,7 +2800,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBF4BiJsCp1i5KvMgMcRk2z" target="_blank" rel="noopener noreferrer" data-game-title="dls shadow of rose. resident evil 8: village">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/L3QcasHGNzY/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCb7ZKIDTLrEiSnBt6j6pGBl4pVtg" alt="Обложка плейлиста DLS Shadow of ROSE. Resident Evil 8: Village" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 2 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 2 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>DLS Shadow of ROSE. Resident Evil 8: Village</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2507,7 +2808,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDIoazMyyUzk2Rnnzss_qg9" target="_blank" rel="noopener noreferrer" data-game-title="gwent. карточная игра онлайн.">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/H1-R9-uxLq8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBlmjzbmBRBYbHtqyuUEWcdIZBZlg" alt="Обложка плейлиста GWENT. Карточная игра онлайн." loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 19 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 19 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>GWENT. Карточная игра онлайн.</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2515,7 +2816,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCDwUluBcaMN7T-UBp4xAHX" target="_blank" rel="noopener noreferrer" data-game-title="metro exodus">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/7-gtADiLbOI/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAtNd2GzFeWzrH2cdrn4_wgazGWPg" alt="Обложка плейлиста METRO exodus" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 24 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 24 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>METRO exodus</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2523,7 +2824,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCQETBu4BdZSIX1gfo9kFsr" target="_blank" rel="noopener noreferrer" data-game-title="game shorts">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/O07gvpvcxEU/hqdefault.jpg?sqp=-oaymwExCOADEI4CSFryq4qpAyMIARUAAIhCGAHwAQH4Ac4FgAKACooCDAgAEAEYfyAaKCIwDw==&amp;rs=AOn4CLAZ0Ork5S77xcWgHmPPBL_u_k_6Vg" alt="Обложка плейлиста Game Shorts" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 30 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 30 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fas fa-list"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Game Shorts</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2531,7 +2832,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCBTXvCNBH5gv30dhRQ4w4L" target="_blank" rel="noopener noreferrer" data-game-title="shadow of the tomb raider">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/KPFLwUr74cE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLArAzcVtGBhpPsAxrJPDtJpy876mQ" alt="Обложка плейлиста Shadow of the Tomb Raider" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 19 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 19 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Shadow of the Tomb Raider</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2539,7 +2840,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD17QrSFd-zQFuoHbPYeYPC" target="_blank" rel="noopener noreferrer" data-game-title="metro last light">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/foLJlucKpfo/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLC_4GXsIUFYQWoB5fkRD3xz2HXs5A" alt="Обложка плейлиста Metro Last Light" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Metro Last Light</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2547,7 +2848,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBDalUxrgDX2m00oJQHpftf" target="_blank" rel="noopener noreferrer" data-game-title="phasmophobia/demonologist">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Hab2n6-vhm4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBYoc5-hoGXhuIJeJ5rEDxFRWJ-mA" alt="Обложка плейлиста Phasmophobia/Demonologist" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 3 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 3 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Phasmophobia/Demonologist</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2555,7 +2856,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCLOEYOZGW1RDmrgQmUwGm7" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 7: biohazard">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/PV0pwUsrGM8/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCOavrWTDarWY70b7Jz_tPS-mHYJA" alt="Обложка плейлиста Resident Evil 7: Biohazard" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 7: Biohazard</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2563,7 +2864,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD6dvWQQiO2803-NpQg25xf" target="_blank" rel="noopener noreferrer" data-game-title="atomic heart">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/okEEjzeX_4U/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAUtbJ_ODW7_ojpr3YUfX2HwL2ccg" alt="Обложка плейлиста Atomic Heart" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 13 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 13 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Atomic Heart</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2571,7 +2872,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlDLcFA3YgG03DwCgtPo0_fF" target="_blank" rel="noopener noreferrer" data-game-title="hogwarts legacy">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/EYd4hivculE/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLA4WtCfecAss6Tam98BjEF4TtWXdQ" alt="Обложка плейлиста Hogwarts Legacy" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 19 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 19 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Hogwarts Legacy</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2579,7 +2880,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlB73lyJ6DguV_dMFgxh3Qgz" target="_blank" rel="noopener noreferrer" data-game-title="the sims 4. страна цинтрийки)">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/baaMe5Kj0IM/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAdNy18ZCqaTOXS8SEr6O6O-2z6Kw" alt="Обложка плейлиста The Sims 4. Страна Цинтрийки)" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 39 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 39 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>The Sims 4. Страна Цинтрийки)</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2587,7 +2888,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAhMACDJyKTYAxO9muijE2M" target="_blank" rel="noopener noreferrer" data-game-title="metro 2033 redux">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/Pk9I8SJVB98/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLDW_jkkDM_GKlEGD3AeGIqPFXCL4A" alt="Обложка плейлиста Metro 2033 Redux" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 6 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 6 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Metro 2033 Redux</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2595,7 +2896,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBT9XRLmouJpCFEuGMpsRkQ" target="_blank" rel="noopener noreferrer" data-game-title="uncharted 4: a thief’s end">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlBT9XRLmouJpCFEuGMpsRkQ/studio_square_thumbnail.jpg?sqp=CMSTktgG-oaymwEICKoDEPABSFqi85f_AwYItreQ2AY=&amp;rs=AOn4CLDdTP0xrJnL1x1DLglVfxFzORTbkQ" alt="Обложка плейлиста Uncharted 4: A Thief’s End" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 14 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 14 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Uncharted 4: A Thief’s End</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2603,7 +2904,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlA1hn0Y_50cnYv4zpBOfkN9" target="_blank" rel="noopener noreferrer" data-game-title="rise of the tomb raider">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/yW18Nz6r8A4/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAf90JVyh6DpFG4Bvk2eR5KVJnYgw" alt="Обложка плейлиста Rise of the Tomb Raider" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 14 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 14 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Rise of the Tomb Raider</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2611,7 +2912,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlD2vVLorT3T7_UEw9LyfhZM" target="_blank" rel="noopener noreferrer" data-game-title="resident evil 8: village">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlD2vVLorT3T7_UEw9LyfhZM/studio_square_thumbnail.jpg?sqp=COacktgG-oaymwEICKoDEPABSFqi85f_AwYI2beM2AY=&amp;rs=AOn4CLCyu_2KgZtmZYxwShomtjtM5Xf2nQ" alt="Обложка плейлиста Resident Evil 8: Village" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 8 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 8 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Resident Evil 8: Village</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2619,7 +2920,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlCR_eb7o8vr53xbGVSvMqEI" target="_blank" rel="noopener noreferrer" data-game-title="tomb raider. game of the year edition">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/vi/lnWADpNL64o/hqdefault.jpg?sqp=-oaymwEXCOADEI4CSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBN3INKpUyNHHikdvlZcgVRsXJCGw" alt="Обложка плейлиста Tomb Raider. Game of The Year Edition" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 10 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 10 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Tomb Raider. Game of The Year Edition</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2627,7 +2928,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlBA1XGkH2DK2DGUhZbBkmC5" target="_blank" rel="noopener noreferrer" data-game-title="detroit: become human">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlBA1XGkH2DK2DGUhZbBkmC5/studio_square_thumbnail.jpg?sqp=COOWktgG-oaymwEICKoDEPABSFqi85f_AwYI7OjjygY=&amp;rs=AOn4CLAL3kwjKW_0NmKbbf_ZXuKeOi5JyA" alt="Обложка плейлиста Detroit: Become Human" loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>Detroit: Become Human</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2635,7 +2936,7 @@
                     <a class="game-card" href="https://www.youtube.com/playlist?list=PLNsodgEr-MlAR9lyD2rnhwTJkShu2i35w" target="_blank" rel="noopener noreferrer" data-game-title="a plague tale: innocence.">
                         <div class="game-thumb">
                             <img src="https://i.ytimg.com/pl_c/PLNsodgEr-MlAR9lyD2rnhwTJkShu2i35w/studio_square_thumbnail.jpg?sqp=CIGcktgG-oaymwEICKoDEPABSFqi85f_AwYIxLKQ1AY=&amp;rs=AOn4CLCGvtjjgX12XrvuowxGeUSttAk-EA" alt="Обложка плейлиста A Plague Tale: Innocence." loading="lazy">
-                            <span class="game-video-count"><i class="fas fa-film"></i> 7 videos</span>
+                            <span class="game-video-count"><i class="fas fa-film"></i> 7 видео</span>
                             <span class="game-play" aria-hidden="true"><i class="fab fa-youtube"></i></span>
                         </div>
                         <div class="game-card-info"><h2>A Plague Tale: Innocence.</h2><span class="game-open">Открыть плейлист <i class="fas fa-arrow-up-right-from-square"></i></span></div>
@@ -2667,7 +2968,7 @@
 
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда скопирована!</span>
+        <span id="notification-text">Команда "!поле чудес" добавлена в "💪 Боевой настрой"</span>
     </div>
 
     
@@ -2788,12 +3089,12 @@
                         "cost": 300
                 },
                 {
-                        "name": "!хвать охота",
+                        "name": "!хавать охота",
                         "description": "Сталкер",
                         "cost": 300
                 },
                 {
-                        "name": "!черичь их",
+                        "name": "!херачь их",
                         "description": "Сталкер",
                         "cost": 300
                 },
@@ -2813,7 +3114,7 @@
                         "cost": 300
                 },
                 {
-                        "name": "!ах за душу",
+                        "name": "!эх за душу",
                         "description": "Сталкер",
                         "cost": 300
                 },
@@ -2828,17 +3129,17 @@
                         "cost": 300
                 },
                 {
-                        "name": "!хавать охота",
+                        "name": "!хвать охота",
                         "description": "Сталкер",
                         "cost": 300
                 },
                 {
-                        "name": "!херачь их",
+                        "name": "!черичь их",
                         "description": "Сталкер",
                         "cost": 300
                 },
                 {
-                        "name": "!эх за душу",
+                        "name": "!ах за душу",
                         "description": "Сталкер",
                         "cost": 300
                 }
@@ -3012,7 +3313,7 @@
                         "cost": 300
                 },
                 {
-                        "name": "!pole чудес",
+                        "name": "!поле чудес",
                         "description": "При победе",
                         "cost": 300
                 },
@@ -3022,7 +3323,12 @@
                         "cost": 300
                 },
                 {
-                        "name": "!поле чудес",
+                        "name": "!хэдшот",
+                        "description": "",
+                        "cost": 300
+                },
+                {
+                        "name": "!pole чудес",
                         "description": "При победе",
                         "cost": 300
                 }
@@ -3427,7 +3733,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":22,"updatedAt":"2026-11-23T20:14:05.968Z"};
+        let dataMeta = {"version":23,"updatedAt":"2026-11-24T18:45:40.997Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
@@ -4160,6 +4466,8 @@
         function initTheme() {
             const savedTheme = localStorage.getItem('cintribot_theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#120F15' : '#F3EEE4');
         }
         function switchThemeSmooth(newTheme) {
             const root = document.documentElement;
@@ -4202,7 +4510,7 @@
             }, 2000);
         }
         function createPetals() {
-            const petalCount = 15;
+            const petalCount = window.innerWidth < 700 ? 7 : 15;
             for (let i = 0; i < petalCount; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
@@ -4256,14 +4564,23 @@
                 const navRect = tabsNav.getBoundingClientRect();
                 const tabRect = activeTab.getBoundingClientRect();
                 const indicatorInsetX = parseFloat(getComputedStyle(tabIndicator).left) || 0;
-                const position = tabRect.left - navRect.left - indicatorInsetX;
+                const position = tabRect.left - navRect.left + tabsNav.scrollLeft - indicatorInsetX;
                 const width = tabRect.width;
                 tabIndicator.style.transform = `translateX(${position}px)`;
                 tabIndicator.style.width = `${width}px`;
             } catch (error) { console.error('Error updating tab indicator:', error); }
         }
+        function centerTabInNav(btn) {
+            try {
+                if (!tabsNav || !btn) return;
+                if (tabsNav.scrollWidth <= tabsNav.clientWidth + 2) return;
+                const target = btn.offsetLeft - (tabsNav.clientWidth - btn.offsetWidth) / 2;
+                tabsNav.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+            } catch (_) {}
+        }
         function handleTabSwitch(e) {
-            const tabId = e.currentTarget.getAttribute('data-tab');
+            const clickedBtn = e.currentTarget;
+            const tabId = clickedBtn.getAttribute('data-tab');
 
             // === ФИКС: перед сравнением синхронизируем currentTab
             // с реально активной кнопкой, чтобы клики не «съедались». ===
@@ -4279,7 +4596,7 @@
             tabContents.forEach(content => content.classList.remove('active'));
             document.getElementById(`${tabId}-tab`).classList.add('active');
             currentTab = tabId;
-            setTimeout(() => { updateTabIndicator(); setTimeout(updateTabIndicator, 50); }, 20);
+            setTimeout(() => { updateTabIndicator(); centerTabInNav(clickedBtn); setTimeout(updateTabIndicator, 50); }, 20);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         function initCategories() {
@@ -4305,6 +4622,7 @@
             if (category === activeCategoryFilter) return;
             document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
             e.currentTarget.classList.add('active');
+            try { e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (_) {}
             if (searchQuery) { searchBox.value = ""; searchQuery = ""; }
             if (commandsContainer) commandsContainer.classList.add('is-switching');
             setTimeout(() => {
@@ -4462,14 +4780,31 @@
             renderCommands(true);
         }
         function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).catch(() => legacyCopyToClipboard(text));
+                return;
+            }
+            legacyCopyToClipboard(text);
+        }
+        function legacyCopyToClipboard(text) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.contentEditable = 'true';
             textArea.style.position = 'fixed'; textArea.style.top = '0'; textArea.style.left = '0';
             textArea.style.width = '2em'; textArea.style.height = '2em';
             textArea.style.padding = '0'; textArea.style.border = 'none'; textArea.style.outline = 'none';
             textArea.style.boxShadow = 'none'; textArea.style.background = 'transparent';
+            textArea.style.fontSize = '16px'; textArea.style.opacity = '0';
             document.body.appendChild(textArea);
             textArea.focus(); textArea.select();
+            try {
+                const range = document.createRange();
+                range.selectNodeContents(textArea);
+                const sel = window.getSelection();
+                sel.removeAllRanges(); sel.addRange(range);
+                textArea.setSelectionRange(0, text.length);
+            } catch (_) {}
             try { document.execCommand("copy"); } catch (err) { console.error('Ошибка копирования:', err); }
             document.body.removeChild(textArea);
         }
@@ -5149,7 +5484,7 @@
 
         })();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a523cae8ea6ee310',t:'MTc5MzI5MzgxNQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a523cae8ea6ee310',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a523eb444fab9d80',t:'MTc5MzI5NTE0MA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a523eb444fab9d80',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
+
 <script>
 (() => {
   const input = document.getElementById('games-search');
@@ -5158,6 +5493,19 @@
   const cards = [...grid.querySelectorAll('.game-card')];
   const count = document.getElementById('games-total');
   const empty = document.getElementById('games-empty');
+  const plural = (n, forms) => {
+    const m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return forms[0];
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return forms[1];
+    return forms[2];
+  };
+  cards.forEach(card => {
+    const vc = card.querySelector('.game-video-count');
+    if (!vc) return;
+    const m = vc.textContent.match(/\d+/);
+    const n = m ? parseInt(m[0], 10) : 0;
+    vc.innerHTML = '<i class="fas fa-film"></i> ' + n + ' видео';
+  });
   const update = () => {
     const query = input.value.trim().toLocaleLowerCase('ru');
     let shown = 0;
@@ -5166,11 +5514,13 @@
       card.hidden = !match;
       if (match) shown++;
     });
-    count.textContent = query ? `${shown} из ${cards.length} плейлистов` : `${cards.length} плейлистов`;
+    const word = plural(cards.length, ['плейлист', 'плейлиста', 'плейлистов']);
+    count.textContent = query ? `${shown} из ${cards.length} ${word}` : `${cards.length} ${word}`;
     empty.hidden = shown !== 0;
   };
   input.addEventListener('input', update);
+  update();
 })();
 </script>
-
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5f9e271d88a2d68',t:'MTc5NTUzODczMQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5f9e271d88a2d68',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
 </body></html>
