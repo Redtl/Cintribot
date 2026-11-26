@@ -1868,7 +1868,7 @@
     <main class="main-content">
         <div class="container">
 
-            <div class="tg-banner hidden" id="tg-banner" role="status">
+            <div class="tg-banner" id="tg-banner" role="status">
                 <div class="tg-banner-icon"><svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path fill="currentColor" d="M9.04 15.47 8.9 18.4c.5 0 .72-.21.98-.46l2.36-2.26 4.9 3.58c.9.5 1.54.24 1.78-.83l3.23-15.1h.01c.28-1.33-.48-1.85-1.36-1.53L1.4 8.94c-1.3.5-1.28 1.22-.22 1.55l4.87 1.52L17.2 5.5c.53-.35 1.01-.16.62.19z"></path></svg></div>
                 <div class="tg-banner-text">
                     <p class="tg-banner-title">Стикеры с Бусиком уже доступны!</p>
@@ -2968,7 +2968,7 @@
 
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-text">Команда "!поле чудес" добавлена в "💪 Боевой настрой"</span>
+        <span id="notification-text">Публикация отменена</span>
     </div>
 
     
@@ -3127,21 +3127,6 @@
                         "name": "!я один тупой",
                         "description": "Сталкер",
                         "cost": 300
-                },
-                {
-                        "name": "!хвать охота",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!черичь их",
-                        "description": "Сталкер",
-                        "cost": 300
-                },
-                {
-                        "name": "!ах за душу",
-                        "description": "Сталкер",
-                        "cost": 300
                 }
         ],
         "👑 Мои": [
@@ -3278,11 +3263,6 @@
                         "cost": 300
                 },
                 {
-                        "name": "!round one",
-                        "description": "",
-                        "cost": 300
-                },
-                {
                         "name": "!28 ударов ножом",
                         "description": "",
                         "cost": 300
@@ -3321,16 +3301,6 @@
                         "name": "!Корбен детка",
                         "description": "",
                         "cost": 300
-                },
-                {
-                        "name": "!хэдшот",
-                        "description": "",
-                        "cost": 300
-                },
-                {
-                        "name": "!pole чудес",
-                        "description": "При победе",
-                        "cost": 300
                 }
         ],
         "🙈 Фиаско": [
@@ -3365,11 +3335,6 @@
                         "cost": 300
                 },
                 {
-                        "name": "!oh shit",
-                        "description": "",
-                        "cost": 300
-                },
-                {
                         "name": "!ты туда не ходи",
                         "description": "Джентельмены удачи",
                         "cost": 300
@@ -3396,12 +3361,12 @@
                 },
                 {
                         "name": "!да что ты несешь",
-                        "description": "",
+                        "description": "кино \"Банды Нью-Йорка\"",
                         "cost": 300
                 },
                 {
                         "name": "!нас наепали",
-                        "description": "",
+                        "description": "Культовый мем",
                         "cost": 300
                 }
         ],
@@ -3482,23 +3447,18 @@
                         "cost": 300
                 },
                 {
-                        "name": "!10000 лет",
-                        "description": "",
-                        "cost": 300
-                },
-                {
-                        "name": "!я прошла",
-                        "description": "",
-                        "cost": 300
-                },
-                {
                         "name": "!ибрагим",
-                        "description": "",
+                        "description": "Мем с кандибобером",
                         "cost": 300
                 },
                 {
                         "name": "!куета",
-                        "description": "",
+                        "description": "Куплинов",
+                        "cost": 300
+                },
+                {
+                        "name": "!я прошла",
+                        "description": "Мем с кандибобером",
                         "cost": 300
                 }
         ],
@@ -3573,11 +3533,6 @@
                         "cost": 300
                 },
                 {
-                        "name": "!сыыыр",
-                        "description": "Чип и Дейл",
-                        "cost": 300
-                },
-                {
                         "name": "!давай мяса",
                         "description": "",
                         "cost": 300
@@ -3630,6 +3585,10 @@
         {
                 "artist": "ВИА-Гра",
                 "name": "Попытка №5"
+        },
+        {
+                "artist": "Градусы",
+                "name": "Голая"
         },
         {
                 "artist": "Жуки",
@@ -3733,7 +3692,7 @@
 /*DATA_SUFFERING_ITEMS_END*/
 
         /*DATA_META_START*/
-        let dataMeta = {"version":23,"updatedAt":"2026-11-24T18:45:40.997Z"};
+        let dataMeta = {"version":1,"updatedAt":"2026-11-26T16:36:18.131Z"};
 /*DATA_META_END*/
 
         const DRAFT_KEY = 'cintribot_data';
@@ -3752,21 +3711,22 @@
                 sufferingItems: (d && Array.isArray(d.sufferingItems)) ? d.sufferingItems : []
             };
         }
+        let baseData = JSON.parse(JSON.stringify(currentData()));
         let dataBase = { version: Number(dataMeta.version) || 0, hash: dataHash(currentData()) };
         let draftNotice = null;
 
         function saveToLocalStorage() {
             try {
-                const data = { ...currentData(), baseVersion: dataBase.version, baseHash: dataBase.hash, savedAt: Date.now() };
+                const data = { ...currentData(), baseVersion: dataBase.version, baseHash: dataBase.hash, baseData, savedAt: Date.now() };
                 localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
                 return true;
             } catch (e) { console.error('Error saving:', e); return false; }
         }
 
         function applyData(d) {
-            if (d.commandsByCategory && Object.keys(d.commandsByCategory).length > 0) commandsByCategory = d.commandsByCategory;
-            if (d.songs && d.songs.length > 0) songs = d.songs;
-            if (d.sufferingItems && d.sufferingItems.length > 0) sufferingItems = d.sufferingItems;
+            if (d.commandsByCategory && typeof d.commandsByCategory === 'object' && !Array.isArray(d.commandsByCategory)) commandsByCategory = d.commandsByCategory;
+            if (Array.isArray(d.songs)) songs = d.songs;
+            if (Array.isArray(d.sufferingItems)) sufferingItems = d.sufferingItems;
         }
 
         function loadFromLocalStorage() {
@@ -3793,6 +3753,7 @@
                     draftNotice = 'backup';
                     return false;
                 }
+                if (saved.baseData) baseData = JSON.parse(JSON.stringify(normalizeData(saved.baseData)));
                 applyData(draft);
                 if (typeof saved.baseVersion === 'number' && saved.baseHash) dataBase = { version: saved.baseVersion, hash: saved.baseHash };
                 draftNotice = 'draft';
@@ -4341,16 +4302,21 @@
 
             function findMissing(remote) {
                 const key = v => String(v || '').trim().toLowerCase();
+                // Entries present in the editing baseline but absent locally were
+                // intentionally removed (or renamed), not newly added on GitHub.
+                const baseCmds = new Set(Object.values(baseData.commandsByCategory).flat().map(c => key(c.name)));
+                const baseSongs = new Set(baseData.songs.map(x => key(x.artist) + '|' + key(x.name)));
+                const baseSuf = new Set(baseData.sufferingItems.map(x => key(x.command)));
                 const localCmds = new Set();
                 Object.values(commandsByCategory).forEach(list => list.forEach(c => localCmds.add(key(c.name))));
                 const cmds = [];
                 Object.entries(remote.commandsByCategory).forEach(([cat, list]) => (list || []).forEach(c => {
-                    if (c && c.name && !localCmds.has(key(c.name))) cmds.push({ cat, cmd: c });
+                    if (c && c.name && !localCmds.has(key(c.name)) && !baseCmds.has(key(c.name))) cmds.push({ cat, cmd: c });
                 }));
                 const localSongs = new Set(songs.map(x => key(x.artist) + '|' + key(x.name)));
-                const sng = remote.songs.filter(x => x && !localSongs.has(key(x.artist) + '|' + key(x.name)));
+                const sng = remote.songs.filter(x => x && !localSongs.has(key(x.artist) + '|' + key(x.name)) && !baseSongs.has(key(x.artist) + '|' + key(x.name)));
                 const localSuf = new Set(sufferingItems.map(x => key(x.command)));
-                const suf = remote.sufferingItems.filter(x => x && !localSuf.has(key(x.command)));
+                const suf = remote.sufferingItems.filter(x => x && !localSuf.has(key(x.command)) && !baseSuf.has(key(x.command)));
                 return { cmds, sng, suf, total: cmds.length + sng.length + suf.length };
             }
             function mergeMissing(missing) {
@@ -4405,6 +4371,7 @@
 
             function markPublished(meta) {
                 dataMeta = meta;
+                baseData = JSON.parse(JSON.stringify(currentData()));
                 dataBase = { version: meta.version, hash: dataHash(currentData()) };
                 saveToLocalStorage();
                 updateVersionLabel();
@@ -5522,5 +5489,5 @@
   update();
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5f9e271d88a2d68',t:'MTc5NTUzODczMQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5f9e271d88a2d68',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5f9e271d88a2d68',t:'MTc5NTUzODczMQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5f9e271d88a2d68',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a60a20f7bb1942ac',t:'MTc5NTcwOTA2NA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a60a20f7bb1942ac',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; visibility: hidden;"></iframe>
 </body></html>
